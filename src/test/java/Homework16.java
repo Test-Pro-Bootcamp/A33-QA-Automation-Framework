@@ -6,18 +6,26 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+public class Homework extends BaseTest {
 
-public class LoginTests extends BaseTest {
 
     @Test
-    public static void LoginEmptyEmailPasswordTest() {
+    public static void registrationNavigation() {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        String url = "https://testpro.io/";
+        String url = "https://bbb.testpro.io/";
+        String urlRegistration = "https://bbb.testpro.io/Registration.php";
         driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+
+
+        WebElement registrationButton = driver.findElement(By.xpath("//a[@type='submit']"));
+        registrationButton.click();
+
+        Assert.assertEquals(driver.getCurrentUrl(), urlRegistration);
         driver.quit();
+
     }
+
 }
