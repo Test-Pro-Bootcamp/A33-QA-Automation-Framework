@@ -14,10 +14,15 @@ public class LoginTests extends BaseTest {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        String url = "https://bbb.testpro.io/";
+        String url2 = "https://bbb.testpro.io/registration.php";
 
-        String url = "https://apps.testpro.io/";
         driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        driver.findElement(By.xpath("//form/a")).click();
+
+        Assert.assertEquals(driver.getCurrentUrl(), url2);
         driver.quit();
+        }
+
     }
-}
+
