@@ -16,14 +16,23 @@ public class LoginTests extends BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         String url = "https://bbb.testpro.io/";
+        String urlHome = "https://bbb.testpro.io/#!/home";
         driver.get(url);
-//finding email field
+
+        //These are the elements that we need to access the CSS selector:
 
         WebElement loginField = driver.findElement(By.cssSelector("[type='email']"));
+        WebElement passwordField = driver.findElement(By.cssSelector("[placeholder='Password']"));
+        WebElement submitLogin = driver.findElement(By.cssSelector("[type='submit']"));
+
+        //WHEN user types in their email address
 
         loginField.sendKeys("janezelenova@gmail.com");
-        driver.wait(5000);
+        passwordField.click();
+        passwordField.sendKeys("Floridaliving2023$");
+        submitLogin.click();
 
+        Assert.assertNotEquals(driver.getCurrentUrl(), urlHome);
         Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
     }
