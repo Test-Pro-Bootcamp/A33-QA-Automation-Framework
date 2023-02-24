@@ -26,8 +26,8 @@ public class Registration extends BaseTest {
 
         Thread.sleep(5000);
 
-        Assert.assertNotEquals(driver.getCurrentUrl(), urlRegistration);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        Assert.assertEquals(driver.getCurrentUrl(), urlRegistration);
+        Assert.assertNotEquals(driver.getCurrentUrl(), url);
         driver.quit();
 
     }
