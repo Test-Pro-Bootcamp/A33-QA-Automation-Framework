@@ -21,7 +21,7 @@ public class LoginTests extends BaseTest {
 
         WebElement loginField = driver.findElement(By.cssSelector("[type='email']"));
 
-loginField.sendKeys("janezelenova@gmail.com");
+        loginField.sendKeys("janezelenova@gmail.com");
         driver.wait(5000);
 
         Assert.assertEquals(driver.getCurrentUrl(), url);
