@@ -4,8 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.time.Duration;
+import static org.testng.Assert.assertEquals;
 public class HomeWork16 extends BaseTest {
 
     @Test
@@ -16,10 +16,13 @@ public class HomeWork16 extends BaseTest {
 
         String url = "https://bbb.testpro.io";
         driver.get(url);
-        WebElement registrationLink = driver.findElement(By.cssSelector("#hel"));
-        registrationLink.click();
-        Thread.sleep(5000);
-        String registrationUrl = "https://bbb.testpro.io/registration.php";
+//        Assert.assertEquals(driver.getCurrentUrl(), url);
+
+        WebElement registrationUrl = driver.findElement(By.cssSelector("#hel"));
+        String registrationLink = "https://bbb.testpro.io/registration.php";
+        registrationUrl.click();
+//        driver.wait(5000);
+
         Assert.assertEquals(driver.getCurrentUrl(), registrationLink);
         driver.quit();
     }
