@@ -32,8 +32,10 @@ public class LoginTests extends BaseTest {
         passwordField.sendKeys("Floridaliving2023$");
         submitLogin.click();
 
-        Assert.assertNotEquals(driver.getCurrentUrl(), urlHome);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        Thread.sleep(5000);
+
+        Assert.assertEquals(driver.getCurrentUrl(), urlHome);
+        Assert.assertNotEquals(driver.getCurrentUrl(), url);
         driver.quit();
     }
 }
