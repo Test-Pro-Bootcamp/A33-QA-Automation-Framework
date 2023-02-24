@@ -24,7 +24,7 @@ public class Registration extends BaseTest {
 //Click on the registration button
         registrationField.click();
 
-        driver.wait(5000);
+        Thread.sleep(5000);
 
         Assert.assertNotEquals(driver.getCurrentUrl(), urlRegistration);
         Assert.assertEquals(driver.getCurrentUrl(), url);
