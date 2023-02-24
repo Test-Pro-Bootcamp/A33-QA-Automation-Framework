@@ -7,16 +7,21 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 public class HomeWork16 extends BaseTest {
+
     @Test
-    public static void registrationNavigation() {
+    public static void registrationNavigation() throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        String url = "https://bbb.testpro.io/registration.php";
+        String url = "https://bbb.testpro.io";
         driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        WebElement registrationLink = driver.findElement(By.cssSelector("#hel"));
+        registrationLink.click();
+        Thread.sleep(5000);
+        String registrationUrl = "https://bbb.testpro.io/registration.php";
+        Assert.assertEquals(driver.getCurrentUrl(), registrationLink);
         driver.quit();
     }
 }
-}
+
