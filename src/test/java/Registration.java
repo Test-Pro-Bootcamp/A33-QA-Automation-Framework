@@ -19,7 +19,7 @@ public class Registration extends BaseTest {
         String url = "https://bbb.testpro.io/";
         String urlRegistration = "https://bbb.testpro.io/registration.php";
         driver.get(url);
-// Locate web element for registration button using the CSS selector:
+//Locate web element for registration button using the CSS selector:
         WebElement registrationField = driver.findElement(By.cssSelector("[id='hel']"));
 //Click on the registration button
         registrationField.click();
