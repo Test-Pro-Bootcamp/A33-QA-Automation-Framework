@@ -7,10 +7,9 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class LoginTests extends BaseTest {
-
+public class HomeWork16 {
     @Test
-    public static void LoginEmptyEmailPasswordTest() {
+    public static void registrationNavigation() throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -18,12 +17,16 @@ public class LoginTests extends BaseTest {
         String url = "https://bbb.testpro.io/";
         driver.get(url);
 
+        //access the registration url
 
-
-
+        WebElement registrationLink = driver.findElement(By.cssSelector("[@id='hel']"));
+        registrationLink.click();
+        Thread.sleep(5000);
+        String registrationUrl = "https://bbb.testpro.io/registration.php";
         Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
-
-
     }
+
+
+
 }
