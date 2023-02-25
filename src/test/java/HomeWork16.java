@@ -19,10 +19,9 @@ public class HomeWork16 extends BaseTest {
 //        Assert.assertEquals(driver.getCurrentUrl(), url);
 
         WebElement registrationUrl = driver.findElement(By.cssSelector("#hel"));
-        String registrationLink = "https://bbb.testpro.io/registration.php";
         registrationUrl.click();
 //        driver.wait(5000);
-
+        String registrationLink = "https://bbb.testpro.io/registration.php";
         Assert.assertEquals(driver.getCurrentUrl(), registrationLink);
         driver.quit();
     }
