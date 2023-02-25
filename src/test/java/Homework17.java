@@ -7,10 +7,10 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Homework16 extends BaseTest {
+public class Homework17 extends LoginTests {
 
-    @Test(enabled = false, description = "Homework16 and isnt needed for hw17")
-    public static void registrationNavigation() {
+    @Test
+    public static void addSongToPlaylist() {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(25));

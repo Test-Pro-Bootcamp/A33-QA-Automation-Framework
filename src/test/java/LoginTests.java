@@ -3,21 +3,43 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import static java.lang.System.getenv;
 
 import java.time.Duration;
+
 
 public class LoginTests extends BaseTest {
 
     @Test
-    public static void LoginEmptyEmailPasswordTest() {
+    public void LoginValidEmailValidPasswordTest() {
 
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        String url = "https://apps.testpro.io/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+        //setupBrowser();
+        openLoginURL();
+        System.out.println(getenv("Email"));
+        inputEmail(getenv("Email"));
+        inputPassword(getenv("Password"));
+        clickLogin();
+        Assert.assertEquals(driver.getCurrentUrl(), koelHome);
+        //exitBrowser();
     }
+
+    public void openLoginURL() {
+        driver.get(koelStart);
+    }
+
+    public void inputEmail(String email) {
+        emailField.sendKeys(email);
+    }
+
+    public void inputPassword(String pass) {
+        passwordField.sendKeys(pass);
+    }
+
+    public void clickLogin() {
+        loginButton.click();
+    }
+
+
 }
