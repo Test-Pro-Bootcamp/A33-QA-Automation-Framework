@@ -3,6 +3,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.AfterMethod;
@@ -14,12 +15,10 @@ import java.time.Duration;
 
 
 public class BaseTest {
-    WebDriver driver = new ChromeDriver();
+     WebDriver driver;
     String koelStart = "https://bbb.testpro.io/";
     String koelHome = "https://bbb.testpro.io/#!/home";
-    WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-    WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
-    WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
+
 
     @BeforeSuite
     public void setupClass() {
@@ -28,7 +27,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void setupBrowser() {
-
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(25));
     }
 
@@ -37,4 +36,22 @@ public class BaseTest {
         driver.quit();
     }
 
+    public void openLoginURL() {
+        driver.get(koelStart);
+    }
+
+    public void inputEmail(String email) {
+        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
+        emailField.sendKeys(email);
+    }
+
+    public void inputPassword(String pass) {
+        WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
+        passwordField.sendKeys(pass);
+    }
+
+    public void clickLogin() {
+        WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        loginButton.click();
+    }
 }

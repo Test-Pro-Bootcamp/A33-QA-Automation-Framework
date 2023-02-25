@@ -1,7 +1,7 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -10,22 +10,47 @@ import java.time.Duration;
 public class Homework17 extends LoginTests {
 
     @Test
-    public static void addSongToPlaylist() {
+    public void addSongToPlaylist() {
 
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(25));
+        LoginValidEmailValidPasswordTest();
+        //clickCreatePlaylist();
+        //inputPlaylist();
+        //enterPress();
+        //openHomeURL();
+        clickViewAll();
+        clickFirstSong();
+        clickAddto();
+        clickPlaylistfromAddto();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(getSuccessPopup()));
+        Assert.assertEquals(getSuccessNotif(),"Added 1 song into test.");
+    }
 
-        String urlLogin = "https://bbb.testpro.io/";
-        String urlRegi = "https://bbb.testpro.io/registration.php";
-        driver.get(urlLogin);
+    private void clickViewAll() {
+        WebElement viewallButton = driver.findElement(By.cssSelector("button[data-testid='home-view-all-recently-played-btn']"));
+        viewallButton.click();
+    }
 
-        //css selector setup
-        WebElement registrationButton = driver.findElement(By.cssSelector("a[id='hel']"));
+    private void clickFirstSong() {
+            WebElement firstSong = driver.findElement(By.cssSelector("#recentlyPlayedWrapper [class='song-item']:nth-child(1)"));
+            firstSong.click();
+    }
 
-        //click on thing
-        registrationButton.click();
+    private void clickAddto() {
+        WebElement Addto = driver.findElement(By.cssSelector("button[class='btn-add-to']"));
+        Addto.click();
+    }
 
-        Assert.assertEquals(driver.getCurrentUrl(), urlRegi);
-        driver.quit();
+    private void clickPlaylistfromAddto() {
+        WebElement playlistAddto = driver.findElement(By.cssSelector("#recentlyPlayedWrapper [class='existing-playlists'] [class='playlist']"));
+        playlistAddto.click();
+    }
+
+    private String getSuccessNotif(){
+        return driver.findElement(By.cssSelector("[class='success hide']")).getText();
+    }
+
+    private WebElement getSuccessPopup(){
+        return driver.findElement(By.cssSelector("[class='success hide']"));
     }
 }
