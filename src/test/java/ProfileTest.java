@@ -20,13 +20,10 @@ public class ProfileTest extends BaseTest {
         setCurrentPassword();
         setNewProfileName();
         setNewPassword();
-        clickSaveBtn();
-        System.out.println(newname);
-        System.out.println(currentname);
+        System.out.println("this is new name " + newname);
+        System.out.println("this is current " + currentname);
         Assert.assertNotEquals(newname,currentname);
-
-
-
+        clickSaveBtn();
     }
 
     private String getRandomString() {
@@ -56,8 +53,7 @@ public class ProfileTest extends BaseTest {
     public void setNewProfileName() {
         WebElement profilenamefield = driver.findElement(By.id("inputProfileName"));
         profilenamefield.click();
-        currentname = profilenamefield.getText();
-
+        currentname = profilenamefield.getAttribute("value");
         profilenamefield.clear();
         profilenamefield.sendKeys(newname);
     }
