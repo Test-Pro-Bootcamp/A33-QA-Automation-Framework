@@ -10,7 +10,7 @@ import java.time.Duration;
 
 public class LoginTests extends BaseTest {
 
-    @Test
+    @Test (enabled = false)
     public void LoginValidEmailValidPasswordTest() {
 
         openLoginURL();

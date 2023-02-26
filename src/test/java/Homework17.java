@@ -1,9 +1,12 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 
 import java.time.Duration;
 
@@ -12,7 +15,7 @@ public class Homework17 extends LoginTests {
     @Test
     public void addSongToPlaylist() {
 
-        LoginValidEmailValidPasswordTest();
+        loginValidAccount("Test321@gmail.com", "te$t$tudent");
         //clickCreatePlaylist();
         //inputPlaylist();
         //enterPress();
@@ -23,7 +26,20 @@ public class Homework17 extends LoginTests {
         clickPlaylistfromAddto();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(getSuccessPopup()));
-        Assert.assertEquals(getSuccessNotif(),"Added 1 song into test.");
+        System.out.println(getSuccessNotif());
+        Assert.assertEquals(getSuccessNotif(), "Added 1 song into \"test.\"");
+        //Clean up and delete the first song from test playlist... so I can run this again
+        deleteAddedSongPlaylist();
+
+    }
+
+    private void loginValidAccount(String email, String password) {
+        openLoginURL();
+        inputEmail(email);
+        inputPassword(password);
+        clickLogin();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.urlToBe(koelHome));
     }
 
     private void clickViewAll() {
@@ -47,10 +63,21 @@ public class Homework17 extends LoginTests {
     }
 
     private String getSuccessNotif(){
-        return driver.findElement(By.cssSelector("[class='success hide']")).getText();
+        return driver.findElement(By.cssSelector("[class='success show']")).getText();
     }
 
     private WebElement getSuccessPopup(){
-        return driver.findElement(By.cssSelector("[class='success hide']"));
+        return driver.findElement(By.cssSelector("[class='success show']"));
+    }
+
+    private void deleteAddedSongPlaylist(){
+        WebElement testPlaylist = driver.findElement(By.cssSelector("#playlists li[class='playlist playlist'] a"));
+        testPlaylist.click();
+        WebElement song_to_select = driver.findElement(By.cssSelector("#playlistWrapper [class='song-item']:nth-child(1)"));
+        song_to_select.click();
+        WebElement song_to_delete = driver.findElement(By.cssSelector("#playlistWrapper [class='song-item selected']:nth-child(1)"));
+        //song_to_delete.sendKeys(Keys.BACK_SPACE);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(song_to_delete).click().sendKeys(Keys.DELETE).perform();
     }
 }
