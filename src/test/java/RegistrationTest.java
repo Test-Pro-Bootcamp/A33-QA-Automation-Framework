@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class registrationTest extends BaseTest {
+public class RegistrationTest extends BaseTest {
 
     @Test
     public static void registrationNavigation() {
@@ -27,8 +27,6 @@ public class registrationTest extends BaseTest {
         String expectedTitle = "Koel Registration page";
         String actualTitle = driver.getTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
-
-
 
         // close browser
         driver.quit();
