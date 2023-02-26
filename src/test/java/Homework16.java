@@ -18,11 +18,8 @@ public class Homework16 extends BaseTest {
         String url = "https://bbb.testpro.io/";
         String registration = "https://bbb.testpro.io/registration.php";
         driver.get(url);
-<<<<<<< HEAD
+
         //clicking on the registration link
-=======
-        //click on the registration link
->>>>>>> origin/homework16
         WebElement registrationField = driver.findElement(By.xpath("//*[@href=\"/registration.php\"]"));
         registrationField.click();
         Assert.assertEquals(driver.getCurrentUrl(), registration);
