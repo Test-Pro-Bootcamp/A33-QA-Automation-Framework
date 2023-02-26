@@ -15,7 +15,9 @@ public class Homework17 extends LoginTests {
     @Test
     public void addSongToPlaylist() {
 
+        String playlistname = "test";
         loginValidAccount("Test321@gmail.com", "te$t$tudent");
+        //deleteAddedSongPlaylist(playlistname);
         //clickCreatePlaylist();
         //inputPlaylist();
         //enterPress();
@@ -23,14 +25,13 @@ public class Homework17 extends LoginTests {
         clickViewAll();
         clickFirstSong();
         clickAddto();
-        clickPlaylistfromAddto();
+        clickPlaylistfromAddto(playlistname);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(getSuccessPopup()));
         System.out.println(getSuccessNotif());
-        Assert.assertEquals(getSuccessNotif(), "Added 1 song into \"test.\"");
+        Assert.assertEquals(getSuccessNotif(), "Added 1 song into \"" + playlistname + ".\"");
         //Clean up and delete the first song from test playlist... so I can run this again
-        deleteAddedSongPlaylist();
-
+        deleteAddedSongPlaylist(playlistname);
     }
 
     private void loginValidAccount(String email, String password) {
@@ -57,8 +58,9 @@ public class Homework17 extends LoginTests {
         Addto.click();
     }
 
-    private void clickPlaylistfromAddto() {
-        WebElement playlistAddto = driver.findElement(By.cssSelector("#recentlyPlayedWrapper [class='existing-playlists'] [class='playlist']"));
+    private void clickPlaylistfromAddto(String searchText) {
+        WebElement playlistAddto = driver.findElement(By.xpath("//*[@id='recentlyPlayedWrapper'] //li[contains(text(),'" + searchText + "')]"));
+        //WebElement playlistAddto = driver.findElement(By.cssSelector("#recentlyPlayedWrapper [class='existing-playlists'] [class='playlist']"));
         playlistAddto.click();
     }
 
@@ -70,8 +72,9 @@ public class Homework17 extends LoginTests {
         return driver.findElement(By.cssSelector("[class='success show']"));
     }
 
-    private void deleteAddedSongPlaylist(){
-        WebElement testPlaylist = driver.findElement(By.cssSelector("#playlists li[class='playlist playlist'] a"));
+    private void deleteAddedSongPlaylist(String searchText){
+        WebElement testPlaylist = driver.findElement(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + searchText + "')]"));
+        //WebElement testPlaylist = driver.findElement(By.cssSelector("#playlists li[class='playlist playlist'] a"));
         testPlaylist.click();
         WebElement song_to_select = driver.findElement(By.cssSelector("#playlistWrapper [class='song-item']:nth-child(1)"));
         song_to_select.click();
