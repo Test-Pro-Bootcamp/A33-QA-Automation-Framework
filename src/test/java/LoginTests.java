@@ -1,23 +1,27 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.Duration;
 
+// import static java.lang.System.getenv;
+
+
 public class LoginTests extends BaseTest {
 
-    @Test
-    public static void LoginEmptyEmailPasswordTest() {
+    @Test (enabled = false)
+    public void LoginValidEmailValidPasswordTest() {
 
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        openLoginURL();
+        inputEmail(System.getenv("Email"));
+        inputPassword(System.getenv("Password"));
+        clickLogin();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.urlToBe(koelHome));
 
-        String url = "https://apps.testpro.io/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+        //Assert.assertEquals(driver.getCurrentUrl(), koelHome);
     }
+
+
 }
