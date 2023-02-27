@@ -10,14 +10,25 @@ import java.time.Duration;
 public class LoginTests extends BaseTest {
 
     @Test
-    public static void LoginEmptyEmailPasswordTest() {
+    public static void LoginEmptyEmailPasswordTest() throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        String url = "https://apps.testpro.io/";
+        String url = "https://bbb.testpro.io/";
         driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
+        emailField.click();
+        emailField.sendKeys("taqimed99@gmail.com");
+        //driver.wait(5000);
+        WebElement passwordField =  driver.findElement(By.cssSelector("[type='password']"));
+        passwordField.click();
+        passwordField.sendKeys("Med-20115-010499@");
+        //driver.wait(5000);
+        WebElement submitButton =  driver.findElement(By.cssSelector("[type='submit']"));
+        submitButton.click();
+        //driver.wait(5000);
+        //Assert.assertTrue(usersAvatar.isDisplayed());
+        Assert.assertEquals(driver.getCurrentUrl(),url);
         driver.quit();
     }
 }
