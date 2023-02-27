@@ -10,14 +10,22 @@ import java.time.Duration;
 public class LoginTests extends BaseTest {
 
     @Test
-    public static void LoginEmptyEmailPasswordTest() {
+    public static void registrationNavigation() {
+        //Chrome browser should be opened.
 
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        String url = "https://apps.testpro.io/";
+        String url = "https://bbb.testpro.io/";
         driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+
+        WebElement registrationLink = driver.findElement(By.cssSelector("[id=\"hel\"]"));
+
+        //Click the registration link.
+        registrationLink.click();
+
+        String registrationUrl = "https://bbb.testpro.io/registration.php";
+        Assert.assertEquals(driver.getCurrentUrl(), registrationUrl);
         driver.quit();
     }
 }
