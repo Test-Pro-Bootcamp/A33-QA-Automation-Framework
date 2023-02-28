@@ -20,8 +20,11 @@ import java.time.Duration;
 
 public class BaseTest {
      WebDriver driver;
+    String currentUrl = "";
     String koelStart = "https://bbb.testpro.io/";
     String koelHome = "https://bbb.testpro.io/#!/home";
+    String koelSongs = "https://bbb.testpro.io/#!/songs";
+    String koelRecentlyPlayed = "https://bbb.testpro.io/#!/recently-played";
 
 
     @BeforeSuite
@@ -42,6 +45,10 @@ public class BaseTest {
 
     public void openLoginURL() {
         driver.get(koelStart);
+    }
+
+    public void openAllSongs() {
+        driver.get(koelSongs);
     }
 
     public void inputEmail(String email) {
@@ -74,8 +81,28 @@ public class BaseTest {
     }
 
     public void clickFirstSong() {
-        WebElement firstSong = driver.findElement(By.cssSelector("#recentlyPlayedWrapper [class='song-item']:nth-child(1)"));
+        currentUrl = driver.getCurrentUrl();
+        WebElement firstSong = null;
+        if (currentUrl.equals(koelSongs)) {
+            firstSong = driver.findElement(By.cssSelector("#songsWrapper [class='song-item']:nth-child(1)"));
+        }
+        else if (currentUrl.equals(koelRecentlyPlayed)) {
+            firstSong = driver.findElement(By.cssSelector("#recentlyPlayedWrapper [class='song-item']:nth-child(1)"));
+        }
         firstSong.click();
+    }
+
+    public void playFirstSong() {
+        Actions actions = new Actions(driver);
+        currentUrl = driver.getCurrentUrl();
+        WebElement firstSong = null;
+        if (currentUrl.equals(koelSongs)) {
+            firstSong = driver.findElement(By.cssSelector("#songsWrapper [class='song-item']:nth-child(1)"));
+        }
+        else if (currentUrl.equals(koelRecentlyPlayed)) {
+            firstSong = driver.findElement(By.cssSelector("#recentlyPlayedWrapper [class='song-item']:nth-child(1)"));
+        }
+        actions.doubleClick(firstSong).perform();
     }
 
     public void clickAddto() {
@@ -96,6 +123,11 @@ public class BaseTest {
     public WebElement getSuccessPopup(){
         return driver.findElement(By.cssSelector("[class='success show']"));
     }
+
+    public WebElement getPauseButton(){
+        return driver.findElement(By.cssSelector("span[class='pause']"));
+    }
+
 
     public void deleteAddedSongPlaylist(String searchText){
         WebElement testPlaylist = driver.findElement(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + searchText + "')]"));
