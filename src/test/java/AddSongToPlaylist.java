@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 public class AddSongToPlaylist extends BaseTest {
 
     @Test
-    public static <Actions> void AddSongToPlaylistTest() throws InterruptedException {
+    public static <Actions> void SongTest() throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -44,9 +44,9 @@ public class AddSongToPlaylist extends BaseTest {
 
         //now drag and drop
 
-        Actions builder = new Actions(driver);
+        Actions actions = new Actions(driver);
 
-        builder.dragAndDrop(from, to).perform();
+        actions.dragAndDrop(from, to).perform();
 
         Thread.sleep(5000);
 
@@ -54,5 +54,10 @@ public class AddSongToPlaylist extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), urlHome);
         Assert.assertNotEquals(driver.getCurrentUrl(), url);
         driver.quit();
+
+        class Actions {
+
+        }
+
     }
 }
