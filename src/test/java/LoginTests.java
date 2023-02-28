@@ -19,8 +19,7 @@ public class LoginTests extends BaseTest {
         clickLogin();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.urlToBe(koelHome));
-
-        //Assert.assertEquals(driver.getCurrentUrl(), koelHome);
+        Assert.assertEquals(driver.getCurrentUrl(), koelHome);
     }
 
 
