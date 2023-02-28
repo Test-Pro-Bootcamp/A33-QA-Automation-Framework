@@ -13,7 +13,7 @@ public class LoginTests extends BaseTest {
     public static void LoginEmptyEmailPasswordTest() {
 
         WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts()    .implicitlyWait(Duration.ofSeconds(10));
 
         String url = "https://apps.testpro.io/";
         driver.get(url);
