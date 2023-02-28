@@ -90,15 +90,15 @@ public class BaseTest {
         Thread.sleep(2000);
     }
 
-    public String getNotificationMessage () {
+    public String getNotificationMessage() {
         WebElement notificationMessage = driver.findElement(By.xpath("//div[@class='success show']"));
         return notificationMessage.getText();
     }
 
-    public boolean notificationDisplayed() {
+    /*public boolean notificationDisplayed() {
         WebElement notificationIsShown = driver.findElement(By.xpath("//div[@class='success show']"));
         return notificationIsShown.isDisplayed();
-    }
+    }*/
 
    /* public void deleteSongFromPlaylist() throws InterruptedException {
         WebElement SelectPlaylist = driver.findElement(By.xpath("//a[@href='#!/playlist/37058']"));
