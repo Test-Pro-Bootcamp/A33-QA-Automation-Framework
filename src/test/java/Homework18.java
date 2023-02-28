@@ -7,10 +7,10 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class LoginTests extends BaseTest {
 
-    @Test
-    public static void LoginTest() throws InterruptedException {
+public class Homework18 extends BaseTest {
+    @Test(priority = 1, description = "Play a song and validate it is playing")
+    public void playSong() throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -33,8 +33,9 @@ public class LoginTests extends BaseTest {
 
         Thread.sleep(5000);
 
-        Assert.assertEquals(driver.getCurrentUrl(), urlHome);
-        Assert.assertNotEquals(driver.getCurrentUrl(), url);
-        driver.quit();
-    }
-}
+
+       enterAllSongs();
+       selectSong();
+       enterButtonPlaySong();
+
+        Assert.assertTrue(isDisplayedPlayingSong());
