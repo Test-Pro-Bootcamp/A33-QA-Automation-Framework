@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Homework17 extends LoginTests {
+public class Homework17 extends BaseTest {
 
     @Test
     public void addSongToPlaylist() {

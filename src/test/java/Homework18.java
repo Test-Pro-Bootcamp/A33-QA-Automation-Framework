@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Homework18 extends LoginTests {
+public class Homework18 extends BaseTest {
 
     @Test
     @Parameters({"email", "password"})
