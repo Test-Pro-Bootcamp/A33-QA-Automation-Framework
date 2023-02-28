@@ -10,14 +10,40 @@ import java.time.Duration;
 public class LoginTests extends BaseTest {
 
     @Test
+    public static void LoginSuccess() {
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        String url = "https://bbb.testpro.io/";
+        driver.get(url);
+        Assert.assertEquals(driver.getCurrentUrl(), url);
+        driver.quit();
+    }
+
+    @Test
     public static void LoginEmptyEmailPasswordTest() {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        String url = "https://apps.testpro.io/";
+        String url = "https://bbb.testpro.io/";
         driver.get(url);
+
+        WebElement emailField = driver.findElement(By.cssSelector("[type = 'email']"));
+        emailField.click();
+        emailField.sendKeys("aaronalbusiness@gmail.com");
+
+        WebElement passwordField = driver.findElement(By.cssSelector("[type = 'password']"));
+        passwordField.click();
+        passwordField.sendKeys("te$t$tudent");
+
+        WebElement submitLogin =driver.findElement(By.cssSelector("#app  > div >form > button"));
+        //WebElement submitLogin =driver.findElement(By.cssSelector("[type = 'submit']"));
+        submitLogin.click();
+
         Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+        //driver.quit();
     }
+
 }
