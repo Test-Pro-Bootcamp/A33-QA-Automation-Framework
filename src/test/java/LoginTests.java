@@ -9,7 +9,7 @@ import java.time.Duration;
 
 public class LoginTests extends BaseTest {
 
-    @Test
+    @Test(enabled = true)
     public static void LoginEmptyEmailPasswordTest() {
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -20,7 +20,7 @@ public class LoginTests extends BaseTest {
         driver.quit();
     }
 
-    @Test
+    @Test(enabled = true)
     public static void LoginSuccessTest() {
 
         WebDriver driver = new ChromeDriver();
@@ -45,7 +45,7 @@ public class LoginTests extends BaseTest {
         //driver.quit();
     }
 
-    @Test
+    @Test(enabled = true)
     public static void LoginNotExistingEmailTest() {
 
         WebDriver driver = new ChromeDriver();
@@ -70,7 +70,7 @@ public class LoginTests extends BaseTest {
         //driver.quit();
     }
 
-    @Test
+    @Test(enabled = true)
     public static void LoginNotEmptyPasswordTest() {
 
         WebDriver driver = new ChromeDriver();
