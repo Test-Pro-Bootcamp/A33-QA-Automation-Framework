@@ -1,3 +1,4 @@
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework17 extends BaseTest {
@@ -17,6 +18,7 @@ public class Homework17 extends BaseTest {
         addToPlaylist();
         newPlaylist("Ope");
         notificationIcon();
+        Assert.assertTrue(notificationVerification());
         //driver.wait(5000);
     }
 }
