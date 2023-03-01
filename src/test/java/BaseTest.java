@@ -13,8 +13,7 @@ import java.time.Duration;
 
 
 public class BaseTest {
-
-    public static WebDriver driver = null;
+     public static WebDriver driver = null;
     public static String url = "https://bbb.testpro.io/";
     public static String homepageUrl = "https://bbb.testpro.io/#!/home";
 
@@ -25,8 +24,8 @@ public class BaseTest {
 
     @BeforeMethod
     public static void launchBrowser(){
-        AddSongToPlayListTest.driver = new ChromeDriver();
-        AddSongToPlayListTest.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         driver.manage().window().maximize();
     }
     public static void openLoginUrl() throws InterruptedException {
@@ -101,7 +100,7 @@ public class BaseTest {
         Thread.sleep(2000);
     }
     @AfterMethod
-    public static void closeBrowser() {AddSongToPlayListTest.driver.quit();
+    public static void closeBrowser() {driver.quit();
     }
 
 }

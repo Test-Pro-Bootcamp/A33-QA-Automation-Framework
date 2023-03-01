@@ -11,7 +11,7 @@ import java.time.Duration;
 
 import static org.testng.Assert.assertTrue;
 
-public class AddSongToPlayListTest extends BaseTest{
+public class Homework17 extends BaseTest{
 
     @Test
     public static void addSongToPlayListTest() throws InterruptedException {
