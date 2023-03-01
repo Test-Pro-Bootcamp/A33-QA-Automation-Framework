@@ -16,7 +16,7 @@ import java.time.Duration;
 public class Homework17 extends BaseTest {
 
     @Test
-    public static void AddSongToPlaylist() throws InterruptedException {
+    public void AddSongToPlaylist() throws InterruptedException {
         openPage("https://bbb.testpro.io/");
         //Log in
         enterEmail("linulya1411@gmail.com");
@@ -40,14 +40,14 @@ public class Homework17 extends BaseTest {
 
 
 
-    /*public static String addedSongNotification() {
+    /*public String addedSongNotification() {
  *       WebElement addedSongNotification = driver.findElement(By.cssSelector("success show"));
- *       return.addedSongNotification.isDisplayed();
+ *       return addedSongNotification.isDisplayed();
 
   *  }
-  *  public static boolean verifyNotificationMessage() {
+  *  public boolean verifyNotificationMessage() {
   *      WebElement verifyMessage = driver.findElement(By.cssSelector("success show"));
-  *      verifyMessage.getText();
+  *      return verifyMessage.getText();
     }*/
 
 }

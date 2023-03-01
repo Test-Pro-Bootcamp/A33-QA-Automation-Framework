@@ -57,20 +57,21 @@ public class BaseTest {
         Thread.sleep(2000);
     }
 
-    public static void searchForSong(String songName) throws InterruptedException {
-        WebElement searchField = driver.findElement(By.cssSelector("#searchForm"));
-        searchField.sendKeys();
+    public void searchForSong(String songName) throws InterruptedException {
+        WebElement searchField = driver.findElement(By.cssSelector("[type='search']"));
+        searchField.click();
+        searchField.sendKeys(songName);
         Thread.sleep(2000);
     }
 
     public static void viewAllResults() throws InterruptedException {
-        WebElement viewAllButton = driver.findElement(By.cssSelector("selection#searchExcerptsWrapper section h1 button"));
+        WebElement viewAllButton = driver.findElement(By.xpath("//*[@id=\"searchExcerptsWrapper\"]/div/div/section[1]/h1/button"));
         viewAllButton.click();
         Thread.sleep(2000);
     }
 
     public static void selectFirstSong() throws InterruptedException {
-        WebElement selectFirstFromTheList = driver.findElement(By.cssSelector("selection#songResultsWrapper tr.song-item td.title"));
+        WebElement selectFirstFromTheList = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/div/div/div[1]/table/tr[1]/td[2]"));
         selectFirstFromTheList.click();
         Thread.sleep(2000);
     }
