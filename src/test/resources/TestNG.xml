@@ -9,4 +9,11 @@
             <class name="BaseTest"/>
         </classes>
     </test>
+
+<test name="MusicPlayerTest">
+    <classes>
+        <class name="com.example.MusicPlayerTest" />
+    </classes>
+</test>
+
 </suite>
