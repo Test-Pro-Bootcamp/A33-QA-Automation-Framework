@@ -54,12 +54,12 @@ public class BaseTest {
         submitButtonElement.click();
     }
     public void searchSong(String songName) throws InterruptedException{
-        WebElement searchSong = driver.findElement(By.cssSelector("[type='Pluto']"));
+        WebElement searchSong = driver.findElement(By.cssSelector("[type='search']"));
         searchSong.sendKeys(songName);
         Thread.sleep(2000);
     }
     public void viewSearchResult() throws InterruptedException{
-        WebElement viewSearchResult = driver.findElement(By.xpath("//h1[contains(text(), 'Songs')] " +
+        WebElement viewSearchResult = driver.findElement(By.xpath("//h1[contains(text(), 'songs')] " +
                 "//button [contains(text(), 'View All')]"));
         viewSearchResult.click();
         Thread.sleep(2000);
