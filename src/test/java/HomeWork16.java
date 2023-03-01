@@ -20,7 +20,8 @@ public class HomeWork16 extends BaseTest {
 
         WebElement registrationUrl = driver.findElement(By.cssSelector("#hel"));
         registrationUrl.click();
-//        driver.wait(5000);
+//        driver.wait(2000);
+        Thread.sleep(2000);
         String registrationLink = "https://bbb.testpro.io/registration.php";
         Assert.assertEquals(driver.getCurrentUrl(), registrationLink);
         driver.quit();
