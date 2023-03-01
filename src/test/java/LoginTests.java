@@ -1,23 +1,24 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
+//The following are the Test Cases
 public class LoginTests extends BaseTest {
 
-    @Test
-    public static void LoginEmptyEmailPasswordTest() {
+//    @Test(enabled = true, description = "First test for A33")
+//    public void LoginEmptyEmailPasswordTest() {
+//
+//    openLoginUrl();
+//    provideEmail("regniermandy@gmail.com");
+//    String url = "https://bbb.testpro.io/";
 
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
- //adding a comment for changes
-        String url = "https://bbb.testpro.io/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+    //Assert.assertEquals(driver.getCurrentUrl(), url);
+    //}
+    @Test
+    public void loginValidEmailValidPasswordTest() {
+        openLoginUrl();
+        provideEmail("regniermandy@gmail.com");
+        providePassword("te$t$tudent");
+        clickSubmit();
+        exitBrowser();
     }
+
 }
