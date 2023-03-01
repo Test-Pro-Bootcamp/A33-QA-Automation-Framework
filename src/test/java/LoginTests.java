@@ -10,7 +10,7 @@ import java.time.Duration;
 public class LoginTests extends BaseTest {
 
     @Test
-    public static void LoginEmptyEmailPasswordTest () throws InterruptedException {
+    public static void LoginEmptyEmailPasswordTest() throws InterruptedException {
         // Simple comment
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -27,22 +27,22 @@ public class LoginTests extends BaseTest {
     public static void LoginInvalidEmail() {
         //Login Not Existing Email:
         //Precondition: Chrome browser should be opened DONE
-           // declare driver
+        // declare driver
         //Step1. Open koel login page DONE
-           // tell driver to load koel page
+        // tell driver to load koel page
         //Step2. Enter Not Existing email
-           // find email field
-           // click into email field
-           // enter invalid email inside email field
+        // find email field
+        // click into email field
+        // enter invalid email inside email field
         //Step3. Enter Correct password
-           // find password field
-           // click into password field
-           // enter anything
+        // find password field
+        // click into password field
+        // enter anything
         //Step4. Click Login button
-           // find the login button
-           // click the login button
+        // find the login button
+        // click the login button
         //Expected result: User should stay on login page
-           // assert the present of email field
+        // assert the present of email field
 
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -112,3 +112,23 @@ public class LoginTests extends BaseTest {
         driver.quit();
     }
 }
+
+        public static class Homework16 extends BaseTest {
+        @Test
+        public void Navigation() {
+            WebDriver driver = new ChromeDriver();
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+            String url = "https://bbb.testpro.io/";
+            driver.get(url);
+
+            WebElement registrationLink = driver.findElement(By.cssSelector("[id = 'hel']"));
+            registrationLink.click();
+
+            String registrationUrl = "https://bbb.testpro.io/registration.php";
+            Assert.assertEquals(driver.getCurrentUrl(), registrationUrl);
+
+            driver.quit();
+        }
+    }
+
