@@ -88,6 +88,8 @@ public class BaseTest {
         Thread.sleep(2000);
     }
 
+
+
     public boolean isDisplayedPlayingSong() {
         WebElement songIsPlaying = driver.findElement(By.cssSelector("[data-testid = 'sound-bar-play']"));
         return songIsPlaying.isDisplayed();
