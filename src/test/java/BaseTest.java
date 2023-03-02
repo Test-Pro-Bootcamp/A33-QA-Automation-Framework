@@ -7,7 +7,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
->>>>>>> Stashed changes
 import org.testng.annotations.BeforeSuite;
 
 import java.time.Duration;
