@@ -10,7 +10,7 @@ public class Homework17 extends BaseTest{
     getPassword("te$t$tudent");
     clickSubmit();
     searchSong("Pluto");
-    viewSearchResult();
+    clickViewAllBtn();
     selectFirstSongResult("Take my Hand");
     clickAddButton();
     choosePlaylist("Favorites");
