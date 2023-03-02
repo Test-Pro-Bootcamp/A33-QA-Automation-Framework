@@ -31,23 +31,16 @@ public class Homework17 extends BaseTest {
         selectFirstSong();
         //Add song to the playlist
         clickAddTo();
-        choosePlaylist();
+        choosePlaylist("My Playlist");
+
+        verifyNotificationMessage();
 
 
-        WebElement addedSongNotification = driver.findElement(By.cssSelector("success show"));
-        Assert.assertTrue(addedSongNotification.isDisplayed());
+        Assert.assertTrue(addedSongNotification());
+
     }
 
 
 
-    /*public String addedSongNotification() {
- *       WebElement addedSongNotification = driver.findElement(By.cssSelector("success show"));
- *       return addedSongNotification.isDisplayed();
-
-  *  }
-  *  public boolean verifyNotificationMessage() {
-  *      WebElement verifyMessage = driver.findElement(By.cssSelector("success show"));
-  *      return verifyMessage.getText();
-    }*/
 
 }

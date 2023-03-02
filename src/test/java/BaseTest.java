@@ -3,13 +3,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.safari.SafariDriver;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
 
 import java.time.Duration;
 
@@ -28,11 +24,6 @@ public class BaseTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-    }
-
-    @AfterMethod
-    public static void closeBrowser(){
-        driver.quit();
     }
 
     public static void openPage(String url) {
@@ -77,15 +68,31 @@ public class BaseTest {
     }
 
     public static void clickAddTo()  throws InterruptedException {
-        WebElement addToButton = driver.findElement(By.cssSelector("[class='button.btn-add-to']"));
+        WebElement addToButton = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/span/button[2]"));
         addToButton.click();
         Thread.sleep(2000);
     }
 
-    public static void choosePlaylist() throws InterruptedException {
-        WebElement playList = driver.findElement(By.cssSelector("playlist My Playlist"));
+    public static void choosePlaylist(String playlist) throws InterruptedException {
+        WebElement playList = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[5]"));
         playList.click();
         Thread.sleep(2000);
 
+    }
+
+    public String verifyNotificationMessage() {
+        WebElement verifyMessage = driver.findElement(By.cssSelector("div.alertify-logs.top.right > div.success.show"));
+        return verifyMessage.getText();
+    }
+    public boolean addedSongNotification() {
+        WebElement verifyMessage = driver.findElement(By.cssSelector("div.alertify-logs.top.right > div.success.show"));
+        return verifyMessage.isDisplayed();
+    }
+
+
+
+         @AfterMethod
+    public static void closeBrowser(){
+        driver.quit();
     }
 }
