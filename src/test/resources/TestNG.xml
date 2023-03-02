@@ -2,15 +2,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="SmokeSuite">
-
     <test name="Smoke Testt" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
             <class name="BaseTest"/>
             <class name="Homework18">
-                    <methods>
-                        <include name = 'playSong'/>
-                    </methods>
+                <methods>
+                    <include name="playSong"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
