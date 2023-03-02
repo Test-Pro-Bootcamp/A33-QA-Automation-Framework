@@ -9,29 +9,15 @@ import java.time.Duration;
 
 
 public class Homework18 extends BaseTest {
-    @Test(priority = 1, description = "Play a song and validate it is playing")
+    @Test
     public void playSong() throws InterruptedException {
+        navigateToPage("https://bbb.testpro.io/");
 
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        String url = "https://bbb.testpro.io/";
-        String urlHome = "https://bbb.testpro.io/#!/home";
-        driver.get(url);
-
-
-        WebElement loginField = driver.findElement(By.cssSelector("[type='email']"));
-        WebElement passwordField = driver.findElement(By.cssSelector("[placeholder='Password']"));
-        WebElement submitLogin = driver.findElement(By.cssSelector("[type='submit']"));
-
-
-
-        loginField.sendKeys("janezelenova@gmail.com");
-        passwordField.click();
-        passwordField.sendKeys("Floridaliving2023$");
-        submitLogin.click();
-
-        Thread.sleep(5000);
+        // Login to the Homepage Koel
+        provideEmail("janezelenova@gmail.com");
+        providePassword("Floridaliving2023$");
+        clickSubmit();
+        Thread.sleep(2000);
 
 
        enterAllSongs();
