@@ -6,13 +6,16 @@ public class Homework17 extends BaseTest {
     // Create a test case, addSongToPlaylist() using @Test annotation
     //and the helper/reusable methods we created.
 
+
     @Test
     public void addSongToPlaylist () throws InterruptedException {
 
+        //variables
         String playlist = "Motivating songs";
         String msg = "Added 1 song into";
         String song = "Pluto";
         String homeUrl = "https://bbb.testpro.io/";
+
 
         //Navigate to "https://bbb.testpro.io/"
         navigateToPage(homeUrl);
