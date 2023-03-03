@@ -83,10 +83,13 @@ public class BaseTest {
     }
 
     public static void selectPlaylistName() throws InterruptedException {
-        WebElement selectPlaylist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[@class='playlist'][normalize-space()='My Absolute Favorites <3']"));
+        WebElement selectPlaylist = driver.findElement(By.xpath(("//*[@id='songResultsWrapper']/header/div[3]/div/section[1]/ul/li[5]")));
         selectPlaylist.click();
         Thread.sleep(2000);
+
+
     }
+
 
 
 
