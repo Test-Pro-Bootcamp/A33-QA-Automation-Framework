@@ -88,12 +88,19 @@ public class BaseTest {
         WebElement verifyMessage = driver.findElement(By.cssSelector("div.alertify-logs.top.right > div.success.show"));
         return verifyMessage.isDisplayed();
     }
-    public static void playButton() {
-        WebElement play = driver.findElement(By.cssSelector());
-
+    public static void playNextSong() {
+        WebElement nextSong = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
+        nextSong.click();
     }
-
-
+    public static void playButton() throws InterruptedException {
+        WebElement play = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
+        play.click();
+        Thread.sleep(2000);
+    }
+    public static boolean playSoundBar() {
+        WebElement play = driver.findElement(By.xpath("//div[@data-testid='sound-bar-play']"));
+        return play.isDisplayed();
+    }
 
     @AfterMethod
     public static void closeBrowser(){

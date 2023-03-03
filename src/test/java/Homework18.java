@@ -16,8 +16,9 @@ public class Homework18 extends BaseTest {
         enterEmail("linulya1411@gmail.com");
         enterPassword("te$t$tudent");
         clickSubmit();
-        Thread.sleep(2000);
+        playNextSong();
         playButton();
-
+        Thread.sleep(2000);
+        Assert.assertTrue(playSoundBar());
     }
 }
