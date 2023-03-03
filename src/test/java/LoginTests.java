@@ -18,6 +18,7 @@ public class LoginTests extends BaseTest {
         String url = "https://apps.testpro.io/";
         driver.get(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);
+
         driver.quit();
     }
 }

@@ -88,6 +88,10 @@ public class BaseTest {
         WebElement verifyMessage = driver.findElement(By.cssSelector("div.alertify-logs.top.right > div.success.show"));
         return verifyMessage.isDisplayed();
     }
+    public static void playButton() {
+        WebElement play = driver.findElement(By.cssSelector());
+
+    }
 
 
 

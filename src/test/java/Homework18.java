@@ -17,5 +17,7 @@ public class Homework18 extends BaseTest {
         enterPassword("te$t$tudent");
         clickSubmit();
         Thread.sleep(2000);
+        playButton();
+
     }
 }

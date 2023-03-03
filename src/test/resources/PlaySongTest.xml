@@ -5,9 +5,7 @@
 
     <test name="PlaySong Test" preserve-order="false">
         <classes>
-            <class name="LoginTests"/>
             <class name="Homework18"/>
-            <class name="BaseTest"/>
         </classes>
     </test>
 </suite>
