@@ -44,7 +44,7 @@ public class BaseTest {
     public static void providePassword(String password) {
         WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
         passwordField.click();
-        passwordField.sendKeys("te$t$tudent");
+        passwordField.sendKeys(password);
     }
 
     public static void clickSubmit() throws InterruptedException {
