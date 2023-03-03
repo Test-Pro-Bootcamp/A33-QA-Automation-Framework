@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Homework16 extends BaseTest {
+public class homework16 extends BaseTest {
 
     @Test
     public void Navigation () {
@@ -20,7 +20,7 @@ public class Homework16 extends BaseTest {
         WebElement registrationLink = driver.findElement(By.cssSelector("[id = 'hel']"));
         registrationLink.click();
 
-        String registrationUrl = "http:// bbb.testpro.io/registration.php";
+        String registrationUrl = "http://bbb.testpro.io/registration.php";
 
         Assert.assertEquals(driver.getCurrentUrl(), registrationUrl);
         //driver.quit();
