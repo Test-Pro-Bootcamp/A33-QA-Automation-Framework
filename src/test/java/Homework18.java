@@ -20,10 +20,13 @@ public class Homework18 extends BaseTest {
         Thread.sleep(2000);
 
 
-       enterAllSongs();
-       selectSong();
-       enterButtonPlaySong();
+        enterAllSongs();
+        selectSong();
+        enterButtonPlaySong();
 
         Assert.assertTrue(isDisplayedPlayingSong());
+
+    }
+}
 
 

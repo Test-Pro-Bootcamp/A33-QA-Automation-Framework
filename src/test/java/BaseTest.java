@@ -52,32 +52,31 @@ public class BaseTest {
     }
 
 
-    public void enterAllSongs() throw InterruptedException {
-                WebElement allSongs = driver.findElement(By.cssSelector("a[href='#!/songs']"));
-                Thread.sleep(1000);
-                allSongs.click();
-            }
+    public void enterAllSongs() throws InterruptedException {
+        WebElement allSongs = driver.findElement(By.cssSelector("a[href='#!/songs']"));
+        Thread.sleep(1000);
+        allSongs.click();
+    }
 
-            public void selectSong () throw InterruptedException {
-                WebElement song = driver.findElement(By.xpath("//tr[@class='song-item']"));
-                Thread.sleep(1000);
-                song.click();
-            }
+    public void selectSong() throws InterruptedException {
+        WebElement song = driver.findElement(By.xpath("//tr[@class='song-item']"));
+        Thread.sleep(1000);
+        song.click();
+    }
 
-            public void enterButtonPlaySong() throw InterruptedException {
-                WebElement buttonPlaySong = driver.findElement(By.xpath("//span[@title='Play or resume']"));
-                Actions actions = new Actions(driver);
-                actions.click(buttonPlaySong).perform();
-            }
-
-
-            public boolean isDisplayedPlayingSong() {
-
-                WebElement songIsPlaying = driver.findElement(By.cssSelector("[data-testid = 'sound-bar-play']"));
-                return songIsPlaying.isDisplayed();
+    public void enterButtonPlaySong() {
+        WebElement buttonPlaySong = driver.findElement(By.xpath("//span[@title='Play or resume']"));
+        Actions actions = new Actions(driver);
+        actions.click(buttonPlaySong).perform();
+    }
 
 
+    public boolean isDisplayedPlayingSong() {
 
-            }
+        WebElement songIsPlaying = driver.findElement(By.cssSelector("[data-testid = 'sound-bar-play']"));
+        return songIsPlaying.isDisplayed();
+
+
+    }
 
 }
