@@ -68,6 +68,41 @@ public class BaseTest {
         WebElement newPlaylistEnter = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[2]/form/button"));
         newPlaylistEnter.click();
     }
+    public void play() throws InterruptedException {
+        WebElement pressPlay = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
+        pressPlay.click();
+        Thread.sleep(1000);
+    }
+    public void hoverOnPlay(){
+        WebElement pressHoverOnPlay = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
+        pressHoverOnPlay.click();
+    }
+    public void soundBar(){
+        WebElement soundBarDisplayed = driver.findElement(By.xpath("//div[@class='side player-controls']"));
+        soundBarDisplayed.click();
+    }
+    public void rewind(){
+        WebElement pressRewind = driver.findElement(By.xpath("//span[@data-testid='play-prev-btn']"));
+        pressRewind.click();
+    }
+    public void pause(){
+        WebElement pressPause = driver.findElement(By.xpath("//span[@data-testid='pause-btn']"));
+        pressPause.click();
+    }
+    public void opePlaylist(){
+        WebElement clickOpePlaylist = driver.findElement(By.xpath("//*[@href='#!/playlist/46044']"));
+        clickOpePlaylist.click();
+    }
+    public void deletePlaylist(){
+        WebElement clickDeletePlaylist = driver.findElement(By.xpath("//button[@class='del btn-delete-playlist']"));
+        clickDeletePlaylist.click();
+        WebElement clickOkay = driver.findElement(By.xpath("//button[@class='ok']"));
+        clickOkay.click();
+    }
+    public boolean verifySoundBar() {
+        WebElement soundBarDisplayed = driver.findElement(By.xpath("//div[@class='side player-controls']"));
+        return soundBarDisplayed.isDisplayed();
+    }
     public String notificationIcon () {
         WebElement newNotificationIcon = driver.findElement(By.xpath("//div[@class='success show']"));
         return newNotificationIcon.getText();

@@ -1,7 +1,7 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Homework17 extends BaseTest {
+public class Homework18 extends BaseTest {
 
     @Test
     public void newSongToPlaylist() throws InterruptedException {
@@ -12,13 +12,12 @@ public class Homework17 extends BaseTest {
         emailField("skillztomkid@gmail.com");
         passwordFinder("te$t$tudent");
         logIn();
-        searchSongs("dark days");
-        viewAll();
-        clickFirstSong();
-        addToPlaylist();
-        newPlaylist("Ope");
-        notificationIcon();
-        Assert.assertTrue(notificationVerification());
+        //soundBar();
+        hoverOnPlay();
+        play();
+        //pause();
+        Assert.assertTrue(verifySoundBar());
+
         //driver.wait(5000);
     }
 }

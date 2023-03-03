@@ -3,12 +3,11 @@
 
 <suite name="TestNG">
 
-    <test name="Example Test" preserve-order="false">
+    <test name="TestNG" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
             <class name="BaseTest"/>
-            <class name="Homework16"/>
-            <class name="Homework17"/>
+            <class name="Homework18"/>
         </classes>
     </test>
 </suite>
