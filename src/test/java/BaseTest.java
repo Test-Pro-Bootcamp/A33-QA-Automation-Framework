@@ -7,7 +7,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-
 import java.time.Duration;
 
 public class BaseTest {
@@ -67,7 +66,7 @@ public class BaseTest {
 
     protected String clickAddToPls (String playlist) throws InterruptedException{
         driver.findElement(By.cssSelector("#songResultsWrapper button.btn-add-to")).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         String xpathSelector = "//section[@id='songResultsWrapper']//li[contains(text(),'" + playlist + "')]";
         WebElement ourPlaylist = driver.findElement(By.xpath(xpathSelector));
         ourPlaylist.click();
@@ -82,6 +81,17 @@ public class BaseTest {
         System.out.println(msg);
         Thread.sleep(2000);
         return msg;
+    }
+
+    public static void playNextSong () throws  InterruptedException{
+        driver.findElement(By.cssSelector("i[title = 'Play next song']")).click();
+        driver.findElement(By.cssSelector("span.play>i")).click();
+        Thread.sleep(2000);
+    }
+
+    public Boolean isPlaying () throws InterruptedException {  //verifying by checking whether the sound bar is displayed
+        Boolean isPlayingFlag = driver.findElement(By.cssSelector("img[alt = 'Sound bars']")).isDisplayed();
+        return isPlayingFlag;
     }
 
     @AfterMethod
