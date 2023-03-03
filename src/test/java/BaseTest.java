@@ -2,6 +2,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.BeforeMethod;
@@ -32,7 +33,8 @@ public class BaseTest {
 
     @BeforeMethod
     public void setupBrowser() {
-        driver = new ChromeDriver();
+        ChromeOptions options= new ChromeOptions(); options.addArguments("--disable-notifications");
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(25));
     }
 
