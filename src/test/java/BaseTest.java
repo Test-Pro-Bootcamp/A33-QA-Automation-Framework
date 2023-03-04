@@ -11,88 +11,74 @@ import org.testng.annotations.BeforeSuite;
 
 import java.time.Duration;
 
-
-public class BaseTest {
-    public static WebDriver driver = null;
-    public static String url = "https://bbb.testpro,io/";
-    @BeforeSuite
-    static void setupClass(){
-        WebDriverManager.chromedriver().setup();
-    }
-    @BeforeMethod
-    public static void openBrowser() {
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-    }
-    public static void loginUrl() throws InterruptedException {
-        String url = "https://bbb.testpro.io";
-        driver.get(url);
-        Thread.sleep(2000);
-    }
-    public static void enterEmail(String email) throws InterruptedException {
-        WebElement emailField = driver.findElement(By.cssSelector("[type = 'email']"));
-        emailField.click();
-        emailField.clear();
-        emailField.sendKeys(email);
-        Thread.sleep(2000);
-    }
-    public static void enterPassword(String password) throws InterruptedException {
-        WebElement passwordField = driver.findElement(By.cssSelector("[type = 'password']"));
-        passwordField.click();
-        passwordField.clear();
-        passwordField.sendKeys(password);
-        Thread.sleep(2000);
-    }
-    public static void clickSubmit() throws InterruptedException {
-        WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
-        submitButton.click();
-        Thread.sleep(2000);
-    }
-    public static void findSong(String songName) throws InterruptedException {
-        WebElement findSong = driver.findElement(By.cssSelector("[type = 'search']"));
-        findSong.click();
-        findSong.sendKeys(songName);
-    }
-   public static void clickViewAllButton() throws InterruptedException{
-        WebElement clickViewAllButton = driver.findElement(By.cssSelector("button[data-test='view-all-songs-btn']"));
-        Thread.sleep(2000);
-        clickViewAllButton.click();
-        Thread.sleep(2000);
-   }
-    public static void selectFirstSong() throws InterruptedException {
-        WebElement firstSong = driver.findElement(By.cssSelector("section#songResultsWrapper tr.song-item td.title"));
-        firstSong.click();
-        Thread.sleep(2000);
-    }
-    public static void clickAddToButton() throws InterruptedException {
-        WebElement addToButton = driver.findElement(By.cssSelector("button[class = 'btn-add-to']"));
-        addToButton.click();
-        Thread.sleep(2000);
-    }
-    public static void selectPlaylist() throws InterruptedException {
+    public class BaseTest {
+        public static WebDriver driver = null;
+        @BeforeSuite
+            static void setupClass(){
+                WebDriverManager.chromedriver().setup();
+            }
+            @BeforeMethod
+            public static void openBrowser() {
+                driver = new ChromeDriver();
+                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            }
+            public static void loginUrl() throws InterruptedException {
+                String url = "https://bbb.testpro.io";
+                driver.get(url);
+                Thread.sleep(2000);
+            }
+            public static void enterEmail(String email) throws InterruptedException {
+                WebElement emailField = driver.findElement(By.cssSelector("[type = 'email']"));
+                emailField.click();
+                emailField.clear();
+                emailField.sendKeys(email);
+                Thread.sleep(2000);
+            }
+            public static void enterPassword(String password) throws InterruptedException {
+                WebElement passwordField = driver.findElement(By.cssSelector("[type = 'password']"));
+                passwordField.click();
+                passwordField.clear();
+                passwordField.sendKeys(password);
+                Thread.sleep(2000);
+            }
+            public static void clickSubmit() throws InterruptedException {
+                WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
+                submitButton.click();
+                Thread.sleep(2000);
+            }
+            public static void findSong(String songName) throws InterruptedException {
+                WebElement findSong = driver.findElement(By.cssSelector("[type = 'search']"));
+                findSong.click();
+                findSong.sendKeys(songName);
+            }
+            public static void clickViewAllButton() throws InterruptedException{
+                WebElement clickViewAllButton = driver.findElement(By.cssSelector("button[data-test='view-all-songs-btn']"));
+                Thread.sleep(2000);
+                clickViewAllButton.click();
+                Thread.sleep(2000);
+            }
+            public static void selectFirstSong() throws InterruptedException {
+                WebElement firstSong = driver.findElement(By.cssSelector("section#songResultsWrapper tr.song-item td.title"));
+                firstSong.click();
+                Thread.sleep(2000);
+            }
+            public static void clickAddToButton() throws InterruptedException {
+                WebElement addToButton = driver.findElement(By.cssSelector("button[class = 'btn-add-to']"));
+                addToButton.click();
+                Thread.sleep(2000);
+            }
+            public static void selectPlaylist() throws InterruptedException {
 //        created playlist 'Piano Music'
-        WebElement selectPlaylist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(), 'Piano Music')]"));
-        selectPlaylist.click();
-        Thread.sleep(2000);
-    }
-    public static String getNotificationMessage(){
-        WebElement notificationMessage = driver.findElement(By.cssSelector("div.success.show"));
-        return notificationMessage.getText();
-    }
-    public static void usePlayerControls() throws InterruptedException{
-        WebElement clickPlayNext = driver.findElement(By.cssSelector("[data-testid='play-next-btn']"));
-        clickPlayNext.click();
-        Thread.sleep(2000);
-        WebElement clickPlayButton = driver.findElement(By.cssSelector("span[class='play']"));
-        clickPlayButton.click();
-        Thread.sleep(2000);
-    }
-    public static boolean songIsPlaying(){
-        WebElement songIsPlaying = driver.findElement(By.cssSelector("div[class='bars']"));
-        return songIsPlaying.isDisplayed();
-    }
-    @AfterMethod
-    public static void closeBrowser() {
-        driver.quit();
-    }
-}
+                WebElement selectPlaylist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(), 'Piano Music')]"));
+                selectPlaylist.click();
+                Thread.sleep(2000);
+            }
+            public static String getNotificationMessage(){
+                WebElement notificationMessage = driver.findElement(By.cssSelector("div.success.show"));
+                return notificationMessage.getText();
+            }
+            @AfterMethod
+            public static void closeBrowser() {
+                driver.quit();
+            }
+        }

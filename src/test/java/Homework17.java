@@ -20,8 +20,6 @@ public class Homework17 extends BaseTest {
         selectFirstSong();
         clickAddToButton();
         selectPlaylist();
-      Assert.assertTrue(getNotificationMessage().contains(newSongAddNotificationMessage));
+        Assert.assertTrue(getNotificationMessage().contains(newSongAddNotificationMessage));
     }
 }
-
-
