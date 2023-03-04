@@ -11,10 +11,10 @@ import java.sql.Driver;
 public class Homework18 extends BaseTest {
     @Test
     public void playSongTest() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
         logIn("regniermandy@gmail.com", "te$t$tudent");
         playSong();
-    Assert.assertTrue(isSongPlaying());
+        Assert.assertTrue(isSongPlaying());
+
 }
 
     @Test
@@ -22,4 +22,5 @@ public class Homework18 extends BaseTest {
         WebElement soundBarPlay = driver.findElement(By.cssSelector("[data-testid ='sound-bar-play']"));
         return soundBarPlay.isDisplayed();
     }
+
 }
