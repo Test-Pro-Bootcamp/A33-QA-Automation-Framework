@@ -14,6 +14,7 @@ import java.time.Duration;
 
 public class BaseTest {
     public static WebDriver driver = null;
+    public static String url = "https://bbb.testpro,io/";
     @BeforeSuite
     static void setupClass(){
         WebDriverManager.chromedriver().setup();
@@ -77,6 +78,18 @@ public class BaseTest {
     public static String getNotificationMessage(){
         WebElement notificationMessage = driver.findElement(By.cssSelector("div.success.show"));
         return notificationMessage.getText();
+    }
+    public static void usePlayerControls() throws InterruptedException{
+        WebElement clickPlayNext = driver.findElement(By.cssSelector("[data-testid='play-next-btn']"));
+        clickPlayNext.click();
+        Thread.sleep(2000);
+        WebElement clickPlayButton = driver.findElement(By.cssSelector("span[class='play']"));
+        clickPlayButton.click();
+        Thread.sleep(2000);
+    }
+    public static boolean songIsPlaying(){
+        WebElement songIsPlaying = driver.findElement(By.cssSelector("div[class='bars']"));
+        return songIsPlaying.isDisplayed();
     }
     @AfterMethod
     public static void closeBrowser() {
