@@ -23,7 +23,7 @@ public class Homework16 extends BaseTest {
         WebElement registrationLink = driver.findElement(By.cssSelector ("[id='hel']"));
         registrationLink.click();
 
-        String urlRegistration = "https://bbb.testpro.io/Registration.php";
+        String urlRegistration = "https://bbb.testpro.io/registration.php";
         Assert.assertEquals(driver.getCurrentUrl(),urlRegistration);
         driver.quit();
     }
