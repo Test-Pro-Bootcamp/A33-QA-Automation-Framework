@@ -10,18 +10,17 @@ public class Homework19 extends BaseTest {
 
     @Test
     public void deletePlaylistTest() {
+
+        //GIVEN
         String testPlaylist = "PLDELTEST";
         logIn();
-        try {
-            WebElement exists = driver.findElement(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + testPlaylist + "')]"));
-            openPlaylist(testPlaylist);
-        }
-        catch (NoSuchElementException e) {
-            createPlaylist(testPlaylist);
-        }
-        finally {
-            deletePlaylistButton();
-            Assert.assertTrue(getDeletedPlaylistmsg().isDisplayed());
-        }
+        createPlaylist(testPlaylist);
+
+        //THEN
+        openPlaylist(testPlaylist);
+        deleteEmptyPlaylist();
+
+        //WHEN
+        Assert.assertTrue(getDeletedPlaylistmsg().isDisplayed());
     }
 }

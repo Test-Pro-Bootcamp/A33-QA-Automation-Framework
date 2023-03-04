@@ -200,19 +200,20 @@ public class BaseTest {
         playlistTxtbox.sendKeys(Keys.ENTER);
     }
 
-    public void deletePlaylistButton() {
-        WebElement hasSong= null;
-        try{
-            hasSong = driver.findElement(By.cssSelector("#playlistWrapper [class='song-item']:nth-child(1)"));
-        }
-        catch (NoSuchElementException e) {}
+    public void deleteEmptyPlaylist() {
         WebElement button = driver.findElement(By.cssSelector("[class='del btn-delete-playlist']"));
         button.click();
-        if(hasSong != null){
-            WebElement okbutton = driver.findElement(By.cssSelector("button[class='ok']"));
-            okbutton.click();
-        }
     }
+
+    public void deleteFullPlaylist() {
+        WebElement button = driver.findElement(By.cssSelector("[class='del btn-delete-playlist']"));
+        button.click();
+        WebElement okbutton = driver.findElement(By.cssSelector("button[class='ok']"));
+        okbutton.click();
+    }
+
+
+
     public boolean isPlaylistvisible(String searchText) {
         try {
             WebElement testPlaylist = driver.findElement(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + searchText + "')]"));
