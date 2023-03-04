@@ -8,8 +8,9 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class Homework16 extends BaseTest {
+
     @Test
-    public static void RegistrationNavigation() {
+    public static void registrationNavigation() {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
