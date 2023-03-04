@@ -39,7 +39,6 @@ public static WebDriver driver = null;
         WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
         emailField.click();
         emailField.sendKeys(email);
-
     }
 
     public void enterPassword(String password) {
@@ -90,6 +89,20 @@ public static WebDriver driver = null;
         WebElement notificationElement = driver.findElement(By.cssSelector("div.success.show"));
         return notificationElement.getText();
 
+    }
+
+    public void playSong() throws InterruptedException{
+        WebElement playButton = driver.findElement(By.cssSelector("[data-testid ='play-btn']"));
+        WebElement nextSongPlayButton = driver.findElement(By.cssSelector("[data-testid ='play-next-btn']"));
+        nextSongPlayButton.click();
+        Thread.sleep(2000);
+        playButton.click();
+        Thread.sleep(2000);
+    }
+
+    public boolean soundBarIsDisplayed(){
+        WebElement soundBarButton = driver.findElement(By.cssSelector("[data-testid ='sound-bar-play']"));
+        return soundBarButton.isDisplayed();
     }
 
 }

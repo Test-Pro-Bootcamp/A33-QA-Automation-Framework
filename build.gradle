@@ -20,3 +20,8 @@ test {
         suites "src/test/resources/TestNG.xml"
     }
 }
+task testHomework18(type: Test){
+    useTestNG(){
+        suites "scr/test/resources/Homework18.xml"
+    }
+}
