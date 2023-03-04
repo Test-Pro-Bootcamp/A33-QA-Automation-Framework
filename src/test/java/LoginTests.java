@@ -22,6 +22,7 @@ public class LoginTests extends BaseTest {
         Thread.sleep(2000);
         driver.quit();
     }
+    
 
     @Test
     public static void LoginInvalidEmail() {
