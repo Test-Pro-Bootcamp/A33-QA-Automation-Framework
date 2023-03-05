@@ -8,6 +8,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 
 import java.time.Duration;
@@ -16,14 +17,21 @@ import java.time.Duration;
 public class BaseTest {
 public static WebDriver driver = null;
 
+public static String url = null;
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
     @BeforeMethod
-    public void setUpBrowser() {
+    @Parameters({"BaseURL"})
+    public void setUpBrowser(String BaseURL) {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        url = BaseURL;
+        driver.get(url);
+
 
     }
     @AfterMethod
@@ -104,5 +112,23 @@ public static WebDriver driver = null;
         WebElement soundBarButton = driver.findElement(By.cssSelector("[data-testid ='sound-bar-play']"));
         return soundBarButton.isDisplayed();
     }
+
+    public void selectPlaylist() throws InterruptedException{
+        WebElement playlistButton = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
+        playlistButton.click();
+        Thread.sleep(2000);
+
+    }
+   public void deletePlayList() throws InterruptedException{
+        WebElement deletePlaylistButton = driver.findElement(By.cssSelector(".btn-delete-playlist"));
+        deletePlaylistButton.click();
+       Thread.sleep(2000);
+
+   }
+
+
+   public WebElement getDeletedPlaylistMessage() {
+       return driver.findElement(By.cssSelector("div.success.show"));
+   }
 
 }
