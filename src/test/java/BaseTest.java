@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -15,6 +16,7 @@ import java.time.Duration;
 public class BaseTest {
 
     public static WebDriver driver = null;
+
 
     @BeforeSuite
     static void setupClass() {
@@ -33,6 +35,7 @@ public class BaseTest {
         driver.quit();
     }
 
+    //Methods for logging in
     public static void navigateToPage(String url) {
         driver.get(url);
     }
@@ -52,6 +55,7 @@ public class BaseTest {
         submitButton.click();
     }
 
+    //Methods for AddingASongToPlaylist class
     public static void searchASong(String songTitle) throws InterruptedException {
         WebElement searchSongField = driver.findElement(By.xpath("//header/div[@id='searchForm']/input[1]"));
         searchSongField.click();
@@ -96,4 +100,30 @@ public class BaseTest {
         return songIsPlaying.isDisplayed();
     }
 
+
+    //Methods for DeletePlaylist
+
+    //open a playlist
+    public static void selectPlaylisttoDelete() throws InterruptedException {
+        WebElement selectPlaylist = driver.findElement(By.xpath(("//*[@id='playlists']/ul/li[3]/a")));
+        selectPlaylist.click();
+        Thread.sleep(2000);
+    }
+
+    //click to delete a playlist 
+
+    public static void removePlaylist() throws InterruptedException {
+        WebElement xPlaylistButton = driver.findElement(By.xpath(("//*[@id='playlistWrapper']/header/div[3]/span/button[2]")));
+        xPlaylistButton.click();
+        Thread.sleep(2000);
+    }
+
+    public static void cancel() throws InterruptedException {
+        WebElement cancelButton = driver.findElement(By.cssSelector("button[class='cancel']"));
+        cancelButton.click();
+        Thread.sleep(2000);
+    }
 }
+//xpath to cancel
+
+
