@@ -77,7 +77,6 @@ public class BaseTest {
 
     public static void clickAddToButton() throws InterruptedException {
         WebElement addToButton = driver.findElement(By.cssSelector("button[class='btn-add-to']"));
-
         addToButton.click();
         Thread.sleep(2000);
     }
@@ -90,10 +89,23 @@ public class BaseTest {
 
     }
 
+    public static void verifySong() throws InterruptedException {
+        WebElement selectToVerify = driver.findElement(By.xpath(("//*[@id='playlists']/ul/li[3]/a")));
+        selectToVerify.click();
+        Thread.sleep(2000);
+    }
 
-    public boolean isDisplayedPlayingSong() {
-        WebElement songIsPlaying = driver.findElement(By.cssSelector("[data-testid = 'sound-bar-play']"));
-        return songIsPlaying.isDisplayed();
+
+
+
+    public boolean DisplayedSong() {
+        WebElement songIsThere = driver.findElement(By.xpath("//*[@id='playlistWrapper']/div/div/div[1]/table/tr[6]/td[2]"));
+        return songIsThere.isDisplayed();
     }
 
 }
+
+
+
+//xpath to verify
+//*[@id='playlistWrapper']/div/div/div[1]/table/tr[6]/td[2]

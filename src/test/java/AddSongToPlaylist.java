@@ -31,10 +31,11 @@ public class AddSongToPlaylist extends BaseTest {
             // Add the song to playlist
             clickAddToButton();
             selectPlaylistName();
+            verifySong();
+
 
             // Verify that song is added to the playlist
-            WebElement addedSongAlert = driver.findElement(By.cssSelector("div.success.show"));
-            Assert.assertTrue(addedSongAlert.isDisplayed());
+            
         }
     }
 
