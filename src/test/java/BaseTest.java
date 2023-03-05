@@ -29,7 +29,8 @@ public class BaseTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         driver.manage().window().maximize();
-        driver.get(baseUrl);
+        url = baseUrl;
+        driver.get(url);
     }
        public static void provideEmail(String email) throws InterruptedException {
         WebElement emailField = driver.findElement(By.cssSelector("[type = 'email']"));
