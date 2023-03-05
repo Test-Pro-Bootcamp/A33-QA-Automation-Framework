@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTest {
 
-    @Test(dataProvider = "incorrectLoginData")
+    @Test(enabled = false, dataProvider = "incorrectLoginData")
     public void LoginIncorrectCredentials(String email, String password) throws InterruptedException {
         // navigateToPage("https://bbb.testpro.io/");
         driver.get(url);

@@ -4,16 +4,23 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.*;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 
 public class BaseTest {
 
+
+    WebDriverWait wait;
+
     public static WebDriver driver = null;
 
+
     public static String url = null;
+
 
     @BeforeSuite
     static void setupClass() {
@@ -31,6 +38,8 @@ public class BaseTest {
 
         url = BaseURL;
         driver.get(url);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
     }
 
     @AfterMethod
@@ -60,16 +69,23 @@ public class BaseTest {
 
 
     //Methods for playing a song
-    public void enterAllSongs() throws InterruptedException {
+    public void enterAllSongs() {
         WebElement allSongs = driver.findElement(By.cssSelector("a[href='#!/songs']"));
-        Thread.sleep(1000);
         allSongs.click();
+
+        //Thread.sleep(1000);
+       // allSongs.click();
+        //
     }
 
-    public void selectSong() throws InterruptedException {
+    public void selectSong()  {
         WebElement song = driver.findElement(By.xpath("//tr[@class='song-item']"));
-        Thread.sleep(1000);
         song.click();
+
+        //throws InterruptedException
+        //WebElement song = driver.findElement(By.xpath("//tr[@class='song-item']"));
+        //Thread.sleep(1000);
+
     }
 
     public void enterButtonPlaySong() {
@@ -93,7 +109,8 @@ public class BaseTest {
         return homePage.isDisplayed();
 
     }
-@DataProvider(name = "incorrectLoginData")
+
+    @DataProvider(name = "incorrectLoginData")
     public Object[][] getDataProviders() {
         return new Object[][]{
                 {"invalid@gmail.com", "invalidPass"},
