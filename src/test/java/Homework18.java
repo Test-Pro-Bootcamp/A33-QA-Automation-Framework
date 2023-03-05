@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.openqa.selenium.WebElement;
 
@@ -16,7 +17,7 @@ import org.openqa.selenium.WebElement;
       allSongsPage();
       clickPlayNextSong();
       clickPlayBtn();
-      confirmSoundBarIsDisplayed();
+      Assert.assertTrue(confirmSoundBarIsDisplayed());
 
 
 
