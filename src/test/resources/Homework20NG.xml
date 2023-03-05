@@ -9,27 +9,10 @@
             <class name="Homework20">
                 <methods>
                     <include name="playSongTest"/>
+                    <include name="addSongToPlaylist"/>
+                    <include name="deleteCreatedPlaylist"/>
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="Homework20" preserve-order="false">
-        <classes>
-            <class name="BaseTest"/>
-            <class name="Homework20">
-                <methods>
-                    <include name="addSongToPlaylist"/>
-                </methods>
-            </class>
-        </classes>
-    </test><test name="Homework20" preserve-order="false">
-    <classes>
-        <class name="BaseTest"/>
-        <class name="Homework20">
-            <methods>
-                <include name="deleteCreatedPlaylist"/>
-            </methods>
-        </class>
-    </classes>
-</test>
 </suite>
