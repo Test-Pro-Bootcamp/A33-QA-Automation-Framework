@@ -4,9 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
@@ -15,16 +13,24 @@ public class BaseTest {
 
     public static WebDriver driver = null;
 
+    public static String url = null;
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
 
     @BeforeMethod
-    public static void launchBrowser() {
+
+    @Parameters({"BaseURL"})
+
+    public void launchBrowser(String BaseURL) {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
+
+        url = BaseURL;
+        driver.get(url);
     }
 
     @AfterMethod
@@ -32,6 +38,7 @@ public class BaseTest {
         driver.quit();
     }
 
+    //Methods for logging in
     public static void navigateToPage(String url) {
         driver.get(url);
     }
@@ -52,6 +59,7 @@ public class BaseTest {
     }
 
 
+    //Methods for playing a song
     public void enterAllSongs() throws InterruptedException {
         WebElement allSongs = driver.findElement(By.cssSelector("a[href='#!/songs']"));
         Thread.sleep(1000);
@@ -79,4 +87,21 @@ public class BaseTest {
 
     }
 
+    //additional things for Login test
+    public boolean isHomePageElementDisplayed() {
+        WebElement homePage = driver.findElement(By.xpath("/html/body/div/div/div/nav/section[1]/ul/li[1]/a"));
+        return homePage.isDisplayed();
+
+    }
+@DataProvider(name = "incorrectLoginData")
+    public Object[][] getDataProviders() {
+        return new Object[][]{
+                {"invalid@gmail.com", "invalidPass"},
+                {"onlyEmail@gmail.com", ""},
+                {"", ""}
+
+        };
+    }
 }
+
+

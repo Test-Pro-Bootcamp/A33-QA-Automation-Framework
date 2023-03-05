@@ -2,7 +2,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="SmokeSuite">
-    <test name="Smoke Testt" preserve-order="false">
+    <parameter name="BaseURL" value="https://bbb.testpro.io/"/>
+    <test name="Smoke Test" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
             <class name="BaseTest"/>
