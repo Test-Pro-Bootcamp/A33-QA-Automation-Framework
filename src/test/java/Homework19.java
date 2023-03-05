@@ -10,6 +10,8 @@ import java.time.Duration;
 public class Homework19 extends BaseTest {
 
     @Test
-    public static void deletePlayList() {
+    public void deletePlayList(String BaseURL) {
+        setUpBrowser(BaseURL);
+        
     }
 }
