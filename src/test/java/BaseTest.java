@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import java.time.Duration;
@@ -13,23 +14,26 @@ import java.time.Duration;
 public class BaseTest {
 
     public static WebDriver driver = null;
+    WebDriverWait wait;
 
     @BeforeSuite
     static void setupClass() throws InterruptedException {
         WebDriverManager.chromedriver().setup();
     }
+
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public static void launchBrowser(String BaseURL){
+    public static void launchBrowser(String BaseURL) {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get(BaseURL);
+        driver.manage().window().maximize();
     }
 
-//    @AfterTest
-//    public static void closeBrowser(){
-//        driver.quit();
-//    }
+    @AfterClass
+    public static void closeBrowser(){
+        driver.quit();
+    }
 
     @Test
     public static void navigateToPage() throws InterruptedException {
@@ -37,8 +41,9 @@ public class BaseTest {
         driver.get(url);
         Thread.sleep(1000);
     }
+
     public static void provideEmail(String email) {
-        WebElement emailField =driver.findElement(By.cssSelector("[type='email']"));
+        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
         emailField.clear();
         emailField.sendKeys(email);
     }
@@ -53,8 +58,6 @@ public class BaseTest {
         WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
         submitButton.click();
         Thread.sleep(2000);
-
-
 
 
     }
