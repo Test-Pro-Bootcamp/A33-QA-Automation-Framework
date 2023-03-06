@@ -6,13 +6,19 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.openqa.selenium.WebElement;
+
+import java.time.Duration;
 
 
 public class BaseTest {
 
     @BeforeSuite
-    static void setupClass() {
-        WebDriverManager.chromedriver().setup();
+     static void setupClass() {
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
     }
 
 }
