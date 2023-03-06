@@ -14,8 +14,6 @@ import java.time.Duration;
 public class BaseTest {
 
 
-    WebDriverWait wait;
-
     public static WebDriver driver = null;
 
 
@@ -33,13 +31,13 @@ public class BaseTest {
 
     public void launchBrowser(String BaseURL) {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
         driver.manage().window().maximize();
 
         url = BaseURL;
         driver.get(url);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+
     }
 
     @AfterMethod
@@ -70,15 +68,20 @@ public class BaseTest {
 
     //Methods for playing a song
     public void enterAllSongs() {
-        WebElement allSongs = driver.findElement(By.cssSelector("a[href='#!/songs']"));
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        WebElement allSongs = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[href='#!/songs']")));
         allSongs.click();
 
+        // WebElement allSongs = driver.findElement(By.cssSelector("a[href='#!/songs']"));
+        //allSongs.click();
+
         //Thread.sleep(1000);
-       // allSongs.click();
+        // allSongs.click();
         //
     }
 
-    public void selectSong()  {
+    public void selectSong() {
         WebElement song = driver.findElement(By.xpath("//tr[@class='song-item']"));
         song.click();
 
