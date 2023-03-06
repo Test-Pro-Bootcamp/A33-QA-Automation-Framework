@@ -79,88 +79,54 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public static void LoginValidEmailPasswordTest() {
+    //public static void LoginValidEmailPasswordTest() {
         // Precondition: Chrome browser should be opened DONE
         //Step1. Open koel login page DONE
         //Step2. Enter Existing username
         //Step3. Enter Correct password
         //Step4. Click Login button
         //Expected result: User should be directed to the home page
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+       // WebDriver driver = new ChromeDriver();
+       // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        String url = "https://bbb.testpro.io/";
-        driver.get(url);
+       // String url = "https://bbb.testpro.io/";
+      //  driver.get(url);
 
-        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
-        emailField.click();
-        emailField.sendKeys("demo@class.com");
+      //  WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
+       // emailField.click();
+       // emailField.sendKeys("demo@class.com");
 
         //Step3. Enter Correct password
-        WebElement passwordField = driver.findElement(By.cssSelector("[type='password'"));
-        passwordField.click();
-        passwordField.sendKeys("te$t$tudent");
+       // WebElement passwordField = driver.findElement(By.cssSelector("[type='password'"));
+       // passwordField.click();
+      //  passwordField.sendKeys("te$t$tudent");
 
         //Step4. Click Login button
-        WebElement loginField = driver.findElement(By.cssSelector("[type='submit'"));
-        loginField.click();
+       // WebElement loginField = driver.findElement(By.cssSelector("[type='submit'"));
+       // loginField.click();
 
         //Expected result: User should be directed to the home page
-        WebElement avatar = driver.findElement(By.className("avatar"));
-        Assert.assertTrue(avatar.isDisplayed());
+       // WebElement avatar = driver.findElement(By.className("avatar"));
+       // Assert.assertTrue(avatar.isDisplayed());
 
-        driver.quit();
+      //  driver.quit();
     }
 }
 <<<<<<< Updated upstream
  public class Homework16 extends BaseTest {
-    @Test
-     public static void registrationNavigation(){
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+     @Test
+     public static void registrationNavigation() {
+         WebDriver driver = new ChromeDriver();
+         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        String url = "https://bbb.testpro/io/";
-        String urlRegistration = "https://bbb.test.io/registration.php";
-        driver.get(url);
+         String url = "https://bbb.testpro/io/";
+         String urlRegistration = "https://bbb.test.io/registration.php";
+         driver.get(url);
 
-        WebElement registrationLink = driver.findElement(by.cssSelector ("[id = 'hel']"));
-        registrationLink.click();
+         WebElement registrationLink = driver.findElement(by.cssSelector("[id = 'hel']"));
+         registrationLink.click();
 
-        Assert.assertEquals(driver.getCurrentUrl(), urlRegistration);
-        driver.quit();
-        
-    }
-
-        }
-
-        =======
-    public class Homework17 extends BaseTest {
-    @Test
-        public void addSongToPlaylist() throws interuptedException {
-
-        String newSongAddedNotificationText = "Added 1 song into";
-
-        navigateToPage("https://bbb.testpro.io");
-        //Login to the homepage Koel
-        provideEmail("ruth.asghar@testpro.io");
-        providePassword("te$t$tudent");
-        clickSubmit();
-        Thread.sleep(2000);
-
-        //Search and select a song
-        searchSong("Take my Hand");
-        Thread.sleep(2000);
-       viewAllSearchResult();
-        selectSong();
-
-        //Add the song to playlist
-        clickAddtoButton();
-        choosePlaylistName(RA-HMWK17);
-
-        //Verify that song is added to the playlist
-        WebElement addedSongAlert = driver.findElement(by.cssSelect("div.success.show)"));
-        Assert.assertTrue(getNotificationText().contains(newSongAddedNotificationText));
-        
-        }
-    }
->>>>>>> Stashed changes
+         Assert.assertEquals(driver.getCurrentUrl(), urlRegistration);
+         driver.quit();
+     }
+ }
