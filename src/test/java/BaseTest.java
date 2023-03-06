@@ -97,6 +97,7 @@ public class BaseTest {
 
     public void clickLogin() {
         WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         loginButton.click();
     }
 
@@ -111,11 +112,14 @@ public class BaseTest {
         inputEmail(email);
         inputPassword(password);
         clickLogin();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.urlToBe(koelHome));
     }
 
     public void clickViewAll() {
         //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        WebElement viewallButton = driver.findElement(By.xpath("//*[@id='homeWrapper']/div/div[1]/section[2]/h1/button"));
+        //wait.until(ExpectedConditions.elementToBeClickable(By.id("button[data-testid='home-view-all-recently-played-btn']")));
+        WebElement viewallButton = driver.findElement(By.cssSelector("button[data-testid='home-view-all-recently-played-btn']"));
         viewallButton.click();
     }
 
