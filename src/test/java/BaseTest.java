@@ -19,15 +19,17 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
     }
     @BeforeMethod
-    public static void launchBrowser() {
+    @Parameters({"BaseURL"})
+    public static void launchBrowser(String BaseURL){
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.get(BaseURL);
     }
 
-    @AfterTest
-    public static void closeBrowser(){
-        driver.quit();
-    }
+//    @AfterTest
+//    public static void closeBrowser(){
+//        driver.quit();
+//    }
 
     @Test
     public static void navigateToPage() throws InterruptedException {
@@ -51,6 +53,8 @@ public class BaseTest {
         WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
         submitButton.click();
         Thread.sleep(2000);
+
+
 
 
     }
