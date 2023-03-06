@@ -113,27 +113,27 @@ public class LoginTests extends BaseTest {
     }
 }
 <<<<<<< Updated upstream
+ public class Homework16 extends BaseTest {
+    @Test
+     public static void registrationNavigation(){
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        public class Homework16 extends BaseTest {
-        @Test
-        public static void registrationNavigation() {
-            WebDriver driver = new ChromeDriver();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        String url = "https://bbb.testpro/io/";
+        String urlRegistration = "https://bbb.test.io/registration.php";
+        driver.get(url);
 
-            String url = "https://bbb.testpro.io/";
-            String urlRegistration = "https://bbb.testpro.io/registration.php";
-            driver.get(url);
+        WebElement registrationLink = driver.findElement(by.cssSelector ("[id = 'hel']"));
+        registrationLink.click();
 
-            WebElement registrationLink = driver.findElement(By.cssSelector("[id ='hel']"));
-            registrationLink.click();
-
-            Assert.assertEquals(driver.getCurrentUrl(), urlRegistration);
-
-            driver.quit();
-        }
+        Assert.assertEquals(driver.getCurrentUrl(), urlRegistration);
+        driver.quit();
+        
     }
 
-=======
+        }
+
+        =======
     public class Homework17 extends BaseTest {
     @Test
         public void addSongToPlaylist() throws interuptedException {
