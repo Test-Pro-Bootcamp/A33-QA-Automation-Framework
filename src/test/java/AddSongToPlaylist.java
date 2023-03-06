@@ -34,7 +34,6 @@ public class AddSongToPlaylist extends BaseTest {
             verifySong();
 
 
-            // Verify that song is added to the playlist
             
         }
     }
