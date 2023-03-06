@@ -2,10 +2,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="TestNG">
-
+    <parameter name="BaseUrl" value="https://bbb.testpro.io/"></parameter>
+    <parameter name="Playlist" value="qweqwe"></parameter>
     <test name="Example Test" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
+            <class name="Homework17"/>
+            <class name="Homework19"/>
             <class name="BaseTest"/>
         </classes>
     </test>
