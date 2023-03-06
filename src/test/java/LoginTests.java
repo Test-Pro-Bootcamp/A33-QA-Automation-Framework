@@ -112,23 +112,55 @@ public class LoginTests extends BaseTest {
         driver.quit();
     }
 }
+<<<<<<< Updated upstream
 
-        public static class Homework16 extends BaseTest {
+        public class Homework16 extends BaseTest {
         @Test
-        public void Navigation() {
+        public static void registrationNavigation() {
             WebDriver driver = new ChromeDriver();
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
             String url = "https://bbb.testpro.io/";
+            String urlRegistration = "https://bbb.testpro.io/registration.php";
             driver.get(url);
 
-            WebElement registrationLink = driver.findElement(By.cssSelector("[id = 'hel']"));
+            WebElement registrationLink = driver.findElement(By.cssSelector("[id ='hel']"));
             registrationLink.click();
 
-            String registrationUrl = "https://bbb.testpro.io/registration.php";
-            Assert.assertEquals(driver.getCurrentUrl(), registrationUrl);
+            Assert.assertEquals(driver.getCurrentUrl(), urlRegistration);
 
             driver.quit();
         }
     }
 
+=======
+    public class Homework17 extends BaseTest {
+    @Test
+        public void addSongToPlaylist() throws interuptedException {
+
+        String newSongAddedNotificationText = "Added 1 song into";
+
+        navigateToPage("https://bbb.testpro.io");
+        //Login to the homepage Koel
+        provideEmail("ruth.asghar@testpro.io");
+        providePassword("te$t$tudent");
+        clickSubmit();
+        Thread.sleep(2000);
+
+        //Search and select a song
+        searchSong("Take my Hand");
+        Thread.sleep(2000);
+       viewAllSearchResult();
+        selectSong();
+
+        //Add the song to playlist
+        clickAddtoButton();
+        choosePlaylistName(RA-HMWK17);
+
+        //Verify that song is added to the playlist
+        WebElement addedSongAlert = driver.findElement(by.cssSelect("div.success.show)"));
+        Assert.assertTrue(getNotificationText().contains(newSongAddedNotificationText));
+        
+        }
+    }
+>>>>>>> Stashed changes
