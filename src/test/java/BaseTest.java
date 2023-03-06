@@ -105,7 +105,6 @@ public class BaseTest {
         inputEmail(email);
         inputPassword(password);
         clickLogin();
-        wait.until(ExpectedConditions.urlToBe(koelHome));
     }
 
     public void logIn() {
@@ -115,7 +114,8 @@ public class BaseTest {
     }
 
     public void clickViewAll() {
-        WebElement viewallButton = driver.findElement(By.cssSelector("button[data-testid='home-view-all-recently-played-btn']"));
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        WebElement viewallButton = driver.findElement(By.xpath("//*[@id='homeWrapper']/div/div[1]/section[2]/h1/button"));
         viewallButton.click();
     }
 
@@ -132,7 +132,7 @@ public class BaseTest {
     }
 
     public void playFirstSong() {
-        Actions actions = new Actions(driver);
+        actions = new Actions(driver);
         currentUrl = driver.getCurrentUrl();
         WebElement firstSong = null;
         if (currentUrl.equals(koelSongs)) {
@@ -174,12 +174,13 @@ public class BaseTest {
     public void deleteAddedSongPlaylist(String searchText){
         //WebElement testPlaylist = driver.findElement(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + searchText + "')]"));
         //testPlaylist.click();
+        actions = new Actions(driver);
         openPlaylist(searchText);
         WebElement song_to_select = driver.findElement(By.cssSelector("#playlistWrapper [class='song-item']:nth-child(1)"));
         song_to_select.click();
         WebElement song_to_delete = driver.findElement(By.cssSelector("#playlistWrapper [class='song-item selected']:nth-child(1)"));
-        //song_to_delete.sendKeys(Keys.BACK_SPACE);
-        actions.moveToElement(song_to_delete).click().sendKeys(Keys.DELETE).perform();
+        song_to_delete.click();
+        actions.sendKeys(Keys.DELETE).perform();
     }
 
     public void openPlaylist(String searchText) {

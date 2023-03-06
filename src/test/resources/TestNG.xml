@@ -3,6 +3,9 @@
 
 <suite name="TestNG">
 
+    <parameter name="baseURL" value="https://bbb.testpro.io/"/>
+    <parameter name="email" value="Test321@gmail.com"/>
+    <parameter name="password" value="te$t$tudent"/>
     <test name="Example Test" preserve-order="true">
         <classes>
             <class name="LoginTests"/>

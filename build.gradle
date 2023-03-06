@@ -21,9 +21,23 @@ test {
     }
 }
 
-task testSmoke(type: Test) {
+task hw19(type: Test) {
     useTestNG() {
         suites "src/test/resources/hw19NG.xml"
+        systemProperty "browser", System.getProperty("browser")
+    }
+}
+
+task hw18(type: Test) {
+    useTestNG() {
+        suites "src/test/resources/hw18NG.xml"
+        systemProperty "browser", System.getProperty("browser")
+    }
+}
+
+task before18(type: Test) {
+    useTestNG() {
+        suites "src/test/resources/TestNG.xml"
         systemProperty "browser", System.getProperty("browser")
     }
 }
