@@ -9,9 +9,17 @@ import java.time.Duration;
 
 public class Homework19 extends BaseTest {
 
-    @Test
-    public void deletePlayList() {
-        
+    @Test(dataProvider = "loginData")
+    public void deletePlayList(String email, String password) throws InterruptedException {
+        setUpBrowser("https://bbb.testpro.io/");
+        enterEmail(email);
+        enterPassword(password);
+        clickSubmit();
+        Thread.sleep(2000);
+        clickPlaylistToDelete();
+        Thread.sleep(2000);
+        clickXPlaylist();
+        clickOkToConfirm();
 
     }
 }

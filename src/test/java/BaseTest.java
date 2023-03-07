@@ -1,14 +1,10 @@
-import com.beust.jcommander.Parameter;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Parameters;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.*;
+
 import java.time.Duration;
 
 
@@ -28,7 +24,6 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url="BaseURL";
         driver.get(url);
-
     }
 
     public static void enterEmail(String email) {
@@ -101,6 +96,25 @@ public class BaseTest {
     public static boolean playSoundBar() {
         WebElement play = driver.findElement(By.xpath("//div[@data-testid='sound-bar-play']"));
         return play.isDisplayed();
+    }
+    public void clickXPlaylist() {
+        WebElement clickX = driver.findElement(By.cssSelector(".del.btn-delete-playlist"));
+        clickX.click();
+    }
+
+    public void clickPlaylistToDelete() {
+        WebElement clickToDelete = driver.findElement(By.cssSelector("[href=\"#!/playlist/45477\"]"));
+        clickToDelete.click();
+    }
+    public void clickOkToConfirm() {
+        WebElement clickOk = driver.findElement(By.cssSelector(".ok"));
+        clickOk.click();
+    }
+    @DataProvider(name="loginData")
+    public static Object[][] getDataFromDataProviders(){
+        return new Object[][]{
+                {"linulya1411@gmail.com", "te$t$tudent"}
+        };
     }
 
     @AfterMethod
