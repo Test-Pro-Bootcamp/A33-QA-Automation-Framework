@@ -11,7 +11,7 @@ public class Homework18 extends BaseTest {
         emailField("skillztomkid@gmail.com");
         passwordFinder("te$t$tudent");
         logIn();
-        //soundBar();
+        soundBar();
         hoverOnPlay();
         play();
         //pause();

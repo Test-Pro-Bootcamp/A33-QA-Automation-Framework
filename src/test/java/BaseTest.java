@@ -3,10 +3,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
-import org.testng.annotations.AfterMethod;
 
 import java.time.Duration;
 
@@ -14,6 +16,8 @@ import java.time.Duration;
 public class BaseTest {
     public static WebDriver driver = null;
     public static String url = null;
+
+    static WebDriverWait wait;
 
     @BeforeSuite
     static void setupClass() {
@@ -28,6 +32,7 @@ public class BaseTest {
         driver.manage().window().maximize();
         url = BaseURL;
         driver.get(url);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(2));
     }
     public void setUpBrowser() {
         driver = new ChromeDriver();
@@ -51,8 +56,9 @@ public class BaseTest {
         thePasswordFinder.sendKeys(password);
     }
     public void logIn(){
-        WebElement logInAccount = driver.findElement(By.cssSelector("[type='submit']"));
-        logInAccount.click();
+        //WebElement logInAccount = driver.findElement(By.cssSelector("[type='submit']"));
+        WebElement logInButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@type='submit']")));
+        logInButton.click();
     }
     public void searchSongs(String songTitle) {
         WebElement searchTheSongs = driver.findElement(By.cssSelector("[type='search']"));
@@ -84,17 +90,20 @@ public class BaseTest {
         newPlaylistEnter.click();
     }
     public void play() throws InterruptedException {
-        WebElement pressPlay = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
+        //WebElement pressPlay = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
+        WebElement pressPlay = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@data-testid='play-btn']")));
         pressPlay.click();
         Thread.sleep(1000);
     }
     public void hoverOnPlay(){
-        WebElement pressHoverOnPlay = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
+        //WebElement pressHoverOnPlay = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
+        WebElement pressHoverOnPlay = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i[@data-testid='play-next-btn']")));
         pressHoverOnPlay.click();
     }
     public void soundBar(){
-        WebElement soundBarDisplayed = driver.findElement(By.xpath("//div[@class='side player-controls']"));
-        soundBarDisplayed.click();
+        //WebElement soundBarDisplayed = driver.findElement(By.xpath("//div[@class='side player-controls']"));
+        WebElement soundBarDisplay = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='side player-controls']")));
+        soundBarDisplay.click();
     }
     public void rewind(){
         WebElement pressRewind = driver.findElement(By.xpath("//span[@data-testid='play-prev-btn']"));
