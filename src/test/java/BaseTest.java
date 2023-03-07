@@ -115,13 +115,20 @@ public class BaseTest {
 
     @DataProvider(name = "incorrectLoginData")
     public Object[][] getDataProviders() {
-        return new Object[][]{
-                {"invalid@gmail.com", "invalidPass"},
-                {"onlyEmail@gmail.com", ""},
-                {"", ""}
+        return new Object[][]{{"invalid@gmail.com", "invalidPass"}, {"onlyEmail@gmail.com", ""}, {"", ""}
 
         };
     }
+
+    Actions renamePlaylist() = new Actions(driver);
+
+    WebElement element = driver.findElement(By.xpath("/html/body/div/div/div/nav/section[2]/ul/li[3]/a"));
+renamePlaylist.doubleClick(element).
+
+    perform();
+
+
 }
+
 
 
