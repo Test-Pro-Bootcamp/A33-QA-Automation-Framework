@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeSuite;
 import java.time.Duration;
 public class BaseTest {
      public static WebDriver driver = null ;
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -17,7 +18,7 @@ public class BaseTest {
 
     @BeforeMethod
     public static void setUpBrowser() {
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
     protected void openBrowser(){
@@ -30,13 +31,13 @@ public class BaseTest {
     public void enterEmail(){
         WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
         emailField.click();
-        emailField.sendKeys("ayoub.rafiqui@testpro.io");
+        emailField.sendKeys("rfkayoub12@gmail.com");
     }
 
     public void enterPassword(){
         WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
         passwordField.click();
-        passwordField.sendKeys("ayoub.rafiqui@testpro.io");
+        passwordField.sendKeys("te$t$tudent");
     }
     public void submit() throws InterruptedException {
         WebElement submitButton = driver.findElement(By.cssSelector("[type='submit']"));
