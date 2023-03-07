@@ -3,16 +3,31 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.AfterMethod;
 
 import java.time.Duration;
 
 
 public class BaseTest {
-    WebDriver driver;
+    public static WebDriver driver = null;
+    public static String url = null;
+
     @BeforeSuite
     static void setupClass() {
+
         WebDriverManager.chromedriver().setup();
+    }
+    @BeforeMethod
+    @Parameters({"BaseURL"})
+    public static void openBrowser(String BaseURL) {
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        url = BaseURL;
+        driver.get(url);
     }
     public void setUpBrowser() {
         driver = new ChromeDriver();
@@ -90,7 +105,7 @@ public class BaseTest {
         pressPause.click();
     }
     public void opePlaylist(){
-        WebElement clickOpePlaylist = driver.findElement(By.xpath("//*[@href='#!/playlist/46044']"));
+        WebElement clickOpePlaylist = driver.findElement(By.xpath("//*[@href='#!/playlist/46313']"));
         clickOpePlaylist.click();
     }
     public void deletePlaylist(){
@@ -110,5 +125,9 @@ public class BaseTest {
     public boolean notificationVerification() {
         WebElement notificationVerified = driver.findElement(By.xpath("//div[@class='success show']"));
         return notificationVerified.isDisplayed();
+    }
+    @AfterMethod
+    public static void closeChromeBrowser() {
+        driver.quit();
     }
 }

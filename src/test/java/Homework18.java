@@ -5,10 +5,9 @@ public class Homework18 extends BaseTest {
 
     @Test
     public void newSongToPlaylist() throws InterruptedException {
-        setUpBrowser();
-        String url = "https://bbb.testpro.io/";
-        driver.get(url);
-        //getBrowser();
+        //setUpBrowser();
+        //String url = "https://bbb.testpro.io/";
+        //driver.get(url);
         emailField("skillztomkid@gmail.com");
         passwordFinder("te$t$tudent");
         logIn();
