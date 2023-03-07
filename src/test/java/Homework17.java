@@ -11,7 +11,7 @@ public class Homework17 extends BaseTest {
 @Test
     public void addSongToPlaylist() throws InterruptedException {
 
-    String notification = "added 1 song into";
+    String notification = "Added 1 song into";
     openBrowser();
     enterEmail();
     enterPassword();

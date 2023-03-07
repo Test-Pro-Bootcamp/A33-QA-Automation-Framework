@@ -52,27 +52,27 @@ public class BaseTest {
         Thread.sleep(2000);
     }
     public void clickViewAll() throws InterruptedException {
-        WebElement viewAll = driver.findElement(By.cssSelector("[class='panes']"));
+        WebElement viewAll = driver.findElement(By.cssSelector("[data-test='view-all-songs-btn']"));
         viewAll.click();
         Thread.sleep(2000);
     }
     public void clickFirstSong() throws InterruptedException {
-        WebElement firstSong = driver.findElement(By.cssSelector("#searchExcerptsWrapper > div > div >" +
-                " section.songs > ul > article > span.main > span.details"));
+        WebElement firstSong = driver.findElement(By.cssSelector("#songResultsWrapper > div > div > div.item-container > table > tr > td.title"));
         firstSong.click();
         Thread.sleep(2000);
 
 
     }
     public void clickAddTo() throws InterruptedException {
-        WebElement addToBtn = driver.findElement(By.cssSelector("[class='has-sub']"));
+        WebElement addToBtn = driver.findElement(By.cssSelector("[class='btn-add-to']"));
         addToBtn.click();
         Thread.sleep(2000);
     }
 
     public void choosePlaylist() throws InterruptedException {
-        WebElement chosenPlaylist = driver.findElement(By.cssSelector("#app > nav > ul > li.has-sub > ul > li:nth-child(8)"));
-        Thread.sleep(2000);
+        WebElement chosenPlaylist = driver.findElement(By.cssSelector("#songResultsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul > li:nth-child(6)"));
+        chosenPlaylist.click();
+        Thread.sleep(5000);
     }
     public String getNotification(){
         WebElement notificationElement = driver.findElement(By.cssSelector("div.success.show"));
