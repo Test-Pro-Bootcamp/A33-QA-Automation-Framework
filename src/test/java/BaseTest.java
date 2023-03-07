@@ -8,6 +8,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import java.time.Duration;
 
@@ -22,9 +23,12 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public void setUpBrowser() {
+    @Parameters("baseURL")
+    public void setUpBrowser(String baseURL) {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        driver.get(baseURL);
     }
 
     @AfterMethod
@@ -32,10 +36,27 @@ public class BaseTest {
         driver.quit();
     }
 
+    public void openPlayLis() throws InterruptedException {
+        WebElement emptyPlayList = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
+        emptyPlayList.click();
+        Thread.sleep(2000);
+    }
+
+    public WebElement getDeletedMessage() {
+        return driver.findElement(By.cssSelector("div.success.show"));
+    }
+
+    public void deletePlayList() throws InterruptedException {
+        WebElement deletePlaylistButton = driver.findElement(By.cssSelector(".btn-delete-playlist"));
+        deletePlaylistButton.click();
+        Thread.sleep(2000);
+    }
+
+
+
     public void urlAccess() throws InterruptedException {
         String url = "https://bbb.testpro.io/";
         driver.get(url);
-        driver.manage().window().maximize();
         Thread.sleep(1000);
     }
 
