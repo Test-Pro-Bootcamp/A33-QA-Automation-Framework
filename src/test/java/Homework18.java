@@ -11,6 +11,5 @@ public class Homework18 extends BaseTest {
         loginUser();
         clickPlayNextSong();
         Assert.assertTrue(songPlayIsDisplayed());
-        Thread.sleep(3000);
     }
 }
