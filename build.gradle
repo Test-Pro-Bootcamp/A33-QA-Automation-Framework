@@ -18,9 +18,7 @@ dependencies {
 test {
     useTestNG() {
         suites "src/test/resources/TestNG.xml"
-<<<<<<< Updated upstream
-=======
 //        suites "src/test/resources/HomeWork18.xml"
->>>>>>> Stashed changes
+
     }
 }
