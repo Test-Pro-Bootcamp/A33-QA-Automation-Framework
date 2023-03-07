@@ -15,7 +15,8 @@ import java.time.Duration;
 
 
 public class BaseTest {
-
+    WebDriver driver;
+  
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -26,9 +27,10 @@ public class BaseTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        driver.get(baseUrl);
+        driver.get("baseUrl");
         
     }
+
 
     public void logIn(String email, String password){
      WebElement emailField = driver.findElement(By.cssSelector("[type = 'email']"));
@@ -36,7 +38,6 @@ public class BaseTest {
      WebElement passwordField = driver.findElement(By.cssSelector("[type = 'password']"));
      passwordField.sendKeys(password);
      WebElement submitButton = driver.findElement(By.cssSelector("[type = 'submit']"));
-
 
         
     }
