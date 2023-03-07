@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 public class Homework19 extends BaseTest{
 
     @Test
-    public void deletePlaylist() throws InterruptedException{
+    public void deletePlaylist(){
 
         enterEmail("vasilinapelo@gmail.com");
         enterPassword("vasilina230109!");
@@ -13,10 +13,7 @@ public class Homework19 extends BaseTest{
         selectPlaylist();
         deletePlayList();
 
-        WebElement getDeletedPlaylistMessage = getDeletedPlaylistMessage();
-        Assert.assertTrue(getDeletedPlaylistMessage.isDisplayed());
-
+        Assert.assertTrue(getDeletedPlaylistMessage());
 
     }
-
 }
