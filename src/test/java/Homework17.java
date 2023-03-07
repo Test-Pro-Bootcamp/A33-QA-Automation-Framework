@@ -9,7 +9,7 @@ import java.time.Duration;
 
 public class Homework17 extends BaseTest {
 @Test
-    public void addSongToPlaylist(){
+    public void addSongToPlaylist() throws InterruptedException {
 
     String notification = "added 1 song into";
     openBrowser();
