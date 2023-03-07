@@ -9,15 +9,13 @@ public class Homework19 extends BaseTest{
     public void deletePlaylist (String BaseUrl, String Playlist){
 
         //variables
-        String homeUrl = BaseUrl;
         String email = "me@elevchenko.com";
         String password = "$student1111";
-        String playlist = Playlist;
-        String msg = "Deleted playlist \"" + playlist + ".\"";
+        String msg = "Deleted playlist \"" + Playlist + ".\"";
 
-        navigateToPage(homeUrl);
+        navigateToPage(BaseUrl);
         loginWithValidCredentials(email, password);
-        selectPlaylist(playlist);
+        selectPlaylist(Playlist);
         System.out.println("Message should be: " + msg);
         String msgReturn = deleteSelectedPlaylist();
         Assert.assertTrue(msgReturn.contains(msg));

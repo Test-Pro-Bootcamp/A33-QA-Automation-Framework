@@ -1,9 +1,11 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -16,6 +18,7 @@ public class BaseTest {
 
     protected static WebDriver driver  = null;
     protected static WebDriverWait wait;
+    protected  static Actions actions;
 
     @BeforeSuite
     protected static void setUpClass () {
@@ -30,6 +33,7 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        actions = new Actions(driver);
     }
 
     public static void navigateToPage(String url) {
@@ -47,16 +51,18 @@ public class BaseTest {
     }
 
     protected static void searchSong (String song){
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.main-scroll-wrap")));
         WebElement songEl = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type = 'search']")));
         songEl.clear();
-        songEl.sendKeys(song);
         String url = driver.getCurrentUrl();
         System.out.println("searchng for " + song + " in " + url);
+        songEl.sendKeys(song);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.results")));
     }
 
     protected static void viewAllSongs () {
         //view all results for songs
-        WebElement searchResult = wait.until(ExpectedConditions.presenceOfElementLocated(
+        WebElement searchResult = wait.until(ExpectedConditions.elementToBeClickable(
                 By.cssSelector("section.songs h1 button")
         ));
         searchResult.click();
