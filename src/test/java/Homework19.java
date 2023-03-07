@@ -11,7 +11,6 @@ public class Homework19 extends BaseTest {
 
     @Test(dataProvider = "loginData")
     public void deletePlayList(String email, String password) throws InterruptedException {
-        setUpBrowser("https://bbb.testpro.io/");
         enterEmail(email);
         enterPassword(password);
         clickSubmit();
@@ -19,7 +18,9 @@ public class Homework19 extends BaseTest {
         clickPlaylistToDelete();
         Thread.sleep(2000);
         clickXPlaylist();
-        clickOkToConfirm();
 
+        Assert.assertTrue(verifyNotification());
+        Thread.sleep(2000);
     }
+
 }

@@ -11,6 +11,7 @@ import java.time.Duration;
 public class BaseTest {
 
     public static WebDriver driver = null;
+    public static String url = null;
 
     @BeforeSuite
     static void setupClass() {
@@ -19,13 +20,11 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters ({"BaseURL"})
-    public void setUpBrowser(String url) {
+    public void setUpBrowser(String BaseURL) {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        url="BaseURL";
-        driver.get(url);
+        driver.get(BaseURL);
     }
-
     public static void enterEmail(String email) {
         WebElement emailField = driver.findElement(By.cssSelector("[type = 'email']"));
         emailField.click();
@@ -43,73 +42,20 @@ public class BaseTest {
         submitButton.click();
         Thread.sleep(2000);
     }
-
-    public void searchForSong(String songName) throws InterruptedException {
-        WebElement searchField = driver.findElement(By.cssSelector("[type='search']"));
-        searchField.click();
-        searchField.sendKeys(songName);
-        Thread.sleep(2000);
-    }
-
-    public static void viewAllResults() throws InterruptedException {
-        WebElement viewAllButton = driver.findElement(By.xpath("//*[@id=\"searchExcerptsWrapper\"]/div/div/section[1]/h1/button"));
-        viewAllButton.click();
-        Thread.sleep(2000);
-    }
-
-    public static void selectFirstSong() throws InterruptedException {
-        WebElement selectFirstFromTheList = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/div/div/div[1]/table/tr[1]/td[2]"));
-        selectFirstFromTheList.click();
-        Thread.sleep(2000);
-    }
-
-    public static void clickAddTo()  throws InterruptedException {
-        WebElement addToButton = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/span/button[2]"));
-        addToButton.click();
-        Thread.sleep(2000);
-    }
-
-    public static void choosePlaylist(String playlist) throws InterruptedException {
-        WebElement playList = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[5]"));
-        playList.click();
-        Thread.sleep(2000);
-
-    }
-
-    public String verifyNotificationMessage() {
-        WebElement verifyMessage = driver.findElement(By.cssSelector("div.alertify-logs.top.right > div.success.show"));
-        return verifyMessage.getText();
-    }
-    public boolean addedSongNotification() {
-        WebElement verifyMessage = driver.findElement(By.cssSelector("div.alertify-logs.top.right > div.success.show"));
-        return verifyMessage.isDisplayed();
-    }
-    public static void playNextSong() {
-        WebElement nextSong = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
-        nextSong.click();
-    }
-    public static void playButton() throws InterruptedException {
-        WebElement play = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
-        play.click();
-        Thread.sleep(2000);
-    }
-    public static boolean playSoundBar() {
-        WebElement play = driver.findElement(By.xpath("//div[@data-testid='sound-bar-play']"));
-        return play.isDisplayed();
-    }
     public void clickXPlaylist() {
-        WebElement clickX = driver.findElement(By.cssSelector(".del.btn-delete-playlist"));
+        WebElement clickX = driver.findElement(By.cssSelector("button[title='Delete this playlist']"));
         clickX.click();
     }
-
     public void clickPlaylistToDelete() {
-        WebElement clickToDelete = driver.findElement(By.cssSelector("[href=\"#!/playlist/45477\"]"));
+        WebElement clickToDelete = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
         clickToDelete.click();
     }
-    public void clickOkToConfirm() {
-        WebElement clickOk = driver.findElement(By.cssSelector(".ok"));
-        clickOk.click();
+    public static boolean verifyNotification(){
+        WebElement notificationMessage = driver.findElement(By.cssSelector("div.success.show"));
+        return notificationMessage.isDisplayed();
     }
+
+
     @DataProvider(name="loginData")
     public static Object[][] getDataFromDataProviders(){
         return new Object[][]{
