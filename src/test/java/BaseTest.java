@@ -19,6 +19,10 @@ public class BaseTest {
     protected static WebDriver driver  = null;
     protected static WebDriverWait wait;
     protected  static Actions action;
+    private static final int time = 6; //time in seconds for timeout wait
+    private static Boolean playlistExists = Boolean.FALSE;
+
+
 
     @BeforeSuite
     protected static void setUpClass () {
@@ -30,10 +34,11 @@ public class BaseTest {
         ChromeOptions options  = new ChromeOptions();
         options.addArguments("--disable-notifications");
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(7));
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait = new WebDriverWait(driver,Duration.ofSeconds(time));
         action = new Actions(driver);
+
     }
 
     public static void navigateToPage(String url) {
@@ -55,7 +60,7 @@ public class BaseTest {
         WebElement songEl = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type = 'search']")));
         songEl.clear();
         String url = driver.getCurrentUrl();
-        System.out.println("searchng for " + song + " in " + url);
+        System.out.println("searching for " + song + " in " + url);
         songEl.sendKeys(song);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.results")));
     }
@@ -67,7 +72,7 @@ public class BaseTest {
         ));
         searchResult.click();
         String url = driver.getCurrentUrl();
-        System.out.println("searchng for in " + url);
+        System.out.println("searching for in " + url);
     }
 
     protected static void selectFirstSong () {
@@ -82,13 +87,6 @@ public class BaseTest {
         String xpathSelector = "//section[@id='songResultsWrapper']//li[contains(text(),'" + playlist + "')]";
         WebElement ourPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathSelector)));
         ourPlaylist.click();
-        /*WebElement playlistEl = driver.findElement(By.cssSelector("#songResultsWrapper section.new-playlist input[type='text']"));
-        playlistEl.sendKeys(playlist + "1");
-        Thread.sleep(500);
-        driver.findElement(By.cssSelector("#songResultsWrapper section.new-playlist button[type='submit']")).click();
-        String msg1 = driver.findElement(By.cssSelector("div.success.show")).getText();
-        Thread.sleep(500);
-        System.out.println(msg1);*/
         String msg = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.cssSelector("div.success.show")
         )).getText();
@@ -110,34 +108,44 @@ public class BaseTest {
     }
 
     public static void selectPlaylist (String playlist){
+        try {
             String xpathSelector = "//section[@id='playlists']//a[contains(text(),'" + playlist + "')]";
             WebElement selPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathSelector)));
             selPlaylist.click();
+            playlistExists = Boolean.TRUE;
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#playlistWrapper")));
             System.out.println("Playlist " + playlist + " has been selected");
-        /*} catch (Exception e) {
+        } catch (Exception e) {
             //if there is no playlist with the given name then we create a new playlist with that name
-            //click "+" (add new Playlist)
-            WebElement createNewPls = driver.findElement(By.cssSelector("#mainWrapper i[title = 'Create a new playlist']"));
-            // it doesn't work! ?? how to get to ::before pseudo-element?
-            createNewPls.click();
-            //select "New Playlist"
-//            driver.findElement(By.cssSelector("#playlists > nav > ul > li:nth-child(1)")).click();
-            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#playlists > nav > ul > li:nth-child(1)"))).click();
-
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#homeWrapper")));
+            WebElement el = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#sidebar a.songs")));
+            el.click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#songsWrapper")));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
+                    "#songsWrapper  tr > td.title"
+            ))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(
+                    "div.song-list-controls button.btn-add-to"
+            ))).click();
             //type in the name of a new playlist and create it
-            WebElement newPlaylist = driver.findElement(By.cssSelector("form.create input[placeholder = '↵ to save']"));
-            newPlaylist.clear();
+            WebElement newPlaylist = driver.findElement(By.cssSelector("section.new-playlist input"));
             newPlaylist.sendKeys(playlist);
-            newPlaylist.click();
+            newPlaylist.sendKeys(Keys.ENTER);
             System.out.println("Playlist " + playlist + " has been created and selected");
-        }*/
+        }
     }
 
     public static String deleteSelectedPlaylist(){
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(
                 "#playlistWrapper  button.del.btn-delete-playlist"
         ))).click();
-        String msg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show"))).getText();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.alertify button.ok"))).click();
+        String msg;
+        if (playlistExists) {
+            msg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show"))).getText();
+        } else {
+            msg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show:nth-child(2)"))).getText();
+        }
         System.out.println("Message is: " + msg);
         return msg;
     }
@@ -149,7 +157,7 @@ public class BaseTest {
         WebElement selPlaylist = driver.findElement(By.xpath(xpathSelector));
         action.click(selPlaylist).perform();
         action.contextClick(selPlaylist).perform();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("nav.menu.playlist-item-menu")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("nav.menu.playlist-item-menu")));
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(
                 "li[data-testid *= 'playlist-context-menu-edit']"
         ))).click();
@@ -161,7 +169,7 @@ public class BaseTest {
         newPlaylist.sendKeys(newPlaylistName);
         newPlaylist.sendKeys(Keys.ENTER);
         String msg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show"))).getText();
-        System.out.println("Message is: " + msg);
+        System.out.println(msg);
         return msg;
     }
 
