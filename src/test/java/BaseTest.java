@@ -1,3 +1,4 @@
+import com.beust.jcommander.Parameters;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,23 +17,16 @@ import java.time.Duration;
 
 
 public class BaseTest {
-    static WebDriver driver;
+    public WebDriver driver;
 
 
     @BeforeMethod
 
     public void setUpBrowser() {
-
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
-        System.setProperty("webdriver.chrome.driver",
-                "/Users/macbook/Documents/A33-QA-Automation-Framework/build/chromedriver_mac64/chromedriver");
-        driver = new ChromeDriver(options);
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-
-
     }
 
     @AfterMethod
@@ -68,4 +62,6 @@ public class BaseTest {
         enterPassword("te$t$tudent1");
         submit();
     }
+
+
 }
