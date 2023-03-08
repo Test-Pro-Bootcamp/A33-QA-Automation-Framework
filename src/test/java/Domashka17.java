@@ -6,20 +6,20 @@ public class Domashka17 extends BaseTest {
 
 
     @Test
-    public static void addSongToThePlaylist() {
-        BaseTest B = new BaseTest();
-        B.setupBrowser();
-        B.navigation("https://bbb.testpro.io/");
-        B.enterEmail("valentineguts@gmail.com");
-        B.enterPassword("te$t$tudent");
-        B.submit();
-        B.search("hozlinaCC0");
+    public void addSongToThePlaylist() {
+
+        setupBrowser();
+        navigation("https://bbb.testpro.io/");
+        enterEmail("valentineguts@gmail.com");
+        enterPassword("te$t$tudent");
+        submit();
+        search("hozlinaCC0");
        // B.sleep();
-        B.clickViewALl();
-        B.clickFirstSong();
-        B.AddTo();
-        B.addToPlaylist();
-        Assert.assertTrue(B.verifyNotification().contains("Added 1 song into"));
+        clickViewALl();
+        clickFirstSong();
+        AddTo();
+        addToPlaylist();
+        Assert.assertTrue(verifyNotification().contains("Added 1 song into"));
 
 
 
