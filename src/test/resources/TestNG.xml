@@ -6,6 +6,7 @@
     <test name="Example Test" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
+            <class name="RAHomework17.java"/>
             <class name="BaseTest"/>
         </classes>
     </test>
