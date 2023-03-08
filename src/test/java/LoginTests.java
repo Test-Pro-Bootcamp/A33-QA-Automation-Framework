@@ -111,8 +111,7 @@ public class LoginTests extends BaseTest {
 
       //  driver.quit();
     }
-}
-<<<<<<< Updated upstream
+
  public class Homework16 extends BaseTest {
      @Test
      public static void registrationNavigation() {
