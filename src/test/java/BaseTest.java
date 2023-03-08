@@ -18,7 +18,7 @@ public class BaseTest {
 
     protected static WebDriver driver  = null;
     protected static WebDriverWait wait;
-    protected  static Actions actions;
+    protected  static Actions action;
 
     @BeforeSuite
     protected static void setUpClass () {
@@ -32,8 +32,8 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(4));
-        actions = new Actions(driver);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        action = new Actions(driver);
     }
 
     public static void navigateToPage(String url) {
@@ -137,6 +137,29 @@ public class BaseTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(
                 "#playlistWrapper  button.del.btn-delete-playlist"
         ))).click();
+        String msg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show"))).getText();
+        System.out.println("Message is: " + msg);
+        return msg;
+    }
+
+    public static String updatePlaylist (String playlistToChange, String newPlaylistName) {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#playlists")));
+        String xpathSelector = "//section[@id='playlists']//a[contains(text(),'" + playlistToChange + "')]";
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathSelector)));
+        WebElement selPlaylist = driver.findElement(By.xpath(xpathSelector));
+        action.click(selPlaylist).perform();
+        action.contextClick(selPlaylist).perform();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("nav.menu.playlist-item-menu")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(
+                "li[data-testid *= 'playlist-context-menu-edit']"
+        ))).click();
+        WebElement newPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+                "li.playlist.playlist.editing input"
+        )));
+        newPlaylist.sendKeys(Keys.CONTROL + "a");
+        newPlaylist.sendKeys(Keys.DELETE);
+        newPlaylist.sendKeys(newPlaylistName);
+        newPlaylist.sendKeys(Keys.ENTER);
         String msg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show"))).getText();
         System.out.println("Message is: " + msg);
         return msg;
