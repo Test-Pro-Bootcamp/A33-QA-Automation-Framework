@@ -15,7 +15,6 @@ import org.testng.annotations.Parameters;
 
 import java.time.Duration;
 
-
 public class BaseTest {
 
     WebDriver driver;
@@ -40,7 +39,7 @@ public class BaseTest {
         driver.quit();
     }
 
-    public void openPlayLis() throws InterruptedException {
+    public void openPlayLis() {
         WebElement emptyPlayList = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
         emptyPlayList.click();
     }
@@ -49,41 +48,41 @@ public class BaseTest {
         return wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.success.show")));
     }
 
-    public void deletePlayList() throws InterruptedException {
+    public void deletePlayList() {
         WebElement deletePlaylistButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".btn-delete-playlist")));
         deletePlaylistButton.click();
     }
 
-    public void urlAccess() throws InterruptedException {
+    public void urlAccess() {
         String url = "https://bbb.testpro.io/";
         driver.get(url);
     }
 
-    public void getEmail(String email) throws InterruptedException {
+    public void getEmail(String email) {
         WebElement insertEmail = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='email']")));
         insertEmail.click();
         insertEmail.sendKeys(email);
     }
 
-    public void getPassword(String password) throws InterruptedException {
+    public void getPassword(String password) {
         WebElement insertEmail = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='password']")));
         insertEmail.click();
         insertEmail.sendKeys(password);
     }
 
-    public void loginUser() throws InterruptedException {
+    public void loginUser() {
         WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@type='submit']")));
         submitButton.click();
     }
 
-    public void clickPlayNextSong() throws InterruptedException {
+    public void clickPlayNextSong() {
         WebElement playNextSongButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i[@data-testid='play-next-btn']")));
         WebElement playSongButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@data-testid='play-btn']")));
         playNextSongButton.click();
         playSongButton.click();
     }
 
-    public boolean songPlayIsDisplayed() throws InterruptedException {
+    public boolean songPlayIsDisplayed() {
         WebElement songIsPlaying = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//progress[@class='plyr__progress--played']")));
         return songIsPlaying.isDisplayed();
     }

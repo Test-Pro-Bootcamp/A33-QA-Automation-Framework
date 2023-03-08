@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 public class Homework19 extends BaseTest {
 
     @Test
-    public void deletePlaylist() throws InterruptedException {
+    public void deletePlaylist() {
         getEmail("ponypony123@gmail.com");
         getPassword("Testtesttest123123$$");
         loginUser();
