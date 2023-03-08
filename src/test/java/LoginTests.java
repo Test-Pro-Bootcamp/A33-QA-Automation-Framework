@@ -112,7 +112,7 @@ public class LoginTests extends BaseTest {
         driver.quit();
     }
 }
-public class Homework16 extends BaseTest {
+public class RAHomework16 extends BaseTest {
     @Test
     public static void registrationNavigation() {
         WebDriver driver = new ChromeDriver();
