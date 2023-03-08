@@ -130,8 +130,7 @@ public class LoginTests extends BaseTest {
          driver.quit();
      }
  }
-=======
-}
+
 public class Homework16 extends BaseTest {
     @Test
     public static void registrationNavigation() {
@@ -148,4 +147,4 @@ public class Homework16 extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), urlRegistration);
         driver.quit();
     }}
->>>>>>> Stashed changes
+
