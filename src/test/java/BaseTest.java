@@ -16,6 +16,7 @@ import java.time.Duration;
 
 public class BaseTest {
     WebDriver driver;
+    String url;
   
     @BeforeSuite
     static void setupClass() {
@@ -27,6 +28,7 @@ public class BaseTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
+        url=baseUrl;
         driver.get("baseUrl");
         
     }
