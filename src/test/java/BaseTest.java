@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,18 +8,19 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+import java.time.Duration;
+
 
 public class BaseTest {
-
+    public static WebDriver driver = null;
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
 
-<<<<<<< Updated upstream
-=======
+
     @BeforeMethod
-    public static void setUpBrowser() {
+    public  void setUpBrowser() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
@@ -93,5 +95,4 @@ public class BaseTest {
         WebElement songIsPLaying = driver.findElement(By.cssSelector("[class='plyr__progress--seek']"));
         return songIsPLaying.isDisplayed();
     }
->>>>>>> Stashed changes
 }
