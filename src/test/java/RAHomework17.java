@@ -5,7 +5,7 @@ public class RAHomework17 extends BaseTest {
     public void addSongToPlaylist() throws InterruptedException {
         String notificationText = "Added 1 song into";
         openLoginURL();
-        provideEmail("ruth.asghar@testpro.io");
+        provideEmail("student@testpro.io");
         providePW("te$t$tudent");
         clickSubmit();
         searchSong("Take my Hand");
