@@ -1,3 +1,4 @@
+import com.beust.jcommander.Parameter;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,12 +8,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import java.time.Duration;
 
 
 public class BaseTest {
     public static WebDriver driver = null;
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -20,28 +23,34 @@ public class BaseTest {
 
 
     @BeforeMethod
-    public  void setUpBrowser() {
+    @Parameters("BaseUrl")
+    public void setUpBrowser(String BaseUrl) {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        driver.get(BaseUrl);
     }
-    protected void openBrowser(){
-        String url = "https://bbb.testpro.io/";
+
+   protected void openBrowser() {String url = "https://bbb.testpro.io/";
         driver.get(url);
-    }
-    public void closeBrowser(){
+   }
+
+    public void closeBrowser() {
         driver.quit();
     }
-    public void enterEmail(){
+
+    public void enterEmail() {
         WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
         emailField.click();
         emailField.sendKeys("rfkayoub12@gmail.com");
     }
 
-    public void enterPassword(){
+    public void enterPassword() {
         WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
         passwordField.click();
         passwordField.sendKeys("te$t$tudent");
     }
+
     public void submit() throws InterruptedException {
         WebElement submitButton = driver.findElement(By.cssSelector("[type='submit']"));
         submitButton.click();
@@ -54,11 +63,13 @@ public class BaseTest {
         searchField.sendKeys("Lament");
         Thread.sleep(2000);
     }
+
     public void clickViewAll() throws InterruptedException {
         WebElement viewAll = driver.findElement(By.cssSelector("[data-test='view-all-songs-btn']"));
         viewAll.click();
         Thread.sleep(2000);
     }
+
     public void clickFirstSong() throws InterruptedException {
         WebElement firstSong = driver.findElement(By.cssSelector("#songResultsWrapper > div > div > div.item-container > table > tr > td.title"));
         firstSong.click();
@@ -66,6 +77,7 @@ public class BaseTest {
 
 
     }
+
     public void clickAddTo() throws InterruptedException {
         WebElement addToBtn = driver.findElement(By.cssSelector("[class='btn-add-to']"));
         addToBtn.click();
@@ -77,22 +89,35 @@ public class BaseTest {
         chosenPlaylist.click();
         Thread.sleep(5000);
     }
-    public String getNotification(){
+
+    public String getNotification() {
         WebElement notificationElement = driver.findElement(By.cssSelector("div.success.show"));
         return notificationElement.getText();
     }
+
     public void clickNext() throws InterruptedException {
         WebElement nextBtn = driver.findElement(By.cssSelector("[data-testid ='play-next-btn']"));
         nextBtn.click();
         Thread.sleep(2000);
     }
+
     public void clickPlay() throws InterruptedException {
         WebElement playBtn = driver.findElement(By.cssSelector("[data-testid='play-btn']"));
         playBtn.click();
         Thread.sleep(2000);
     }
-    public Boolean isSongPlaying(){
+
+    public Boolean isSongPlaying() {
         WebElement songIsPLaying = driver.findElement(By.cssSelector("[class='plyr__progress--seek']"));
         return songIsPLaying.isDisplayed();
+    }
+
+    public void clickPlaylist() throws InterruptedException {
+        WebElement chosenPlaylist = driver.findElement(By.cssSelector("#playlists > ul > li:nth-child(3) > a"));
+        chosenPlaylist.click();
+    }
+    public void clickDelete() throws InterruptedException {
+        WebElement xPlaylist = driver.findElement(By.cssSelector("[title = 'Delete this playlist']"));
+        xPlaylist.click();
     }
 }
