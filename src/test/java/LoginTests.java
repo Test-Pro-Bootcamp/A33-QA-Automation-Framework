@@ -1,3 +1,4 @@
+import Pages.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,71 +14,41 @@ import static org.openqa.selenium.By.cssSelector;
 
 public class LoginTests extends BaseTest {
 
-    By submitbutton = By.cssSelector("button[type='submit']");
-    By emaillocator = By.cssSelector("input[type='email']");
-    By passwordlocator = By.cssSelector("input[type='password']");
-
-
-    public void enterEmail(String email) {
-        WebElement emailfield = wait.until(ExpectedConditions.elementToBeClickable(emaillocator));
-        emailfield.sendKeys(email);
-    }
-
-    public void enterPassword(String password) {
-        WebElement passwordfield = wait.until(ExpectedConditions.elementToBeClickable(passwordlocator));
-        passwordfield.sendKeys(password);
-    }
-
-    public void submit() {
-        WebElement submitbtn = wait.until(ExpectedConditions.elementToBeClickable(submitbutton));
-        submitbtn.click();
-    }
-
-    public void login() {
-        enterEmail("maxim.ibon@gmail.com");
-        enterPassword("te$t$tudent1");
-        submit();
-    }
+    LoginPage loginpage = new LoginPage(driver);
 
     @Test(priority = 1)
     public void loginValidCredentials() {
-        enterEmail("maxim.ibon@gmail.com");
-        enterPassword("te$t$tudent1");
-        submit();
+        loginpage.enterEmail("maxim.ibon@gmail.com");
+        loginpage.enterPassword("te$t$tudent1");
+        loginpage.submit();
         WebElement avatar = driver.findElement(cssSelector("img[class='avatar']"));
         Assert.assertTrue(avatar.isDisplayed(), "Profile avatar is displayed");
     }
 
     @Test(priority = 2)
     public void loginInvalidCredentials() {
-        enterEmail("maxim.ibon@mail.com");
-        enterPassword("te$t$tuden");
-        submit();
+        loginpage.enterEmail("maxim.ibon@mail.com");
+        loginpage.enterPassword("te$t$tuden");
+        loginpage.submit();
         WebElement loginform = driver.findElement(cssSelector("form[data-testid='login-form']"));
         Assert.assertTrue(loginform.isDisplayed(), "Login form is Displayed");
     }
 
     @Test
     public void loginEmailFieldisEmpty() {
-        openLoginUrl();
-        enterEmail("");
-        enterPassword("te$t$tuden1");
-        submit();
+        loginpage.enterEmail("");
+        loginpage.enterPassword("te$t$tuden1");
+        loginpage.submit();
         WebElement loginform = driver.findElement(cssSelector("form[data-testid='login-form']"));
         Assert.assertTrue(loginform.isDisplayed(), "Login form is Displayed");
     }
 
     @Test
     public void loginPasswordFieldisEmpty() {
-        enterEmail("maxim.ibon@mail.com");
-        enterPassword("");
-        submit();
+        loginpage.enterEmail("maxim.ibon@mail.com");
+        loginpage.enterPassword("");
+        loginpage.submit();
         WebElement loginform = driver.findElement(cssSelector("form[data-testid='login-form']"));
         Assert.assertTrue(loginform.isDisplayed(), "Login form is Displayed");
-
-    }
-    @Test(enabled = false)
-    public void loginInvalidEmail() {
-        enterEmail("maxim.ibonmailcom");
     }
 }

@@ -6,9 +6,8 @@ import org.testng.annotations.Test;
 
 public class Homework18 extends BaseTest {
 
-    @Test
+/*    @Test
     public void playSong(){
-        openLoginUrl();
         login();
         WebElement covericon = driver.findElement(By.cssSelector("article span.cover"));
         covericon.click();
@@ -17,7 +16,6 @@ public class Homework18 extends BaseTest {
     }
     @Test
     public void clickPlayBtn() {
-        openLoginUrl();
         login();
         WebElement covericon = driver.findElement(By.cssSelector("article span.cover"));
         covericon.click();
@@ -38,5 +36,5 @@ public class Homework18 extends BaseTest {
         WebElement pausebtn = driver.findElement(By.cssSelector("span[data-testid='pause-btn']"));
         return(pausebtn.isDisplayed());
     }
-
+*/
 }

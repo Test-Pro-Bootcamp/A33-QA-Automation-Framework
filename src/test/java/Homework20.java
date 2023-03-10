@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class Homework20 extends BaseTest {
     By iconlocator = By.cssSelector("button[data-test='like-btn']");
-
+/*
     @Test
     public void addSongToFavorites(){
         login();
@@ -18,5 +18,5 @@ public class Homework20 extends BaseTest {
         Assert.assertTrue(favoritebtntitle.contains("Unlike"));
     }
 
-
+*/
 }

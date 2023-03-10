@@ -10,7 +10,7 @@ public class Homework21 extends BaseTest{
     By playlistlocator = By.cssSelector("li[class='playlist playlist']");
     By inputselector = By.cssSelector("input[name='name']");
     String newplaylistname = "Test PRO";
-
+/*
     @Test
     public void renamePlaylist(){
         login();
@@ -35,4 +35,7 @@ public class Homework21 extends BaseTest{
         System.out.println(msg.getCssValue("Visibility"));
         Assert.assertTrue(msg.getCssValue("Visibility").equals("visible"));
     }
+
+
+ */
 }

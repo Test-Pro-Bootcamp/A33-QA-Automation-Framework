@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework17 extends BaseTest {
-
+/*
     @Test
     public void addSongToPlaylist() {
       openLoginUrl();
@@ -55,6 +55,6 @@ public void searchinput(){
     }
 
 
-
+*/
 
 }

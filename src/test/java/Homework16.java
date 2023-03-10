@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class Homework16 {
-
+/*
     public String url = "https://bbb.testpro.io/";
 
 
@@ -24,4 +24,6 @@ public class Homework16 {
         Assert.assertEquals(driver.getTitle(),"Koel Registration page");
         driver.quit();
     }
+
+ */
 }

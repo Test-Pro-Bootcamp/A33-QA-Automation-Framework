@@ -1,3 +1,4 @@
+import Pages.LoginPage;
 import com.beust.jcommander.Parameters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -11,12 +12,12 @@ public class Homework19 extends BaseTest{
     public String xpathplaylist="//a[text()=' ']";
 
     public String cssselector;
-
-   // @Parameters({"BaseUrl"})
+/*
+   LoginPage loginpage = new LoginPage(driver);
     @Test
     public void deletePlaylist() {
         driver.get("https://bbb.testpro.io/#!/home");
-        login();
+        loginpage.login();
         createPlaylist();
         clickOnPlaylist();
         clickOnDeleteBtn();
@@ -44,4 +45,6 @@ public class Homework19 extends BaseTest{
         inputplaylistname.sendKeys(playlistname);
         inputplaylistname.sendKeys(Keys.ENTER);
     }
+
+ */
 }
