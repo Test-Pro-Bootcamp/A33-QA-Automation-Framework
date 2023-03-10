@@ -15,7 +15,7 @@ import java.time.Duration;
 
 
 public class BaseTest {
-    WebDriver driver;
+    static WebDriver driver;
     String url;
   
     @BeforeSuite
@@ -29,21 +29,24 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         url=baseUrl;
-        driver.get("baseUrl");
+        driver.get("url");
         
     }
 
 
     public void logIn(String email, String password){
      WebElement emailField = driver.findElement(By.cssSelector("[type = 'email']"));
+     emailField.click();
      emailField.sendKeys(email);
      WebElement passwordField = driver.findElement(By.cssSelector("[type = 'password']"));
      passwordField.sendKeys(password);
-     WebElement submitButton = driver.findElement(By.cssSelector("[type = 'submit']"));
 
-        
     }
-
+      public static void clickSubmit() throws InterruptedException{
+        WebElement submitButton = driver.findElement(By.cssSelector("[type='submit']"));
+        submitButton.click();
+        Thread.sleep(2000);
+      }
     public WebElement getDeletedPlaylistMsg(){
         return driver.findElement(By.cssSelector("div.success.show"));
         

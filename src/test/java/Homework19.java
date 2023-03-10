@@ -7,6 +7,7 @@ public class Homework19 extends BaseTest{
     @Test
     public void DeletePlayListTest() throws InterruptedException {
         logIn("andalia.nia@gmail.com", "te$t$tudent");
+        clickSubmit();
         openPlaylist();
         deletedPlaylist();
 
