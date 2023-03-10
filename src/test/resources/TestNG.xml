@@ -7,10 +7,12 @@
         <classes>
             <class name="LoginTests"/>
             <class name="BaseTest"/>
+            <class name="RenamePlaylistTest"/>
             <class name="PlaySongTests">
                 <methods>
                     <include name="playSong"/>
                 </methods>
+
             </class>
         </classes>
     </test>

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
 import java.time.Duration;
 
 
@@ -23,6 +24,7 @@ public class BaseTest {
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
+
     }
 
     @BeforeMethod
@@ -106,7 +108,23 @@ public class BaseTest {
 
     }
 
-    //additional things for Login test
+    //Methods to rename a playlist
+    public void doubleClickOnPlaylist () {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+
+        Actions actions = new Actions(driver);
+        WebElement myPlayList = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div/nav/section[2]/ul/li[3]/a")));
+        actions.doubleClick(myPlayList).perform();
+
+    }
+
+    public static void provideNewName (String name) {
+        WebElement nameField = driver.findElement(By.xpath("/html/body/div/div/div/nav/section[2]/ul/li[3]/a"));
+        nameField.sendKeys(name);
+    }
+
+    //Additional things for Login test
     public boolean isHomePageElementDisplayed() {
         WebElement homePage = driver.findElement(By.xpath("/html/body/div/div/div/nav/section[1]/ul/li[1]/a"));
         return homePage.isDisplayed();
@@ -119,15 +137,6 @@ public class BaseTest {
 
         };
     }
-
-    Actions renamePlaylist() = new Actions(driver);
-
-    WebElement element = driver.findElement(By.xpath("/html/body/div/div/div/nav/section[2]/ul/li[3]/a"));
-renamePlaylist.doubleClick(element).
-
-    perform();
-
-
 }
 
 
