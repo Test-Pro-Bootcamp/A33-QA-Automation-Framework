@@ -3,16 +3,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import java.time.Duration;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Action;
+
+
 public class BaseTest {
     WebDriver driver = null;
-    WebDriverWait wait;
+    Actions actions = null;
+    WebDriverWait wait = null;
     String url;
 
     @BeforeSuite
@@ -20,30 +24,34 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
     }
     @BeforeMethod
-    @Parameters("baseUrl")
-    public void launchBrowser(String baseUrl) {
-        driver = new ChromeDriver();
-        url = baseUrl;
+    @Parameters({"BaseURL"})
+    public void launchBrowser(String BaseURL) {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        url = BaseURL;
         driver.get(url);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(4));
-        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        actions = new Actions(driver);
+        //driver.manage().window().maximize();
     }
     public void playSong() {
-        WebElement buttonPlayNextSong = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='play-next-btn']")));
-        //WebElement buttonPlayNextSong = driver.findElement(By.cssSelector("[data-testid='play-next-btn']"));
+        //WebElement buttonPlayNextSong = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='play-next-btn']")));
+        WebElement buttonPlayNextSong = driver.findElement(By.cssSelector("[data-testid='play-next-btn']"));
         buttonPlayNextSong.click();
 
         WebElement playButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='play-btn']")));
         playButton.click();
     }
-    public void logIn(String email, String password) {
+    public void logIn() {
         WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type = 'email']")));
         //WebElement emailField = driver.findElement(By.cssSelector("[type = 'email']"));
-        emailField.sendKeys(email);
+        emailField.sendKeys("regniermandy@gmail.com");
 
         WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type = 'password']")));
         //WebElement passwordField = driver.findElement(By.cssSelector("[type = 'password']"));
-        passwordField.sendKeys(password);
+        passwordField.sendKeys("te$t$tudent");
 
         WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type = 'submit']")));
         //WebElement submitButton = driver.findElement(By.cssSelector("[type = 'submit']"));
@@ -63,6 +71,12 @@ public class BaseTest {
         deletePlaylistButton.click();
 
     }
+
+    public boolean isSongPlaying() {
+        WebElement soundBarPlay = driver.findElement(By.cssSelector("[data-testid ='sound-bar-play']"));
+        return soundBarPlay.isDisplayed();
+    }
+
     @AfterMethod
     public void closeBrowser() {
         driver.quit();

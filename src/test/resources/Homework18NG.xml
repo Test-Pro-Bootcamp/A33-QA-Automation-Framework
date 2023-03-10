@@ -2,13 +2,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Homework18NG">
-        <parameter name="baseUrl" value="https://bbb.testpro.io/"></parameter>
+    <parameter name="BaseURL" value="https://bbb.testpro.io/"></parameter>
     <test name="Homework18" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
             <class name="BaseTest"/>
             <class name="Homework18"/>
-            <class name="Homework19"/>
+            <class name="Homework21"/>
         </classes>
     </test>
 </suite>
