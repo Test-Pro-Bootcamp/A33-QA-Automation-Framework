@@ -1,8 +1,10 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.*;
@@ -20,6 +22,8 @@ public class BaseTest {
 
     public static String url = null;
 
+    String playlistName = ":)";
+
 
     @BeforeSuite
     static void setupClass() {
@@ -32,8 +36,10 @@ public class BaseTest {
     @Parameters({"BaseURL"})
 
     public void launchBrowser(String BaseURL) {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications");
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
 
         url = BaseURL;
@@ -109,7 +115,7 @@ public class BaseTest {
     }
 
     //Methods to rename a playlist
-    public void doubleClickOnPlaylist () {
+    public void doubleClickOnPlaylist() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
 
@@ -119,10 +125,20 @@ public class BaseTest {
 
     }
 
-    public static void provideNewName (String name) {
+    public void provideNewName() {
+
+
         WebElement nameField = driver.findElement(By.xpath("/html/body/div/div/div/nav/section[2]/ul/li[3]/a"));
-        nameField.sendKeys(name);
+        nameField.sendKeys((Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE)));
+        nameField.sendKeys(playlistName);
+        nameField.sendKeys(Keys.ENTER);
     }
+
+    public boolean doesPlaylistExist() {
+        WebElement playlistElement = driver.findElement(By.xpath("//a[text()='" + playlistName + "']"));
+        return playlistElement.isDisplayed();
+    }
+
 
     //Additional things for Login test
     public boolean isHomePageElementDisplayed() {

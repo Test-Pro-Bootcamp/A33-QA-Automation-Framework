@@ -1,3 +1,4 @@
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class RenamePlaylistTest extends BaseTest {
@@ -16,8 +17,8 @@ public class RenamePlaylistTest extends BaseTest {
         //AND user clicks a submit button
         clickSubmit();
         doubleClickOnPlaylist();
-        provideNewName(":)");
-
+        provideNewName();
+        Assert.assertTrue(doesPlaylistExist());
 
 
     }
