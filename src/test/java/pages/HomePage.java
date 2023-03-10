@@ -1,78 +1,21 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
+package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.annotations.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 import java.time.Duration;
 
+public class HomePage extends BasePage {
 
-public class BaseTest {
-
-
-    public static WebDriver driver = null;
-
-
-    public static String url = null;
-
-    String playlistName = ":)";
-
-
-    @BeforeSuite
-    static void setupClass() {
-        WebDriverManager.chromedriver().setup();
-
+    public HomePage(WebDriver givenDriver) {
+        super(givenDriver);
     }
 
-    @BeforeMethod
-
-    @Parameters({"BaseURL"})
-
-
-    public void launchBrowser(String BaseURL) {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-
-        url = BaseURL;
-        driver.get(url);
-
-
-    }
-
-    @AfterMethod
-    public static void closeBrowser() {
-        driver.quit();
-    }
-
-    //Methods for logging in
-
-    public static void provideEmail(String email) {
-        WebElement emailField = driver.findElement(By.cssSelector("[type = 'email']"));
-        emailField.sendKeys(email);
-    }
-
-    public static void providePassword(String password) {
-        WebElement passwordField = driver.findElement(By.cssSelector("[type = 'password']"));
-        passwordField.sendKeys(password);
-    }
-
-    public static void clickSubmit() {
-        WebElement submitButton = driver.findElement(By.cssSelector("button[type = 'submit']"));
-        submitButton.click();
-    }
-
-
-    //Methods for playing a song
     public void enterAllSongs() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
@@ -91,9 +34,6 @@ public class BaseTest {
         WebElement song = driver.findElement(By.xpath("//tr[@class='song-item']"));
         song.click();
 
-        //throws InterruptedException
-        //WebElement song = driver.findElement(By.xpath("//tr[@class='song-item']"));
-        //Thread.sleep(1000);
 
     }
 
@@ -144,23 +84,4 @@ public class BaseTest {
         return homePage.isDisplayed();
 
     }
-
-    public void logIn() {
-        provideEmail("janezelenova@gmail.com");
-        providePassword("Floridaliving2023$");
-
-        //AND user clicks a submit button
-
-        clickSubmit();
-    }
-
-    @DataProvider(name = "incorrectLoginData")
-    public Object[][] getDataProviders() {
-        return new Object[][]{{"invalid@gmail.com", "invalidPass"}, {"onlyEmail@gmail.com", ""}, {"", ""}
-
-        };
-    }
 }
-
-
-
