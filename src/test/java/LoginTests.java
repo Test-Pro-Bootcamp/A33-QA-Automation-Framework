@@ -17,12 +17,9 @@ public class LoginTests extends BaseTest {
         openLoginURL();
         String url = "https://bbb.testpro.io/";
 
-        // Assert.assertEquals(driver.getCurrentUrl(), url);
+        Assert.assertEquals(driver.getCurrentUrl(), url);
     }
 
-    private static void openLoginURL() {
-        driver.get("https://bbb.testpro.io/");
-    }
 }
 
 

@@ -14,7 +14,7 @@ import java.time.Duration;
 
 @Test
 public class BaseTest {
-    WebDriver driver;
+    public static WebDriver driver = null;
 
     @BeforeSuite
     static void setupClass() { WebDriverManager.chromedriver().setup(); }
@@ -31,26 +31,26 @@ public class BaseTest {
     }
 
     public static void openLoginURL() {
-        driver.get("https://bbb.testpro.io");
+        String url = "https://bbb.testpro.io";
         driver.get(url);
     }
 
     public void provideEmail (String email) {
-        WebElement emailField = driver.findElement (By.cssSelector("[Type='email']"));
+        WebElement emailField = driver.findElement (By.cssSelector("[type='email']"));
         emailField.clear();
         emailField.sendKeys(email);
     }
 
     public void providePassword (String password) {
-        WebElement passwordField = driver.findElement (By.cssSelector("[Type='password']"));
+        WebElement passwordField = driver.findElement (By.cssSelector("[type='password']"));
         passwordField.clear();
         passwordField.sendKeys(password);
     }
 
     public static void clickSubmit() throws InterruptedException {
-        WebElement emailElement = driver.findElement(By.cssSelector("button[Type='submit']"));
+        WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
         submitButton.click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
     }
 
     }
