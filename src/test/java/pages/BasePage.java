@@ -1,71 +1,38 @@
 package pages;
 
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
 
 import java.time.Duration;
-
-import static pages.LoginPage.*;
 
 
 public class BasePage {
 
-
-    public static WebDriver driver = null;
-
-
-    public static String url = null;
-
-    String playlistName = ":)";
+    protected static WebDriver driver;
+    private WebDriverWait wait;
+    protected Actions actions;
 
     public BasePage(WebDriver givenDriver) {
         driver = givenDriver;
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        Actions actions = new Actions(driver);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        actions = new Actions(driver);
     }
 
-
-    @BeforeSuite
-    static void setupClass() {
-        WebDriverManager.chromedriver().setup();
-
-    }
-
-    @BeforeMethod
-
-    @Parameters({"BaseURL"})
+    //public static WebDriver driver = null;
 
 
-    public void launchBrowser(String BaseURL) {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+    //public static String url = null;
 
-        url = BaseURL;
-        driver.get(url);
+    //String playlistName = ":)";
 
-
-    }
-
-    public void logIn() {
-        provideEmail("janezelenova@gmail.com");
-        providePassword("Floridaliving2023$");
-
-        //AND user clicks a submit button
-
-        clickSubmit();
-    }
+    // public BasePage(WebDriver givenDriver) {
+    // driver = givenDriver;
+    // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    // Actions actions = new Actions(driver);
+    // }
 
 
     @AfterMethod

@@ -12,15 +12,30 @@ import java.time.Duration;
 
 public class HomePage extends BasePage {
 
+    private final By allSongs = By.cssSelector("a[href='#!/songs']");
+
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
 
-    public void enterAllSongs() {
 
+    public void enterAllSongs() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
-        WebElement allSongs = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[href='#!/songs']")));
-        allSongs.click();
+        WebElement songs = wait.until(ExpectedConditions.visibilityOfElementLocated(allSongs));
+        songs.click();
+
+    }
+
+
+   // public HomePage(WebDriver givenDriver) {
+       // super(givenDriver);
+    //}
+
+    //public void enterAllSongs() {
+
+        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        //WebElement allSongs = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[href='#!/songs']")));
+        //allSongs.click();
 
         // WebElement allSongs = driver.findElement(By.cssSelector("a[href='#!/songs']"));
         //allSongs.click();
