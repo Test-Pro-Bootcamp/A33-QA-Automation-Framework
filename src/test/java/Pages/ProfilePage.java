@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public class ProfilePage extends BasePage{
 
+
     public String newname = getRandomString();
     public String currentname;
     By savebtn = By.cssSelector("button[class='btn-submit']");
@@ -49,9 +50,9 @@ public class ProfilePage extends BasePage{
         profilenamefield.sendKeys(newname);
     }
 
-    //public boolean validateRenamePlaylist(){
-       // return Assert.assertTrue(newname.equals(currentname));
-
+   public boolean validateRenamePlaylist() {
+       return newname.equals(currentname);
+   }
 
 
 

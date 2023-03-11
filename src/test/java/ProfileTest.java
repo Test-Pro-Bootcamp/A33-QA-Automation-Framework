@@ -23,7 +23,7 @@ public class ProfileTest extends BaseTest {
 
         //System.out.println("this is new name " + newname);
         //System.out.println("this is current " + currentname);
-        //Assert.assertNotEquals(newname,currentname);
+        Assert.assertTrue(validateRenamePlaylist());
         profilepage.clickSaveBtn();
     }
 
