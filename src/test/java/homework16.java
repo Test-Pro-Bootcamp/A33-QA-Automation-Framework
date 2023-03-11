@@ -6,19 +6,24 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.time.Duration;
 
-public class Homework16 extends BaseTest {
+public class HomeWork16 extends BaseTest {
     @Test
-    public  void registrationNavigation() {
-       String webdrvier = new ChromeDriver();
-        Driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5000));
+    public static void registrationNavigation() throws InterruptedException {
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         String url = "https://bbb.testpro.io/";
         driver.get(url);
 
-        WebElement registrationLink = driver.findElement(By.cssSelector("[id='hel']"));
-        registrationLink.click();
+        //access the registration url
 
+        WebElement registrationLink = driver.findElement(By.cssSelector("[@id='hel']"));
+        registrationLink.click();
+        Thread.sleep(5000);
+        String registrationUrl = "https://bbb.testpro.io/registration.php";
         Assert.assertEquals(driver.getCurrentUrl(), url);
+        driver.quit();
         //Im not sure what Im doing wrong here? and I cannot access other projects.
         //I had to rebuild this after I lost it trying to move it as you asked.
 
