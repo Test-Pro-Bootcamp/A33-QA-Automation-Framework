@@ -3,7 +3,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,6 +19,7 @@ public class BaseTest {
     public static WebDriver driver = null;
     public static WebDriverWait wait;
 
+    public static Actions actions = null;
     public static By emailField = By.cssSelector("[type='email']");
     public static By passwordField = By.cssSelector("[type='password']");
     public static By submitButton = By.cssSelector("[type='submit']");
@@ -32,17 +35,17 @@ public class BaseTest {
     @Parameters({"BaseURL"})
     public static void launchBrowser(String BaseURL) {
         driver = new ChromeDriver();
+        actions = new Actions(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        //        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get(BaseURL);
         driver.manage().window().maximize();
     }
 
-    @AfterClass
-    public static void closeBrowser(){
-        driver.quit();
-    }
+//    @AfterClass
+//    public static void closeBrowser(){
+//        driver.quit();
+//    }
 
     @Test
     public static void navigateToPage() {
@@ -66,6 +69,7 @@ public class BaseTest {
     public static void clickSubmit()  {
         WebElement submitButtonElement = wait.until(ExpectedConditions.elementToBeClickable(submitButton));
         submitButtonElement.click();
+
 
 
 
