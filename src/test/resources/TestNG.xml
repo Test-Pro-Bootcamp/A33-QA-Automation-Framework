@@ -10,7 +10,6 @@
                     <include name = "renamePlayList"/>
                 </methods>
             </class>
-            <class name="BaseTest"></class>
         </classes>
     </test>
 </suite>
