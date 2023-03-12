@@ -9,6 +9,7 @@ import org.testng.annotations.*;
 import java.time.Duration;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
 public class BaseTest {
     public static WebDriver driver = null;
     public static WebDriverWait wait;
@@ -20,17 +21,18 @@ public class BaseTest {
     @BeforeMethod
     @Parameters ({"BaseURL"})
     public static void openBrowser(String BaseURL) {
-        driver = new ChromeDriver();
-        url = BaseURL;
-        driver.get(url);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        ChromeOptions option = new ChromeOptions();
+        option.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(option);
+        driver.get(BaseURL);
+        //wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
-    public void logIn() {
-        enterEmail("linulya1411@gmail.com");
-        enterPassword("te$t$tudent");
-        clickSubmit();
-    }
+//    public void logIn() {
+//        enterEmail("linulya1411@gmail.com");
+//        enterPassword("te$t$tudent");
+//        clickSubmit();
+//    }
     By enterEmailAddress = By.cssSelector(("[type = 'email']"));
     By passwordField = By.cssSelector(("[type='password']"));
     By submitButton = By.cssSelector(("[type='submit']"));
@@ -62,12 +64,12 @@ public class BaseTest {
         WebElement messageElement = wait.until(ExpectedConditions.visibilityOfElementLocated(notificationMessage));
         return messageElement.isDisplayed();
     }
-//    @DataProvider(name="loginData")
-//    public static Object[][] getDataFromDataProviders(){
-//        return new Object[][]{
-//                {"linulya1411@gmail.com", "te$t$tudent"}
-//        };
-//    }
+    @DataProvider(name="loginData")
+    public static Object[][] getDataFromDataProviders(){
+        return new Object[][]{
+                {"linulya1411@gmail.com", "te$t$tudent"}
+        };
+    }
 
     @AfterMethod
     public  void closeBrowser(){

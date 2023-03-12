@@ -2,10 +2,12 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework20 extends BaseTest {
-    @Test
-    public void deletePlayList(){
+    @Test(dataProvider = "loginData")
+    public void deletePlayList(String email, String password){
 
-        logIn();
+        enterEmail(email);
+        enterPassword(password);
+        clickSubmit();
         clickPlaylistToDelete();
         clickXPlaylist();
         Assert.assertTrue(verifyNotification());
