@@ -15,6 +15,7 @@ import org.testng.annotations.Parameters;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 import java.time.Duration;
+import org.testng.IExpectedExceptionsHolder;
 
 
 public class BaseTest {
@@ -25,7 +26,6 @@ public class BaseTest {
     String testUrl = "";
     String password = "";
     String email = "";
-    String workingPlaylist = "";
     String koelStart = "https://bbb.testpro.io/";
     String koelHome = "https://bbb.testpro.io/#!/home";
     String koelSongs = "https://bbb.testpro.io/#!/songs";
@@ -41,10 +41,11 @@ public class BaseTest {
     @BeforeMethod
     @Parameters({"baseURL"})
     public void setupBrowser(String baseUrl) {
-        ChromeOptions options= new ChromeOptions(); options.addArguments("--disable-notifications");
-        driver = new ChromeDriver(options);
-        //actions = new Actions(driver);
-        //wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        ChromeOptions option = new ChromeOptions();
+        option.addArguments("--remote-allow-origins=*", "--disable-notifications");
+        driver = new ChromeDriver(option);
+        actions = new Actions(driver);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(baseUrl);
     }
@@ -86,19 +87,22 @@ public class BaseTest {
     }
 
     public void inputEmail(String email) {
-        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-        emailField.sendKeys(email);
+        //WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
+        //emailField.sendKeys(email);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']"))).sendKeys(email);
     }
 
     public void inputPassword(String pass) {
-        WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
-        passwordField.sendKeys(pass);
+        //WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
+        //passwordField.sendKeys(pass);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']"))).sendKeys(pass);
     }
 
     public void clickLogin() {
-        WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        loginButton.click();
+        //WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        //wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        //loginButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']"))).click();
     }
 
     public void loginValidAccount(String email, String password) {
@@ -149,6 +153,7 @@ public class BaseTest {
     }
 
     public void clickAddto() {
+
         WebElement Addto = driver.findElement(By.cssSelector("button[class='btn-add-to']"));
         Addto.click();
     }
@@ -200,9 +205,7 @@ public class BaseTest {
         plusButton.click();
         WebElement simplePlaylist = driver.findElement(By.cssSelector("[data-testid='playlist-context-menu-create-simple']"));
         simplePlaylist.click();
-        WebElement playlistTxtbox = driver.findElement(By.cssSelector("input[name='name']"));
-        playlistTxtbox.sendKeys(name);
-        playlistTxtbox.sendKeys(Keys.ENTER);
+        enterPlaylistName(name);
     }
 
     public void deleteEmptyPlaylist() {
@@ -217,15 +220,19 @@ public class BaseTest {
         okbutton.click();
     }
 
-
-
     public boolean isPlaylistvisible(String searchText) {
-        try {
-            WebElement testPlaylist = driver.findElement(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + searchText + "')]"));
-            return testPlaylist.isDisplayed();
-        }
-        catch (NoSuchElementException e) {
-            return false;
-        }
+        WebElement testPlaylist = driver.findElement(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + searchText + "')]"));
+        return testPlaylist.isDisplayed();
+    }
+
+    public void doubleClickPlaylist(String searchText) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + searchText + "')]"))));
+        WebElement playlistElement = driver.findElement(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + searchText + "')]"));
+        actions.doubleClick(playlistElement).perform();
+    }
+    public void enterPlaylistName(String name) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By.cssSelector("input[name='name']"))));
+        WebElement playlistTxtbox = driver.findElement(By.cssSelector("input[name='name']"));
+        playlistTxtbox.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE),name, Keys.ENTER);
     }
 }
