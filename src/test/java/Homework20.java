@@ -10,5 +10,4 @@ public class Homework20 extends BaseTest {
         clickXPlaylist();
         Assert.assertTrue(verifyNotification());
     }
-
 }
