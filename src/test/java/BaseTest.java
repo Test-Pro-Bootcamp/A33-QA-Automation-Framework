@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonBooleanFormatVisitor;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,8 +25,9 @@ public class BaseTest {
         ChromeOptions option = new ChromeOptions();
         option.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(option);
-        driver.get(BaseURL);
-        //wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        url= BaseURL;
+        driver.get(url);
     }
 
 //    public void logIn() {
@@ -41,11 +43,11 @@ public class BaseTest {
     By notificationMessage = By.cssSelector(("div.success.show"));
     public  void enterEmail(String email) {
         WebElement emailElement = wait.until(ExpectedConditions.elementToBeClickable(enterEmailAddress));
-        emailElement.sendKeys();
+        emailElement.sendKeys("linulya1411@gmail.com");
     }
     public void enterPassword(String password) {
         WebElement passwordElement = wait.until(ExpectedConditions.elementToBeClickable(passwordField));
-        passwordElement.sendKeys();
+        passwordElement.sendKeys("te$t$tudent");
     }
 
     public void clickSubmit() {
@@ -64,12 +66,12 @@ public class BaseTest {
         WebElement messageElement = wait.until(ExpectedConditions.visibilityOfElementLocated(notificationMessage));
         return messageElement.isDisplayed();
     }
-    @DataProvider(name="loginData")
-    public static Object[][] getDataFromDataProviders(){
-        return new Object[][]{
-                {"linulya1411@gmail.com", "te$t$tudent"}
-        };
-    }
+//    @DataProvider(name="loginData")
+//    public static Object[][] getDataFromDataProviders(){
+//        return new Object[][]{
+//                {"linulya1411@gmail.com", "te$t$tudent"}
+//        };
+//    }
 
     @AfterMethod
     public  void closeBrowser(){

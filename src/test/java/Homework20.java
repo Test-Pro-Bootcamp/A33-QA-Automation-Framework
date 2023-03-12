@@ -2,11 +2,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework20 extends BaseTest {
-    @Test(dataProvider = "loginData")
-    public void deletePlayList(String email, String password){
+    @Test
+    public void deletePlayList(){
 
-        enterEmail(email);
-        enterPassword(password);
+        enterEmail("linulya1411@gmail.com");
+        enterPassword("te$t$tudent");
         clickSubmit();
         clickPlaylistToDelete();
         clickXPlaylist();
