@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 public class Homework18 extends BaseTest {
 
     @Test
-    public void newSongToPlaylist() throws InterruptedException {
+    public void newSongToPlaylist()  {
         //setUpBrowser();
         //String url = "https://bbb.testpro.io/";
         //driver.get(url);
@@ -14,7 +14,7 @@ public class Homework18 extends BaseTest {
         soundBar();
         hoverOnPlay();
         play();
-        //pause();
+        pause();
         Assert.assertTrue(verifySoundBar());
 
         //driver.wait(5000);

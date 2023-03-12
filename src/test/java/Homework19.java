@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 public class Homework19 extends BaseTest {
 
     @Test
-    public void newSongToPlaylist() throws InterruptedException {
+    public void newSongToPlaylist()  {
         //etUpBrowser();
         //String url = "https://bbb.testpro.io/";
         //driver.get(url);
