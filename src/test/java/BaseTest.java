@@ -25,10 +25,12 @@ public class BaseTest {
     @BeforeMethod
     @Parameters ({"BaseURL"})
     public static void openBrowser(String BaseURL) {
-        driver = new ChromeDriver();
-        url = BaseURL;
-        driver.get(url);
+        ChromeOptions option = new ChromeOptions();
+        option.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(option);
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        url= BaseURL;
+        driver.get(url);
     }
 
     public void logIn() {
@@ -48,11 +50,11 @@ public class BaseTest {
 
     public void enterEmail(String email) {
         WebElement emailElement = wait.until(ExpectedConditions.elementToBeClickable(enterEmailAddress));
-        emailElement.sendKeys();
+        emailElement.sendKeys("linulya1411@gmail.com");
     }
     public void enterPassword(String password) {
         WebElement passwordElement = wait.until(ExpectedConditions.elementToBeClickable(passwordField));
-        passwordElement.sendKeys();
+        passwordElement.sendKeys("te$t$tudent");
     }
 
     public void clickSubmit() {
