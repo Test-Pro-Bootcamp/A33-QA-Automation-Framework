@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.*;
 import java.time.Duration;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.testng.annotations.BeforeSuite;
 
 public class BaseTest {
     public static WebDriver driver = null;
