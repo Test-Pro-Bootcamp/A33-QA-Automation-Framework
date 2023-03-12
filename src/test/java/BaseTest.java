@@ -48,7 +48,7 @@ public class BaseTest {
     By xButton = cssSelector(("button[title='Delete this playlist']"));
     By notificationMessage = cssSelector(("div.success.show"));
     By editOption = cssSelector(("[data-testid='playlist-context-menu-edit-48111']"));
-    By textField = cssSelector(("input[name='name']"));
+    By textField = By.xpath(("//*[@id=\"playlists\"]/ul/li[3]/a"));
     By newPlayList = By.xpath(("//a[text()='"+newPlayListName+"']"));
 
     public void enterEmail(String email) {
@@ -66,19 +66,19 @@ public class BaseTest {
     }
     public void clickPlayList() {
         WebElement clickOnPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(playList));
-        actions.contextClick(clickOnPlaylist).perform();
+        actions.doubleClick(clickOnPlaylist).perform();
     }
-    public void chooseEdit() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(editOption)).click();
-    }
+//    public void chooseEdit() {
+//        wait.until(ExpectedConditions.elementToBeClickable(editOption)).click();
+//    }
     public void renamePlayListName() {
         WebElement textBox = driver.findElement(textField);
-        textBox.sendKeys((Keys.chord(Keys.CONTROL,"a",Keys.SPACE)));
+        textBox.sendKeys((Keys.chord(Keys.COMMAND,"a",Keys.SPACE)));
         textBox.sendKeys(newPlayListName);
         textBox.sendKeys(Keys.ENTER);
     }
     public boolean verifyNewPlayListName(){
-        WebElement newPlaylistName = wait.until(ExpectedConditions.visibilityOfElementLocated(newPlayList));
+        WebElement newPlaylistName = driver.findElement(newPlayList);
         return newPlaylistName.isDisplayed();
     }
     public void clickXPlaylist() {
