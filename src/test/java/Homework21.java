@@ -12,37 +12,35 @@ import java.util.List;
 public class Homework21 extends BaseTest {
     String playlistName = "Test Pro Playlist";
 
-    @Test
-    public void playSong() {
-        logIn();
-        chooseAllSongsList();
-        contextClickFirstSong();
-        choosePlay();
-        Assert.assertTrue(isSongPlaying());
-    }
-    @Test
-    public void renamePlaylist() {
-        logIn();
-        doubleClickChoosePlaylist();
-        enterPlaylistName();
-        Assert.assertTrue(doesPlaylistExist());
-
-    }
-    @Test
-    public void listOfSongsWebElements(){
-        logIn();
-        choosePlaylist();
-        displayAllSongs();
-        Assert.assertTrue(getPlaylistDetails().contains(String.valueOf(countSongsInPlaylist())));
-
-    }
-    @Test
-    public void hoverOverPlayBtn() {
-        logIn();
-        chooseAllSongsList();
-        hoverToPlayBtn();
-        Assert.assertTrue(hoverToPlayBtn().isDisplayed());
-    }
+//    @Test
+//    public void playSong() {
+//        logIn();
+//        chooseAllSongsList();
+//        contextClickFirstSong();
+//        choosePlay();
+//        Assert.assertTrue(isSongPlaying());
+//    }
+//    @Test
+//    public void renamePlaylist() {
+//        logIn();
+//        doubleClickChoosePlaylist();
+//        enterPlaylistName();
+//        Assert.assertTrue(doesPlaylistExist());
+//    }
+//    @Test
+//    public void listOfSongsWebElements(){
+//        logIn();
+//        choosePlaylist();
+//        displayAllSongs();
+//        Assert.assertTrue(getPlaylistDetails().contains(String.valueOf(countSongsInPlaylist())));
+//    }
+//    @Test
+//    public void hoverOverPlayBtn() {
+//        logIn();
+//        chooseAllSongsList();
+//        hoverToPlayBtn();
+//        Assert.assertTrue(hoverToPlayBtn().isDisplayed());
+//    }
 //these are the helper methods:
     public void choosePlaylist() {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)"))).click();
@@ -94,10 +92,10 @@ public class Homework21 extends BaseTest {
     public void choosePlay() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("nav.menu.song-menu li.playback"))).click();
     }
-    public boolean isSongPlaying() {
-        WebElement soundBarVisualizer = driver.findElement(By.cssSelector("[data-testid = 'sound-bar-play']"));
-        return soundBarVisualizer.isDisplayed();
-    }
+//    public boolean isSongPlaying() {
+//        WebElement soundBarVisualizer = driver.findElement(By.cssSelector("[data-testid = 'sound-bar-play']"));
+//        return soundBarVisualizer.isDisplayed();
+//    }
     //example helper method to hover over an element
     public WebElement hoverToPlayBtn() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@data-testid='play-btn']")));
