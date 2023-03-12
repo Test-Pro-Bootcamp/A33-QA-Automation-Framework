@@ -12,10 +12,10 @@ public class LoginTests extends BaseTest {
     @Test
     public static void LoginEmptyEmailPasswordTest() {
 
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        LoginPage loginTest = new LoginPage(driver);
+        loginTest.logIn();
 
-        String url = "https://apps.testpro.io/";
+        String url = "https://bbb.testpro.io/#!/profile";
         driver.get(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
