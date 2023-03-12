@@ -21,14 +21,16 @@ public class BaseTest {
     @Parameters ({"BaseURL"})
     public void setUpBrowser(String BaseURL) {
         driver = new ChromeDriver();
-        url = BaseURL;
-        driver.get(url);
+        driver.get(BaseURL);
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
     By enterEmailAddress = By.cssSelector(("[type = 'email']"));
     By passwordField = By.cssSelector(("[type='password']"));
     By submitButton = By.cssSelector(("[type='submit']"));
+    By clickToDelete = By.xpath(("//*[@id=\"playlists\"]/ul/li[3]/a"));
+    By xButton = By.cssSelector(("button[title='Delete this playlist']"));
+    By notificationMessage = By.cssSelector(("div.success.show"));
 
     public void logIn() {
         enterEmail("linulya1411@gmail.com");
@@ -46,20 +48,19 @@ public class BaseTest {
 
     public void clickSubmit() {
         WebElement submitElement = wait.until(ExpectedConditions.elementToBeClickable(submitButton));
-        //submitElement.click();
-
+        submitElement.click();
     }
     public void clickXPlaylist() {
-        WebElement clickX = driver.findElement(By.cssSelector("button[title='Delete this playlist']"));
+        WebElement clickX = wait.until(ExpectedConditions.elementToBeClickable(xButton));
         clickX.click();
     }
     public void clickPlaylistToDelete() {
-        WebElement clickToDelete = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
-        clickToDelete.click();
+        WebElement deleteElement = wait.until(ExpectedConditions.elementToBeClickable(clickToDelete));
+        deleteElement.click();
     }
     public boolean verifyNotification(){
-        WebElement notificationMessage = driver.findElement(By.cssSelector("div.success.show"));
-        return notificationMessage.isDisplayed();
+        WebElement messageElement = wait.until(ExpectedConditions.visibilityOfElementLocated(notificationMessage));
+        return messageElement.isDisplayed();
     }
 
 
