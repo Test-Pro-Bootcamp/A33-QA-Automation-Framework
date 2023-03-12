@@ -1,9 +1,14 @@
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Homework21 extends BaseTest {
+public class Homework21 extends BaseTest{
     @Test
-    public static void renamePlaylist(){
-        
-    }
+    public void renamePlaylist(){
+        logIn();
+        clickPlayList();
+        chooseEdit();
+        renamePlayListName();
 
+        Assert.assertTrue(verifyNewPlayListName());
+    }
 }
