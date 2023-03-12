@@ -7,8 +7,9 @@ public class Homework21 extends BaseTest{
     public void renamePlaylist(){
         logIn();
         clickPlayList();
-        renamePlayListName();
+        chooseEdit();
+        renamePlayListName(newPlayListName);
 
-        Assert.assertTrue(verifyNewPlayListName());
+        Assert.assertTrue(verifyNewPlayListName(newPlayListName));
     }
 }

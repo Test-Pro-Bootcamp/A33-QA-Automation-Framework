@@ -19,7 +19,6 @@ public class BaseTest {
     public static WebDriverWait wait;
     public static String url = null;
     public static Actions actions;
-    String newPlayListName = "New Playlist";
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -30,7 +29,7 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications","--remote-allow-origins=*","--incognito","--start-maximized");
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
         url= BaseURL;
         driver.get(url);
@@ -47,9 +46,9 @@ public class BaseTest {
     By playList = By.xpath(("//*[@id=\"playlists\"]/ul/li[3]/a"));
     By xButton = cssSelector(("button[title='Delete this playlist']"));
     By notificationMessage = cssSelector(("div.success.show"));
-    By editOption = cssSelector(("[data-testid='playlist-context-menu-edit-48111']"));
-    By textField = By.xpath(("//*[@id=\"playlists\"]/ul/li[3]/a"));
-    By newPlayList = By.xpath(("//a[text()='"+newPlayListName+"']"));
+    By editOption = xpath(("//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]"));
+    By textField = By.cssSelector(("[name='name']"));
+    By newPlayList = By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + "New Playlist" + "')]");
 
     public void enterEmail(String email) {
         WebElement emailElement = wait.until(ExpectedConditions.elementToBeClickable(enterEmailAddress));
@@ -66,18 +65,19 @@ public class BaseTest {
     }
     public void clickPlayList() {
         WebElement clickOnPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(playList));
-        actions.doubleClick(clickOnPlaylist).perform();
+        actions.contextClick(clickOnPlaylist).perform();
     }
-//    public void chooseEdit() {
-//        wait.until(ExpectedConditions.elementToBeClickable(editOption)).click();
-//    }
-    public void renamePlayListName() {
+    public void chooseEdit() {
+        wait.until(ExpectedConditions.elementToBeClickable(editOption)).click();
+    }
+    public void renamePlayListName(String name) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(textField));
         WebElement textBox = driver.findElement(textField);
         textBox.sendKeys((Keys.chord(Keys.COMMAND,"a",Keys.SPACE)));
-        textBox.sendKeys(newPlayListName);
+        textBox.sendKeys(name);
         textBox.sendKeys(Keys.ENTER);
     }
-    public boolean verifyNewPlayListName(){
+    public boolean verifyNewPlayListName(String searchText){
         WebElement newPlaylistName = driver.findElement(newPlayList);
         return newPlaylistName.isDisplayed();
     }
