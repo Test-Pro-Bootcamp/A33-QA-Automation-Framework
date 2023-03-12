@@ -14,9 +14,7 @@ public class HomePage extends BasePage {
 
     private final By allSongs = By.cssSelector("a[href='#!/songs']");
 
-    public HomePage(WebDriver givenDriver) {
-        super(givenDriver);
-    }
+    public HomePage(WebDriver givenDriver) { super(givenDriver); }
 
 
     public void enterAllSongs() {
@@ -43,7 +41,6 @@ public class HomePage extends BasePage {
         //Thread.sleep(1000);
         // allSongs.click();
         //
-    }
 
     public void selectSong() {
         WebElement song = driver.findElement(By.xpath("//tr[@class='song-item']"));
@@ -83,7 +80,6 @@ public class HomePage extends BasePage {
 
         WebElement nameField = driver.findElement(By.xpath("/html/body/div/div/div/nav/section[2]/ul/li[3]/a"));
         nameField.sendKeys((Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE)));
-        nameField.sendKeys(playlistName);
         nameField.sendKeys(Keys.ENTER);
     }
 

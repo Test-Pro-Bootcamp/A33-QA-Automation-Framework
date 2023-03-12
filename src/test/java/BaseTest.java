@@ -22,7 +22,6 @@ public class BaseTest {
 
     public static String url = null;
 
-    String playlistName = ":)";
 
 
     @BeforeSuite
@@ -53,6 +52,7 @@ public class BaseTest {
     public static void closeBrowser() {
         driver.quit();
     }
+
 
     //Methods for logging in
 

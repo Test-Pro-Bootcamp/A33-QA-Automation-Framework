@@ -35,8 +35,5 @@ public class BasePage {
     // }
 
 
-    @AfterMethod
-    public static void closeBrowser() {
-        driver.quit();
-    }
+
 }
