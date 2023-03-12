@@ -11,6 +11,8 @@ import java.time.Duration;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeSuite;
+import static org.openqa.selenium.By.cssSelector;
+import static org.openqa.selenium.By.xpath;
 
 public class BaseTest {
     public static WebDriver driver = null;
@@ -38,14 +40,14 @@ public class BaseTest {
         enterPassword("te$t$tudent");
         clickSubmit();
     }
-    By enterEmailAddress = By.cssSelector(("[type = 'email']"));
-    By passwordField = By.cssSelector(("[type='password']"));
-    By submitButton = By.cssSelector(("[type='submit']"));
+    By enterEmailAddress = cssSelector(("[type = 'email']"));
+    By passwordField = cssSelector(("[type='password']"));
+    By submitButton = cssSelector(("[type='submit']"));
     By playList = By.xpath(("//*[@id=\"playlists\"]/ul/li[3]/a"));
-    By xButton = By.cssSelector(("button[title='Delete this playlist']"));
-    By notificationMessage = By.cssSelector(("div.success.show"));
-    By editOption = By.cssSelector(("[data-testid='playlist-context-menu-edit-48111']"));
-    By textField = By.cssSelector(("input[name='name']"));
+    By xButton = cssSelector(("button[title='Delete this playlist']"));
+    By notificationMessage = cssSelector(("div.success.show"));
+    By editOption = cssSelector(("[data-testid='playlist-context-menu-edit-48111']"));
+    By textField = cssSelector(("input[name='name']"));
     By newPlayList = By.xpath(("//a[text()='"+newPlayListName+"']"));
 
     public void enterEmail(String email) {
