@@ -27,10 +27,11 @@ public class BaseTest {
     @BeforeMethod
     @Parameters ({"BaseURL"})
     public static void openBrowser(String BaseURL) {
-        ChromeOptions option = new ChromeOptions();
-        option.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(option);
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications","--remote-allow-origins=*","--incognito","--start-maximized");
+        driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        actions = new Actions(driver);
         url= BaseURL;
         driver.get(url);
     }

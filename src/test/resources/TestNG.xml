@@ -6,11 +6,7 @@
     <test name="Example Test" preserve-order="false">
         <classes>
             <class name="Homework21">
-                <methods>
-                    <include name = "renamePlayList"/>
-                </methods>
             </class>
-            <class name="BaseTest"></class>
         </classes>
     </test>
 </suite>
