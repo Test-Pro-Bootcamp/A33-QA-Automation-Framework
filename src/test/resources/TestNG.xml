@@ -10,6 +10,7 @@
                     <include name = "deletePlayList"/>
                 </methods>
             </class>
+            <class name="BaseTest"></class>
         </classes>
     </test>
 </suite>
