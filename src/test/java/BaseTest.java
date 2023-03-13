@@ -3,6 +3,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,6 +12,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.Keys;
+import org.testng.Assert;
+
+
 
 
 
@@ -22,6 +29,8 @@ public static WebDriver driver = null;
 WebDriverWait wait;
 public static String url = null;
 
+Actions actions = new Actions(driver);
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -29,19 +38,19 @@ public static String url = null;
     @BeforeMethod
     @Parameters({"BaseURL"})
     public void setUpBrowser(String BaseURL) {
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver,Duration.ofSeconds(15));
         url = BaseURL;
         driver.get(url);
     }
     @AfterMethod
     public static void closeBrowser(){
+
         driver.quit();
     }
 
-    //public void openloginUrl() {
-        //driver.get("https://bbb.testpro.io/");
-    //}
 
     public void enterEmail(String email) {
         WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
@@ -58,6 +67,12 @@ public static String url = null;
     public void clickSubmit() {
         WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[type='submit']")));
         submitButton.click();
+    }
+
+    public void logIn(){
+        enterEmail("vasilinapelo@gmail.com");
+        enterPassword("vasilina230109!");
+        clickSubmit();
     }
 
     public void searchForSong(String songName) {
@@ -114,5 +129,25 @@ public static String url = null;
         WebElement notificationMessage = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.success.show")));
        return notificationMessage.isDisplayed();
    }
+    public void doubleClickPlaylist(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
+        WebElement playlistElement = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
+        actions.doubleClick(playlistElement).perform();
+    }
+
+    public void enterNewPlaylistName(){
+        String playlistName = "LinaPelo2323";
+        WebElement inputPlaylistField = driver.findElement(By.cssSelector("input[name='name']"));
+        inputPlaylistField.sendKeys((Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE)));
+        inputPlaylistField.sendKeys(playlistName);
+        inputPlaylistField.sendKeys(Keys.ENTER);
+
+    }
+
+    public boolean checkNewPlaylist(){
+        WebElement playlistElement = driver.findElement(By.xpath("//a[text()='LinaPelo'"));
+        return playlistElement.isDisplayed();
+
+    }
 
 }
