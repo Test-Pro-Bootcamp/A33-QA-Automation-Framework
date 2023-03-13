@@ -38,9 +38,6 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//*[@id='playlists']  //li[@class='playlist playlist']")
     private List<WebElement> playlistLocators;
 
-    private int numPlaylists;
-
-
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
@@ -51,15 +48,14 @@ public class HomePage extends BasePage{
         return this;
     }
 
-    private void reinitializePlaylistLocators() {
-        System.out.println(numPlaylists);
-        //wait.until(ExpectedConditions.
-        //((playlistLocators, numPlaylists + 1));
-        PageFactory.initElements(driver, this);
-        playlistLocators = driver.findElements(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a"));
-        numPlaylists = playlistLocators.size();
-        System.out.println(numPlaylists);
+    private void openHomeSelf() {
+        driver.get(koelHome);
     }
+
+    private HomePage reinitializePlaylistLocators() {
+        PageFactory.initElements(driver, this);
+        return this;
+        }
 
     private List<WebElement> getPlaylistLocators() {
         return playlistLocators;
@@ -69,6 +65,7 @@ public class HomePage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(playlistPlusBtn)).click();
         wait.until(ExpectedConditions.visibilityOf(simplePlaylist)).click();
         inputPlaylistName(name);
+        reinitializePlaylistLocators();
         return this;
     }
 
@@ -79,20 +76,21 @@ public class HomePage extends BasePage{
     }
 
     public HomePage findPlaylist(String searchText) {
-        WebElement testPlaylist = driver.findElement(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + searchText + "')]"));
-        playlistElement = testPlaylist;
-        //This was an attempt to create a list of all webelemetns in playlist and find the one I needed
-        //But I was unable to make it so so it is commented out
-        //for (WebElement locator : playlistLocators) {
-        //    System.out.println(locator);
-        //    if (locator.getText().contains(searchText)) {
-        //        playlistElement = locator;
-        //        break;
-        //    }
-        //}
+        //WebElement testPlaylist = driver.findElement(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + searchText + "')]"));
+        //playlistElement = testPlaylist;
+        List<WebElement> locators  = getPlaylistLocators();
+        for (WebElement locator : playlistLocators) {
+            if (locator.getText().contains(searchText)) {
+                playlistElement = locator;
+                break;
+            }
+        }
+        if (playlistElement == null){
+            createPlaylist(searchText);
+            openHomeSelf();
+            findPlaylist(searchText);
+        }
         return this;
-        //createPlaylist(searchText);
-        //findPlaylist(searchText);
     }
 
     public HomePage startRenamingPlaylist() {
@@ -129,10 +127,8 @@ public class HomePage extends BasePage{
         return this;
     }
 
-    public WebElement isPlaylistvisible(String searchText) {
-        WebElement testPlaylist = driver.findElement(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + searchText + "')]"));
-        return testPlaylist;
-        //return playlistElement.isDisplayed();
+    public WebElement isPlaylistvisible() {
+        return playlistElement;
     }
 
     public WebElement getNotification(){
