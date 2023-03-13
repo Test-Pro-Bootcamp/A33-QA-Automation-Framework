@@ -21,9 +21,9 @@ public class Homework19 extends BaseTest {
         homePage.createPlaylist(currentPlaylistname);
 
         //THEN
-        homePage.findPlaylist(currentPlaylistname);
-        homePage.openPlaylist();
-        homePage.deleteEmptyPlaylist();
+        homePage.findPlaylist(currentPlaylistname)
+                .openPlaylist()
+                .deleteEmptyPlaylist();
 
         //WHEN
         Assert.assertTrue(homePage.getNotification().isDisplayed());

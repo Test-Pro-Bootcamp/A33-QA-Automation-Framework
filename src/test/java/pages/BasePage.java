@@ -23,9 +23,9 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.PageFactory;
 
 public class BasePage {
-    WebDriver driver;
-    WebDriverWait wait;
-    Actions actions;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+    protected Actions actions;
 
     String password = "";
     String email = "";

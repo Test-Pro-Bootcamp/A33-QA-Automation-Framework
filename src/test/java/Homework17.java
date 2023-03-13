@@ -15,7 +15,7 @@ import java.time.Duration;
 public class Homework17 extends BaseTest {
 
     @Test
-    public void addSongToPlaylist() {
+    public void addSongToPlaylist() throws InterruptedException {
 
         //GIVEN
         LoginPage loginPage = new LoginPage(driver);
@@ -23,20 +23,20 @@ public class Homework17 extends BaseTest {
         RecentlyPage recentlyPage = new RecentlyPage(driver);
         String currentPlaylistname = "PLDELTEST";
         loginPage.inputLogIn(email, password);
-        homePage.createPlaylist(currentPlaylistname);
-        homePage.findPlaylist(currentPlaylistname);
-        homePage.openHome();
+        homePage.createPlaylist(currentPlaylistname)
+                .findPlaylist(currentPlaylistname)
+                .openHome();
 
         //THEN
-        recentlyPage.clickViewAll();
-        recentlyPage.clickFirstSong();
-        recentlyPage.addToBtn();
-        recentlyPage.clickPlaylistfromAddto(currentPlaylistname);
+        recentlyPage.clickViewAll()
+                    .clickFirstSong()
+                    .addToBtn()
+                    .clickPlaylistfromAddto(currentPlaylistname);
 
         //WHEN
         Assert.assertTrue(homePage.getNotification().isDisplayed());
-        homePage.openPlaylist();
-        homePage.deleteFilledPlaylist();
+        homePage.openPlaylist()
+                .deleteFilledPlaylist();
 
         //String testPlaylist = "test";
         //logIn();

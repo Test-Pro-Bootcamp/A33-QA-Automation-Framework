@@ -22,13 +22,13 @@ import java.time.Duration;
 public class SongsPage extends BasePage{
 
     @FindBy(css = "#songsWrapper [class='song-item']:nth-child(1)")
-    WebElement firstSong;
+    private WebElement firstSong;
 
     @FindBy(css = "[class='songs']")
-    WebElement allSongsPage;
+    private WebElement allSongsPage;
 
     @FindBy(css = "span[class='pause']")
-    WebElement pauseButton;
+    private WebElement pauseButton;
 
 
 
@@ -36,13 +36,15 @@ public class SongsPage extends BasePage{
         super(givenDriver);
     }
 
-    public void playFirstSong() {
+    public SongsPage playFirstSong() {
         actions.doubleClick(firstSong).perform();
+        return this;
     }
 
-    public void openAllSongs() {
+    public SongsPage openAllSongs() {
         allSongsPage.click();
         //driver.get(koelSongs);
+        return this;
     }
 
     public WebElement getPauseButton(){

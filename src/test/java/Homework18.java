@@ -20,8 +20,8 @@ public class Homework18 extends BaseTest {
         loginPage.inputLogIn(email, password);
 
         //THEN
-        songPage.openAllSongs();
-        songPage.playFirstSong();
+        songPage.openAllSongs()
+                .playFirstSong();
 
         //WHEN
         Assert.assertTrue(songPage.getPauseButton().isDisplayed());

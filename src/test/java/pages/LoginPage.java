@@ -26,14 +26,14 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage extends BasePage {
 
     @FindBy(css = "input[type='email']")
-    WebElement emailFieldLocator;
+    private WebElement emailFieldLocator;
     @FindBy(css = "input[type='password']")
-    WebElement passFieldLocator;
+    private WebElement passFieldLocator;
     @FindBy(css = "button[type='submit']")
-    WebElement submitButtonLocator;
+    private WebElement submitButtonLocator;
 
     @FindBy(css = "a[id='hel']")
-    WebElement registrationBtnLocator;
+    private WebElement registrationBtnLocator;
 
     //By emailFieldLocator = By.cssSelector("input[type='email");
     //By passFieldLocator = By.cssSelector("input[type='password");

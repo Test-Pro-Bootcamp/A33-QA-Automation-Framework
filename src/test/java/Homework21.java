@@ -16,15 +16,15 @@ public class Homework21 extends BaseTest {
         loginPage.inputLogIn(email, password);
 
         //THEN
-        homePage.createPlaylist(currentPlaylistname);
-        homePage.findPlaylist(currentPlaylistname);
-        homePage.startRenamingPlaylist();
-        homePage.inputPlaylistName(newPlaylistname);
+        homePage.createPlaylist(currentPlaylistname)
+                .findPlaylist(currentPlaylistname)
+                .startRenamingPlaylist()
+                .inputPlaylistName(newPlaylistname);
         System.out.printf(homePage.confirmPlaylistNameChange(newPlaylistname));
 
         //WHEN
         Assert.assertTrue(homePage.isPlaylistvisible(newPlaylistname).isDisplayed());
-        homePage.openPlaylist();
-        homePage.deleteEmptyPlaylist();
+        homePage.openPlaylist()
+                .deleteEmptyPlaylist();
     }
 }

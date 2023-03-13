@@ -12,32 +12,33 @@ import java.util.List;
 
 public class HomePage extends BasePage{
 
-    WebElement playlistElement = null;
+    private WebElement playlistElement = null;
 
     @FindBy(css = "input[name='name']")
-    WebElement playlistInputfield;
+    private WebElement playlistInputfield;
 
     @FindBy(css = "div.success.show")
-    WebElement popUpnotification;
-
+    private WebElement popUpnotification;
 
     @FindBy(css = "i[class='fa fa-plus-circle create']")
-    WebElement playlistPlusBtn;
+    private WebElement playlistPlusBtn;
 
     @FindBy(css = "[data-testid='playlist-context-menu-create-simple']")
-    WebElement simplePlaylist;
+    private WebElement simplePlaylist;
 
     @FindBy(css = "[class='del btn-delete-playlist']")
-    WebElement deleteBtn;
+    private WebElement deleteBtn;
 
     @FindBy(css = "button[class='ok']")
-    WebElement okBtn;
+    private WebElement okBtn;
 
     @FindBy(css = "[class='home']")
-    WebElement homePage;
+    private WebElement homePage;
 
     @FindBy(xpath = "//*[@id='playlists']  //li[@class='playlist playlist']")
-    List<WebElement> playlistLocators;
+    private List<WebElement> playlistLocators;
+
+    private int numPlaylists;
 
 
     public HomePage(WebDriver givenDriver) {
@@ -45,70 +46,87 @@ public class HomePage extends BasePage{
     }
 
 
-    public void openHome() {
+    public HomePage openHome() {
         homePage.click();
+        return this;
     }
-    public void reinitializePlaylistLocators() {
+
+    private void reinitializePlaylistLocators() {
+        System.out.println(numPlaylists);
+        //wait.until(ExpectedConditions.
+        //((playlistLocators, numPlaylists + 1));
         PageFactory.initElements(driver, this);
-        //playlistLocators = driver.findElements(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a"));
-    }
-
-    public void createPlaylist(String name) {
-        wait.until(ExpectedConditions.visibilityOf(playlistPlusBtn)).click();
-        wait.until(ExpectedConditions.visibilityOf(simplePlaylist)).click();
-        inputPlaylistName(name);
-        reinitializePlaylistLocators();
-    }
-
-    public void inputPlaylistName(String name) {
-        wait.until(ExpectedConditions.visibilityOf(playlistInputfield));
-        playlistInputfield.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE),name, Keys.ENTER);
-    }
-
-    public void findPlaylist(String searchText) {
-        WebElement testPlaylist = driver.findElement(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + searchText + "')]"));
-        playlistElement = testPlaylist;
-        List<WebElement> locators  = getPlaylistLocators();
-        //for (WebElement locator : playlistLocators) {
-        //    if (locator.getText().contains(searchText)) {
-        //        playlistElement = locator;
-        //        break;
-        //    }
-        //}
-        //createPlaylist(searchText);
-        //findPlaylist(searchText);
+        playlistLocators = driver.findElements(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a"));
+        numPlaylists = playlistLocators.size();
+        System.out.println(numPlaylists);
     }
 
     private List<WebElement> getPlaylistLocators() {
         return playlistLocators;
     }
 
-    public void startRenamingPlaylist() {
+    public HomePage createPlaylist(String name) {
+        wait.until(ExpectedConditions.visibilityOf(playlistPlusBtn)).click();
+        wait.until(ExpectedConditions.visibilityOf(simplePlaylist)).click();
+        inputPlaylistName(name);
+        return this;
+    }
+
+    public HomePage inputPlaylistName(String name) {
+        wait.until(ExpectedConditions.visibilityOf(playlistInputfield));
+        playlistInputfield.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE),name, Keys.ENTER);
+        return this;
+    }
+
+    public HomePage findPlaylist(String searchText) {
+        WebElement testPlaylist = driver.findElement(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + searchText + "')]"));
+        playlistElement = testPlaylist;
+        //This was an attempt to create a list of all webelemetns in playlist and find the one I needed
+        //But I was unable to make it so so it is commented out
+        //for (WebElement locator : playlistLocators) {
+        //    System.out.println(locator);
+        //    if (locator.getText().contains(searchText)) {
+        //        playlistElement = locator;
+        //        break;
+        //    }
+        //}
+        return this;
+        //createPlaylist(searchText);
+        //findPlaylist(searchText);
+    }
+
+    public HomePage startRenamingPlaylist() {
+        wait.until(ExpectedConditions.visibilityOf(playlistElement));
         doubleClickElement(playlistElement);
+        return this;
     }
 
     public WebElement getPlaylistElement(){
         return playlistElement;
     }
 
-    public void deleteEmptyPlaylist() {
+    public HomePage deleteEmptyPlaylist() {
         deleteBtn.click();
+        return this;
     }
 
-    public void deleteFilledPlaylist() {
+    public HomePage deleteFilledPlaylist() {
         deleteBtn.click();
         okBtn.click();
+        return this;
     }
 
-    public void deleteFullPlaylist() {
+    public HomePage deleteFullPlaylist() {
         WebElement button = driver.findElement(By.cssSelector("[class='del btn-delete-playlist']"));
         button.click();
         WebElement okbutton = driver.findElement(By.cssSelector("button[class='ok']"));
         okbutton.click();
+        return this;
     }
 
-    public void openPlaylist() {
+    public HomePage openPlaylist() {
         playlistElement.click();
+        return this;
     }
 
     public WebElement isPlaylistvisible(String searchText) {

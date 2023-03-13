@@ -22,34 +22,42 @@ import java.time.Duration;
 public class RecentlyPage extends BasePage{
 
     @FindBy(css = "#recentlyPlayedWrapper [class='song-item']:nth-child(1)")
-    WebElement firstSong;
+    private WebElement firstSong;
 
     @FindBy(css = "button[data-testid='home-view-all-recently-played-btn']")
-    WebElement viewAllBtnLocator;
+    private WebElement viewAllBtnLocator;
 
     @FindBy(css = "button[class='btn-add-to']")
-    WebElement addToLocator;
-
+    private WebElement addToLocator;
 
     public RecentlyPage(WebDriver givenDriver) {
         super(givenDriver);
     }
 
-    public void playFirstSong() {
+    public RecentlyPage playFirstSong() {
         actions.doubleClick(firstSong).perform();
+        return this;
     }
 
-    public void clickFirstSong() {
+    public RecentlyPage clickFirstSong() {
         firstSong.click();
+        return this;
     }
 
-    public void clickViewAll() { viewAllBtnLocator.click(); }
+    public RecentlyPage clickViewAll() {
+        viewAllBtnLocator.click();
+        return this;
+    }
 
-    public void addToBtn() { addToLocator.click(); }
+    public RecentlyPage addToBtn() {
+        addToLocator.click();
+        return this;
+    }
 
-    public void clickPlaylistfromAddto(String searchText) {
+    public RecentlyPage clickPlaylistfromAddto(String searchText) {
         WebElement playlistAddto = driver.findElement(By.xpath("//*[@id='recentlyPlayedWrapper'] //li[contains(text(),'" + searchText + "')]"));
         playlistAddto.click();
+        return this;
     }
 
 }
