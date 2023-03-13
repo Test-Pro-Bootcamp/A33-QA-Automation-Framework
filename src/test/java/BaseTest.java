@@ -19,8 +19,8 @@ public class BaseTest {
     static WebDriver driver;
     static WebDriverWait wait;
     static String url=null;
-   public Actions action;
-   public String playlistName = "TEST2";
+    public Actions actions;
+    public String playlistName = "TEST2";
     @BeforeSuite
     public static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -31,7 +31,7 @@ public class BaseTest {
         ChromeOptions ops = new ChromeOptions();
         ops.addArguments("--remote-allow-origins=*");
         driver= new ChromeDriver(ops);
-        action=new Actions(driver);
+        actions=new Actions(driver);
         wait=new WebDriverWait(driver, Duration.ofSeconds(4));
         url=baseURL;
         driver.get(url);
@@ -59,7 +59,7 @@ public class BaseTest {
     public void doubleClick(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlists > ul > li:nth-child(4)")));
         WebElement playlistElement=driver.findElement(By.cssSelector("#playlists > ul > li:nth-child(4)"));
-        action.doubleClick(playlistElement).perform();
+        actions.doubleClick(playlistElement).perform();
     }
     public void enterPlaylistName(){
         WebElement inputField1=wait.until(ExpectedConditions.elementToBeClickable
