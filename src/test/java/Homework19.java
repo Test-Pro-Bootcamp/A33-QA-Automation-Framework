@@ -5,6 +5,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
 
 public class Homework19 extends BaseTest {
 
@@ -12,15 +14,18 @@ public class Homework19 extends BaseTest {
     public void deletePlaylistTest() {
 
         //GIVEN
-        String testPlaylist = "PLDELTEST";
-        logIn();
-        createPlaylist(testPlaylist);
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        String currentPlaylistname = "PLDELTEST";
+        loginPage.inputLogIn(email, password);
+        homePage.createPlaylist(currentPlaylistname);
 
         //THEN
-        openPlaylist(testPlaylist);
-        deleteEmptyPlaylist();
+        homePage.findPlaylist(currentPlaylistname);
+        homePage.openPlaylist();
+        homePage.deleteEmptyPlaylist();
 
         //WHEN
-        Assert.assertTrue(getDeletedPlaylistmsg().isDisplayed());
+        Assert.assertTrue(homePage.getNotification().isDisplayed());
     }
 }

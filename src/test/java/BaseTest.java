@@ -15,7 +15,7 @@ import org.testng.annotations.Parameters;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 import java.time.Duration;
-import org.testng.IExpectedExceptionsHolder;
+import pages.BasePage;
 
 
 public class BaseTest {
@@ -26,11 +26,10 @@ public class BaseTest {
     String testUrl = "";
     String password = "";
     String email = "";
-    String koelStart = "https://bbb.testpro.io/";
+    String koelStart = "https://bbb.testpro.io/#!/login";
     String koelHome = "https://bbb.testpro.io/#!/home";
     String koelSongs = "https://bbb.testpro.io/#!/songs";
     String koelRecentlyPlayed = "https://bbb.testpro.io/#!/recently-played";
-
 
 
     @BeforeSuite
@@ -39,8 +38,8 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    @Parameters({"baseURL"})
-    public void setupBrowser(String baseUrl) {
+    @Parameters({"baseURL", "email", "password"})
+    public void setupBrowser(String baseUrl, String mail, String pass) {
         ChromeOptions option = new ChromeOptions();
         option.addArguments("--remote-allow-origins=*", "--disable-notifications");
         driver = new ChromeDriver(option);
@@ -48,11 +47,6 @@ public class BaseTest {
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(baseUrl);
-    }
-
-    @BeforeMethod
-    @Parameters({"email", "password"})
-    public void setLogEmail(String mail, String pass) {
         password = pass;
         email = mail;
     }
@@ -118,6 +112,9 @@ public class BaseTest {
         clickLogin();
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.urlToBe(koelHome));
+    }
+    public String getEmail() {
+        return email;
     }
 
     public void clickViewAll() {

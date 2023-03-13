@@ -4,28 +4,23 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.LoginPage;
+import pages.SongsPage;
 
 import java.time.Duration;
 
 public class Homework16 extends BaseTest {
 
-    @Test(enabled = false, description = "Homework16 and isnt needed for hw17")
+    @Test(enabled = true, description = "Homework16 and isnt needed for hw17")
     public void registrationNavigation() {
 
-        //WebDriver driver = new ChromeDriver();
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(25));
+        //GIVEN
+        LoginPage loginPage = new LoginPage(driver);
 
-        //String urlLogin = "https://bbb.testpro.io/";
-        String urlRegi = "https://bbb.testpro.io/registration.php";
-        //driver.get(urlLogin);
+        //THEN
+        loginPage.clickRegiBtn();
 
-        //css selector setup
-        WebElement registrationButton = driver.findElement(By.cssSelector("a[id='hel']"));
-
-        //click on thing
-        registrationButton.click();
-
-        Assert.assertEquals(driver.getCurrentUrl(), urlRegi);
-        //driver.quit();
+        //WHEN
+        Assert.assertEquals(driver.getCurrentUrl(), loginPage.getkoelRegiPage());
     }
 }
