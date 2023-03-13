@@ -4,6 +4,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,7 +27,9 @@ static String url=null;
     @BeforeMethod
     @Parameters({"baseURL"})
     public void launchBrowser (String baseURL){
-     driver= new ChromeDriver();
+        ChromeOptions ops= new ChromeOptions();
+        ops.addArguments("--remote-allow-origins=*");
+     driver= new ChromeDriver(ops);
      wait=new WebDriverWait(driver,Duration.ofSeconds(10));
      url=baseURL;
      driver.get(url);
