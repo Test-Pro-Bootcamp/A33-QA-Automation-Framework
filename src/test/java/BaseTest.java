@@ -57,8 +57,8 @@ public class BaseTest {
         clickSubmit();
     }
     public void doubleClick(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[href='#!/playlist/46973']")));
-        WebElement playlistElement=driver.findElement(By.cssSelector("[href='#!/playlist/46973']"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlists > ul > li:nth-child(4)")));
+        WebElement playlistElement=driver.findElement(By.cssSelector("#playlists > ul > li:nth-child(4)"));
         action.doubleClick(playlistElement).perform();
     }
     public void enterPlaylistName(){
