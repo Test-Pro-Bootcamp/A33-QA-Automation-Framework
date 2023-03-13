@@ -13,9 +13,9 @@ import org.testng.annotations.*;
 import java.time.Duration;
 
 public class BaseTest {
-    public WebDriver driver;
-    WebDriverWait wait;
-    String url = "https://bbb.testpro.io";
+    static WebDriver driver;
+    static WebDriverWait wait;
+    static String url = "https://bbb.testpro.io";
 
     @BeforeMethod
     public void setUpBrowser() {
