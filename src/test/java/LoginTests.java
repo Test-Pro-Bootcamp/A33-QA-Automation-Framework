@@ -14,7 +14,7 @@ public class LoginTests extends BaseTest {
     @Test
     public void LoginEmptyEmailPasswordTest() {
 
-        openLoginURL();
+        setUpBrowser();
         String url = "https://bbb.testpro.io/";
 
         Assert.assertEquals(driver.getCurrentUrl(), url);
