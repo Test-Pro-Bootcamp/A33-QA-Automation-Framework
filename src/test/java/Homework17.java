@@ -10,7 +10,6 @@ public class Homework17 extends BaseTest {
 
        String newSongAddedNotificationText = "Added 1 song";
 
-
        setUpBrowser();;
        provideEmail ("jguy1@stny.rr.com");
        providePassword ("te$t$tudent");
