@@ -11,9 +11,6 @@ import org.testng.annotations.Test;
         @Test
         public void addSongToPlaylist() throws InterruptedException {
 
-            String newSongAddedNotificationText = "Add 1 song into";
-
-
             navigateToPage();
             provideEmail("guadalupe.medina@testpro.io");
             providePassword("DoingitBig23!");

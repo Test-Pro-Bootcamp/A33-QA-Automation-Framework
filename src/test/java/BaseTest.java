@@ -20,9 +20,7 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    @Parameters({"BaseURL"})
-    public static void launchBrowser(String BaseURL) {
-
+    public static void launchBrowser() {
 //       Chromeoptions argument fixes the error below:
 //        Fixes the error below:
         //WARNING: Invalid Status code=403 text=Forbidden
@@ -40,7 +38,7 @@ public class BaseTest {
     }
 
     public static void navigateToPage() {
-        String url = "BaseURL";
+        String url = "https://bbb.testpro.io/";
         driver.get(url);
     }
 
