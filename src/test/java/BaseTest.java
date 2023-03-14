@@ -47,6 +47,9 @@ public class BaseTest {
         WebElement submitBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='submit']")));
         submitBtn.click();
     }
+    public WebElement getPlaylistRemovalMsg(){
+        return driver.findElement(By.cssSelector("div.success.show"));
+    }
 
     public void playlistClick(String playlistName) throws InterruptedException {
         WebElement playlistlink = wait.until(ExpectedConditions.elementToBeClickable(By.linkText(playlistName)));
@@ -61,9 +64,7 @@ public class BaseTest {
         }
     }
 
-    public WebElement getPlaylistRemovalMsg(){
-        return driver.findElement(By.cssSelector("div.success.show"));
-    }
+
 
 
 }
