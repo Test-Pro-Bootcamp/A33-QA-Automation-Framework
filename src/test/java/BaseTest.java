@@ -3,6 +3,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,8 +26,10 @@ public class BaseTest {
     @BeforeSuite
     @Parameters({"BaseURL"})
     public static void setupClass(String BaseURL) {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
        // String baseURL = "https://bbb.testpro.io/";
         String url = BaseURL;
         driver.get(url);
@@ -45,10 +48,22 @@ public class BaseTest {
         submitBtn.click();
     }
 
-    public void playlistRemoval(String playlistName) throws InterruptedException {
-        WebElement playlistlink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[containts(text() = ' " + playlistName + "')]")));
+    public void playlistClick(String playlistName) throws InterruptedException {
+        WebElement playlistlink = wait.until(ExpectedConditions.elementToBeClickable(By.linkText(playlistName)));
         playlistlink.click();
-
     }
+    public void platlistRemove() {
+        WebElement deleteButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@title='Delete this playlist']")));
+        deleteButton.click();
+        WebElement PlaylistDeleteConfirmation = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.ok")));
+        if (PlaylistDeleteConfirmation.isDisplayed()==true) {
+            PlaylistDeleteConfirmation.click();
+        }
+    }
+
+    public WebElement getPlaylistRemovalMsg(){
+        return driver.findElement(By.cssSelector("div.success.show"));
+    }
+
 
 }
