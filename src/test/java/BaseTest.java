@@ -48,7 +48,8 @@ public class BaseTest {
     By notificationMessage = cssSelector(("div.success.show"));
     By editOption = xpath(("//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]"));
     By textField = By.cssSelector(("[name='name']"));
-    By newPlayList = By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + "New Playlist" + "')]");
+    By newPlayList = By.cssSelector("li>a.active");
+    By successMessage = By.cssSelector("#nprogress");
 
     public void enterEmail(String email) {
         WebElement emailElement = wait.until(ExpectedConditions.elementToBeClickable(enterEmailAddress));
@@ -77,8 +78,9 @@ public class BaseTest {
         textBox.sendKeys(name);
         textBox.sendKeys(Keys.ENTER);
     }
-    public boolean verifyNewPlayListName(String searchText){
-        WebElement newPlaylistName = driver.findElement(newPlayList);
+    public boolean verifyNewPlayListNameUpdated(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
+        WebElement newPlaylistName = driver.findElement(successMessage);
         return newPlaylistName.isDisplayed();
     }
     public void clickXPlaylist() {

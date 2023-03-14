@@ -10,6 +10,6 @@ public class Homework21 extends BaseTest{
         chooseEdit();
         renamePlayListName(newPlayListName);
 
-        Assert.assertTrue(verifyNewPlayListName(newPlayListName));
+        Assert.assertTrue(verifyNewPlayListNameUpdated());
     }
 }
