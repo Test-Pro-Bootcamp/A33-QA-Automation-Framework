@@ -20,7 +20,9 @@ public class BaseTest {
     @BeforeMethod
     public void setUpBrowser() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
+        driver = new ChromeDriver(options);
         driver.get(url);
         driver.manage().window().maximize();
     }
