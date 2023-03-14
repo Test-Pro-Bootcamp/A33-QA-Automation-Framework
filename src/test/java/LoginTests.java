@@ -7,17 +7,27 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
+
+
 public class LoginTests extends BaseTest {
 
-    @Test
-    public static void LoginEmptyEmailPasswordTest() {
+    @Test (dataProvider = "IncorrectLoginProviders")
+    public static void LoginEmptyEmailPasswordTest(String email, String password) throws InterruptedException {
+
+        provideEmail("");
+        providePassword("");
+        submitButton();
 
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        String url = "https://testpro.io/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+            String url = "https://testpro.io/";
+        }
+        @Test
+        public static void LoginInvalidEmail() {
+            String url = "https://bbb.testpro.io/";
+            driver.get(url);
+            Assert.assertEquals(driver.getCurrentUrl(), url);
+            driver.quit();
+        }
     }
-}

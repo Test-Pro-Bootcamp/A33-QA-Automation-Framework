@@ -17,19 +17,40 @@ public class BaseTest {
     @BeforeSuite
     public static void setupClass() {
           WebDriverManager.chromedriver().setup();
+
+    }
+    private void login() throws InterruptedException {
+        provideEmail("guadalupe.medina@testpro.io");
+        providePassword("DoingitBig23!");
+        submitButton();
+    }
+    public WebElement getDeletedPlaylistMsg(){
+        return driver.findElement(By.cssSelector("div.success.show"));
+    }
+     public void openPlaylist() throws InterruptedException {
+         WebElement emptyPlaylist = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
+         emptyPlaylist.click();
+         Thread.sleep(2000);
+     }
+
+    private void deletePlaylist() throws InterruptedException {
+        WebElement deletePlaylistButton = driver.findElement(By.cssSelector(".btn-delete-playlist"));
+        deletePlaylistButton.click();
+        Thread.sleep(2000);
     }
 
     @BeforeMethod
-    public static void launchBrowser() {
-//       Chromeoptions argument fixes the error below:
-//        Fixes the error below:
-        //WARNING: Invalid Status code=403 text=Forbidden
-        //java.io.IOException: Invalid Status code=403 text=Forbidden
+    @Parameters({"BaseURL"})
+    public static void launchBrowser(String BaseURL) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
-
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        String url = "https://bbb.testpro.io/";
+        driver.get(url);
+
+
     }
 
     @AfterMethod
@@ -61,8 +82,8 @@ public class BaseTest {
         Thread.sleep(2000);
     }
 
-    @DataProvider(name = "IncorrectLoginPoviders")
-    public static Object[][] getDataProviders() {
+    @DataProvider(name = "IncorrectLoginProviders")
+    public Object[][] getDataProviders() {
         return new Object[][]{
                 {"invalid@email.com", "invalidPassword"},
                 {"onlyEmail@email.com",},
