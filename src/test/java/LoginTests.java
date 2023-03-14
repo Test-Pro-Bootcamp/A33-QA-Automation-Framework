@@ -12,7 +12,7 @@ import java.time.Duration;
 public class LoginTests extends BaseTest {
 
     @Test
-    public static void LoginEmptyEmailPasswordTest() {
+    public void LoginEmptyEmailPasswordTest() {
 
         openLoginURL();
         String url = "https://bbb.testpro.io/";

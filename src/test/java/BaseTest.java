@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-@Test
+// removed @Test annotation.
 public class BaseTest {
     public static WebDriver driver = null;
 
@@ -50,7 +50,8 @@ public class BaseTest {
     public static void clickSubmit() throws InterruptedException {
         WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
         submitButton.click();
-        Thread.sleep(5000);
+        Thread.sleep(3000);
     }
 
-    }
+}
+
