@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
             navigateToPage();
             provideEmail("guadalupe.medina@testpro.io");
-            passwordField("DoingitBig23!");
+            providePassword("DoingitBig23!");
             submitButton();
             searchSong("BossStatus");
             clickViewAllBtn();

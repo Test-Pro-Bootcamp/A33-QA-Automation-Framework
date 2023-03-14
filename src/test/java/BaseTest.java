@@ -1,4 +1,5 @@
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 
 import org.openqa.selenium.WebDriver;
@@ -6,8 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.*;
-import sun.security.jgss.GSSCaller;
-import static java.sql.DriverManager.getDriver;
 import java.time.Duration;
 
 
@@ -17,9 +16,7 @@ public class BaseTest {
 
     @BeforeSuite
     public static void setupClass() {
-
-
-        //  WebDriverManager.chromedriver().setup();
+          WebDriverManager.chromedriver().setup();
     }
 
     @BeforeMethod
@@ -27,7 +24,6 @@ public class BaseTest {
     public static void launchBrowser(String BaseURL) {
 
 //       Chromeoptions argument fixes the error below:
-
 //        Fixes the error below:
         //WARNING: Invalid Status code=403 text=Forbidden
         //java.io.IOException: Invalid Status code=403 text=Forbidden
