@@ -3,6 +3,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -14,12 +16,15 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Parameters;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.time.Duration;
-import pages.BasePage;
+import org.openqa.selenium.edge.EdgeDriver;
 
 
 public class BaseTest {
-    WebDriver driver;
+    static WebDriver driver;
     Actions actions;
     WebDriverWait wait;
     String currentUrl = "";
@@ -39,16 +44,41 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"baseURL", "email", "password"})
-    public void setupBrowser(String baseUrl, String mail, String pass) {
-        ChromeOptions option = new ChromeOptions();
-        option.addArguments("--remote-allow-origins=*", "--disable-notifications");
-        driver = new ChromeDriver(option);
+    public void setupBrowser(String baseUrl, String mail, String pass) throws MalformedURLException {
+        //driver = pickBrowser(System.getProperty("browser"));
+        driver = pickBrowser("firefox");
         actions = new Actions(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(baseUrl);
         password = pass;
         email = mail;
+    }
+
+    private static WebDriver pickBrowser(String browser) throws MalformedURLException {
+        DesiredCapabilities caps = new DesiredCapabilities();
+        String gridURL = "http://192.168.1.9:4444";
+        switch (browser) {
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                return new FirefoxDriver();
+            case "MicrosoftEdge":
+                WebDriverManager.edgedriver().setup();
+                return new EdgeDriver();
+            case "grid-firefox":
+                caps.setCapability("browserName", "firefox");
+                return new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+            case "grid-edge":
+                caps.setCapability("browserName", "MicrosoftEdge");
+                return new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+            case "grid-chrome":
+                caps.setCapability("browserName", "chrome");
+                return new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+            default:
+                ChromeOptions option = new ChromeOptions();
+                option.addArguments("--remote-allow-origins=*", "--disable-notifications");
+                return new ChromeDriver(option);
+        }
     }
 
     @AfterMethod
