@@ -42,12 +42,8 @@ public class BaseTest {
         driver.manage().window().maximize();
     }
 
-//    @AfterClass
-//    public static void closeBrowser(){
-//        driver.quit();
-//    }
 
-    @Test
+
     public static void navigateToPage() {
         String url = "https://bbb.testpro.io/";
         driver.get(url);

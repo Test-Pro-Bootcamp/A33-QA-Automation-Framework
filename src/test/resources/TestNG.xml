@@ -5,14 +5,9 @@
     <parameter name="BaseURL" value="https://bbb.testpro.io/"/>
     <test name="Example Test" preserve-order="false">
         <classes>
-            <class name ="BaseTest"/>
-            <class name="Homework21">
-                <methods>
-                    <include name="renamePlaylist"/>
-                </methods>
+            <class name="Homework22">
 
             </class>
-
         </classes>
     </test>
 </suite>
