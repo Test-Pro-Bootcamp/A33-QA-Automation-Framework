@@ -4,27 +4,35 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.FindAll;
 
 import java.time.Duration;
 
 public class LoginPage extends BasePage {
-    //Locators
-    By submitButton = By.cssSelector("[type='submit']");
-    By emailField = By.cssSelector("[type='email']");
-    By passwordField = By.cssSelector("[type='password']");
+    //WebElements
+    @FindBy(css = "[type='submit']")
+    WebElement submitButton;
+    @FindBy(css = "[type='email']")
+    WebElement emailField;
+    @FindBy(css = "[type='password']")
+    WebElement passwordField;
 
     public LoginPage (WebDriver givenDriver) {
         super(givenDriver);
-        //wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
-    public void provideEmail(String email) {
-        driver.findElement(emailField).sendKeys(email);
+    public LoginPage provideEmail(String email) {
+        emailField.sendKeys(email);
+        return this;
     }
-    public void providePassword(String password) {
-        driver.findElement(passwordField).sendKeys(password);
+    public LoginPage providePassword(String password) {
+        passwordField.sendKeys(password);
+        return this;
     }
-    public void clickSubmitButton() {
-        driver.findElement(submitButton).click();
+    public LoginPage clickSubmitButton() {
+        submitButton.click();
+        return this;
     }
     public void logIn() {
         provideEmail("regniermandy@gmail.com");

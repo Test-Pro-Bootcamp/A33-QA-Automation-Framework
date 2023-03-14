@@ -62,7 +62,7 @@ public class Homework21 extends BaseTest {
        actions.contextClick(playlistElement).perform();
        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li[data-testid='playlist-context-menu-edit']")));
    }
-   public void doubleClickChoosePlaylist(){
+   public void doubleClickFirstPlaylist(){
        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
        WebElement playlistElement = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
        actions.doubleClick(playlistElement).perform();
@@ -74,9 +74,7 @@ public class Homework21 extends BaseTest {
         playlistInputField.sendKeys(playlistName);
         playlistInputField.sendKeys(Keys.ENTER);
     }
-   public void chooseAllSongsList() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section.music a.songs"))).click();
-    }
+
     public int countSongsInPlaylist() {
         return driver.findElements(By.cssSelector("section#playlistWrapper td.title")).size();
     }

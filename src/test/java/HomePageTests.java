@@ -4,8 +4,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.AllSongsPage;
 import pages.HomePage;
 import pages.LoginPage;
+import pages.AllSongsPage;
 
 public class HomePageTests extends BaseTest {
     String playlistName = "TestPro Playlist 123";
@@ -13,12 +15,12 @@ public class HomePageTests extends BaseTest {
     public void playSongTest()  {
         HomePage homePage = new HomePage(driver);
         LoginPage loginPage = new LoginPage(driver);
+        AllSongsPage allSongsPage = new AllSongsPage(driver);
 
         loginPage.logIn();
         homePage.playSong();
-        Assert.assertTrue(homePage.isSongPlaying());
+        Assert.assertTrue(allSongsPage.isSongPlaying());
     }
-
     @Test
     public void renamePlaylist() {
         HomePage homePage = new HomePage(driver);
