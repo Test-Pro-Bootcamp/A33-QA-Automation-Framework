@@ -5,6 +5,7 @@ public class Homework20 extends BaseTest {
 
     @Test
     public static void createNewPlaylistTest() {
+
         logIn("andalia.nia@gmail.com", "te$t$tudent");
         clickSubmit();
         createNewPlaylist();

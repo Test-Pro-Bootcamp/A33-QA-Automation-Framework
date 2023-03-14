@@ -4,6 +4,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
@@ -25,11 +26,14 @@ public class BaseTest {
     @BeforeMethod
     @Parameters({"baseUrl"})
     public void launchBrowser(String baseUrl){
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications","--remote-allow-origins=*","--incognito","--start-maximize");
+
+        driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
         url = baseUrl;
-        driver.get("url");
+        driver.get(url);
         
     }
 
@@ -40,7 +44,7 @@ public class BaseTest {
      
     }
       public static void providePassword(String password){
-        WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
+        WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='password']")));
         passwordField.click();
         passwordField.sendKeys(password);
       }
@@ -69,7 +73,7 @@ public class BaseTest {
 
         public static boolean newPlaylistDisplayed(){
         WebElement newPlaylist = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[class='active']")));
-        return newPlaylistDisplayed();
+        return newPlaylist.isDisplayed();
         }
 
         public static void searchSong(String songName){
