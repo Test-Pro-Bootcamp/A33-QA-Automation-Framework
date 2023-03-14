@@ -60,6 +60,7 @@ public class LoginTests extends BaseTest {
         loginPage.provideEmail("regniermandy@gmail.com").providePassword("123password").clickSubmitButton();
         Assert.assertEquals(url, url);
     }
+
 }
 
 
