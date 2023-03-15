@@ -36,9 +36,9 @@ public class Homework23 extends BaseTest {
                 .clickViewAllButton()
                 .selectFirstSong()
                 .clickAddToButton()
-                .clickPlaylistNameFromAddToButton("Sleepy Songs");
+                .clickPlaylistNameFromAddToButton("Sleepy Songs")
+                .deleteSongFromPlaylist();
         Assert.assertTrue(homePage.notificationMessageIsDisplayed());
-        homePage.deleteSongFromPlaylist();
     }
     @Test(enabled = true, priority = 3, description = "Validate can rename an existing playlist")
     public void renamePlaylistTest(){
