@@ -9,6 +9,8 @@
         <classes>
             <class name="LoginTests"/>
             <class name="BaseTest"/>
+            <class name="Homework22"/>
+            <class name="Homework23"/>
         </classes>
     </test>
 </suite>
