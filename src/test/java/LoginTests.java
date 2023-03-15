@@ -30,11 +30,11 @@ public class LoginTests extends BaseTest {
         driver.get(url);
         //email field
         WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
-        WebElement.click();
+        emailField.click();
         emailField.sendKeys("damascus.dotson@testpro.io");
 
         WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
-        WebElement.click();
+        passwordField.click();
         passwordField.sendKeys("Destro808");
 
         WebElement usersAvatar = driver.findElement(By.xpath(("[alt='Avatar of student]")));
