@@ -10,29 +10,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class BasePage {
+    protected static WebDriver driver;
+    protected static WebDriverWait wait;
+    protected static Actions actions;
 
-    WebDriver driver;
-    WebDriverWait wait;
-    Actions actions;
-
-    public BasePage(WebDriver givenDriver){
+    public BasePage(WebDriver givenDriver) {
         driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
-        }
+    }
 
     public void click(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
-
-
-
     }
 
-//            public WebElement findElement(By locator){
-//        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-//    }
-//    public void performDoubleClick (WebElement locator){
-//        wait.until(ExpectedConditions.elementToBeClickable(locator));
-//        actions.doubleClick(locator).perform();
+    public WebElement findElement(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
+    public void performDoubleClick(WebElement locator) {
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+        actions.doubleClick(locator).perform();
+    }
+
+}
 

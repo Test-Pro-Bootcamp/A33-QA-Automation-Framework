@@ -20,35 +20,26 @@ import pages.HomePage;
 import pages.LoginPage;
 
 import java.time.Duration;
-
 import java.util.Arrays;
 import java.util.List;
 
-public class Homework22 extends BaseTest {
+public class PlaylistTest extends BaseTest {
 
-    LoginPage loginPage = new LoginPage(driver);
-    HomePage homePage = new HomePage(driver);
-    AllSongsPage allSongPage = new AllSongsPage(driver);
+
     @Test
-    public void createPlaylistAndAddSong() {
+    public void createPlaylistAddSong() {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AllSongsPage allSongPage = new AllSongsPage(driver);
+
         //<--login-->
         setupClass();
         loginPage.loginPageTest();
 
-
-        //<--create playlist/add song/delete playlist-->
         homePage.createPlaylist();
+        Assert.assertTrue(homePage.playlistCreatedMsg());
         allSongPage.addSong();
-        homePage.deletePlaylist();
-
+        Assert.assertTrue(homePage.newSongExists());
 
     }
 }
-
-
-
-
-
-
-
-

@@ -13,17 +13,10 @@ import org.testng.annotations.*;
 
 import java.time.Duration;
 
-
 public class BaseTest {
-
     public static WebDriver driver = null;
     public static WebDriverWait wait;
-
-    public static Actions actions = null;
-    public static By emailField = By.cssSelector("[type='email']");
-    public static By passwordField = By.cssSelector("[type='password']");
-    public static By submitButton = By.cssSelector("[type='submit']");
-
+    public static Actions actions;
 
 
     @BeforeSuite
@@ -42,33 +35,5 @@ public class BaseTest {
         driver.manage().window().maximize();
     }
 
-
-
-    public static void navigateToPage() {
-        String url = "https://bbb.testpro.io/";
-        driver.get(url);
-
-    }
-
-    public static void provideEmail(String email) {
-        WebElement emailElement = wait.until(ExpectedConditions.elementToBeClickable(emailField));
-        emailElement.clear();
-        emailElement.sendKeys(email);
-    }
-
-    public static void providePassword(String password) {
-        WebElement passwordElement = wait.until(ExpectedConditions.elementToBeClickable(passwordField));
-        passwordElement.click();
-        passwordElement.sendKeys(password);
-    }
-
-    public static void clickSubmit()  {
-        WebElement submitButtonElement = wait.until(ExpectedConditions.elementToBeClickable(submitButton));
-        submitButtonElement.click();
-
-
-
-
-    }
 
 }
