@@ -15,7 +15,7 @@ public class LoginTests extends BaseTest {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 
         String url = "https://bbb.testpro.io/";
         driver.get(url);
@@ -24,22 +24,22 @@ public class LoginTests extends BaseTest {
 
 
         Assert.assertEquals(driver.getCurrentUrl(), url);
-=======
+//=======
 //load page
-        String url = "https://testpro.io/";
+       // String url = "https://testpro.io/";
         driver.get(url);
         //email field
-        WebElement emailfield = driver.findElement(By.cssSelector("[type='email']"));
+        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
         WebElement.click();
-        emailfield.sendKeys("damascus.dotson@testpro.io");
+        emailField.sendKeys("damascus.dotson@testpro.io");
 
-        WebElement passwordfield = driver.findElement(By.cssSelector("[type='password']"));
+        WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
         WebElement.click();
-        passwordfield.sendKeys("Destro808");
+        passwordField.sendKeys("Destro808");
 
         WebElement usersAvatar = driver.findElement(By.xpath(("[alt='Avatar of student]")));
         Assert.assertTrue(usersAvatar.isDisplayed());
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
         driver.quit();
 
 
