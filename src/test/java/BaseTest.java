@@ -4,8 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
@@ -15,7 +18,7 @@ import java.time.Duration;
 
 public class BaseTest {
     public static WebDriver driver = null;
-
+     WebDriverWait wait;
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -25,14 +28,18 @@ public class BaseTest {
     @BeforeMethod
     @Parameters("BaseUrl")
     public void setUpBrowser(String BaseUrl) {
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+       // driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        //driver.manage().window().maximize();
         driver.get(BaseUrl);
+        wait = new WebDriverWait(driver,Duration.ofSeconds(5));
     }
 
    protected void openBrowser() {String url = "https://bbb.testpro.io/";
-        driver.get(url);
+       driver.get(url);
    }
 
     public void closeBrowser() {
@@ -51,43 +58,46 @@ public class BaseTest {
         passwordField.sendKeys("te$t$tudent");
     }
 
-    public void submit() throws InterruptedException {
-        WebElement submitButton = driver.findElement(By.cssSelector("[type='submit']"));
-        submitButton.click();
-        Thread.sleep(2000);
+    public void submit()  {
+       // WebElement submitButton = driver.findElement(By.cssSelector("[type='submit']"));
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='submit']"))).click();
+        //submitButton.click();
+
     }
 
-    public void searchForSong() throws InterruptedException {
-        WebElement searchField = driver.findElement(By.cssSelector("[type='search']"));
-        searchField.click();
-        searchField.sendKeys("Lament");
-        Thread.sleep(2000);
+    public void searchForSong()  {
+        //WebElement searchField = driver.findElement(By.cssSelector("[type='search']"));
+       // searchField.click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='search']"))).sendKeys("Lament");
+        //searchField.sendKeys("Lament");
+
     }
 
-    public void clickViewAll() throws InterruptedException {
-        WebElement viewAll = driver.findElement(By.cssSelector("[data-test='view-all-songs-btn']"));
-        viewAll.click();
-        Thread.sleep(2000);
+    public void clickViewAll() {
+        //WebElement viewAll = driver.findElement(By.cssSelector("[data-test='view-all-songs-btn']"));
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-test='view-all-songs-btn']"))).click();
+        //viewAll.click();
+
     }
 
-    public void clickFirstSong() throws InterruptedException {
+    public void clickFirstSong()  {
         WebElement firstSong = driver.findElement(By.cssSelector("#songResultsWrapper > div > div > div.item-container > table > tr > td.title"));
-        firstSong.click();
-        Thread.sleep(2000);
-
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#songResultsWrapper > div > div > div.item-container > table > tr > td.title"))).click();
+        //firstSong.click();
 
     }
-
-    public void clickAddTo() throws InterruptedException {
+    public void clickAddTo()  {
         WebElement addToBtn = driver.findElement(By.cssSelector("[class='btn-add-to']"));
-        addToBtn.click();
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[class='btn-add-to']"))).click();
+        //addToBtn.click();
+
     }
 
-    public void choosePlaylist() throws InterruptedException {
-        WebElement chosenPlaylist = driver.findElement(By.cssSelector("#songResultsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul > li:nth-child(6)"));
-        chosenPlaylist.click();
-        Thread.sleep(5000);
+    public void choosePlaylist()  {
+       // WebElement chosenPlaylist = driver.findElement(By.cssSelector("#songResultsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul > li:nth-child(6)"));
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#songResultsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul > li:nth-child(6)"))).click();
+        //chosenPlaylist.click();
+
     }
 
     public String getNotification() {
@@ -95,16 +105,18 @@ public class BaseTest {
         return notificationElement.getText();
     }
 
-    public void clickNext() throws InterruptedException {
-        WebElement nextBtn = driver.findElement(By.cssSelector("[data-testid ='play-next-btn']"));
-        nextBtn.click();
-        Thread.sleep(2000);
+    public void clickNext()  {
+        //WebElement nextBtn = driver.findElement(By.cssSelector("[data-testid ='play-next-btn']"));
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid ='play-next-btn']"))).click();
+        //nextBtn.click();
+
     }
 
-    public void clickPlay() throws InterruptedException {
-        WebElement playBtn = driver.findElement(By.cssSelector("[data-testid='play-btn']"));
-        playBtn.click();
-        Thread.sleep(2000);
+    public void clickPlay()  {
+       // WebElement playBtn = driver.findElement(By.cssSelector("[data-testid='play-btn']"));
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='play-btn']"))).click();
+        //playBtn.click();
+
     }
 
     public Boolean isSongPlaying() {
@@ -112,11 +124,11 @@ public class BaseTest {
         return songIsPLaying.isDisplayed();
     }
 
-    public void clickPlaylist() throws InterruptedException {
+    public void clickPlaylist()  {
         WebElement chosenPlaylist = driver.findElement(By.cssSelector("#playlists > ul > li:nth-child(3) > a"));
         chosenPlaylist.click();
     }
-    public void clickDelete() throws InterruptedException {
+    public void clickDelete()  {
         WebElement xPlaylist = driver.findElement(By.cssSelector("[title = 'Delete this playlist']"));
         xPlaylist.click();
     }

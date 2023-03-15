@@ -12,7 +12,7 @@ public class Homework17 extends BaseTest {
     public void addSongToPlaylist() throws InterruptedException {
 
     String notification = "Added 1 song into";
-    openBrowser();
+   // openBrowser();
     enterEmail();
     enterPassword();
     submit();
