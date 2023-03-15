@@ -19,7 +19,7 @@ public class HomePageTests extends BaseTest {
 
         loginPage.logIn();
         homePage.playSong();
-        Assert.assertTrue(allSongsPage.isSongPlaying());
+        Assert.assertTrue(homePage.isSongPlaying());
     }
     @Test
     public void renamePlaylist() {
@@ -43,5 +43,14 @@ public class HomePageTests extends BaseTest {
         Assert.assertTrue(deletedPlaylistMessage.isDisplayed());
 
     }
+    @Test
+    public void listOfSongsWebElements(){
+        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(driver);
 
+        loginPage.logIn();
+        homePage.chooseSecondPlaylist();
+        homePage.displayAllSongs();
+        Assert.assertTrue(homePage.getPlaylistDetails().contains(String.valueOf(homePage.countSongsInPlaylist())));
+    }
 }

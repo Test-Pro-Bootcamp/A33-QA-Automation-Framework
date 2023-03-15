@@ -37,8 +37,5 @@ public class BasePage  {
         actions.doubleClick(findElement(locator)).perform();
     }
 
-    public boolean isSongPlaying() {
-        WebElement soundBarVisualizer = driver.findElement(By.cssSelector("[data-testid = 'sound-bar-play']"));
-        return soundBarVisualizer.isDisplayed();
-    }
+
 }

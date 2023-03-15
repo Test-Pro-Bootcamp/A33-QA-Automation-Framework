@@ -14,20 +14,23 @@ import java.util.List;
 
 public class HomePage extends BasePage {
 @FindBy(css = "img.avatar")
-    WebElement userAvatarIcon;
+    private WebElement userAvatarIcon;
 @FindBy(css = ".playlist:nth-child(3)")
-    WebElement firstPlaylist;
+    private WebElement firstPlaylist;
 @FindBy(css = "input[name='name']" )
-    WebElement playlistInputField;
+    private WebElement playlistInputField;
 @FindBy(css = "[data-testid='play-next-btn']")
-    WebElement buttonPlayNextSong;
+    private WebElement buttonPlayNextSong;
 @FindBy(css = "[data-testid='play-btn']")
-    WebElement playButton;
+    private WebElement playButton;
 @FindBy(css = "section.music a.songs")
-    WebElement chooseAllSongs;
+    private WebElement chooseAllSongs;
 @FindBy(css = ".btn-delete-playlist")
-    WebElement deletePlaylistButton;
-
+    private WebElement deletePlaylistButton;
+@FindBy(css = ".playlist:nth-child(4)")
+    private WebElement secondPlaylist;
+@FindBy(css = "[data-testid = 'sound-bar-play']")
+    private WebElement soundBarVisualizer;
 
 
     public HomePage(WebDriver givenDriver) {
@@ -46,6 +49,11 @@ public class HomePage extends BasePage {
         actions.doubleClick(firstPlaylist).perform();
         return this;
     }
+    public HomePage chooseSecondPlaylist() {
+       secondPlaylist.click();
+        return this;
+    }
+
     public HomePage enterPlaylistName(String playlistName) {
         playlistInputField.sendKeys((Keys.chord(Keys.COMMAND, "a", Keys.DELETE)));
         playlistInputField.sendKeys(playlistName);
@@ -56,13 +64,21 @@ public class HomePage extends BasePage {
         //WebElement playlistElement = driver.findElement(By.xpath("//a[text()='"+ playlistName+"']"));
         return firstPlaylist.isDisplayed();
     }
-
+    public List displayAllSongs() {
+        List<WebElement> songList = driver.findElements(By.cssSelector("section#playlistWrapper td.title"));
+        return songList;
+    }
+    public String getPlaylistDetails() {
+        return driver.findElement(By.cssSelector("span.meta.text-secondary span.meta")).getText();
+    }
     public HomePage chooseAllSongsList() {
         chooseAllSongs.click();
         return this;
         //wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section.music a.songs"))).click();
     }
-
+    public int countSongsInPlaylist() {
+        return driver.findElements(By.cssSelector("section#playlistWrapper td.title")).size();
+    }
     public HomePage openPlaylist() {
         //WebElement emptyPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
         firstPlaylist.click();
@@ -76,5 +92,9 @@ public class HomePage extends BasePage {
     public WebElement getDeletedPlaylistMessage() {
         return driver.findElement(By.cssSelector("div.success.show"));
     }
-
+    public boolean isSongPlaying() {
+//        WebElement soundBarVisualizer = driver.findElement(By.cssSelector("[data-testid = 'sound-bar-play']"));
+//        return soundBarVisualizer.isDisplayed();
+        return soundBarVisualizer.isDisplayed();
+    }
 }
