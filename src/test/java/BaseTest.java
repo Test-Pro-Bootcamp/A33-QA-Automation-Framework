@@ -28,7 +28,7 @@ public class BaseTest {
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
-
+public static Actions actions = null;
 
     @BeforeMethod
     @Parameters("BaseUrl")
@@ -41,6 +41,7 @@ public class BaseTest {
         //driver.manage().window().maximize();
         driver.get(BaseUrl);
         wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+         actions = new Actions(driver);
     }
 
    protected void openBrowser() {String url = "https://bbb.testpro.io/";
@@ -111,16 +112,16 @@ public class BaseTest {
     }
 
     public void clickNext()  {
-        //WebElement nextBtn = driver.findElement(By.cssSelector("[data-testid ='play-next-btn']"));
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid ='play-next-btn']"))).click();
-        //nextBtn.click();
+        WebElement nextBtn = driver.findElement(By.cssSelector("[data-testid ='play-next-btn']"));
+       // wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid ='play-next-btn']"))).click();
+        nextBtn.click();
 
     }
 
     public void clickPlay()  {
-       // WebElement playBtn = driver.findElement(By.cssSelector("[data-testid='play-btn']"));
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='play-btn']"))).click();
-        //playBtn.click();
+        WebElement playBtn = driver.findElement(By.cssSelector("[data-testid='play-btn']"));
+       // wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='play-btn']"))).click();
+        playBtn.click();
 
     }
 
@@ -137,26 +138,26 @@ public class BaseTest {
         WebElement xPlaylist = driver.findElement(By.cssSelector("[title = 'Delete this playlist']"));
         xPlaylist.click();
     }
-//    public void selectPlaylist(){
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlists > ul > li:nth-child(4) > a"))).click();
-//    }
-//
-//    public void contextClickPlaylist(){
-//        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#playlists > ul > li:nth-child(4) > a")));
-//        WebElement playlistElement = driver.findElement(By.cssSelector("#playlists > ul > li:nth-child(4) > a"));
-//        actions.contextClick(playlistElement).perform();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlists > ul > li:nth-child(4) > nav > ul > li:nth-child(1)"))).click();
-//    }
-//
-//    public void enterPlaylistName(){
-//        WebElement playlistInputField = driver.findElement(By.cssSelector("input[name='name']"));
-//        playlistInputField.sendKeys(Keys.chord(Keys.CONTROL, "a" ,Keys.BACK_SPACE));
-//        playlistInputField.sendKeys("newPlaylistName");
-//        playlistInputField.sendKeys(Keys.ENTER);
-//    }
-//
-//    public Boolean verifyNewPlaylist(){
-//        WebElement playlistElement1 = driver.findElement(By.xpath("//*[@id='playlists']/ul/li[4]/a/text()"));
-//        return playlistElement1.isDisplayed();
-//    }
+    public void selectPlaylist(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlists > ul > li:nth-child(4) > a"))).click();
+    }
+
+    public void contextClickPlaylist(){
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#playlists > ul > li:nth-child(4) > a")));
+        WebElement playlistElement = driver.findElement(By.cssSelector("#playlists > ul > li:nth-child(4) > a"));
+        actions.contextClick(playlistElement).perform();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlists > ul > li:nth-child(4) > nav > ul > li:nth-child(1)"))).click();
+    }
+
+    public void enterPlaylistName(){
+        WebElement playlistInputField = driver.findElement(By.cssSelector("input[name='name']"));
+        playlistInputField.sendKeys(Keys.chord(Keys.CONTROL, "a" ,Keys.BACK_SPACE));
+        playlistInputField.sendKeys("newPlaylistName");
+        playlistInputField.sendKeys(Keys.ENTER);
+    }
+
+    public Boolean verifyNewPlaylist(){
+        WebElement playlistElement1 = driver.findElement(By.xpath("//*[@id='playlists']/ul/li[4]/a"));
+        return playlistElement1.isDisplayed();
+    }
 }

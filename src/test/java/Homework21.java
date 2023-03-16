@@ -13,20 +13,20 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
-//import org.testng.annotations.Test;
-//
-//import java.time.Duration;
-//public class Homework21 extends BaseTest {
-//
-//    @Test
-//    public void renamePlaylist(){
-//        enterEmail();
-//        enterPassword();
-//        submit();
-//        selectPlaylist();
-//        contextClickPlaylist();
-//        enterPlaylistName();
-//        Assert.assertTrue(verifyNewPlaylist());
-//
-//    }
+import org.testng.annotations.Test;
+import java.time.Duration;
+public class Homework21 extends BaseTest {
+
+    @Test
+    public void renamePlaylist() {
+        enterEmail();
+        enterPassword();
+        submit();
+        selectPlaylist();
+        contextClickPlaylist();
+        enterPlaylistName();
+        Assert.assertTrue(verifyNewPlaylist());
+    }
+
+    }
 //}
