@@ -4,15 +4,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.Test;
 
 public class LoginPage extends BasePage {
-    public static Actions actions = null;
-    public static By emailField = By.cssSelector("[type='email']");
-    public static By passwordField = By.cssSelector("[type='password']");
-    public static By submitBtnLocator = By.cssSelector("[type = 'submit']");
 
-
+    @FindBy(css = "[type='email']")
+    WebElement emailField;
+    @FindBy(css = "[type='password']")
+    WebElement passwordField;
+    @FindBy(css = "[type = 'submit']")
+    WebElement submitBtnLocator;
     public LoginPage(WebDriver givenDriver) {
         super(givenDriver);
     }
@@ -28,19 +30,20 @@ public class LoginPage extends BasePage {
         driver.get(url);
     }
 
-    public static void provideEmail(String email) {
-        WebElement emailElement = driver.findElement(emailField);
-        emailElement.sendKeys(email);
+    public LoginPage provideEmail(String email) {
+        emailField.sendKeys(email);
+        return this;
     }
 
-    public static void providePassword(String password) {
-        WebElement passwordElement = driver.findElement(passwordField);
-        passwordElement.sendKeys(password);
+    public LoginPage providePassword(String password) {
+       passwordField.sendKeys(password);
+       return this;
     }
 
-    public void clickSubmitBtn() {
-        WebElement submitButtonElement = driver.findElement(submitBtnLocator);
-        submitButtonElement.click();
+    public LoginPage clickSubmitBtn() {
+        submitBtnLocator.click();
+        return this;
+
     }
 
 }

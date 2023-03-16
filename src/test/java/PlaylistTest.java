@@ -34,6 +34,7 @@ public class PlaylistTest extends BaseTest {
 
         //<--login-->
         setupClass();
+
         loginPage.loginPageTest();
 
         homePage.createPlaylist();

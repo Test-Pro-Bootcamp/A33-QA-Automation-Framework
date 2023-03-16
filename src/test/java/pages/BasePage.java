@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,6 +19,7 @@ public class BasePage {
         driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
+        PageFactory.initElements(driver, this);
     }
 
     public void click(By locator) {
@@ -31,6 +33,7 @@ public class BasePage {
     public void performDoubleClick(WebElement locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
         actions.doubleClick(locator).perform();
+
     }
 
 }
