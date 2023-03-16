@@ -25,6 +25,7 @@ public class HomePage extends BasePage {
     By notificationMessage = cssSelector(("div.success.show"));
     By editOption = By.xpath(("//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]"));;
     By textField = cssSelector(("input[name='name']"));
+    By avatarIcon = cssSelector(("img.avatar"));
     static By newPlayList = By.cssSelector("li>a.active");
     static By successMessage = By.cssSelector("#nprogress");
 
@@ -46,6 +47,11 @@ public class HomePage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
         WebElement newPlaylistName = driver.findElement(successMessage);
         return newPlaylistName.isDisplayed();
+    }
+    public boolean verifyAvatarIcon(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(avatarIcon));
+        WebElement findAvatar = driver.findElement(avatarIcon);
+        return findAvatar.isDisplayed();
     }
     public void clickXPlaylist() {
         WebElement clickX = wait.until(ExpectedConditions.elementToBeClickable(xButton));

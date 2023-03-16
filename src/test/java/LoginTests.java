@@ -13,14 +13,12 @@ public class LoginTests extends BaseTest {
     public void LoginEmptyEmailPasswordTest() {
 
         LoginPage loginTest = new LoginPage(driver);
-        String url = "https://bbb.testpro.io/#!/profile";
-        driver.get(url);
+        HomePage findAvatar = new HomePage(driver);
 
         loginTest.enterEmail("linulya1411@gmail.com");
         loginTest.enterPassword("te$t$tudent");
         loginTest.clickSubmit();
 
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+        Assert.assertTrue(findAvatar.verifyAvatarIcon());
     }
 }

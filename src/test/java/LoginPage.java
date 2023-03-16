@@ -9,7 +9,6 @@ import java.time.Duration;
 import static org.openqa.selenium.By.cssSelector;
 
 public class LoginPage extends BasePage{
-    WebDriver driver;
     WebDriverWait wait;
     //locators
     By enterEmailAddress = By.cssSelector(("[type = 'email']"));

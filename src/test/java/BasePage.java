@@ -14,18 +14,13 @@ import org.testng.annotations.BeforeSuite;
 import static org.openqa.selenium.By.cssSelector;
 
 public class BasePage {
-    public static WebDriver driver = null;
-    public static WebDriverWait wait;
-    public static String url = null;
+    WebDriver driver;
+    WebDriverWait wait;
     Actions actions;
 
     public BasePage(WebDriver givenDriver){
         driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
-    }
-    public void contextClick(By locator){
-        WebElement clickElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
-        actions.contextClick(clickElement).perform();
     }
 }
