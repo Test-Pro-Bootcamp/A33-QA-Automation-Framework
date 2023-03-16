@@ -1,24 +1,29 @@
 import com.beust.jcommander.Parameter;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
-
+import org.openqa.selenium.interactions.Actions;
 import java.time.Duration;
 
 
 public class BaseTest {
+
     public static WebDriver driver = null;
      WebDriverWait wait;
+     //this line here breaks my code
+   //Actions actions = new Actions(driver);
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -132,4 +137,26 @@ public class BaseTest {
         WebElement xPlaylist = driver.findElement(By.cssSelector("[title = 'Delete this playlist']"));
         xPlaylist.click();
     }
+//    public void selectPlaylist(){
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlists > ul > li:nth-child(4) > a"))).click();
+//    }
+//
+//    public void contextClickPlaylist(){
+//        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#playlists > ul > li:nth-child(4) > a")));
+//        WebElement playlistElement = driver.findElement(By.cssSelector("#playlists > ul > li:nth-child(4) > a"));
+//        actions.contextClick(playlistElement).perform();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlists > ul > li:nth-child(4) > nav > ul > li:nth-child(1)"))).click();
+//    }
+//
+//    public void enterPlaylistName(){
+//        WebElement playlistInputField = driver.findElement(By.cssSelector("input[name='name']"));
+//        playlistInputField.sendKeys(Keys.chord(Keys.CONTROL, "a" ,Keys.BACK_SPACE));
+//        playlistInputField.sendKeys("newPlaylistName");
+//        playlistInputField.sendKeys(Keys.ENTER);
+//    }
+//
+//    public Boolean verifyNewPlaylist(){
+//        WebElement playlistElement1 = driver.findElement(By.xpath("//*[@id='playlists']/ul/li[4]/a/text()"));
+//        return playlistElement1.isDisplayed();
+//    }
 }
