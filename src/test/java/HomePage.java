@@ -35,14 +35,16 @@ public class HomePage extends BasePage {
     public void chooseEdit() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(editOption)).click();
     }
-    public void renamePlayListName() {
+    public void renamePlayListName(String name) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(textField));
         WebElement textBox = driver.findElement(textField);
-        textBox.sendKeys((Keys.chord(Keys.CONTROL,"a",Keys.SPACE)));
-        textBox.sendKeys(newPlayListName);
+        textBox.sendKeys((Keys.chord(Keys.COMMAND,"a",Keys.SPACE)));
+        textBox.sendKeys(name);
         textBox.sendKeys(Keys.ENTER);
     }
-    public static boolean verifyNewPlayListName(){
-        WebElement newPlaylistName = wait.until(ExpectedConditions.visibilityOfElementLocated(newPlayList));
+    public boolean verifyNewPlayListNameUpdated(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
+        WebElement newPlaylistName = driver.findElement(successMessage);
         return newPlaylistName.isDisplayed();
     }
     public void clickXPlaylist() {

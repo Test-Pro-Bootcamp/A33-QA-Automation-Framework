@@ -9,12 +9,16 @@ import java.time.Duration;
 import static org.openqa.selenium.By.cssSelector;
 
 public class LoginPage extends BasePage{
+    WebDriver driver;
+    WebDriverWait wait;
     //locators
     By enterEmailAddress = cssSelector(("[type = 'email']"));
     By passwordField = cssSelector(("[type='password']"));
     By submitButton = cssSelector(("[type='submit']"));
     public LoginPage(WebDriver givenDriver){
         super(givenDriver);
+//        driver = givenDriver;
+//        wait = new WebDriverWait(BasePage.driver,Duration.ofSeconds(10));
     }
     public void logIn() {
         enterEmail("linulya1411@gmail.com");
