@@ -23,9 +23,10 @@ public class HomePage extends BasePage {
     By playList = By.xpath(("//*[@id=\"playlists\"]/ul/li[3]/a"));
     By xButton = cssSelector(("button[title='Delete this playlist']"));
     By notificationMessage = cssSelector(("div.success.show"));
-    By editOption = cssSelector(("[data-testid='playlist-context-menu-edit-48111']"));
+    By editOption = By.xpath(("//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]"));;
     By textField = cssSelector(("input[name='name']"));
-    static By newPlayList = By.xpath(("//a[text()='"+newPlayListName+"']"));
+    static By newPlayList = By.cssSelector("li>a.active");
+    By successMessage = By.cssSelector("#nprogress");
 
     public void clickPlayList() {
         WebElement clickOnPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(playList));
