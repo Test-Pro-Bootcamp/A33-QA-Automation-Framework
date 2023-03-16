@@ -37,5 +37,4 @@ public class BasePage  {
         actions.doubleClick(findElement(locator)).perform();
     }
 
-
 }
