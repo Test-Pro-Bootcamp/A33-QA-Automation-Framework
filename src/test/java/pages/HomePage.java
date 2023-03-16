@@ -9,12 +9,12 @@ import org.testng.Assert;
 
 public class HomePage {
 
+    @FindBy(className = "avatar")
+    public WebElement avatar;
+
     public HomePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
-
-    @FindBy(className = "avatar")
-    public WebElement avatar;
 
     public void isUserAvatarDisplayed() {
         Assert.assertTrue(avatar.isDisplayed());
