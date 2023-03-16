@@ -1,17 +1,26 @@
+import Pages.HomePage;
+import Pages.LoginPage;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 public class LoginTests extends BaseTest {
 
-//    @Test
-//    public static void LoginEmptyEmailPasswordTest() {
-//
-//        WebDriver driver = new ChromeDriver();
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-//
-//        String url = "https://apps.testpro.io/";
-//        driver.get(url);
-//        Assert.assertEquals(driver.getCurrentUrl(), url);
-//        driver.quit();
+
+    String playlistNewName= "Ferrari";
 
 
 
-//    }
+
+
+    @Test
+    public void renamePlaylist() throws InterruptedException{
+
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        loginPage.login();
+        homePage.doubleClickFirstPlaylist();
+        homePage.enterPlaylistName(playlistNewName);
+        Assert.assertTrue(homePage.ifNewPlaylistExists());
+
+    }
 }
