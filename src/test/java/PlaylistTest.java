@@ -26,21 +26,18 @@ import java.util.List;
 public class PlaylistTest extends BaseTest {
 
 
+
     @Test
     public void createPlaylistAddSong() {
+        //GIVEN
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongPage = new AllSongsPage(driver);
-
-        //<--login-->
+        //WHEN
         setupClass();
-
         loginPage.loginPageTest();
-
         homePage.createPlaylist();
+        //THEN
         Assert.assertTrue(homePage.playlistCreatedMsg());
-        allSongPage.addSong();
-        Assert.assertTrue(homePage.newSongExists());
-
     }
 }

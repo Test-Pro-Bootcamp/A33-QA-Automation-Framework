@@ -10,11 +10,11 @@ import org.testng.annotations.Test;
 public class LoginPage extends BasePage {
 
     @FindBy(css = "[type='email']")
-    WebElement emailField;
+    private WebElement emailField;
     @FindBy(css = "[type='password']")
-    WebElement passwordField;
+    private WebElement passwordField;
     @FindBy(css = "[type = 'submit']")
-    WebElement submitBtnLocator;
+    private WebElement submitBtnLocator;
     public LoginPage(WebDriver givenDriver) {
         super(givenDriver);
     }

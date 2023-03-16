@@ -8,13 +8,13 @@ import org.testng.annotations.Test;
 public class AllSongsPage extends BasePage {
 
     @FindBy(xpath = "//*[@id='sidebar']/section[1]/ul/li[3]/a")
-    WebElement allSongsElement;
+    private WebElement allSongsElement;
     @FindBy(xpath ="//*[@id='songsWrapper']/div/div/div[1]/table/tr[1]/td[2]")
-    WebElement firstSong;
+    private WebElement firstSong;
     @FindBy(xpath = "//*[@id='songsWrapper']//span/button[2]")
-    WebElement greenBtnAddTo;
+    private WebElement greenBtnAddTo;
     @FindBy(xpath ="//*[@id=\"songsWrapper\"]/header/div[3]/div/section[1]/ul/li[5]")
-    WebElement contextMenuAddToPlaylist;
+    private  WebElement contextMenuAddToPlaylist;
 
     public AllSongsPage(WebDriver givenDriver) {
         super(givenDriver);

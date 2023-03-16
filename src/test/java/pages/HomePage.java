@@ -14,33 +14,33 @@ public class HomePage extends BasePage {
     String renameTest = "Renamed Playlist";
 
     @FindBy(css = "[img.avatar]")
-    WebElement userAvatarIcon;
+    private WebElement userAvatarIcon;
     @FindBy(css = ".playlist:nth-child(3)")
-    WebElement playlistInput;
+    private WebElement playlistInput;
     @FindBy(css = "i[data-testid='sidebar-create-playlist-btn']")
-    WebElement playlistNewBtn;
+    private WebElement playlistNewBtn;
     @FindBy(xpath = "//li[@data-testid='playlist-context-menu-create-simple']")
-    WebElement playlistContextMenu;
+    private WebElement playlistContextMenu;
     @FindBy(css = "[name='name']")
-    WebElement playlistInputField;
+    private WebElement playlistInputField;
     @FindBy(xpath = "//div[@class='song-list-controls']//button[@class='del btn-delete-playlist']")
-    WebElement contextDeletePlaylist;
+    private WebElement contextDeletePlaylist;
     @FindBy(xpath = "//div[@class='alertify-logs top right']/div[@class='success show'][1]")
-    WebElement playlistCreatedMsgLocator;
+    private WebElement playlistCreatedMsgLocator;
     @FindBy(xpath = "//*[@id='playlists']/ul/li[3]/a")
-    WebElement clickPlaylistLocator;
+    private WebElement clickPlaylistLocator;
     @FindBy(xpath = "//div[@class='song-list-controls']//button[@class='del btn-delete-playlist']")
-    WebElement clickDeletePlaylistLocator;
+    private WebElement clickDeletePlaylistLocator;
     @FindBy(css = ".playlist:nth-child(3)")
-    WebElement doubleClickPlaylistName;
+    private WebElement doubleClickPlaylistName;
     @FindBy(xpath = "//div[@class='alertify-logs top right']/div[@class='success show'][2]")
-    WebElement msgDeletedPlaylistLocator;
+    private WebElement msgDeletedPlaylistLocator;
     @FindBy(css = "input[name='name']")
-    WebElement enterPlaylistNameLocator;
+    private WebElement enterPlaylistNameLocator;
     @FindBy(xpath = "//a[text()='\" + renameTest + \"']")
-   WebElement confirmNewPlaylistLocator;
+    private WebElement confirmNewPlaylistLocator;
     @FindBy(xpath = "//*[@id='playlistWrapper']/div//div[1]/table//td[2]")
-    WebElement firstSongInThePlaylist;
+    private WebElement firstSongInThePlaylist;
 
 
     public HomePage(WebDriver givenDriver) {
@@ -60,6 +60,7 @@ public class HomePage extends BasePage {
     public HomePage createPlaylist() {
         wait.until(ExpectedConditions.elementToBeClickable(playlistNewBtn));
         playlistNewBtn.click();
+        wait.until(ExpectedConditions.elementToBeClickable(playlistContextMenu));
         playlistContextMenu.click();
         playlistInputField.sendKeys(newNameTest, Keys.RETURN);
         return this;
@@ -111,13 +112,12 @@ public class HomePage extends BasePage {
 
     //right top green message
     public boolean playlistCreatedMsg() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated((By) playlistCreatedMsgLocator));
+        wait.until(ExpectedConditions.visibilityOf(playlistCreatedMsgLocator));
        return playlistCreatedMsgLocator.isDisplayed();
 
     }
 
     public boolean newSongExists() {
-        choosePlaylist();
        return firstSongInThePlaylist.isDisplayed();
 
 
