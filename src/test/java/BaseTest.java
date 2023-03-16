@@ -29,10 +29,12 @@ public static WebDriver driver = null;
 WebDriverWait wait;
 public static String url = null;
 
-Actions actions = new Actions(driver);
+Actions actions;
+    String playlistName = "LinaPelo2323";
 
     @BeforeSuite
     static void setupClass() {
+
         WebDriverManager.chromedriver().setup();
     }
     @BeforeMethod
@@ -41,7 +43,8 @@ Actions actions = new Actions(driver);
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver,Duration.ofSeconds(15));
+        wait = new WebDriverWait(driver,Duration.ofSeconds(20));
+        actions = new Actions(driver);
         url = BaseURL;
         driver.get(url);
     }
@@ -136,16 +139,19 @@ Actions actions = new Actions(driver);
     }
 
     public void enterNewPlaylistName(){
-        String playlistName = "LinaPelo2323";
-        WebElement inputPlaylistField = driver.findElement(By.cssSelector("input[name='name']"));
-        inputPlaylistField.sendKeys((Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE)));
+
+        WebElement inputPlaylistField =wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("input[name='name']")));
+        inputPlaylistField.sendKeys(Keys.COMMAND + "a");
+        inputPlaylistField.sendKeys(Keys.DELETE);
         inputPlaylistField.sendKeys(playlistName);
         inputPlaylistField.sendKeys(Keys.ENTER);
 
     }
 
     public boolean checkNewPlaylist(){
-        WebElement playlistElement = driver.findElement(By.xpath("//a[text()='LinaPelo'"));
+        WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath
+                ("//a[text()= '" +playlistName+"']")));
         return playlistElement.isDisplayed();
 
     }
