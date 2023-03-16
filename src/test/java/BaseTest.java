@@ -22,13 +22,11 @@ public class BaseTest {
 
     public static WebDriver driver = null;
      WebDriverWait wait;
-     //this line here breaks my code
-   //Actions actions = new Actions(driver);
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
-public static Actions actions = null;
+    public static Actions actions = null;
 
     @BeforeMethod
     @Parameters("BaseUrl")
