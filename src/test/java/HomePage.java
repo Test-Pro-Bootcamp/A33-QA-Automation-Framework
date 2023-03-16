@@ -11,7 +11,7 @@ import java.time.Duration;
 import static org.openqa.selenium.By.cssSelector;
 
 public class HomePage extends BasePage {
-    WebDriver driver;
+    static WebDriver driver;
     static WebDriverWait wait;
     public static Actions actions;
     static String newPlayListName = "New Playlist";
@@ -26,7 +26,7 @@ public class HomePage extends BasePage {
     By editOption = By.xpath(("//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]"));;
     By textField = cssSelector(("input[name='name']"));
     static By newPlayList = By.cssSelector("li>a.active");
-    By successMessage = By.cssSelector("#nprogress");
+    static By successMessage = By.cssSelector("#nprogress");
 
     public void clickPlayList() {
         WebElement clickOnPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(playList));
@@ -42,7 +42,7 @@ public class HomePage extends BasePage {
         textBox.sendKeys(name);
         textBox.sendKeys(Keys.ENTER);
     }
-    public boolean verifyNewPlayListNameUpdated(){
+    public static boolean verifyNewPlayListNameUpdated() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
         WebElement newPlaylistName = driver.findElement(successMessage);
         return newPlaylistName.isDisplayed();

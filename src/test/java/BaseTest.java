@@ -25,9 +25,9 @@ public class BaseTest{
         driver = new ChromeDriver(option);
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         url= BaseURL;
         driver.get(url);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
     @DataProvider(name="loginData")
     public static Object[][] getDataFromDataProviders(){

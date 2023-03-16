@@ -9,14 +9,17 @@ import java.time.Duration;
 
 public class LoginTests extends BaseTest {
 
-    @Test
-    public static void LoginEmptyEmailPasswordTest() {
+    @Test//(dataProvider = "loginData")
+    public void LoginEmptyEmailPasswordTest() {
 
         LoginPage loginTest = new LoginPage(driver);
-        loginTest.logIn();
-
         String url = "https://bbb.testpro.io/#!/profile";
         driver.get(url);
+
+        loginTest.enterEmail("linulya1411@gmail.com");
+        loginTest.enterPassword("te$t$tudent");
+        loginTest.clickSubmit();
+
         Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
     }

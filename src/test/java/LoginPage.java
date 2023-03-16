@@ -12,19 +12,21 @@ public class LoginPage extends BasePage{
     WebDriver driver;
     WebDriverWait wait;
     //locators
-    By enterEmailAddress = cssSelector(("[type = 'email']"));
-    By passwordField = cssSelector(("[type='password']"));
-    By submitButton = cssSelector(("[type='submit']"));
+    By enterEmailAddress = By.cssSelector(("[type = 'email']"));
+    By passwordField = By.cssSelector(("[type='password']"));
+    By submitButton = By.cssSelector(("[type='submit']"));
     public LoginPage(WebDriver givenDriver){
         super(givenDriver);
 //        driver = givenDriver;
 //        wait = new WebDriverWait(BasePage.driver,Duration.ofSeconds(10));
     }
-    public void logIn() {
-        enterEmail("linulya1411@gmail.com");
-        enterPassword("te$t$tudent");
-        clickSubmit();
-    }
+//    public void logIn() {
+//        enterEmail("linulya1411@gmail.com");
+//        enterPassword("te$t$tudent");
+//        clickSubmit();
+//    }
+    String email = "linulya1411@gmail.com";
+    String password = "te$t$tudent";
     public void enterEmail(String email) {
         WebElement emailElement = wait.until(ExpectedConditions.elementToBeClickable(enterEmailAddress));
         emailElement.sendKeys("linulya1411@gmail.com");
