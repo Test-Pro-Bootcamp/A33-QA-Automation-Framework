@@ -10,10 +10,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -32,10 +29,7 @@ public class BaseTest {
     }
     @BeforeMethod
     @Parameters({"baseUrl"})
-    public void launchBrowser(String baseUrl) throws MalformedURLException {
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--remote-allow-origins=*");
-//        driver = new ChromeDriver(options);
+    public void launchBrowser(@Optional String baseUrl) throws MalformedURLException {
         driver = pickBrowser(System.getProperty("browser"));
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -65,7 +59,9 @@ public class BaseTest {
                 caps.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             default:
-                return driver = new ChromeDriver();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--remote-allow-origins=*","--disable-notifications","--incognito", "--start-maximized");
+                return driver = new ChromeDriver(options);
         }
     }
     @AfterMethod
