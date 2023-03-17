@@ -17,13 +17,15 @@ public class BaseTest {
     public static WebDriverWait wait = null;
     public static String url = null;
     public static Actions actions = null;
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
+
     @BeforeMethod
     @Parameters({"baseURL"})
-    public static void launchBrowser(String baseUrl){
+    public static void launchBrowser(String baseUrl) {
         ChromeOptions ops = new ChromeOptions();
         ops.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(ops);
@@ -34,8 +36,9 @@ public class BaseTest {
         driver.get(url);
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
+
     @AfterMethod
-    public static void closeBrowser(){
+    public static void closeBrowser() {
         driver.quit();
     }
 }

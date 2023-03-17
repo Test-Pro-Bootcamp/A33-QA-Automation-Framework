@@ -9,17 +9,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class basePage {
-    protected WebDriverWait wait;
+public class BasePage {
+    protected static WebDriverWait wait;
     protected Actions actions;
     protected WebDriver driver;
 
-    public basePage (WebDriver givenDriver){
+    public BasePage(WebDriver givenDriver) {
         driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
     }
-    public void contextClick(By locator){
+
+    public void contextClick(By locator) {
         WebElement clickElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
         actions.contextClick(clickElement).perform();
     }
