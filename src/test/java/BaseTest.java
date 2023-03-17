@@ -74,7 +74,9 @@ public class BaseTest {
                 caps.setCapability("browserName", "safari");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             default:
-                return driver = new ChromeDriver();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--remote-allow-origins=*","--disable-notifications","--incognito","--start-maximized");
+                return driver = new ChromeDriver(options);
         }
     }
     @AfterMethod
