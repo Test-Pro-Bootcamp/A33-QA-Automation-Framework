@@ -1,98 +1,104 @@
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.*;
+
 import java.time.Duration;
+
+import static org.testng.Assert.*;
 
 
 public class BaseTest {
-
-    public static WebDriver driver = null;
+    WebDriver driver;
+    WebDriverWait wait;
+    String url;
 
     @BeforeSuite
-    public static void setupClass() {
-          WebDriverManager.chromedriver().setup();
-
+    public void setupClass() {
+        WebDriverManager.chromedriver().setup();
     }
-    private void login() throws InterruptedException {
-        provideEmail("guadalupe.medina@testpro.io");
-        providePassword("DoingitBig23!");
-        submitButton();
-    }
-    public WebElement getDeletedPlaylistMsg(){
-        return driver.findElement(By.cssSelector("div.success.show"));
-    }
-     public void openPlaylist() throws InterruptedException {
-         WebElement emptyPlaylist = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
-         emptyPlaylist.click();
-         Thread.sleep(2000);
-     }
-
-    private void deletePlaylist() throws InterruptedException {
-        WebElement deletePlaylistButton = driver.findElement(By.cssSelector(".btn-delete-playlist"));
-        deletePlaylistButton.click();
-        Thread.sleep(2000);
-    }
-
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public static void launchBrowser(String BaseURL) {
+    public void launchBrowser(String BaseURL) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver,Duration.ofSeconds(20));
 
-        String url = "https://bbb.testpro.io/";
+        url = BaseURL;
+        driver.manage().window().maximize();
         driver.get(url);
 
 
     }
 
+
+
+    public void provideEmail() {
+
+        WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type ='email']")));
+        emailField.sendKeys("guadalupe.medina@testpro.io");
+
+    }
+
+    public void providePassword() {
+        WebElement providePassword = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type ='password']")));
+        providePassword.sendKeys("DoingitBig23!");
+    }
+
+
+    public void submitButton(){
+        WebElement submitButtonElement = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type ='submit']")));
+        submitButtonElement.click();
+
+    }
+    public void findSong(){
+        WebElement findSong = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit'")));
+        findSong.sendKeys();
+    }
+    public void clickViewAllButton() {
+        WebElement clickViewAllButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[data-test='view-all-songs-btn']")));
+        clickViewAllButton.click();
+
+    }
+    public void selectFirstSong() {
+        WebElement selectFirstSong = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("section#songResultsWrapper tr.song-item td.title")));
+        selectFirstSong.click();
+
+    }
+    public void openPlaylist() {
+        WebElement emptyPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
+        emptyPlaylist.click();
+    }
+
+    public void deletePlaylist() throws InterruptedException {
+        WebElement deletePlaylistButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".btn-delete-playlist")));
+        deletePlaylistButton.click();
+    }
+    public String getNotificationMessage(){
+        WebElement NotificationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        return NotificationMessage.getText ();
+    }
+    public boolean songIsPlaying(){
+        WebElement songIsPlaying = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='bars']")));
+        return songIsPlaying.isDisplayed();
+    }
+    public boolean isDeletedPlaylistMsgDisplayed() {
+        WebElement deletedPlaylistMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        return deletedPlaylistMsg.isDisplayed();
+
+    }
     @AfterMethod
-    public static void closeBrowser() {
+    public void closeBrowser() {
         driver.quit();
     }
-
-    public static void navigateToPage() {
-        String url = "https://bbb.testpro.io/";
-        driver.get(url);
-    }
-
-    public static void provideEmail(String email) {
-        WebElement emailField = driver.findElement(By.cssSelector("[type ='email']"));
-        emailField.clear();
-        emailField.sendKeys(email);
-
-    }
-
-    public static void providePassword(String password) {
-        WebElement providePassword = driver.findElement(By.cssSelector("[type='password']"));
-        providePassword.clear();
-        providePassword.sendKeys(password);
-    }
-
-    public static void submitButton() throws InterruptedException {
-        WebElement submitButton = driver.findElement(By.cssSelector("Button[type ='submit']"));
-        submitButton.click();
-        Thread.sleep(2000);
-    }
-
-    @DataProvider(name = "IncorrectLoginProviders")
-    public Object[][] getDataProviders() {
-        return new Object[][]{
-                {"invalid@email.com", "invalidPassword"},
-                {"onlyEmail@email.com",},
-                {""}, {""}
-        };
-
-
-    }
-
 }
 
 

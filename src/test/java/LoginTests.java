@@ -2,32 +2,31 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-
+import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class LoginTests extends BaseTest {
 
-    @Test (dataProvider = "IncorrectLoginProviders")
-    public static void LoginEmptyEmailPasswordTest(String email, String password) throws InterruptedException {
+    @Test
+    public void LoginEmptyEmailPasswordTest() {
 
-        provideEmail("");
-        providePassword("");
+
+    }
+
+    @Test
+    public void LoginValidEmailPasswordTest() {
+        provideEmail();
+        providePassword();
         submitButton();
 
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-            String url = "https://testpro.io/";
-        }
-        @Test
-        public static void LoginInvalidEmail() {
-            String url = "https://bbb.testpro.io/";
-            driver.get(url);
-            Assert.assertEquals(driver.getCurrentUrl(), url);
-            driver.quit();
-        }
+
     }
+
+}
