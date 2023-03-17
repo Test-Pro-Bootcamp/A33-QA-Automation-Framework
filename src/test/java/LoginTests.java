@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -9,10 +10,14 @@ import java.time.Duration;
 
 public class LoginTests extends BaseTest {
 
+    static ChromeOptions options = new ChromeOptions();
     @Test
     public static void LoginEmptyEmailPasswordTest () throws InterruptedException {
         // Simple comment
-        WebDriver driver = new ChromeDriver();
+
+//      Added ChromeOptions argument below to fix websocket error
+        options.addArguments("--remote-allow-origins=*");
+        WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         String url = "https://bbb.testpro.io/";
@@ -44,8 +49,10 @@ public class LoginTests extends BaseTest {
         //Expected result: User should stay on login page
            // assert the present of email field
 
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//      Added ChromeOptions argument below to fix websocket error
+
+        options.addArguments("--remote-allow-origins=*");
+        WebDriver driver = new ChromeDriver(options);
 
         String url = "https://bbb.testpro.io/";
         driver.get(url);
@@ -79,15 +86,17 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public static void LoginValidEmailPasswordTest() {
+    public static void LoginValidEmailPasswordTest() throws InterruptedException {
         // Precondition: Chrome browser should be opened DONE
         //Step1. Open koel login page DONE
         //Step2. Enter Existing username
         //Step3. Enter Correct password
         //Step4. Click Login button
         //Expected result: User should be directed to the home page
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+//      Added ChromeOptions argument below to fix websocket error
+        options.addArguments("--remote-allow-origins=*");
+        WebDriver driver = new ChromeDriver(options);
 
         String url = "https://bbb.testpro.io/";
         driver.get(url);
@@ -106,6 +115,7 @@ public class LoginTests extends BaseTest {
         loginField.click();
 
         //Expected result: User should be directed to the home page
+        Thread.sleep(2000);
         WebElement avatar = driver.findElement(By.className("avatar"));
         Assert.assertTrue(avatar.isDisplayed());
 
