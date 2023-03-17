@@ -12,9 +12,23 @@ import java.time.Duration;
 
 public class HomePage extends BasePage {
 
-    private final By allSongs = By.cssSelector("a[href='#!/songs']");
+    WebDriver driver;
+    WebDriverWait wait;
 
-    public HomePage(WebDriver givenDriver) { super(givenDriver); }
+    By userAvatarIcon = By.cssSelector("img.avatar");
+
+
+    //private final By allSongs = By.cssSelector("a[href='#!/songs']");
+
+    public HomePage(WebDriver givenDriver) {
+        driver = givenDriver;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+    }
+
+    public WebElement getUserAvatar() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(userAvatarIcon));
+    }
 
 
     public void enterAllSongs() {
@@ -24,23 +38,6 @@ public class HomePage extends BasePage {
 
     }
 
-
-   // public HomePage(WebDriver givenDriver) {
-       // super(givenDriver);
-    //}
-
-    //public void enterAllSongs() {
-
-        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
-        //WebElement allSongs = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[href='#!/songs']")));
-        //allSongs.click();
-
-        // WebElement allSongs = driver.findElement(By.cssSelector("a[href='#!/songs']"));
-        //allSongs.click();
-
-        //Thread.sleep(1000);
-        // allSongs.click();
-        //
 
     public void selectSong() {
         WebElement song = driver.findElement(By.xpath("//tr[@class='song-item']"));
