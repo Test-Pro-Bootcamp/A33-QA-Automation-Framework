@@ -3,54 +3,81 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import java.time.Duration;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(css = "[type='submit']")
-    static
-    WebElement submitButton;
 
-    @FindBy(css="[type='email']")
-    static
-    WebElement emailField;
+    WebDriver driver;
+    WebDriverWait wait;
 
-    @FindBy(css="type='password']")
-    static
-    WebElement passwordField;
+    By submitButtonLocator = By.cssSelector("[type='submit']");
+    By emailField = By.cssSelector("[type='email']");
+    By passwordField = By.cssSelector("[type='password']");
 
 
+    //@FindBy(css = "[type='submit']")
+    //static
+    //WebElement submitButton;
 
-    public static void provideEmail(String email) {
-        //WebElement emailField = driver.findElement(By.cssSelector("[type = 'email']"));
-        emailField.sendKeys(email);
-        return this;
-    }
+    //@FindBy(css="[type='email']")
+    //static
+    //WebElement emailField;
 
-    public static void providePassword(String password) {
-        //WebElement passwordField = driver.findElement(By.cssSelector("[type = 'password']"));
-        passwordField.sendKeys(password);
-        return this;
-    }
-
-    public static void clickSubmit() {
-        //WebElement submitButton = driver.findElement(By.cssSelector("button[type = 'submit']"));
-        submitButton.click();
-        return this;
-    }
-
-    public void logIn() {
-        provideEmail("janezelenova@gmail.com");
-        providePassword("Floridaliving2023$");
-        //AND user clicks a submit button
-
-        clickSubmit();
-    }
-
+    //@FindBy(css="[type='password']")
+    //static
+    //WebElement passwordField;
 
     public LoginPage(WebDriver givenDriver) {
-        super(givenDriver);
+        driver = givenDriver;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
 
     }
 
+    public void clickSubmitBtn() {
+        //WebElement submitButton = driver.findElement(By.cssSelector("button[type = 'submit']"));
+        driver.findElement(submitButtonLocator).click();
+
+    }
+
+
+    public void provideEmail(String email) {
+        WebElement emailElement = driver.findElement(emailField);
+        emailElement.click();
+        emailElement.sendKeys(email);
+
+    }
+
+    public void providePassword(String password) {
+        WebElement passwordElement = driver.findElement(passwordField);
+        passwordElement.click();
+        passwordElement.sendKeys(password);
+
+    }
+
+    @Test
+
+    public void LoginValidEmailPasswordTest() {
+
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.provideEmail("janezelenova@gmail.com");
+        loginPage.providePassword("Floridaliving2023$");
+        loginPage.clickSubmitBtn();
+
+        WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar")));
+        Assert.assertTrue(avatarIcon.isDisplayed());
+
+
+    }
 }
+
+
+
+
