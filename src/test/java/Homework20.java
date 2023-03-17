@@ -3,13 +3,13 @@ import org.testng.annotations.Test;
 
 public class Homework20 extends BaseTest {
 
-    @Test
-    public static void createNewPlaylistTest() {
+    @Test(enabled = true, priority = 0, description = "Validate can create a new playlist")
+    public static void createNewPlaylist(){
 
         logIn("andalia.nia@gmail.com", "te$t$tudent");
         clickSubmit();
         createNewPlaylist();
-        Assert.assertTrue(newPlaylistDisplayed());
+        Assert.assertTrue(newPlaylistIsDisplayed());
     }
     @Test
     public static void addASongToPlaylist(){
@@ -19,6 +19,6 @@ public class Homework20 extends BaseTest {
         clickViewAllButton();
         selectFirstSong();
         clickAddToButton();
-        Assert.assertTrue(newPlaylistDisplayed());
+        Assert.assertTrue(newPlaylistIsDisplayed());
     }
 }

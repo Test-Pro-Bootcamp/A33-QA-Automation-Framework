@@ -50,7 +50,8 @@ public class BaseTest {
       }
     
       public static void clickSubmit(){
-        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[type='submit']")));
+        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("[type='submit']")));
         submitButton.click();
   
       }
@@ -71,7 +72,7 @@ public class BaseTest {
         nameField.sendKeys(Keys.ENTER);
         }
 
-        public static boolean newPlaylistDisplayed(){
+        public static boolean newPlaylistIsDisplayed(){
         WebElement newPlaylist = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[class='active']")));
         return newPlaylist.isDisplayed();
         }
@@ -92,7 +93,7 @@ public class BaseTest {
         }
 
         public static void clickAddToButton(){
-         WebElement addToButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[class = 'btn-add-to'")));
+         WebElement addToButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[class = 'btn-add-to']")));
          addToButton.click();
         }
 
