@@ -33,9 +33,15 @@ public class BaseTest {
         String url = "https://bbb.testpro.io/";
         driver.get(url);
     }
-    public void clickSubmit() {
+    public void login(String email, String password) throws InterruptedException {
+        provideEmail(email);
+        providePassword(password);
+        clickSubmit();
+    }
+    public void clickSubmit() throws InterruptedException {
         WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
         submitButton.click();
+        Thread.sleep(2000);
     }
     public void providePassword(String password) {
         WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
