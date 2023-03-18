@@ -4,35 +4,38 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
+
 import java.time.Duration;
 import java.util.UUID;
 
 public class BaseTest {
 
     public WebDriver driver = null;
-    public String url = "https://bbb.testpro.io/";
+    public String url = null;
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
     @BeforeMethod
-    public void launchBrowser() {
+    @Parameters({"BaseURL"})
+    public void launchBrowser(String BaseURL) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        url = BaseURL;
+        driver.get(url);
     }
     @AfterMethod
     public  void closeBrowser(){
         driver.quit();
     }
-    public void navigateToPage() {
-        String url = "https://bbb.testpro.io/";
-        driver.get(url);
-    }
+
+//    public void navigateToPage() {
+//        String url = "https://bbb.testpro.io/";
+//        driver.get(url);
+//    }
     public void login(String email, String password) throws InterruptedException {
         provideEmail(email);
         providePassword(password);
@@ -73,5 +76,14 @@ public class BaseTest {
     public void clickAvatarIcon() {
         WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
         avatarIcon.click();
+    }
+    @DataProvider(name="incorrectLoginProviders")
+    public static Object[][] getDataFromDataproviders() {
+
+        return new Object[][] {
+                {"invalid@email.com", "invalidPass"},
+                {"demo@mail.com", "invalid"},
+                {"", ""}
+        };
     }
 }

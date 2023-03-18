@@ -8,10 +8,7 @@ public class Homework17 extends BaseTest {
 
         String newSongAddedNotificationText = "Added 1 song into";
 
-        navigateToPage();
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
-        clickSubmit();
+        login("demo@class.com", "te$t$tudent");
         searchSong("Pluto");
         clickViewAllBtn();
         selectFirstSongResult();
