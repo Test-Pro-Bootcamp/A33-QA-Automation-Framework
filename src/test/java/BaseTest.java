@@ -3,103 +3,92 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.Parameters;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
-
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.time.Duration;
 import java.util.HashMap;
-
 import org.openqa.selenium.edge.EdgeDriver;
-
 
 public class BaseTest {
     private  WebDriver driver;
     private  Actions actions;
     private  WebDriverWait wait;
     private  ThreadLocal<WebDriver> threadDriver;
-    //private  ThreadLocal<WebDriver> driver;
-    String url = "";
-    String password = "";
-    String email = "";
+    private static final ThreadLocal<WebDriver> THREAD_LOCAL = new ThreadLocal<>();
+    protected String url;
+    protected String password;
+    protected String email;
 
-
-    @BeforeSuite
-    public void setupClass() {
-        WebDriverManager.chromedriver().setup();
+    public static WebDriver getDriver() {
+        return THREAD_LOCAL.get();
     }
-
     @BeforeMethod
     @Parameters({"baseURL", "email", "password"})
-    public void setupBrowser(String baseUrl, String mail, String pass) throws MalformedURLException {
-        threadDriver = new ThreadLocal<>();
-        driver = pickBrowser(System.getProperty("browser"));
-        //driver = pickBrowser("cloud");
-        threadDriver.set(driver);
-        System.out.println("Thread " + Thread.currentThread().getId() + " is starting setupBrowser method...");
-
-
-        actions = new Actions(getDriver());
-        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    public void setUpBrowser(@Optional String baseUrl, String mail, String pass) throws MalformedURLException {
+        THREAD_LOCAL.set(pickBrowser(System.getProperty("browser")));
+        //THREAD_LOCAL.set(pickBrowser("browser"));
+        THREAD_LOCAL.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        THREAD_LOCAL.get().manage().deleteAllCookies();
         url = baseUrl;
-        getDriver().get(url);
         password = pass;
         email = mail;
+        getDriver().get(url);
+        System.out.println(
+                "Browser setup by Thread " + Thread.currentThread().getId() + " and Driver reference is : " + getDriver());
     }
 
     @AfterMethod
-    public void exitBrowser() {
-        getDriver().quit();
-        threadDriver.remove();
+    public void tearDown() {
+        THREAD_LOCAL.get().close();
+        THREAD_LOCAL.remove();
     }
 
-    public WebDriver getDriver() {
-        return threadDriver.get();
-    }
 
-    private static WebDriver pickBrowser(String browser) throws MalformedURLException {
-        DesiredCapabilities caps = new DesiredCapabilities();
-        String gridURL = "http://192.168.1.9:4444";
+    public WebDriver pickBrowser(String browser) throws MalformedURLException {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        String gridURL = "http://10.2.127.17:4444";
+
         switch (browser) {
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
-                return new FirefoxDriver();
-            case "MicrosoftEdge":
+                FirefoxOptions optionsFirefox = new FirefoxOptions();
+                optionsFirefox.addArguments("-private");
+                return driver = new FirefoxDriver(optionsFirefox);
+            case "edge":
                 WebDriverManager.edgedriver().setup();
-                return new EdgeDriver();
+                return driver = new EdgeDriver();
             case "grid-firefox":
-                caps.setCapability("browserName", "firefox");
-                return new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+                capabilities.setCapability("browserName", "firefox");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
             case "grid-edge":
-                caps.setCapability("browserName", "MicrosoftEdge");
-                return new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+                capabilities.setCapability("browserName", "edge");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
             case "grid-chrome":
-                caps.setCapability("browserName", "chrome");
-                return new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+                capabilities.setCapability("browserName", "chrome");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
             case "cloud":
-                return newLambdaTest();
+                return lambdaTest();
             default:
-                ChromeOptions option = new ChromeOptions();
-                option.addArguments("--remote-allow-origins=*", "--disable-notifications");
-                return new ChromeDriver(option);
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito");
+                return driver = new ChromeDriver(options);
         }
     }
 
-    public static WebDriver newLambdaTest() throws MalformedURLException {
+    public static WebDriver lambdaTest() throws MalformedURLException {
         String hubURL = "https://hub.lambdatest.com/wd/hub";
 
         ChromeOptions browserOptions = new ChromeOptions();

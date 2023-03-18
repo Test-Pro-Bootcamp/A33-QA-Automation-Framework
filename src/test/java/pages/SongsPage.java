@@ -30,6 +30,11 @@ public class SongsPage extends BasePage{
     @FindBy(css = "span[class='pause']")
     private WebElement pauseButton;
 
+    @FindBy(css = "img[alt='Sound bars']")
+    private WebElement mixer;
+
+
+
 
 
     public SongsPage(WebDriver givenDriver) {
@@ -50,5 +55,10 @@ public class SongsPage extends BasePage{
     public WebElement getPauseButton(){
         wait.until(ExpectedConditions.visibilityOf(pauseButton));
         return pauseButton;
+    }
+
+    public WebElement getMixer(){
+        wait.until(ExpectedConditions.visibilityOf(mixer));
+        return mixer;
     }
 }

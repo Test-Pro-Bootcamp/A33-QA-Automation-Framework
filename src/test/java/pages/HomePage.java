@@ -18,10 +18,12 @@ public class HomePage extends BasePage{
     @FindBy(css = "input[name='name']")
     private WebElement playlistInputfield;
 
-    @FindBy(css = "div.success.show")
+    @FindBy(css = "div[class='success show']")
     private WebElement popUpnotification;
 
-    @FindBy(css = "i[class='fa fa-plus-circle create']")
+    //<div class="success show">Added 1 song into "xxx."</div>
+
+    @FindBy(css = "i[role='button']")
     private WebElement playlistPlusBtn;
 
     @FindBy(css = "[data-testid='playlist-context-menu-create-simple']")
@@ -145,6 +147,10 @@ public class HomePage extends BasePage{
 
     public WebElement getNotification(){
         return popUpnotification;
+    }
+
+    public String getSuccessNotif(){
+        return popUpnotification.getText();
     }
 
     public String confirmPlaylistNameChange(String searchText) {

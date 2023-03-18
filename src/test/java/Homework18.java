@@ -24,6 +24,6 @@ public class Homework18 extends BaseTest {
                 .playFirstSong();
 
         //WHEN
-        Assert.assertTrue(songPage.getPauseButton().isDisplayed());
+        Assert.assertTrue(songPage.getMixer().isDisplayed());
     }
 }

@@ -35,7 +35,8 @@ public class Homework17 extends BaseTest {
 
         //WHEN
         Assert.assertTrue(homePage.getNotification().isDisplayed());
-        homePage.openHome()
+        System.out.print("Above worked");
+        homePage.findPlaylist(currentPlaylistname)
                 .openPlaylist()
                 .deleteFilledPlaylist();
 

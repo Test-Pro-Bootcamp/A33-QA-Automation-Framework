@@ -18,12 +18,9 @@ public class Homework19 extends BaseTest {
         HomePage homePage = new HomePage(getDriver());
         String currentPlaylistname = "PLDELTEST";
         loginPage.inputLogIn(email, password);
-        homePage.createPlaylist(currentPlaylistname);
+        homePage.createPlaylist(currentPlaylistname)
 
         //THEN
-        homePage.findPlaylist(currentPlaylistname)
-                .openHome()
-                .openPlaylist()
                 .deleteEmptyPlaylist();
 
         //WHEN
