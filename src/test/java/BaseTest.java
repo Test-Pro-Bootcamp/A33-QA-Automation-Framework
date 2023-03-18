@@ -64,7 +64,7 @@ public class BaseTest {
     public void enterPlaylistName(){
         WebElement inputField1=wait.until(ExpectedConditions.elementToBeClickable
                 (By.cssSelector("input[name='name']")));
-        inputField1.sendKeys(Keys.chord(Keys.COMMAND,"A",Keys.BACK_SPACE));
+        inputField1.sendKeys(Keys.chord(Keys.COMMAND,"A"));
         inputField1.sendKeys(playlistName);
         inputField1.sendKeys(Keys.ENTER);
     }
