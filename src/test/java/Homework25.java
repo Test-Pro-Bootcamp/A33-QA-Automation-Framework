@@ -17,7 +17,7 @@ public class Homework25 extends BaseTest {
         loginPage.login();
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
-    @Test(enabled = false, priority = 1, description = "Validate can create a playlist")
+    @Test(enabled = true, priority = 1, description = "Validate can create a playlist")
     public void createNewPlaylistTest(){
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
@@ -26,7 +26,7 @@ public class Homework25 extends BaseTest {
         homePage.createPlaylist();
         Assert.assertTrue(homePage.newPlaylistIsDisplayed());
     }
-    @Test(enabled = false, priority = 2, description = "Validate can add a song to playlist")
+    @Test(enabled = true, priority = 2, description = "Validate can add a song to playlist")
     public void addSongToExistingPlaylistTest()  {
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
@@ -36,11 +36,11 @@ public class Homework25 extends BaseTest {
                 .clickViewAllButton()
                 .selectFirstSong()
                 .clickAddToButton()
-                .clickPlaylistNameFromAddToButton("Sleepy Songs")
-                .deleteSongFromPlaylist();
+                .clickPlaylistNameFromAddToButton("Sleepy Songs");
         Assert.assertTrue(homePage.notificationMessageIsDisplayed());
+        homePage.deleteSongFromPlaylist();
     }
-    @Test(enabled = false, priority = 3, description = "Validate can rename an existing playlist")
+    @Test(enabled = true, priority = 3, description = "Validate can rename an existing playlist")
     public void renamePlaylistTest(){
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
@@ -51,7 +51,7 @@ public class Homework25 extends BaseTest {
                 .renamePlaylist("Active Songs");
         Assert.assertTrue(homePage.displayUpdatedPlaylist("Active Songs"));
     }
-    @Test (enabled = false, priority = 4, description = "Validate can delete a playlist")
+    @Test (enabled = true, priority = 4, description = "Validate can delete a playlist")
     public void deletePlaylistTest(){
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
