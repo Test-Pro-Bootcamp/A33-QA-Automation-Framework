@@ -9,6 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -16,22 +17,26 @@ import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
+
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.Action;
 
 
 public class BaseTest {
-  public static WebDriver driver;
+    public WebDriver driver;
+    public ThreadLocal<WebDriver> threadDriver;
     //WebDriver driver = null;
-    Actions actions = null;
-    WebDriverWait wait = null;
+    Actions actions;
+    WebDriverWait wait;
     String url;
 
-    @BeforeSuite
-    public void setupClass() {
-        WebDriverManager.chromedriver().setup();
-    }
+    //@BeforeSuite
+    //public void setupClass() {
+        //WebDriverManager.chromedriver().setup();
+    //}
     @BeforeMethod
     @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) throws MalformedURLException {
@@ -39,16 +44,20 @@ public class BaseTest {
 //        options.addArguments("--remote-allow-origins=*");
 //        driver = new ChromeDriver(options);
         //driver = new SafariDriver();
+
+        threadDriver = new ThreadLocal<>();
         driver = pickBrowser(System.getProperty("browser"));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        threadDriver.set(driver);
+
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         url = BaseURL;
-        driver.get(url);
+        getDriver().get(BaseURL);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
-        //driver.manage().window().maximize();
+        driver.manage().window().maximize();
     }
 
-    private static WebDriver pickBrowser(String browser) throws MalformedURLException {
+        public WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = "http://192.168.86.39:4444";
         switch (browser){
@@ -73,15 +82,41 @@ public class BaseTest {
             case "grid-safari":
                 caps.setCapability("browserName", "safari");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "lambda":
+                return newLambdaTest();
             default:
+                WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*","--disable-notifications","--incognito","--start-maximized");
                 return driver = new ChromeDriver(options);
         }
     }
+    public WebDriver getDriver() {
+        return threadDriver.get();
+    }
+    public WebDriver newLambdaTest() throws MalformedURLException {
+        String hubURL = "https://hub.lambdatest.com/wd/hub";
+
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("Windows 10");
+        browserOptions.setBrowserVersion("110.0");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("username", "mandyregnier3");
+        ltOptions.put("accessKey", "dAZ1MJWLcm5O21sGsHNdsBtg8VR7R5iPPEDequA8s8jKQhsrsU");
+        ltOptions.put("project", "TestProject");
+        ltOptions.put("w3c", true);
+        ltOptions.put("plugin", "java-testNG");
+        browserOptions.setCapability("LT:Options", ltOptions);
+
+        return new RemoteWebDriver(new URL(hubURL), browserOptions);
+    }
+
+
     @AfterMethod
     public void closeBrowser() {
-        driver.quit();
+        getDriver().quit();
+        threadDriver.remove();
     }
+
 }
 

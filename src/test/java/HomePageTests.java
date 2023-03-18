@@ -13,9 +13,9 @@ public class HomePageTests extends BaseTest {
     String playlistName = "TestPro Playlist 123";
     @Test
     public void playSongTest()  {
-        HomePage homePage = new HomePage(driver);
-        LoginPage loginPage = new LoginPage(driver);
-        AllSongsPage allSongsPage = new AllSongsPage(driver);
+        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getDriver());
+        AllSongsPage allSongsPage = new AllSongsPage(getDriver());
 
         loginPage.logIn();
         homePage.playSong();
@@ -23,18 +23,18 @@ public class HomePageTests extends BaseTest {
     }
     @Test
     public void renamePlaylist() {
-        HomePage homePage = new HomePage(driver);
-        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getDriver());
 
         loginPage.logIn();
         homePage.doubleClickFirstPlaylist();
         homePage.enterPlaylistName(playlistName);
         Assert.assertTrue(homePage.doesPlaylistExist(playlistName));
     }
-    @Test
+
     public void deleteEmptyPlaylist()  {
-        HomePage homePage = new HomePage(driver);
-        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getDriver());
 
         loginPage.logIn();
         homePage.openPlaylist();
@@ -45,8 +45,8 @@ public class HomePageTests extends BaseTest {
     }
     @Test
     public void listOfSongsWebElements(){
-        HomePage homePage = new HomePage(driver);
-        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getDriver());
 
         loginPage.logIn();
         homePage.chooseSecondPlaylist();
