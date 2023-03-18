@@ -15,12 +15,12 @@ public class Homework16 extends BaseTest {
     public void registrationNavigation() {
 
         //GIVEN
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
 
         //THEN
         loginPage.clickRegiBtn();
 
         //WHEN
-        Assert.assertEquals(driver.getCurrentUrl(), loginPage.getkoelRegiPage());
+        Assert.assertEquals(getDriver().getCurrentUrl(), loginPage.getkoelRegiPage());
     }
 }

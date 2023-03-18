@@ -15,8 +15,8 @@ public class Homework18 extends BaseTest {
     public void playSong(String email, String password) {
 
         //GIVEN
-        LoginPage loginPage = new LoginPage(driver);
-        SongsPage songPage = new SongsPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        SongsPage songPage = new SongsPage(getDriver());
         loginPage.inputLogIn(email, password);
 
         //THEN

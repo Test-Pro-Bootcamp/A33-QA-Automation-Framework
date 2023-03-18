@@ -77,7 +77,7 @@ public class LoginPage extends BasePage {
         inputEmail(mail);
         inputPassword(pass);
         clickSubmitBtn();
-        wait.until(ExpectedConditions.urlToBe(koelHome));
+        //wait.until(ExpectedConditions.urlToBe(koelHome));
     }
 
 

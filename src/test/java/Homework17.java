@@ -18,9 +18,9 @@ public class Homework17 extends BaseTest {
     public void addSongToPlaylist() throws InterruptedException {
 
         //GIVEN
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        RecentlyPage recentlyPage = new RecentlyPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        RecentlyPage recentlyPage = new RecentlyPage(getDriver());
         String currentPlaylistname = "PLDELTEST";
         loginPage.inputLogIn(email, password);
         homePage.createPlaylist(currentPlaylistname)
@@ -35,7 +35,8 @@ public class Homework17 extends BaseTest {
 
         //WHEN
         Assert.assertTrue(homePage.getNotification().isDisplayed());
-        homePage.openPlaylist()
+        homePage.openHome()
+                .openPlaylist()
                 .deleteFilledPlaylist();
 
         //String testPlaylist = "test";

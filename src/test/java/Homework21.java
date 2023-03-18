@@ -9,8 +9,8 @@ public class Homework21 extends BaseTest {
     public void renamePlaylistTest() {
 
         //GIVEN
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         String currentPlaylistname = "PLDELTEST";
         String newPlaylistname = "PLRNTEST";
         loginPage.inputLogIn(email, password);

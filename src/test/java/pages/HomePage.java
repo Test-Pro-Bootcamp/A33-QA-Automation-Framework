@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -38,6 +39,9 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//*[@id='playlists']  //li[@class='playlist playlist']")
     private List<WebElement> playlistLocators;
 
+    @FindBy(className = "avatar")
+    public WebElement avatar;
+
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
@@ -50,6 +54,10 @@ public class HomePage extends BasePage{
 
     private void openHomeSelf() {
         driver.get(koelHome);
+    }
+
+    public String getkoelHomePage() {
+        return koelHome;
     }
 
     private HomePage reinitializePlaylistLocators() {
@@ -117,8 +125,8 @@ public class HomePage extends BasePage{
     public HomePage deleteFullPlaylist() {
         WebElement button = driver.findElement(By.cssSelector("[class='del btn-delete-playlist']"));
         button.click();
-        WebElement okbutton = driver.findElement(By.cssSelector("button[class='ok']"));
-        okbutton.click();
+        WebElement okButton = driver.findElement(By.cssSelector("button[class='ok']"));
+        okButton.click();
         return this;
     }
 
@@ -129,6 +137,10 @@ public class HomePage extends BasePage{
 
     public WebElement isPlaylistvisible() {
         return playlistElement;
+    }
+
+    public WebElement isUserAvatarDisplayed() {
+        return avatar;
     }
 
     public WebElement getNotification(){

@@ -19,22 +19,22 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
+
 import org.openqa.selenium.edge.EdgeDriver;
 
 
 public class BaseTest {
-    static WebDriver driver;
-    Actions actions;
-    WebDriverWait wait;
-    String currentUrl = "";
-    String testUrl = "";
+    private  WebDriver driver;
+    private  Actions actions;
+    private  WebDriverWait wait;
+    private  ThreadLocal<WebDriver> threadDriver;
+    //private  ThreadLocal<WebDriver> driver;
+    String url = "";
     String password = "";
     String email = "";
-    String koelStart = "https://bbb.testpro.io/#!/login";
-    String koelHome = "https://bbb.testpro.io/#!/home";
-    String koelSongs = "https://bbb.testpro.io/#!/songs";
-    String koelRecentlyPlayed = "https://bbb.testpro.io/#!/recently-played";
 
 
     @BeforeSuite
@@ -45,14 +45,30 @@ public class BaseTest {
     @BeforeMethod
     @Parameters({"baseURL", "email", "password"})
     public void setupBrowser(String baseUrl, String mail, String pass) throws MalformedURLException {
-        //driver = pickBrowser(System.getProperty("browser"));
-        driver = pickBrowser("firefox");
-        actions = new Actions(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get(baseUrl);
+        threadDriver = new ThreadLocal<>();
+        driver = pickBrowser(System.getProperty("browser"));
+        //driver = pickBrowser("cloud");
+        threadDriver.set(driver);
+        System.out.println("Thread " + Thread.currentThread().getId() + " is starting setupBrowser method...");
+
+
+        actions = new Actions(getDriver());
+        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        url = baseUrl;
+        getDriver().get(url);
         password = pass;
         email = mail;
+    }
+
+    @AfterMethod
+    public void exitBrowser() {
+        getDriver().quit();
+        threadDriver.remove();
+    }
+
+    public WebDriver getDriver() {
+        return threadDriver.get();
     }
 
     private static WebDriver pickBrowser(String browser) throws MalformedURLException {
@@ -74,6 +90,8 @@ public class BaseTest {
             case "grid-chrome":
                 caps.setCapability("browserName", "chrome");
                 return new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+            case "cloud":
+                return newLambdaTest();
             default:
                 ChromeOptions option = new ChromeOptions();
                 option.addArguments("--remote-allow-origins=*", "--disable-notifications");
@@ -81,11 +99,23 @@ public class BaseTest {
         }
     }
 
-    @AfterMethod
-    public void exitBrowser() {
-        driver.quit();
+    public static WebDriver newLambdaTest() throws MalformedURLException {
+        String hubURL = "https://hub.lambdatest.com/wd/hub";
+
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("Windows 10");
+        browserOptions.setBrowserVersion("110.0");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("username", "naturewlf");
+        ltOptions.put("accessKey", "WHJFwqnp7dyUjIwDIDPCycNjX2UsGb4ZUNBirWaG0wo0gR3s9n");
+        ltOptions.put("project", "Untitled");
+        ltOptions.put("w3c", true);
+        browserOptions.setCapability("LT:Options", ltOptions);
+
+        return new RemoteWebDriver(new URL(hubURL), browserOptions);
     }
 
+    /* All the code that got moved to pages for memories
     public void openLoginURL() {
         driver.get(koelStart);
     }
@@ -262,4 +292,6 @@ public class BaseTest {
         WebElement playlistTxtbox = driver.findElement(By.cssSelector("input[name='name']"));
         playlistTxtbox.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE),name, Keys.ENTER);
     }
+
+     */
 }

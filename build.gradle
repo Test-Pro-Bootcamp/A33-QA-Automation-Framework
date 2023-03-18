@@ -21,6 +21,13 @@ test {
     }
 }
 
+task hw25(type: Test) {
+    useTestNG() {
+        suites "src/test/resources/hw25NG.xml"
+        systemProperty "browser", System.getProperty("browser")
+    }
+}
+
 task hw21(type: Test) {
     useTestNG() {
         suites "src/test/resources/hw21NG.xml"

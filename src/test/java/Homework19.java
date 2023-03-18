@@ -14,14 +14,15 @@ public class Homework19 extends BaseTest {
     public void deletePlaylistTest() {
 
         //GIVEN
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         String currentPlaylistname = "PLDELTEST";
         loginPage.inputLogIn(email, password);
         homePage.createPlaylist(currentPlaylistname);
 
         //THEN
         homePage.findPlaylist(currentPlaylistname)
+                .openHome()
                 .openPlaylist()
                 .deleteEmptyPlaylist();
 
