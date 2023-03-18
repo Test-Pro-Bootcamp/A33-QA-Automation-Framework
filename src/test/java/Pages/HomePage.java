@@ -98,7 +98,6 @@ public class HomePage extends BasePage {
     public void renamePlaylist(String newPlaylistName) {
         WebElement enterPlaylistName = wait.until(ExpectedConditions.elementToBeClickable(enterPlaylistNames));
         enterPlaylistName.sendKeys((Keys.chord(Keys.COMMAND + "a")));
-        enterPlaylistName.sendKeys(Keys.BACK_SPACE);
         enterPlaylistName.sendKeys(newPlaylistName);
         enterPlaylistName.sendKeys(Keys.ENTER);
     }
