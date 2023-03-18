@@ -66,8 +66,8 @@ public class HomePage extends BasePage {
         return this;
     }
     public static boolean newPlaylistIsDisplayed(){
-        WebElement newPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector
-                ("a[class='active']")));
+        WebElement newPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath
+                ("//a[contains(text(),'Sleepy Songs')]")));
         return newPlaylist.isDisplayed();
     }
     public HomePage searchASong(String songName){
@@ -110,6 +110,13 @@ public class HomePage extends BasePage {
     }
     public HomePage deleteExistingPlaylist(){
         wait.until(ExpectedConditions.visibilityOf(clickXPlaylistButton)).click();
+        return this;
+    }
+    public HomePage deleteFullPlaylist() {
+        WebElement button = driver.findElement(By.cssSelector("[class='del btn-delete-playlist']"));
+        button.click();
+        WebElement okButton = driver.findElement(By.cssSelector("button[class='ok']"));
+        okButton.click();
         return this;
     }
     public static boolean getNotificationMessage(){
