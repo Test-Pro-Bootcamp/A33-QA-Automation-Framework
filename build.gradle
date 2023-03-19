@@ -19,11 +19,6 @@ test {
     useTestNG() {
         suites "src/test/resources/TestNG.xml"
     }
-
-test {
-    useTestNG() {
-        suites "src/test/resources/Homework18.xml"
-    }
 }
 
 task testSmoke(type: Test) {
@@ -38,4 +33,3 @@ task testRegression(type: Test) {
      }
 }
 
-}
