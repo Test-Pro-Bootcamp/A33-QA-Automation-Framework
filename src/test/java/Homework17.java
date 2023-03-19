@@ -28,7 +28,7 @@ public class Homework17 extends BaseTest {
                 .openHome();
 
         //THEN
-        recentlyPage.clickViewAll()
+        recentlyPage.openRecently()
                     .songContextMenu()
                     .addtoContextMenu()
                     .addtoPlaylistMenu(currentPlaylistname);
