@@ -28,7 +28,7 @@ public class Homework17 extends BaseTest {
                 .openHome();
 
         //THEN
-        recentlyPage.clickViewAll()
+        recentlyPage.openRecently()
                     .clickFirstSong()
                     .addToBtn()
                     .clickPlaylistfromAddto(currentPlaylistname);
