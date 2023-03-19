@@ -7,7 +7,7 @@
     <parameter name="email" value="Test321@gmail.com"/>
     <parameter name="password" value="te$t$tudent"/>
 
-    <test name="Basically Regression" preserve-order="false">
+    <test name="Basically Regression" preserve-order="true">
         <classes>
             <class name="Homework16"/>
             <class name="Homework17"/>
