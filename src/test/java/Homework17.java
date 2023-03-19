@@ -28,17 +28,17 @@ public class Homework17 extends BaseTest {
                 .openHome();
 
         //THEN
-        recentlyPage.openRecently()
-                    .songContextMenu()
-                    .addtoContextMenu()
-                    .addtoPlaylistMenu(currentPlaylistname);
+        recentlyPage.clickViewAll()
+                    .clickFirstSong()
+                    .addToBtn()
+                    .clickPlaylistfromAddto(currentPlaylistname);
 
         //WHEN
         Assert.assertTrue(homePage.getNotification().isDisplayed());
         System.out.print("Above worked");
         homePage.findPlaylist(currentPlaylistname)
                 .openPlaylist()
-                .playlistContextDelete();
+                .deleteFilledPlaylist();
 
         //String testPlaylist = "test";
         //logIn();
