@@ -45,6 +45,7 @@ public class RecentlyPage extends BasePage{
     }
 
     public RecentlyPage clickViewAll() {
+        wait.until(ExpectedConditions.elementToBeClickable((viewAllBtnLocator)));
         viewAllBtnLocator.click();
         return this;
     }

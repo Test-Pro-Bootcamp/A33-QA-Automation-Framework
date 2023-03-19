@@ -114,11 +114,13 @@ public class HomePage extends BasePage{
     }
 
     public HomePage deleteEmptyPlaylist() {
+        wait.until(ExpectedConditions.elementToBeClickable((deleteBtn)));
         deleteBtn.click();
         return this;
     }
 
     public HomePage deleteFilledPlaylist() {
+        wait.until(ExpectedConditions.elementToBeClickable((deleteBtn)));
         deleteBtn.click();
         okBtn.click();
         return this;
