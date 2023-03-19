@@ -28,10 +28,10 @@ public class Homework17 extends BaseTest {
                 .openHome();
 
         //THEN
-        recentlyPage.openRecently()
-                    .clickFirstSong()
-                    .addToBtn()
-                    .clickPlaylistfromAddto(currentPlaylistname);
+        recentlyPage.clickViewAll()
+                    .songContextMenu()
+                    .addtoContextMenu()
+                    .addtoPlaylistMenu(currentPlaylistname);
 
         //WHEN
         Assert.assertTrue(homePage.getNotification().isDisplayed());
