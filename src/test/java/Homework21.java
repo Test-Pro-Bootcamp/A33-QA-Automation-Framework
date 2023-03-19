@@ -17,15 +17,11 @@ public class Homework21 extends BaseTest {
 
         //THEN
         homePage.createPlaylist(currentPlaylistname)
-                .openHome()
-                .findPlaylist(currentPlaylistname)
-                .startRenamingPlaylist()
+                .startRenameActivePlaylist()
                 .inputPlaylistName(newPlaylistname);
-        System.out.printf(homePage.confirmPlaylistNameChange(newPlaylistname));
 
         //WHEN
-        Assert.assertTrue(homePage.isPlaylistvisible().isDisplayed());
-        homePage.openPlaylist()
-                .deleteEmptyPlaylist();
+        Assert.assertTrue(homePage.confirmPlaylistNameChange(newPlaylistname));
+        homePage.deleteEmptyPlaylist();
     }
 }

@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
 
 import java.util.List;
 
@@ -41,8 +40,11 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//*[@id='playlists']  //li[@class='playlist playlist']")
     private List<WebElement> playlistLocators;
 
+    @FindBy(xpath = "//*[@id='playlists']  //li[@class='playlist playlist'] //a[@class='active']")
+    private WebElement activePlaylist;
+
     @FindBy(className = "avatar")
-    public WebElement avatar;
+    private WebElement avatar;
 
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
@@ -155,12 +157,18 @@ public class HomePage extends BasePage{
         return popUpnotification.getText();
     }
 
-    public String confirmPlaylistNameChange(String searchText) {
-        for (WebElement locator : playlistLocators) {
-            if (locator.getText().contains(searchText)) {
-                return "true";
+    public boolean confirmPlaylistNameChange(String searchText) {
+        if (activePlaylist.getText().contains(searchText)) {
+                return true;
             }
+        else {
+            return false;
         }
-        return "false";
+    }
+
+    public HomePage startRenameActivePlaylist() {
+        wait.until(ExpectedConditions.visibilityOf(activePlaylist));
+        doubleClickElement(activePlaylist);
+        return this;
     }
 }

@@ -13,17 +13,13 @@ public class Homework19 extends BaseTest {
     @Test
     public void deletePlaylistTest() {
 
-        //GIVEN
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
         String currentPlaylistname = "PLDELTEST";
         loginPage.inputLogIn(email, password);
         homePage.createPlaylist(currentPlaylistname)
-
-        //THEN
                 .deleteEmptyPlaylist();
 
-        //WHEN
         Assert.assertTrue(homePage.getNotification().isDisplayed());
     }
 }
