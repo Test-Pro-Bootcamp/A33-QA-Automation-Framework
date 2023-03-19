@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class Homework18 extends BaseTest{
     @Test
-    public void playASongTest() throws InterruptedException {
+    public void playASongTest() {
         login("demo@class.com", "te$t$tudent");
         playSong();
         Assert.assertTrue(isSongPlaying());

@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import java.time.Duration;
@@ -13,6 +15,8 @@ public class BaseTest {
 
     public WebDriver driver = null;
     public String url = null;
+
+    public WebDriverWait wait = null;
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -24,6 +28,8 @@ public class BaseTest {
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         url = BaseURL;
         driver.get(url);
     }
@@ -32,22 +38,19 @@ public class BaseTest {
         driver.quit();
     }
 
-//    public void navigateToPage() {
-//        String url = "https://bbb.testpro.io/";
-//        driver.get(url);
-//    }
-    public void login(String email, String password) throws InterruptedException {
+    public void login(String email, String password)  {
         provideEmail(email);
         providePassword(password);
         clickSubmit();
     }
-    public void clickSubmit() throws InterruptedException {
+    public void clickSubmit()  {
         WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
         submitButton.click();
-        Thread.sleep(2000);
     }
     public void providePassword(String password) {
         WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
+        wait.until(ExpectedConditions.elementToBeClickable(passwordField));// use this when method only take WebElement
+
         passwordField.clear();
         passwordField.sendKeys(password);
     }

@@ -13,19 +13,17 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
     @Test(enabled = true, priority = 1, description = "LoginValidEmailValidPasswordTest")
-    public void loginValidEmailValidPasswordTest () throws InterruptedException {
+    public void loginValidEmailValidPasswordTest () {
 
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
         clickSubmit();
 
-        Thread.sleep(2000);
         WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
         Assert.assertTrue(avatarIcon.isDisplayed());
-
     }
     @Test(enabled = true, priority = 2, description = "LoginInvalidEmailValidPasswordTest")
-    public void loginInvalidEmailValidPasswordTest () throws InterruptedException {
+    public void loginInvalidEmailValidPasswordTest () {
 
         provideEmail("invalid@class.com");
         providePassword("te$t$tudent");

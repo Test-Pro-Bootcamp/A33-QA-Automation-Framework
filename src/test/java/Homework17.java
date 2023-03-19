@@ -17,31 +17,27 @@ public class Homework17 extends BaseTest {
         Assert.assertTrue(getNotificationText().contains(newSongAddedNotificationText));
 
     }
-    public void searchSong (String songTitleKeyword) throws InterruptedException{
+    public void searchSong (String songTitleKeyword)  {
         WebElement searchField = driver.findElement(By.cssSelector("div#searchForm input[type=search]"));
         searchField.sendKeys(songTitleKeyword);
-        Thread.sleep(2000);
     }
-    public void clickViewAllBtn () throws InterruptedException{
+    public void clickViewAllBtn ()  {
         WebElement viewAllSearchResult = driver.findElement(By.cssSelector("div.results section.songs h1 button"));
         viewAllSearchResult.click();
-        Thread.sleep(2000);
     }
-    public void selectFirstSongResult() throws InterruptedException {
+    public void selectFirstSongResult()   {
         WebElement firstSongResult = driver.findElement(By.cssSelector("section#songResultsWrapper tr.song-item td.title"));
         firstSongResult.click();
-        Thread.sleep(2000);
     }
-    public void clickAddToBtn() throws InterruptedException {
+    public void clickAddToBtn()   {
         WebElement addToBtn = driver.findElement(By.cssSelector("button.btn-add-to"));
         addToBtn.click();
-        Thread.sleep(2000);
+
     }
-    public void choosePlaylist() throws InterruptedException {
+    public void choosePlaylist()  {
 //       We created a playlist named "Test Pro Playlist"
         WebElement playlistElement = driver.findElement(By.xpath("//section[@id ='songResultsWrapper']//li[contains(text(),'Test Pro Playlist')]"));
         playlistElement.click();
-        Thread.sleep(2000);
     }
     public String getNotificationText(){
         WebElement notificationElement = driver.findElement(By.cssSelector("div.success.show"));
