@@ -29,7 +29,7 @@ public class HomePage extends BasePage{
     @FindBy(css = "[data-testid='playlist-context-menu-create-simple']")
     private WebElement simplePlaylist;
 
-    @FindBy(css = "[class='del btn-delete-playlist']")
+    @FindBy(css = "button[title='Delete this playlist']")
     private WebElement deleteBtn;
 
     @FindBy(css = "button[class='ok']")
