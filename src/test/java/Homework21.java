@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import java.time.Duration;
+import Pages.LoginPage;
 public class Homework21 extends BaseTest {
 
     @Test
@@ -29,4 +30,3 @@ public class Homework21 extends BaseTest {
     }
 
     }
-//}

@@ -50,6 +50,8 @@ public class BaseTest {
         driver.quit();
     }
 
+
+
     public void enterEmail() {
         WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
         emailField.click();
@@ -62,11 +64,10 @@ public class BaseTest {
         passwordField.sendKeys("te$t$tudent");
     }
 
-    public void submit()  {
-       // WebElement submitButton = driver.findElement(By.cssSelector("[type='submit']"));
+    public void submit() {
+        // WebElement submitButton = driver.findElement(By.cssSelector("[type='submit']"));
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='submit']"))).click();
         //submitButton.click();
-
     }
 
     public void searchForSong()  {
