@@ -38,7 +38,7 @@ public class Homework17 extends BaseTest {
         System.out.print("Above worked");
         homePage.findPlaylist(currentPlaylistname)
                 .openPlaylist()
-                .deleteFilledPlaylist();
+                .playlistContextDelete();
 
         //String testPlaylist = "test";
         //logIn();

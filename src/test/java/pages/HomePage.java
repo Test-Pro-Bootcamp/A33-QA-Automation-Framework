@@ -155,6 +155,17 @@ public class HomePage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf((contextdeleteBtn)));
         wait.until(ExpectedConditions.elementToBeClickable((contextdeleteBtn)));
         contextdeleteBtn.click();
+        wait.until(ExpectedConditions.elementToBeClickable((okBtn)));
+        okBtn.click();
+        return this;
+    }
+
+    public HomePage filledplaylistContextDelete() {
+        wait.until(ExpectedConditions.elementToBeClickable((activePlaylist)));
+        actions.contextClick(activePlaylist).perform();
+        wait.until(ExpectedConditions.visibilityOf((contextdeleteBtn)));
+        wait.until(ExpectedConditions.elementToBeClickable((contextdeleteBtn)));
+        contextdeleteBtn.click();
         return this;
     }
 
