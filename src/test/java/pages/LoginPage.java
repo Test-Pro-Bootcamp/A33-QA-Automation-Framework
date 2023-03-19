@@ -54,6 +54,7 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage clickSubmitBtn() {
+        wait.until(ExpectedConditions.elementToBeClickable((submitButtonLocator)));
         submitButtonLocator.click();
         return this;
     }

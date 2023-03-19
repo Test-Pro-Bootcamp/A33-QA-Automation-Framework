@@ -11,8 +11,7 @@ import java.time.Duration;
 public class Homework18 extends BaseTest {
 
     @Test
-    @Parameters({"email", "password"})
-    public void playSong(String email, String password) {
+    public void playSong() {
 
         //GIVEN
         LoginPage loginPage = new LoginPage(getDriver());
@@ -21,9 +20,9 @@ public class Homework18 extends BaseTest {
 
         //THEN
         songPage.openAllSongs()
-                .playFirstSong();
+                .playFirstSong()
 
         //WHEN
-        Assert.assertTrue(songPage.getMixer().isDisplayed());
+                .isMixerVisible();
     }
 }

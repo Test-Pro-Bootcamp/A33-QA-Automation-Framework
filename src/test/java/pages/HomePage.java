@@ -31,6 +31,10 @@ public class HomePage extends BasePage{
     @FindBy(css = "button[title='Delete this playlist']")
     private WebElement deleteBtn;
 
+    @FindBy(xpath = "//li[contains(text(),'Delete')]")
+    private WebElement contextdeleteBtn;
+    //WebElement playlistAddto = driver.findElement(By.xpath("//*[@id='recentlyPlayedWrapper'] //li[contains(text(),'" + searchText + "')]"));
+
     @FindBy(css = "button[class='ok']")
     private WebElement okBtn;
 
@@ -52,6 +56,7 @@ public class HomePage extends BasePage{
 
 
     public HomePage openHome() {
+        wait.until(ExpectedConditions.elementToBeClickable((homePage)));
         homePage.click();
         return this;
     }
@@ -74,7 +79,9 @@ public class HomePage extends BasePage{
     }
 
     public HomePage createPlaylist(String name) {
+        wait.until(ExpectedConditions.elementToBeClickable((playlistPlusBtn)));
         wait.until(ExpectedConditions.visibilityOf(playlistPlusBtn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable((simplePlaylist)));
         wait.until(ExpectedConditions.visibilityOf(simplePlaylist)).click();
         inputPlaylistName(name);
         reinitializePlaylistLocators();
@@ -90,7 +97,6 @@ public class HomePage extends BasePage{
     public HomePage findPlaylist(String searchText) {
         //WebElement testPlaylist = driver.findElement(By.xpath("//*[@id='playlists']  //li[@class='playlist playlist']  //a[contains(text(),'" + searchText + "')]"));
         //playlistElement = testPlaylist;
-        List<WebElement> locators  = getPlaylistLocators();
         for (WebElement locator : playlistLocators) {
             if (locator.getText().contains(searchText)) {
                 playlistElement = locator;
@@ -130,15 +136,25 @@ public class HomePage extends BasePage{
     }
 
     public HomePage deleteFullPlaylist() {
-        WebElement button = driver.findElement(By.cssSelector("[class='del btn-delete-playlist']"));
-        button.click();
-        WebElement okButton = driver.findElement(By.cssSelector("button[class='ok']"));
-        okButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable((deleteBtn)));
+        deleteBtn.click();
+        wait.until(ExpectedConditions.elementToBeClickable((deleteBtn)));
+        okBtn.click();
         return this;
     }
 
     public HomePage openPlaylist() {
+        wait.until(ExpectedConditions.elementToBeClickable((playlistElement)));
         playlistElement.click();
+        return this;
+    }
+
+    public HomePage playlistContextDelete() {
+        wait.until(ExpectedConditions.elementToBeClickable((activePlaylist)));
+        actions.contextClick(activePlaylist).perform();
+        wait.until(ExpectedConditions.visibilityOf((contextdeleteBtn)));
+        wait.until(ExpectedConditions.elementToBeClickable((contextdeleteBtn)));
+        contextdeleteBtn.click();
         return this;
     }
 

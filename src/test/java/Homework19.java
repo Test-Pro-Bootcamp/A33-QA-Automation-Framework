@@ -18,7 +18,7 @@ public class Homework19 extends BaseTest {
         String currentPlaylistname = "PLDELTEST";
         loginPage.inputLogIn(email, password);
         homePage.createPlaylist(currentPlaylistname)
-                .deleteEmptyPlaylist();
+                .playlistContextDelete();
 
         Assert.assertTrue(homePage.getNotification().isDisplayed());
     }

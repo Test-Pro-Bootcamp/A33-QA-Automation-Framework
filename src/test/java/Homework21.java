@@ -22,6 +22,6 @@ public class Homework21 extends BaseTest {
 
         //WHEN
         Assert.assertTrue(homePage.confirmPlaylistNameChange(newPlaylistname));
-        homePage.deleteEmptyPlaylist();
+        homePage.playlistContextDelete();
     }
 }
