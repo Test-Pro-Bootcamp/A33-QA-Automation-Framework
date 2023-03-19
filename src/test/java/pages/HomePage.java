@@ -130,16 +130,9 @@ public class HomePage extends BasePage{
     public HomePage deleteFilledPlaylist() {
         wait.until(ExpectedConditions.elementToBeClickable((deleteBtn)));
         deleteBtn.click();
-        wait.until(ExpectedConditions.elementToBeClickable((okBtn)));
-        okBtn.click();
-        return this;
-    }
-
-    public HomePage deleteFullPlaylist() {
-        wait.until(ExpectedConditions.elementToBeClickable((deleteBtn)));
-        deleteBtn.click();
-        wait.until(ExpectedConditions.elementToBeClickable((deleteBtn)));
-        okBtn.click();
+        actions.sendKeys(Keys.chord(Keys.ENTER));
+        //wait.until(ExpectedConditions.elementToBeClickable((okBtn)));
+        //okBtn.click();
         return this;
     }
 
@@ -154,9 +147,8 @@ public class HomePage extends BasePage{
         actions.contextClick(activePlaylist).perform();
         wait.until(ExpectedConditions.visibilityOf((contextdeleteBtn)));
         wait.until(ExpectedConditions.elementToBeClickable((contextdeleteBtn)));
+        System.out.println(contextdeleteBtn);
         contextdeleteBtn.click();
-        wait.until(ExpectedConditions.elementToBeClickable((okBtn)));
-        okBtn.click();
         return this;
     }
 
@@ -165,7 +157,9 @@ public class HomePage extends BasePage{
         actions.contextClick(activePlaylist).perform();
         wait.until(ExpectedConditions.visibilityOf((contextdeleteBtn)));
         wait.until(ExpectedConditions.elementToBeClickable((contextdeleteBtn)));
-        contextdeleteBtn.click();
+        actions.sendKeys(Keys.chord(Keys.ENTER));
+        //System.out.println(contextdeleteBtn);
+        //contextdeleteBtn.click();
         return this;
     }
 
