@@ -37,7 +37,7 @@ public class RecentlyPage extends BasePage{
     private WebElement addtoContextmenu;
 
     @FindBy(xpath = "//li[@class='has-sub'] //li[@class='playlist']")
-    private List<WebElement> addtoPlaylistmenu;
+    private List<WebElement> playlistmenuAddtoContextmenu;
 
     @FindBy(css = "button[class='btn-add-to']")
     private WebElement addToLocator;
@@ -86,7 +86,7 @@ public class RecentlyPage extends BasePage{
     }
 
     public RecentlyPage addtoPlaylistMenu(String searchText) {
-        for (WebElement locator : addtoPlaylistmenu) {
+        for (WebElement locator : playlistmenuAddtoContextmenu) {
             if (locator.getText().contains(searchText)) {
                 locator.click();
                 break;

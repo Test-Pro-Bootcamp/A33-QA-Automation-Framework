@@ -40,7 +40,8 @@ public class SongsPage extends BasePage{
     @FindBy(css = "li[class='playback']")
     private WebElement playContextmenu;
 
-
+    @FindBy(css = "li[class='has-sub']")
+    private WebElement addtoContextmenu;
 
 
 
@@ -79,7 +80,19 @@ public class SongsPage extends BasePage{
         return pauseButton;
     }
 
+    public SongsPage addtoContextMenu() {
+        wait.until(ExpectedConditions.visibilityOf(addtoContextmenu));
+        wait.until(ExpectedConditions.elementToBeClickable((addtoContextmenu)));
+        addtoContextmenu.click();
+        return this;
+    }
 
+    public SongsPage clickPlaylistfromAddto(String searchText) {
+        WebElement playlistAddto = driver.findElement(By.xpath("//li[@class='has-sub'] //li[contains(text(),'" + searchText + "')]"));
+        wait.until(ExpectedConditions.elementToBeClickable((playlistAddto)));
+        playlistAddto.click();
+        return this;
+    }
 
     public void isMixerVisible() {
         Assert.assertTrue(mixer.isDisplayed());

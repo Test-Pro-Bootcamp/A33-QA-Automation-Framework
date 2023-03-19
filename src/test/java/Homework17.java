@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.RecentlyPage;
+import pages.SongsPage;
 
 
 import java.time.Duration;
@@ -20,6 +21,7 @@ public class Homework17 extends BaseTest {
         //GIVEN
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
+        SongsPage songsPage = new SongsPage(getDriver());
         RecentlyPage recentlyPage = new RecentlyPage(getDriver());
         String currentPlaylistname = "PLDELTEST";
         loginPage.inputLogIn(email, password);
@@ -28,14 +30,19 @@ public class Homework17 extends BaseTest {
                 .openHome();
 
         //THEN
-        recentlyPage.openRecently()
-                    .clickFirstSong()
-                    .addToBtn()
-                    .clickPlaylistfromAddto(currentPlaylistname);
+//        recentlyPage.clickViewAll()
+//                    .clickFirstSong()
+//                    .addToBtn()
+//                    .clickPlaylistfromAddto(currentPlaylistname);
+
 //        recentlyPage.openRecently()
 //                .songContextMenu()
 //                        .addtoContextMenu()
 //                                .addtoPlaylistMenu(currentPlaylistname);
+        songsPage.openAllSongs()
+                .songContextMenu()
+                .addtoContextMenu()
+                .clickPlaylistfromAddto(currentPlaylistname);
 
         //WHEN
         Assert.assertTrue(homePage.getNotification().isDisplayed());
