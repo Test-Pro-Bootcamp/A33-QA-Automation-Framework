@@ -25,7 +25,7 @@ public class RecentlyPage extends BasePage{
     @FindBy(css = "#recentlyPlayedWrapper [class='song-item']:nth-child(1)")
     private WebElement firstSong;
 
-    @FindBy(xpath = "//button[contains(text(),'View All')]")
+    @FindBy(xpath = "//h1 //*[contains(text(),'View All')]")
     //@FindBy(xpath = "//a[@href='#!/recently-played']")
     //@FindBy(css = "button[data-testid='home-view-all-recently-played-btn']")
     private WebElement viewAllBtnLocator;
