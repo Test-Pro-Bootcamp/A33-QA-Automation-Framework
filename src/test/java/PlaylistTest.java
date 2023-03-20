@@ -19,6 +19,7 @@ import pages.AllSongsPage;
 import pages.HomePage;
 import pages.LoginPage;
 
+import java.net.MalformedURLException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
@@ -28,13 +29,12 @@ public class PlaylistTest extends BaseTest {
 
 
     @Test
-    public void createPlaylistAddSong() {
+    public void createPlaylistAddSong() throws MalformedURLException {
         //GIVEN
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongPage = new AllSongsPage(driver);
         //WHEN
-        setupClass();
         loginPage.loginPageTest();
         homePage.createPlaylist();
         //THEN

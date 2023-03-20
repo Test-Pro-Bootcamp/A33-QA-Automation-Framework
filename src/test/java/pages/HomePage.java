@@ -58,11 +58,9 @@ public class HomePage extends BasePage {
     }
 
     public HomePage createPlaylist() {
-        wait.until(ExpectedConditions.elementToBeClickable(playlistNewBtn));
-        playlistNewBtn.click();
-        wait.until(ExpectedConditions.elementToBeClickable(playlistContextMenu));
-        playlistContextMenu.click();
-        playlistInputField.sendKeys(newNameTest, Keys.RETURN);
+        wait.until(ExpectedConditions.elementToBeClickable(playlistNewBtn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(playlistContextMenu)).click();
+        playlistInputField.sendKeys((Keys.chord(newNameTest, Keys.RETURN)));
         return this;
     }
 
