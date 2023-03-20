@@ -28,6 +28,7 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
+
     @AfterMethod
     public static void closeDownBrowser() {
         driver.quit();
