@@ -16,8 +16,8 @@ import org.testng.annotations.BeforeSuite;
 import static org.openqa.selenium.By.cssSelector;
 
 public class BasePage {
-    WebDriver driver;
-    WebDriverWait wait;
+    static WebDriver driver;
+    static WebDriverWait wait;
     Actions actions;
 
     public BasePage(WebDriver givenDriver){
