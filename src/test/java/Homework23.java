@@ -9,8 +9,13 @@ public class Homework23 extends BaseTest{
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
 
-        loginPage.enterPassword("vasilinapelo@gmail.com").enterPassword("vasilina230109!").clickSubmit();
-        homePage.doubleClickPlaylist().enterNewPlaylistName();
+        loginPage
+                .enterEmail("vasilinapelo@gmail.com")
+                .enterPassword("vasilina230109!")
+                .clickSubmit();
+        homePage
+                .doubleClickPlaylist()
+                .enterNewPlaylistName();
         Assert.assertTrue(homePage.checkNewPlaylist());
     }
 }

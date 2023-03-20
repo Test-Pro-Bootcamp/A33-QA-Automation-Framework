@@ -43,6 +43,7 @@ Actions actions;
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         wait = new WebDriverWait(driver,Duration.ofSeconds(20));
         actions = new Actions(driver);
         url = BaseURL;
