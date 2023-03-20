@@ -9,4 +9,11 @@
             <class name="BaseTest"/>
         </classes>
     </test>
+
+    <test name="homework17 Test" preserve-order="false">
+        <classes>
+            <class name="Homework17"/>
+        </classes>
+    </test>
+
 </suite>
