@@ -1,14 +1,9 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 
-import static org.openqa.selenium.By.cssSelector;
-
-public class Homework22 extends BaseTest{
+public class Homework23 extends BaseTest{
 
     @Test//(dataProvider = "loginData")
     public void renamePlaylist(){

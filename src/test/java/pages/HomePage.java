@@ -5,6 +5,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasePage;
@@ -18,15 +20,22 @@ public class HomePage extends BasePage {
         super(givenDriver);
     }
     //locators
-    private By playList = By.xpath(("//*[@id=\"playlists\"]/ul/li[3]/a"));
-    private By xButton = cssSelector(("button[title='Delete this playlist']"));
-    private By editOption = By.xpath(("//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]"));;
-    private By textField = cssSelector(("input[name='name']"));
-    private By avatarIcon = cssSelector(("img.avatar"));
-    private By newPlayList = By.cssSelector("li>a.active");
-    private By successMessage = By.cssSelector("#nprogress");
-    static By notificationMessage = cssSelector("div.success.show");
-
+    @FindBy(css = "button[title='Delete this playlist']")
+    WebElement xButton;
+    @FindBy(css = "input[name='name']")
+    WebElement textField;
+    @FindBy(css = "img.avatar")
+    WebElement avatarIcon;
+    @FindBy(css = "li>a.active")
+    WebElement newPlayList;
+    @FindBy(css = "#nprogress")
+    WebElement successMessage;
+    @FindBy(css = "div.success.show")
+    static WebElement notificationMessage;
+    @FindBy(xpath = "//*[@id=\"playlists\"]/ul/li[3]/a")
+    WebElement playList;
+    @FindBy(xpath = "//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]")
+    WebElement editOption;
     public void clickPlayList() {
         WebElement clickOnPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(playList));
         actions.contextClick(clickOnPlaylist).perform();
