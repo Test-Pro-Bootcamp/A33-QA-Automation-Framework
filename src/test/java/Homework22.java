@@ -15,7 +15,6 @@ public class Homework22 extends BaseTest{
         homePage.doubleClickPlaylist();
         homePage.enterNewPlaylistName();
         Assert.assertTrue(homePage.checkNewPlaylist());
-        
 
     }
 }
