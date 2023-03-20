@@ -1,3 +1,5 @@
+package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -5,29 +7,25 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
+import pages.BasePage;
 
 import static org.openqa.selenium.By.cssSelector;
 
 public class HomePage extends BasePage {
-    static WebDriver driver;
-    static WebDriverWait wait;
-    public static Actions actions;
     static String newPlayListName = "New Playlist";
 
     public HomePage(WebDriver givenDriver){
         super(givenDriver);
     }
     //locators
-    By playList = By.xpath(("//*[@id=\"playlists\"]/ul/li[3]/a"));
-    By xButton = cssSelector(("button[title='Delete this playlist']"));
-    By notificationMessage = cssSelector(("div.success.show"));
-    By editOption = By.xpath(("//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]"));;
-    By textField = cssSelector(("input[name='name']"));
-    By avatarIcon = cssSelector(("img.avatar"));
-    static By newPlayList = By.cssSelector("li>a.active");
-    static By successMessage = By.cssSelector("#nprogress");
+    private By playList = By.xpath(("//*[@id=\"playlists\"]/ul/li[3]/a"));
+    private By xButton = cssSelector(("button[title='Delete this playlist']"));
+    private By editOption = By.xpath(("//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]"));;
+    private By textField = cssSelector(("input[name='name']"));
+    private By avatarIcon = cssSelector(("img.avatar"));
+    private By newPlayList = By.cssSelector("li>a.active");
+    private By successMessage = By.cssSelector("#nprogress");
+    static By notificationMessage = cssSelector(("div.success.show"));
 
     public void clickPlayList() {
         WebElement clickOnPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(playList));
@@ -43,7 +41,7 @@ public class HomePage extends BasePage {
         textBox.sendKeys(name);
         textBox.sendKeys(Keys.ENTER);
     }
-    public static boolean verifyNewPlayListNameUpdated() {
+    public boolean verifyNewPlayListNameUpdated() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
         WebElement newPlaylistName = driver.findElement(successMessage);
         return newPlaylistName.isDisplayed();
@@ -61,9 +59,8 @@ public class HomePage extends BasePage {
         WebElement deleteElement = wait.until(ExpectedConditions.elementToBeClickable(playList));
         deleteElement.click();
     }
-    public boolean verifyNotification(){
+    public static boolean verifyNotification(){
         WebElement messageElement = wait.until(ExpectedConditions.visibilityOfElementLocated(notificationMessage));
         return messageElement.isDisplayed();
     }
-
 }
