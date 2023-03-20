@@ -37,28 +37,21 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]")
     WebElement editOption;
     public void clickPlayList() {
-        WebElement clickOnPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(playList));
-        actions.contextClick(clickOnPlaylist).perform();
+        actions.contextClick(playList).perform();
     }
     public void chooseEdit() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(editOption)).click();
+        editOption.click();
     }
     public void renamePlayListName(String name) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(textField));
-        WebElement textBox = driver.findElement(textField);
-        textBox.sendKeys((Keys.chord(Keys.COMMAND,"a",Keys.SPACE)));
-        textBox.sendKeys(name);
-        textBox.sendKeys(Keys.ENTER);
+        textField.sendKeys((Keys.chord(Keys.COMMAND,"a",Keys.SPACE)));
+        textField.sendKeys(name);
+        textField.sendKeys(Keys.ENTER);
     }
     public boolean verifyNewPlayListNameUpdated() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
-        WebElement newPlaylistName = driver.findElement(successMessage);
-        return newPlaylistName.isDisplayed();
+        return successMessage.isDisplayed();
     }
     public boolean verifyAvatarIcon(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(avatarIcon));
-        WebElement findAvatar = driver.findElement(avatarIcon);
-        return findAvatar.isDisplayed();
+        return avatarIcon.isDisplayed();
     }
     public void clickXPlaylist() {
         WebElement clickX = wait.until(ExpectedConditions.elementToBeClickable(xButton));
@@ -69,8 +62,6 @@ public class HomePage extends BasePage {
         deleteElement.click();
     }
     public static boolean verifyNotification(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationMessage));
-        WebElement messageElement = driver.findElement((notificationMessage));
-        return messageElement.isDisplayed();
+        return notificationMessage.isDisplayed();
     }
 }

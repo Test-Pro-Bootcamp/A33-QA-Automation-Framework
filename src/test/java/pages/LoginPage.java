@@ -3,28 +3,29 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasePage;
 
 public class LoginPage extends BasePage {
     //locators
-    private By enterEmailAddress = By.cssSelector(("[type = 'email']"));
-    private By passwordField = By.cssSelector(("[type='password']"));
-    private By submitButton = By.cssSelector(("[type='submit']"));
+    @FindBy(css = "[type = 'email']")
+    private WebElement enterEmailAddress;
+    @FindBy(css = "[type='password']")
+    private WebElement passwordField;
+    @FindBy(css = "[type='submit']")
+    private WebElement submitButton;
     public LoginPage(WebDriver givenDriver){
         super(givenDriver);
     }
     public void enterEmail(String email) {
-        WebElement emailElement = wait.until(ExpectedConditions.elementToBeClickable(enterEmailAddress));
-        emailElement.sendKeys(email);
+        enterEmailAddress.sendKeys(email);
     }
     public void enterPassword(String password) {
-        WebElement passwordElement = wait.until(ExpectedConditions.elementToBeClickable(passwordField));
-        passwordElement.sendKeys(password);
+        passwordField.sendKeys(password);
     }
     public void clickSubmit() {
-        WebElement submitElement = wait.until(ExpectedConditions.elementToBeClickable(submitButton));
-        submitElement.click();
+        submitButton.click();
     }
 }
