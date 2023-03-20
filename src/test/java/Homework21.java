@@ -8,8 +8,8 @@ public void renamePlaylist(){
     logIn("andalia.nia@gmail.com","te$t$tudent");
     choosePlaylist();
     contextClickChoosePlaylist();
-    enterPlaylistName();
-    Assert.assertTrue(doesPlaylistExist());
+    enterPlaylistName(playlistName);
+    Assert.assertTrue(doesPlaylistExist(playlistName));
 
     }
 }

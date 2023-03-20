@@ -2,7 +2,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class homework19 extends BaseTest{
+public class Homework19 extends BaseTest{
 
     @Test
     public void DeletePlayListTest() throws InterruptedException {

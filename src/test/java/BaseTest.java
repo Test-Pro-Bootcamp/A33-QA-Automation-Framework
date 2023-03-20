@@ -23,7 +23,10 @@ public class BaseTest {
    public static WebDriverWait wait = null;
 
    public static Actions actions = null;
-  
+
+    public BaseTest(WebDriver givenDriver) {
+    }
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -128,13 +131,13 @@ public class BaseTest {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li[data-testid='playlist-context-menu-edit']"))).click();
 
    }
-   public void enterPlaylistName(){
+   public void enterPlaylistName(String playlistName){
         WebElement playlistInputField = driver.findElement(By.cssSelector("input[name='name']"));
         playlistInputField.sendKeys((Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE)));
         playlistInputField.sendKeys(playlistName);
         playlistInputField.sendKeys(Keys.ENTER);
    }
-   public boolean doesPlaylistExist() {
+   public boolean doesPlaylistExist(String playlistName) {
        WebElement playlistElement = driver.findElement(By.xpath("//a[text()='" + playlistName + "']"));
        return playlistElement.isDisplayed();
     }

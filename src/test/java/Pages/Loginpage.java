@@ -3,12 +3,12 @@ package Pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage extends BasePage{
+public class Loginpage extends Basepage {
     static By emailFieldLocator = By.cssSelector("[type='email']");
     static By passwordFieldLocator = By.cssSelector("[type='password']");
     static By submitButtonLocator = By.cssSelector("button[type='submit']");
 
-    public LoginPage(WebDriver givenDriver) {
+    public Loginpage(WebDriver givenDriver) {
         super(givenDriver);
     }
     public static void provideEmail(String email){

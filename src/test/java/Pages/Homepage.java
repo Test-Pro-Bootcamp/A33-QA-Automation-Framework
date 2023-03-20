@@ -4,17 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class HomePage {
-    WebDriver driver;
-    WebDriverWait wait;
-    By firstPlaylist = By.cssSelector(".playlist:nth-child(3)");
-    By playlistInputField = By.cssSelector("input[name='name']");
+public class Homepage extends Basepage {
+   private By firstPlaylist = By.cssSelector(".playlist:nth-child(3)");
+   private By playlistInputField = By.cssSelector("input[name='name']");
 
-    public HomePage(WebDriver givenDriver){
-        super();
+    public Homepage(WebDriver givenDriver){
+        super(givenDriver);
     }
 
 public void doubleClickFirstPlaylist() {
