@@ -135,7 +135,7 @@ public class BaseTest {
         playlistInputField.sendKeys(Keys.ENTER);
    }
    public boolean doesPlaylistExist() {
-       WebElement playlistElement = driver.findElement(By.xpath("//a[text()='"+playlistName+"']"));
+       WebElement playlistElement = driver.findElement(By.xpath("//a[text()='" + playlistName + "']"));
        return playlistElement.isDisplayed();
     }
 
