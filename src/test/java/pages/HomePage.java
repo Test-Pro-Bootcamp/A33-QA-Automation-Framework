@@ -12,7 +12,7 @@ import pages.BasePage;
 import static org.openqa.selenium.By.cssSelector;
 
 public class HomePage extends BasePage {
-    static String newPlayListName = "New Playlist";
+    String newPlayListName = "New Playlist";
 
     public HomePage(WebDriver givenDriver){
         super(givenDriver);
@@ -25,7 +25,6 @@ public class HomePage extends BasePage {
     private By avatarIcon = cssSelector(("img.avatar"));
     private By newPlayList = By.cssSelector("li>a.active");
     private By successMessage = By.cssSelector("#nprogress");
-    static By notificationMessage = cssSelector(("div.success.show"));
 
     public void clickPlayList() {
         WebElement clickOnPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(playList));
@@ -58,9 +57,5 @@ public class HomePage extends BasePage {
     public void clickPlaylistToDelete() {
         WebElement deleteElement = wait.until(ExpectedConditions.elementToBeClickable(playList));
         deleteElement.click();
-    }
-    public static boolean verifyNotification(){
-        WebElement messageElement = wait.until(ExpectedConditions.visibilityOfElementLocated(notificationMessage));
-        return messageElement.isDisplayed();
     }
 }

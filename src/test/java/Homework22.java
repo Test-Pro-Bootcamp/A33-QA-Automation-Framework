@@ -23,6 +23,11 @@ public class Homework22 extends BaseTest{
         newPlayListName.chooseEdit();
         newPlayListName.renamePlayListName("New Playlist");
 
-        Assert.assertTrue(HomePage.verifyNotification());
+        Assert.assertTrue(verifyNotification());
+    }
+    public boolean verifyNotification(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        WebElement messageElement = driver.findElement(By.cssSelector("div.success.show"));
+        return messageElement.isDisplayed();
     }
 }
