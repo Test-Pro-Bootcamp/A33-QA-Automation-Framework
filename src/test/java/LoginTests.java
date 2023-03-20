@@ -13,6 +13,7 @@ public class LoginTests extends BaseTest {
     public static void LoginEmptyEmailPasswordTest() {
         String url = "https://bbb.testpro.io/";
         Assert.assertEquals(getDriver().getCurrentUrl(), url);
+        driver.quit();
 
     }
 }
