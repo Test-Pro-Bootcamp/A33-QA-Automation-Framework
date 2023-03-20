@@ -4,24 +4,21 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.annotations.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.*;
 
-
+import java.net.MalformedURLException;
 import java.time.Duration;
 
 
 public class BaseTest {
 
 
-    public static WebDriver driver = null;
-
-
-    public static String url = null;
-
+    public static WebDriver driver;
 
 
     @BeforeSuite
@@ -31,19 +28,39 @@ public class BaseTest {
     }
 
     @BeforeMethod
+    public static void launchBrowser(String browser) {
+       driver = pickBrowser(browser);
+    }
+
+
+    public static WebDriver pickBrowser(String browser) throws MalformedURLException {
+        DesiredCpabilities caps = new DesiredCapabilities();
+        String gridURL = "http://192.168.55.101:4444";
+        switch (browser) {
+            case "grid-chrome":
+                WebDriverManager.chromedriver().setup();
+                return driver = new ChromeDriver();
+            case "grid-firefox":
+                WebDriverManager.firefoxdriver().setup();
+                return driver = new FirefoxDriver();
+            default:
+                return driver = new ChromeDriver();
+
+        }
+    }
 
     @Parameters({"BaseURL"})
 
 
-    public void launchBrowser(String BaseURL) {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+    //public void launchBrowser(String BaseURL) {
+        //ChromeOptions options = new ChromeOptions();
+        //options.addArguments("--disable-notifications");
+        //driver = new ChromeDriver();
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        //driver.manage().window().maximize();
 
-        url = BaseURL;
-        driver.get(url);
+        //url = BaseURL;
+        //driver.get(url);
 
 
     }
