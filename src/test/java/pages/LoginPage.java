@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -12,13 +13,20 @@ import java.time.Duration;
 
 public class LoginPage extends BasePage {
 
+    @FindBy(css = "[type='submit']")
+    WebElement submitButton;
+    @FindBy(css = "[type='email']")
+    WebElement emailField;
+    @FindBy(css = "[type='password']");
+    WebElement passwordField;
+
 
     WebDriver driver;
     WebDriverWait wait;
 
-    By submitButtonLocator = By.cssSelector("[type='submit']");
-    By emailField = By.cssSelector("[type='email']");
-    By passwordField = By.cssSelector("[type='password']");
+    //By submitButtonLocator = By.cssSelector("[type='submit']");
+    //By emailField = By.cssSelector("[type='email']");
+    //By passwordField = By.cssSelector("[type='password']");
 
 
     //@FindBy(css = "[type='submit']")
@@ -40,24 +48,31 @@ public class LoginPage extends BasePage {
 
     }
 
-    public void clickSubmitBtn() {
+    public LoginPage clickSubmitBtn() {
         //WebElement submitButton = driver.findElement(By.cssSelector("button[type = 'submit']"));
-        driver.findElement(submitButtonLocator).click();
-
+        //driver.findElement(submitButtonLocator).click();
+        submitButton.click();
+        return this;
     }
 
 
-    public void provideEmail(String email) {
-        WebElement emailElement = driver.findElement(emailField);
-        emailElement.click();
-        emailElement.sendKeys(email);
+    public LoginPage provideEmail(String email) {
+        emailField.sendKeys(email);
+        return this;
+
+        //WebElement emailElement = driver.findElement(emailField);
+        //emailElement.click();
+        //emailElement.sendKeys(email);
 
     }
 
-    public void providePassword(String password) {
-        WebElement passwordElement = driver.findElement(passwordField);
-        passwordElement.click();
-        passwordElement.sendKeys(password);
+    public LoginPage providePassword(String password) {
+        passwordField.sendKeys(password);
+        return this;
+
+        // WebElement passwordElement = driver.findElement(passwordField);
+        //passwordElement.click();
+        // passwordElement.sendKeys(password);
 
     }
 

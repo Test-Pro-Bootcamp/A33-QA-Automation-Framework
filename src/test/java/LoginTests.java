@@ -2,6 +2,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
+import org.openqa.selenium.support.FindBy;
 
 public class LoginTests extends BaseTest {
 
