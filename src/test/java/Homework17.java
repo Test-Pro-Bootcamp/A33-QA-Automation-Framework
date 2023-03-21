@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 
 import java.util.Collection;
 
-public class Homework17 {
+class Homework17 {
     @Test
     public void addSongToPlaylist() throws InterruptedException {
 
@@ -19,6 +19,7 @@ public class Homework17 {
         selectFirstSongResult();
         clickAddToBtn();
         choosePlaylist();
+        assert getNotificationText() != null;
         Assert.assertTrue(getNotificationText().contains(newSongAddedNotificationText));
     }
 
