@@ -9,8 +9,6 @@ import java.time.Duration;
 public class Homework18 extends BaseTest {
     @Test
     public void playASong() throws InterruptedException {
-
-
         openLoginUrl();
         provideEmail("vera1077@gmail.com");
         enterPassword("te$t$tudent");
