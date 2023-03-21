@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.events.WebDriverEventListener;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -14,27 +14,28 @@ public class BasePage {
     protected static WebDriver driver;
     protected static WebDriverWait wait;
     protected  static Actions action;
-    private static final int time = 6; //time in seconds for timeout wait
+    private static final int TIME = 8; //time in seconds for timeout wait
 
     public BasePage (WebDriver submittedDriver) {
         driver = submittedDriver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(time));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(TIME));
         action = new Actions(driver);
+        PageFactory.initElements(driver, this);
     }
 
     public static void navigateToPage(String url) {
         driver.get(url);
     }
 
-    protected static WebElement findElement (By elementLocator) {
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
-        return element;
-    }
-    protected static void clickElement (By elementLocator) {
+//    protected WebElement findElement (By elementLocator) {
+//        return wait.until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
+//    }
+
+    protected void clickElement (By elementLocator) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(elementLocator));
         action.click(element).perform();
     }
-    protected static void doubleClickElement (By elementLocator) {
+    protected void doubleClickElement (By elementLocator) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(elementLocator));
         action.doubleClick(element).perform();
     }

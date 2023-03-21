@@ -1,23 +1,28 @@
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import pages.BasePage;
+import pages.HomePage;
+import pages.LoginPage;
 
 public class Homework19 extends BaseTest{
 
     @Test
-    @Parameters ({"BaseUrl", "Playlist"})
-    public void deletePlaylist (String BaseUrl, String Playlist){
+    @Parameters ({"Playlist"})
+    public void deletePlaylist (String Playlist){
 
         //variables
-        String email = "me@elevchenko.com";
-        String password = "$student1111";
         String msg = "Deleted playlist \"" + Playlist + ".\"";
 
-        navigateToPage(BaseUrl);
-        loginWithValidCredentials(email, password);
-        selectPlaylist(Playlist);
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        BasePage basePage = new BasePage(driver);
+        basePage.navigateToPage(homeUrl);
+        loginPage.loginWithValidCredentials(email, password);
+
+        homePage.selectPlaylist(Playlist);
         System.out.println("Message should be: " + msg);
-        String msgReturn = deleteSelectedPlaylist();
+        String msgReturn = homePage.deleteSelectedPlaylist();
         Assert.assertTrue(msgReturn.contains(msg));
     }
 

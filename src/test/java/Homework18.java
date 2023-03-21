@@ -1,23 +1,20 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.BasePage;
+import pages.HomePage;
+import pages.LoginPage;
 
 public class Homework18 extends BaseTest{
 
     @Test
-    public void playSong (){
+    public void playSong () {
 
-        //variables
-        String homeUrl = "https://bbb.testpro.io/";
-        String email = "me@elevchenko.com";
-        String password = "$student1111";
-
-
-        //Navigate to "https://bbb.testpro.io/"
-        navigateToPage(homeUrl);
-        //Log in with your credentials
-        loginWithValidCredentials(email, password);
-        playNextSong();
-        Assert.assertTrue(isPlaying());
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        BasePage basePage = new BasePage(driver);
+        basePage.navigateToPage(homeUrl);
+        loginPage.loginWithValidCredentials(email, password);
+        Assert.assertTrue(homePage.playNextSong().isPlaying());
     }
 
 }
