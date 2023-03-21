@@ -1,105 +1,102 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariOptions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
 import java.time.Duration;
-import java.util.HashMap;
-
 
 public class BaseTest {
-
-    public WebDriver driver;
-    public ThreadLocal<WebDriver> threadDriver;
-    public String url;
-
-    public WebDriverWait wait;
+    public static WebDriver driver;
 
     @BeforeSuite
-    public void setupClass() {
-//        WebDriverManager.chromedriver().setup();
+    static void setupClass() {
+        WebDriverManager.chromedriver().setup();
+    }
+    public String getDeletedPlaylistMsg(){
+        WebElement notificationMsg=driver.findElement(By.cssSelector("div.success.show"));
+        return notificationMsg.getText();
+    }
+    public void openPlaylist() throws InterruptedException{
+        WebElement emptyPlaylist =driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
+        emptyPlaylist.click();
+        Thread.sleep(2000);
     }
 
+    public void clickDeletePlaylistBtn() throws InterruptedException{
+        WebElement deletePlaylist= driver.findElement(By.cssSelector(".btn-delete-playlist"));
+        deletePlaylist.click();
+        Thread.sleep(2000);
+    }
     @BeforeMethod
-    @Parameters("BaseURL")
-    public void launchBrowser(String BaseURL) throws MalformedURLException {
-//        threadDriver = new ThreadLocal<>();// Make sure to create this object as the first line
-        driver = pickBrowser( System.getProperty("browser") );
-//        threadDriver.set(driver);
+    @Parameters("baseUrl")
+    public void setUpBrowser(String baseUrl) {
 
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        url = BaseURL;
-        getDriver().get(BaseURL);
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        driver.get(baseUrl);
     }
 
     @AfterMethod
-    public void tearDownBrowser() {
-        getDriver().quit();
-//        threadDriver.remove();
+    public static void closeDownBrowser() {
+        driver.quit();
     }
 
-    public WebDriver getDriver() {
-        return driver;
+    public void logIn() {
+        provideEmail("krista_ua86@gmail.com");
+        providePassword("te$t$tudent");
+        submit();
     }
 
-    public WebDriver lambdaTest() throws MalformedURLException {
-        String hubURL = "https://hub.lambdatest.com/wd/hub";
-
-        ChromeOptions browserOptions = new ChromeOptions();
-        browserOptions.setPlatformName("Windows 10");
-        browserOptions.setBrowserVersion("110.0");
-        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
-        ltOptions.put("username", "khaledoni01");
-        ltOptions.put("accessKey", "Zx0HIXlEJ9ERHjcH9UDCvNXRoiSm2si9VM3L6Dii3SX6W1GPF4");
-        ltOptions.put("project", "Test Project");
-        ltOptions.put("w3c", true);
-        browserOptions.setCapability("LT:Options", ltOptions);
-
-        return new RemoteWebDriver(new URL(hubURL), browserOptions);
+    public void provideEmail(String email) {
+        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
+        emailField.sendKeys(email);
     }
 
-    public WebDriver pickBrowser(String browser) throws MalformedURLException {
-        DesiredCapabilities caps = new DesiredCapabilities();
-        String gridURL = "http://192.168.1.160:4444";
-
-        switch(browser) {
-            case "firefox":
-                WebDriverManager.firefoxdriver().setup();
-                return driver = new FirefoxDriver();
-            case "MicrosoftEdge":
-                WebDriverManager.edgedriver().setup();
-                return driver = new EdgeDriver();
-            case "grid-edge":
-                caps.setCapability("browserName", "MicrosoftEdge");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
-            case "grid-firefox":
-                caps.setCapability("browserName", "firefox");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
-            case "grid-chrome":
-                caps.setCapability("browserName", "chrome");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
-            case "cloud":
-                return lambdaTest();
-            default:
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--remote-allow-origins=*");
-                return driver = new ChromeDriver(options);
-        }
+    public void providePassword(String password) {
+        WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
+        passwordField.sendKeys(password);
     }
+
+    public static void submit()  {
+        WebElement submitButton = driver.findElement(By.cssSelector("[type='submit']"));
+        submitButton.click();
+    }
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
