@@ -37,40 +37,35 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]")
     WebElement editOption;
     public void clickPlayList() {
-        WebElement clickOnPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated((By) playList));
+        wait.until(ExpectedConditions.visibilityOf(playList));
         actions.contextClick(playList).perform();
     }
     public void chooseEdit() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated((By) editOption)).click();
+        wait.until(ExpectedConditions.visibilityOf(editOption)).click();
     }
     public void renamePlayListName(String name) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated((By) textField));
-        WebElement textBox = driver.findElement((By) textField);
         textField.sendKeys((Keys.chord(Keys.COMMAND,"a",Keys.SPACE)));
         textField.sendKeys(name);
         textField.sendKeys(Keys.ENTER);
     }
     public boolean verifyNewPlayListNameUpdated() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated((By) successMessage));
-        WebElement newPlaylistName = driver.findElement((By) successMessage);
+        wait.until(ExpectedConditions.visibilityOf(successMessage));
         return successMessage.isDisplayed();
     }
     public boolean verifyAvatarIcon(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated((By) avatarIcon));
-        WebElement findAvatar = driver.findElement((By) avatarIcon);
+        wait.until(ExpectedConditions.visibilityOf(avatarIcon));
         return avatarIcon.isDisplayed();
     }
     public void clickXPlaylist() {
-        WebElement clickX = wait.until(ExpectedConditions.elementToBeClickable(xButton));
-        clickX.click();
+        wait.until(ExpectedConditions.elementToBeClickable(xButton));
+        xButton.click();
     }
     public void clickPlaylistToDelete() {
-        WebElement deleteElement = wait.until(ExpectedConditions.elementToBeClickable(playList));
-        deleteElement.click();
+        wait.until(ExpectedConditions.elementToBeClickable(playList));
+        playList.click();
     }
     public static boolean verifyNotification(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated((By) notificationMessage));
-        WebElement messageElement = driver.findElement((By) notificationMessage);
+        wait.until(ExpectedConditions.visibilityOf(notificationMessage));
         return notificationMessage.isDisplayed();
     }
 }
