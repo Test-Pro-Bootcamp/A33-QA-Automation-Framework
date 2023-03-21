@@ -4,7 +4,7 @@
 <suite name="Homework18" verbose="1" >
 <test name="playSongTest" >
     <classes>
-        <class name="LoginTests"/>
+<!--        <class name="LoginTests"/>-->
         <class name="BaseTest"/>
         <class name="Homework18">
             <methods>

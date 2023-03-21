@@ -19,7 +19,7 @@ public class Homework18 extends BaseTest {
         //Performing the mouse hover action on the target element.
         action.moveToElement(playBtn).perform();
         playBtn.click();
-        Thread.sleep(5000);
+        Thread.sleep(4000);
 
         WebElement pauseBtn =driver.findElement(By.cssSelector("[data-testid='pause-btn']"));
         Assert.assertTrue(pauseBtn.isDisplayed());
