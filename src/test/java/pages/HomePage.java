@@ -37,12 +37,15 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]")
     WebElement editOption;
     public void clickPlayList() {
+        WebElement clickOnPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated((By) playList));
         actions.contextClick(playList).perform();
     }
     public void chooseEdit() {
-        editOption.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By) editOption)).click();
     }
     public void renamePlayListName(String name) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By) textField));
+        WebElement textBox = driver.findElement((By) textField);
         textField.sendKeys((Keys.chord(Keys.COMMAND,"a",Keys.SPACE)));
         textField.sendKeys(name);
         textField.sendKeys(Keys.ENTER);
@@ -53,6 +56,8 @@ public class HomePage extends BasePage {
         return successMessage.isDisplayed();
     }
     public boolean verifyAvatarIcon(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By) avatarIcon));
+        WebElement findAvatar = driver.findElement((By) avatarIcon);
         return avatarIcon.isDisplayed();
     }
     public void clickXPlaylist() {
@@ -64,6 +69,8 @@ public class HomePage extends BasePage {
         deleteElement.click();
     }
     public static boolean verifyNotification(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By) notificationMessage));
+        WebElement messageElement = driver.findElement((By) notificationMessage);
         return notificationMessage.isDisplayed();
     }
 }
