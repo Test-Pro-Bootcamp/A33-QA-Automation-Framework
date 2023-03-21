@@ -23,9 +23,9 @@ public class BaseTest{
         ChromeOptions option = new ChromeOptions();
         option.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(option);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         url= BaseURL;
         driver.get(url);
     }
