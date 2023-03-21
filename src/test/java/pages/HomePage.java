@@ -48,6 +48,8 @@ public class HomePage extends BasePage {
         textField.sendKeys(Keys.ENTER);
     }
     public boolean verifyNewPlayListNameUpdated() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By) successMessage));
+        WebElement newPlaylistName = driver.findElement((By) successMessage);
         return successMessage.isDisplayed();
     }
     public boolean verifyAvatarIcon(){
