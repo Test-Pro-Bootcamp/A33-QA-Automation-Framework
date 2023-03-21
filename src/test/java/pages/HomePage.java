@@ -168,6 +168,7 @@ public class HomePage extends BasePage{
     }
 
     public WebElement isUserAvatarDisplayed() {
+        wait.until(ExpectedConditions.visibilityOf(avatar));
         return avatar;
     }
 
