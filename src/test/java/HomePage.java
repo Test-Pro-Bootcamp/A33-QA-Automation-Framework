@@ -39,10 +39,7 @@ public class HomePage extends BasePage {
     public void choosePlaylist() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("playlist:nth-child(3)"))).click();
 
-
     }
-
-
     public void doubleClickFirstPlayList() {
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("playlist:nth-child(3)")));
         WebElement playlistElement = driver.findElement(By.cssSelector("playlist:nth-child(3)"));
