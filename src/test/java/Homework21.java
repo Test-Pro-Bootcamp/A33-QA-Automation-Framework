@@ -4,11 +4,7 @@ import org.testng.annotations.Test;
 public class Homework21 extends BaseTest {
 
     @Test
-    public void renamePlaylistMethod () {
-        urlAccess();
-        getEmail("ponypony123@gmail.com");
-        getPassword("Testtesttest123123$$");
-        loginUser();
+    public void test() {
         renamePlaylist();
         Assert.assertTrue(playlistDoesExist());
     }
