@@ -25,6 +25,10 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
+        String url = "https://app.testpro.io/";
+        driver.get(url);
+        Assert.assertEquals(driver.getCurrentUrl(), url);
+        driver.quit();
         loginPage.provideEmail("demo@class.com");
         loginPage.providePassword("te$t$tudent");
         loginPage.clickSubmitButton();
