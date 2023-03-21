@@ -6,7 +6,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -34,7 +33,7 @@ public class BaseTest {
     @Parameters("BaseURL")
     public void launchBrowser(String BaseURL) throws MalformedURLException {
         threadDriver = new ThreadLocal<>();// Make sure to create this object as the first line
-        driver = pickBrowser( System.getProperty("browser") );
+        driver = pickBrowser(System.getProperty("browser"));
         threadDriver.set(driver);
 
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -52,17 +51,20 @@ public class BaseTest {
         return threadDriver.get();
     }
 
+
     public WebDriver lambdaTest() throws MalformedURLException {
         String hubURL = "https://hub.lambdatest.com/wd/hub";
 
+
         ChromeOptions browserOptions = new ChromeOptions();
-        browserOptions.setPlatformName("Windows 10");
+        browserOptions.setPlatformName("macOS Ventura");
         browserOptions.setBrowserVersion("110.0");
         HashMap<String, Object> ltOptions = new HashMap<String, Object>();
-        ltOptions.put("username", "khaledoni01");
-        ltOptions.put("accessKey", "Zx0HIXlEJ9ERHjcH9UDCvNXRoiSm2si9VM3L6Dii3SX6W1GPF4");
-        ltOptions.put("project", "Test Project");
+        ltOptions.put("username", "janezelenova");
+        ltOptions.put("accessKey", "Nm7IJSKQTsY3punGW5nkUr38C6WY5dbOZOloUQV3LvWVSeAjW9");
+        ltOptions.put("project", "TestPro");
         ltOptions.put("w3c", true);
+        ltOptions.put("plugin", "java-testNG");
         browserOptions.setCapability("LT:Options", ltOptions);
 
         return new RemoteWebDriver(new URL(hubURL), browserOptions);
@@ -72,7 +74,7 @@ public class BaseTest {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = "http://192.168.1.160:4444";
 
-        switch(browser) {
+        switch (browser) {
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
                 return driver = new FirefoxDriver();
