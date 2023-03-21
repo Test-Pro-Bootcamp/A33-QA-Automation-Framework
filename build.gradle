@@ -21,3 +21,5 @@ test {
         systemProperty "browser", System.getProperty("browser")
     }
 }
+
+build/test-results/test/*.xml
