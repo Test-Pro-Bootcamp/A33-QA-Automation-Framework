@@ -14,7 +14,7 @@ public class BasePage {
     protected static WebDriver driver;
     protected static WebDriverWait wait;
     protected  static Actions action;
-    private static final int TIME = 8; //time in seconds for timeout wait
+    private static final int TIME = 7; //time in seconds for timeout wait
 
     public BasePage (WebDriver submittedDriver) {
         driver = submittedDriver;
@@ -23,7 +23,7 @@ public class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public static void navigateToPage(String url) {
+    public void navigateToPage(String url) {
         driver.get(url);
     }
 

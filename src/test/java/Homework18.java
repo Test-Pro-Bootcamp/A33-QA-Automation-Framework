@@ -8,7 +8,6 @@ public class Homework18 extends BaseTest{
 
     @Test
     public void playSong () {
-
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         BasePage basePage = new BasePage(driver);
