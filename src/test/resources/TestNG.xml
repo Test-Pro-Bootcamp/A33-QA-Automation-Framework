@@ -6,12 +6,16 @@
     <test name="Example Test" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
+            <class name="LoginPage"/>
+            <class name="BasePage"/>
             <class name="BaseTest"/>
+            <class name="HomePage"/>
             <class name="HomeWork17"/>
             <class name="HomeWork18"/>
             <class name="HomeWork19"/>
             <class name="HomeWork20"/>
             <class name="HomeWork21"/>
+            <class name="HomeWork22"/>
         </classes>
 
     </test>
