@@ -5,12 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -18,9 +17,8 @@ import org.openqa.selenium.Keys;
 import org.testng.Assert;
 
 
-
-
-
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.time.Duration;
 
 
@@ -34,26 +32,50 @@ Actions actions;
 
     @BeforeSuite
     static void setupClass() {
-
         WebDriverManager.chromedriver().setup();
     }
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void setUpBrowser(String BaseURL) {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
+    public void setUpBrowser(@Optional String BaseURL) throws MalformedURLException {
+        driver = pickBrowser(System.getProperty("browser"));
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         wait = new WebDriverWait(driver,Duration.ofSeconds(20));
         actions = new Actions(driver);
         url = BaseURL;
         driver.get(url);
     }
+
+    private static WebDriver pickBrowser(String browser) throws MalformedURLException {
+        DesiredCapabilities caps = new DesiredCapabilities();
+        String gridURL = "http://192.168.1.34:4444";
+        switch(browser){
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                return driver = new FirefoxDriver();
+            case "safari":
+                WebDriverManager.safaridriver().setup();
+                return driver = new SafariDriver();
+            case "grid-firefox":
+                caps.setCapability("browserName", "firefox");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "grid-safari":
+                caps.setCapability("browserName", "safari");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "grid-chrome":
+                caps.setCapability("browserName", "chrome");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            default:
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--remote-allow-origins=*","--disable-notifications","--incognito", "--start-maximized");
+                return driver = new ChromeDriver(options);
+        }
+    }
+
     @AfterMethod
     public static void closeBrowser(){
         driver.quit();
     }
-
 
     public void enterEmail(String email) {
         WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
