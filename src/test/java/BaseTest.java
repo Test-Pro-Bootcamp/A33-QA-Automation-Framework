@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -25,6 +26,8 @@ public class BaseTest {
     public ThreadLocal<WebDriver> threadDriver;
     public String url;
 
+    public WebDriverWait wait;
+
     @BeforeSuite
     public void setupClass() {
 //        WebDriverManager.chromedriver().setup();
@@ -33,11 +36,12 @@ public class BaseTest {
     @BeforeMethod
     @Parameters("BaseURL")
     public void launchBrowser(String BaseURL) throws MalformedURLException {
-        threadDriver = new ThreadLocal<>();// Make sure to create this object as the first line
+//        threadDriver = new ThreadLocal<>();// Make sure to create this object as the first line
         driver = pickBrowser( System.getProperty("browser") );
-        threadDriver.set(driver);
+//        threadDriver.set(driver);
 
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         url = BaseURL;
         getDriver().get(BaseURL);
     }
@@ -45,11 +49,11 @@ public class BaseTest {
     @AfterMethod
     public void tearDownBrowser() {
         getDriver().quit();
-        threadDriver.remove();
+//        threadDriver.remove();
     }
 
     public WebDriver getDriver() {
-        return threadDriver.get();
+        return driver;
     }
 
     public WebDriver lambdaTest() throws MalformedURLException {
