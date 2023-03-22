@@ -14,8 +14,8 @@ public class LoginTests extends BaseTest {
     public void LoginInvalidEmail() {
         LoginPage loginPage = new LoginPage(getDriver());
 
-        loginPage.provideEmail("cucaracha@class.com");
-        loginPage.providePassword("ayCaramba");
+        loginPage.provideEmail("janezelenova@gmail.com");
+        loginPage.providePassword("Floridaliving2020$");
         loginPage.clickSubmitButton();
         loginPage.isEmailFieldVisible();
     }
@@ -25,8 +25,8 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
-        loginPage.provideEmail("demo@class.com");
-        loginPage.providePassword("te$t$tudent");
+        loginPage.provideEmail("janezelenova@gmail.com");
+        loginPage.providePassword("Floridaliving2023$");
         loginPage.clickSubmitButton();
         homePage.isUserAvatarDisplayed();
     }
