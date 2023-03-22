@@ -26,7 +26,7 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
 
-        String url = "https://app.testpro.io/";
+        String url = "https://bbb.testpro.io/";
         driver.get(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();

@@ -121,43 +121,39 @@ public class BaseTest {
     public void closeBrowser() {
         driver.quit();
     }
+
 //    @Test
-    public void renamePlaylist() {
-        getEmail("ponypony123@gmail.com");
-        getPassword("Testtesttest123123$$");
-        loginUser();
-        choosePlaylist();
-        contextClickChoosePlaylist();
-        enterPlaylistName();
-    }
+//    public void renamePlaylist() {
+//        getEmail("ponypony123@gmail.com");
+//        getPassword("Testtesttest123123$$");
+//        loginUser();
+//        choosePlaylist();
+//        contextClickChoosePlaylist();
+//        enterPlaylistName();
+//    }
 
-    public void choosePlaylist() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)"))).click();
-    }
-
-    public void contextClickChoosePlaylist() {
-        //System.out.println("11111");
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
-        //System.out.println("22222");
-        WebElement playlistElement = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
-        //System.out.println("33333");
-        actions.contextClick(playlistElement).perform();
-        //System.out.println("44444");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li[data-testid^='playlist-context-menu-edit']"))).click();
-        //System.out.println("55555");
-    }
-
-    public void enterPlaylistName() {
-        WebElement playlistInputField = driver.findElement(By.cssSelector("input[name='name']"));
-        playlistInputField.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE));
-        playlistInputField.sendKeys(playlistName);
-        playlistInputField.sendKeys(Keys.ENTER);
-    }
-
-    public boolean playlistDoesExist() {
-        WebElement playlistElement = driver.findElement(By.xpath("//a[text()='"+playlistName+"']"));
-        return playlistElement.isDisplayed();
-    }
+//    public void choosePlaylist() {
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)"))).click();
+//    }
+//
+//    public void contextClickChoosePlaylist() {
+//        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
+//        WebElement playlistElement = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
+//        actions.contextClick(playlistElement).perform();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li[data-testid^='playlist-context-menu-edit']"))).click();
+//    }
+//
+//    public void enterPlaylistName() {
+//        WebElement playlistInputField = driver.findElement(By.cssSelector("input[name='name']"));
+//        playlistInputField.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE));
+//        playlistInputField.sendKeys(playlistName);
+//        playlistInputField.sendKeys(Keys.ENTER);
+//    }
+//
+//    public boolean playlistDoesExist() {
+//        WebElement playlistElement = driver.findElement(By.xpath("//a[text()='"+playlistName+"']"));
+//        return playlistElement.isDisplayed();
+//    }
 
 //    public void openPlayLis() {
 //        WebElement emptyPlayList = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
