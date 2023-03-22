@@ -27,4 +27,3 @@ test {
     }
 }
 
-build/test-results/test/*.xml
