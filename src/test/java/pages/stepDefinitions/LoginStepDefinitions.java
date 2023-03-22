@@ -32,7 +32,7 @@ public class LoginStepDefinitions {
 
     }
 
-    @Given("I open browser")
+    @Given("I open Login Page")
     public void openBrowser() {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -63,4 +63,6 @@ public class LoginStepDefinitions {
         Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar"))).isDisplayed());
 
     }
+
+
 }
