@@ -23,6 +23,9 @@ public class LoginStepDefinitions {
 
     @Before
     public void openBrowser() {
+        WebDriver.chromeDriver().setup();
+        driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
     }
 
