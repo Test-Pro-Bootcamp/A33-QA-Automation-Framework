@@ -1,7 +1,9 @@
 package pages.stepDefinitions;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -21,16 +23,19 @@ public class LoginStepDefinitions {
 
     @When("I enter email {string}")
     public void iEnterEmail(String arg0) {
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
 
     }
 
     @And("I enter password {string}")
     public void iEnterPassword(String arg0) {
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='password']]")));
 
     }
 
     @And("I submit")
     public void iSubmit() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='submit']")));
 
     }
 
