@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +18,7 @@ public class HomePage extends BasePage {
     private WebElement playlistInput;
     @FindBy(css = "i[data-testid='sidebar-create-playlist-btn']")
     private WebElement playlistNewBtn;
-    @FindBy(xpath = "//li[@data-testid='playlist-context-menu-create-simple']")
+    @FindBy(css = "li[data-testid='playlist-context-menu-create-simple']")
     private WebElement playlistContextMenu;
     @FindBy(css = "[name='name']")
     private WebElement playlistInputField;
@@ -33,7 +32,7 @@ public class HomePage extends BasePage {
     private WebElement clickDeletePlaylistLocator;
     @FindBy(css = ".playlist:nth-child(3)")
     private WebElement doubleClickPlaylistName;
-    @FindBy(xpath = "//div[@class='alertify-logs top right']/div[@class='success show'][2]")
+    @FindBy(xpath = "//div[@class='alertify-logs top right']/div[@class='success show'][1]")
     private WebElement msgDeletedPlaylistLocator;
     @FindBy(css = "input[name='name']")
     private WebElement enterPlaylistNameLocator;
@@ -44,7 +43,7 @@ public class HomePage extends BasePage {
 
 
     public HomePage(WebDriver givenDriver) {
-         super(givenDriver);
+        super(givenDriver);
     }
 
     public WebElement getUserAvatar() {
@@ -57,16 +56,20 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    public HomePage createPlaylist() {
+    public void createPlaylist() {
         wait.until(ExpectedConditions.elementToBeClickable(playlistNewBtn)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(playlistContextMenu)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(playlistContextMenu));
+        playlistContextMenu.click();
+//        actions.contextClick(playlistContextMenu).build().perform();
+        wait.until(ExpectedConditions.elementToBeClickable(playlistInputField));
         playlistInputField.sendKeys((Keys.chord(newNameTest, Keys.RETURN)));
-        return this;
+
     }
 
     public HomePage deletePlaylist() {
+
         playlistInput.click();
-        actions.contextClick(contextDeletePlaylist).perform();
+        contextDeletePlaylist.click();
         return this;
     }
 
@@ -76,9 +79,8 @@ public class HomePage extends BasePage {
 
     }
 
-    public HomePage confirmNotification() {
-       msgDeletedPlaylistLocator.getText();
-       return this;
+    public boolean confirmNotification() {
+        return msgDeletedPlaylistLocator.isDisplayed();
 
     }
 
@@ -91,8 +93,8 @@ public class HomePage extends BasePage {
     }
 
     public HomePage doubleClickChoosePlaylist() {
-       actions.doubleClick(doubleClickPlaylistName).perform();
-       return this;
+        actions.doubleClick(doubleClickPlaylistName).perform();
+        return this;
     }
 
     public HomePage enterPlaylistName() {
@@ -104,19 +106,19 @@ public class HomePage extends BasePage {
 
 
     public HomePage confirmNewPlaylistExist() {
-       confirmNewPlaylistLocator.isDisplayed();
-       return this;
+        confirmNewPlaylistLocator.isDisplayed();
+        return this;
     }
 
     //right top green message
     public boolean playlistCreatedMsg() {
         wait.until(ExpectedConditions.visibilityOf(playlistCreatedMsgLocator));
-       return playlistCreatedMsgLocator.isDisplayed();
+        return playlistCreatedMsgLocator.isDisplayed();
 
     }
 
     public boolean newSongExists() {
-       return firstSongInThePlaylist.isDisplayed();
+        return firstSongInThePlaylist.isDisplayed();
 
 
     }

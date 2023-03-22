@@ -7,71 +7,101 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
+
 
 public class BaseTest {
-    public static WebDriver driver= null;
+    public static WebDriver driver = null;
     public static WebDriverWait wait = null;
     public static Actions actions = null;
     public static String url = null;
+    ThreadLocal<WebDriver> threadDriver;
 
-    @BeforeSuite
-    public void setupClass() {
-        WebDriverManager.chromedriver().setup();
-    }
+//    @BeforeSuite
+//    public void setupClass() {
+//        WebDriverManager.chromedriver().setup();
+//    }
 
 
     @Parameters({"BaseURL"})
     @BeforeMethod
     public void launchBrowser(@Optional String BaseURL) throws MalformedURLException {
+        threadDriver = new ThreadLocal<>();
         driver = pickBrowser(System.getProperty("browser"));
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications","--remote-allow-origins=*","--start-maximized");
-        driver = new ChromeDriver(options);
-        actions = new Actions(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(8));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+        threadDriver.set(driver);
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        getDriver().manage().window().maximize();
         url = BaseURL;
-        driver.get(url);
+        getDriver().get(BaseURL);
 
+
+    }
+
+    public WebDriver getDriver() {
+        return threadDriver.get();
+    }
+
+    public static WebDriver newLambdaTest() throws MalformedURLException {
+        String hubURL = "https://hub.lambdatest.com/wd/hub";
+
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("Windows 10");
+        browserOptions.setBrowserVersion("110.0");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("username", "masaru.kunihiro");
+        ltOptions.put("accessKey", "VJlyK2EqwPsGlRSqROhOW6Tza7scLfQ3MvpUFtWpT4GycilQ5Q");
+        ltOptions.put("project", "Test Project");
+        ltOptions.put("w3c", true);
+        ltOptions.put("plugin", "java-testNG");
+        browserOptions.setCapability("LT:Options", ltOptions);
+
+        return new RemoteWebDriver(new URL(hubURL), browserOptions);
     }
 
     private static WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
-        String gridURL ="http://192.168.0.2:4444";
+        String gridURL = "http://192.168.0.2:4444";
 
-        switch(browser){
-                    case "firefox":
+        switch (browser) {
+            case "firefox":
                 WebDriverManager.firefoxdriver().setup();
                 return driver = new FirefoxDriver();
-                    case "MicrosoftEdge":
-                        WebDriverManager.edgedriver().setup();
-                        return driver = new EdgeDriver();
-                    case "grid-edge":
-                        caps.setCapability("browserName", "MicrosoftEdge");
-                        return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
-                    case "grid-firefox":
-                        caps.setCapability("browserName", "firefox");
-                        return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
-                    case "grid-chrome":
-                        caps.setCapability("browserName","chrome");
-                        return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
-                    default:
-                        ChromeOptions options = new ChromeOptions();
-                        options.addArguments("--remote-allow-origins=*","--disable-notifications", "--start-maximized");
-                        return driver = new ChromeDriver(options);
-                }
+            case "MicrosoftEdge":
+                WebDriverManager.edgedriver().setup();
+                return driver = new EdgeDriver();
+            case "grid-edge":
+                caps.setCapability("browserName", "MicrosoftEdge");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "grid-firefox":
+                caps.setCapability("browserName", "firefox");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "grid-chrome":
+                caps.setCapability("browserName", "chrome");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "cloud":
+                return newLambdaTest();
+            default:
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--remote-allow-origins=*", "--disable-notifications", "--start-maximized");
+                return driver = new ChromeDriver(options);
+        }
+    }
+
+    @AfterMethod
+    public void closeBrowser() {
+        getDriver().quit();
+        threadDriver.remove();
+    }
+
+
 }
 
-@AfterMethod
-    public static void closeBrowser(){
-        driver.quit();
-}
-
-}

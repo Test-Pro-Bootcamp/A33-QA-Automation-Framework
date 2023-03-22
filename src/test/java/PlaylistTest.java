@@ -25,19 +25,30 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PlaylistTest extends BaseTest {
-
-
-
     @Test
-    public void createPlaylistAddSong() throws MalformedURLException {
+    public void createPlaylistAddSong() throws MalformedURLException, InterruptedException {
         //GIVEN
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        AllSongsPage allSongPage = new AllSongsPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        AllSongsPage allSongPage = new AllSongsPage(getDriver());
         //WHEN
         loginPage.loginPageTest();
+        Thread.sleep(2000);
         homePage.createPlaylist();
         //THEN
         Assert.assertTrue(homePage.playlistCreatedMsg());
+    }
+    @Test
+    public void deletePlaylistTest() throws InterruptedException {
+        //GIVEN
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        AllSongsPage allSongPage = new AllSongsPage(getDriver());
+        //WHEN
+        loginPage.loginPageTest();
+        Thread.sleep(2000);
+        homePage.deletePlaylist();
+        //THEN
+        Assert.assertTrue(homePage.confirmNotification());
     }
 }
