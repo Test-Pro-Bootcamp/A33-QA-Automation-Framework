@@ -2,62 +2,48 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import java.time.Duration;
-
-public class BaseTest {
-
-    WebDriver driver;
-    WebDriverWait wait;
-    String playlistName = "Homework#21";
-    public static Actions actions = null;
-    //Actions action = new Actions(driver);
-
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariOptions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
-
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
-import java.time.Duration;
 import java.util.HashMap;
-
 
 public class BaseTest {
 
     public WebDriver driver;
     public ThreadLocal<WebDriver> threadDriver;
     public String url;
-
+    String playlistName = "Homework#21";
     public WebDriverWait wait;
+    public static Actions actions = null;
 
-
-    @BeforeSuite
-    public void setupClass() {
+//    @BeforeSuite
+//    public void setupClass() {
 //        WebDriverManager.chromedriver().setup();
-    }
+//    }
 
     @BeforeMethod
-    @Parameters("BaseURL")
+    @Parameters("baseURL")
     public void launchBrowser(String BaseURL) throws MalformedURLException {
-//        threadDriver = new ThreadLocal<>();// Make sure to create this object as the first line
+        threadDriver = new ThreadLocal<>();// Make sure to create this object as the first line
         driver = pickBrowser( System.getProperty("browser") );
-//        threadDriver.set(driver);
-
+        threadDriver.set(driver);
+        driver.manage().window().maximize();
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         url = BaseURL;
@@ -76,7 +62,6 @@ public class BaseTest {
 
     public WebDriver lambdaTest() throws MalformedURLException {
         String hubURL = "https://hub.lambdatest.com/wd/hub";
-
         ChromeOptions browserOptions = new ChromeOptions();
         browserOptions.setPlatformName("Windows 10");
         browserOptions.setBrowserVersion("110.0");
@@ -86,7 +71,6 @@ public class BaseTest {
         ltOptions.put("project", "Test Project");
         ltOptions.put("w3c", true);
         browserOptions.setCapability("LT:Options", ltOptions);
-
         return new RemoteWebDriver(new URL(hubURL), browserOptions);
     }
 
@@ -120,6 +104,7 @@ public class BaseTest {
         }
     }
 
+/*
     @BeforeMethod
     @Parameters({"baseURL"})
     public void setUpBrowser(String baseURL) {
@@ -130,12 +115,13 @@ public class BaseTest {
         driver.get(baseURL);
         wait = new WebDriverWait(driver, Duration.ofSeconds(4));
     }
+*/
 
     @AfterMethod
     public void closeBrowser() {
         driver.quit();
     }
-    @Test
+//    @Test
     public void renamePlaylist() {
         getEmail("ponypony123@gmail.com");
         getPassword("Testtesttest123123$$");

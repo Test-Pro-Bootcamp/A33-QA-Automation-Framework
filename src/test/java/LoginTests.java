@@ -1,10 +1,3 @@
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-import java.time.Duration;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
@@ -14,14 +7,14 @@ import pages.LoginPage;
 public class LoginTests extends BaseTest {
 
     @Test
-    public void LoginEmptyEmailPasswordTest () throws InterruptedException {
-        Assert.assertEquals(getDriver().getCurrentUrl(), url);
+    public void LoginEmptyEmailPasswordTest() {
+        String url = "https://bbb.testpro.io/";
+        Assert.assertEquals(driver.getCurrentUrl(), url);
     }
 
     @Test
     public void LoginInvalidEmail() {
-        LoginPage loginPage = new LoginPage(getDriver());
-
+        LoginPage loginPage = new LoginPage(driver);
         loginPage.provideEmail("cucaracha@class.com");
         loginPage.providePassword("ayCaramba");
         loginPage.clickSubmitButton();
@@ -30,9 +23,8 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void LoginValidEmailPasswordTest() {
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
-
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
 
         String url = "https://app.testpro.io/";
         driver.get(url);
