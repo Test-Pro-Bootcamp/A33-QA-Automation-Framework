@@ -5,18 +5,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.openqa.selenium.*;
 import org.testng.Assert;
-import org.testng.annotations.Parameters;
-
+import org.testng.annotations.*;
 import java.time.Duration;
 
 
 public class BaseTest {
-    public static WebDriver driver = null;
+    WebDriver driver;
+    WebDriverWait wait;
+    String url;
 
     @BeforeSuite
     static void setupClass() {
@@ -27,35 +31,30 @@ public class BaseTest {
     @Parameters ({"BaseUrl"})
     public void launchBrowser(String BaseUrl) {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        url=BaseUrl;
         driver.get(BaseUrl);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(4));
     }
 
     @AfterMethod
-    public static void closeDownBrowser() {
+    public void closeDownBrowser() {
         driver.quit();
     }
 
-   /* public void openLoginUrl() {
-        String url = "https://bbb.testpro.io/";
-        driver.get(url);
-    }*/
 
-    public static void provideEmail(String email) {
-        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
-        emailField.click();
+    public void provideEmail(String email) {
+        WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
         emailField.sendKeys(email);
     }
 
-    public static void enterPassword(String password) {
-        WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
-        passwordField.click();
+    public void enterPassword(String password) {
+        WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='password']")));
         passwordField.sendKeys(password);
     }
 
-    public static void clickSubmit() throws InterruptedException {
-        WebElement loginButton = driver.findElement(By.cssSelector("[type='submit']"));
+    public void clickSubmit() {
+        WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='submit']")));
         loginButton.click();
-        Thread.sleep(2000);
     }
 }

@@ -19,7 +19,7 @@ public class HomeWork19 extends BaseTest {
         selectPlaylistToDelete.click();
     }
 
-    public static void clickDeletePlaylist() throws InterruptedException{
+    public void clickDeletePlaylist() throws InterruptedException{
         WebElement deleteBtn = driver.findElement(By.xpath("//button[@class='del btn-delete-playlist']"));
         deleteBtn.click();
         Thread.sleep(2000);
