@@ -14,9 +14,9 @@ public class Homework19 extends BaseTest{
         //variables
         String msg = "Deleted playlist \"" + Playlist + ".\"";
 
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        BasePage basePage = new BasePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        BasePage basePage = new BasePage(getDriver());
         basePage.navigateToPage(homeUrl);
         loginPage.loginWithValidCredentials(email, password);
 

@@ -16,16 +16,19 @@ import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
 
 public class BaseTest {
 
-    protected static WebDriver driver;
+    private static ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
+    private static WebDriver driver;
     protected static WebDriverWait wait;
     protected String password = "";
     protected String email = "";
     protected String homeUrl = "";
-    private final static int TIME = 7; // time to set up implicitlyWait for the browser
+    private final static int TIME = 10; // time to set up implicitlyWait for the browser
 
 
 //    @BeforeSuite
@@ -33,15 +36,40 @@ public class BaseTest {
 //        WebDriverManager.chromedriver().setup();
 //    }
 
+    public static WebDriver getDriver () {
+        return threadDriver.get();
+    }
     @BeforeMethod
     @Parameters ({"BaseUrl", "LoginEmail", "LoginPassword"})
     public void setUpBrowser (String BaseUrl, String LoginEmail, String LoginPassword) throws MalformedURLException{
         email = LoginEmail;
         password = LoginPassword;
         homeUrl = BaseUrl;
-        driver = pickBrowser(System.getProperty("browser"));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TIME));
-        driver.manage().window().maximize();
+        threadDriver.set(pickBrowser("cloud")); //System.getProperty("browser")
+        threadDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(TIME));
+        threadDriver.get().manage().window().maximize();
+        threadDriver.get().manage().deleteAllCookies();
+        System.out.println("Thread working is " + Thread.currentThread().getId() + "driver: " + getDriver());
+    }
+
+    private static WebDriver lambdaTest() throws MalformedURLException {
+        String username = "meelevchenko";
+        String authkey = "3D71epOtVUMBbR20o0BuJGiEXuSTmPQfY9ow5WRE1YSGLeR6lh";
+        String hub = "@hub.lambdatest.com/wd/hub";
+
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("Windows 10");
+        browserOptions.setBrowserVersion("109.0");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("username", username);
+        ltOptions.put("accessKey", authkey);
+        ltOptions.put("project", "Untitled");
+        ltOptions.put("selenium_version", "4.0.0");
+        ltOptions.put("w3c", true);
+        browserOptions.setCapability("LT:Options", ltOptions);
+        System.out.println("Cloud testing is working!");
+
+        return new RemoteWebDriver(new URL("https://" + username + ":" + authkey + hub), browserOptions);
     }
     private static WebDriver pickBrowser (String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
@@ -69,6 +97,8 @@ public class BaseTest {
             case "grid-chrome":
                 caps.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridUrl).toURL(),caps);
+            case "cloud":
+                return lambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options  = new ChromeOptions();
@@ -118,6 +148,7 @@ public class BaseTest {
 
     @AfterMethod
     public void closeBrowser () {
-        driver.quit();
+        threadDriver.get().close();
+        threadDriver.remove();
     }
 }
