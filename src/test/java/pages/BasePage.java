@@ -14,7 +14,7 @@ public class BasePage {
     protected static WebDriver driver;
     protected static WebDriverWait wait;
     protected  static Actions action;
-    private static final int TIME = 11; //time in seconds for timeout wait
+    private static final int TIME = 13; //time in seconds for timeout wait
 
     public BasePage (WebDriver submittedDriver) {
         driver = submittedDriver;

@@ -108,4 +108,36 @@ public class HomePage extends BasePage{
         return wait.until(ExpectedConditions.visibilityOf(soundBar)).isDisplayed();
     }
 
+    public HomePage searchSong (String song){
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.main-scroll-wrap")));
+        WebElement songEl = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type = 'search']")));
+        songEl.clear();
+        String url = driver.getCurrentUrl();
+        System.out.println("searching for " + song + " in " + url);
+        songEl.sendKeys(song);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.results")));
+        return this;
+    }
+
+    public HomePage viewSearchedSong () {
+        //view all results for songs
+        WebElement searchResult = wait.until(ExpectedConditions.elementToBeClickable(
+                By.cssSelector("section.songs h1 button")
+        ));
+        searchResult.click();
+        String url = driver.getCurrentUrl();
+        System.out.println("searching for in " + url);
+        clickElement(By.cssSelector("#songResultsWrapper  tr > td.title"));
+        return this;
+    }
+
+    public String clickAddToPls (String playlist) {
+        clickElement(By.cssSelector("#songResultsWrapper button.btn-add-to"));
+        String xpathSelector = "//section[@id='songResultsWrapper']//li[contains(text(),'" + playlist + "')]";
+        clickElement(By.xpath(xpathSelector));
+        String msg = wait.until(ExpectedConditions.visibilityOf(notificationMessage)).getText();
+        System.out.println(msg);
+        return msg;
+    }
+
 }

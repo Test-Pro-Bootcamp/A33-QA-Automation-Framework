@@ -45,7 +45,7 @@ public class BaseTest {
         email = LoginEmail;
         password = LoginPassword;
         homeUrl = BaseUrl;
-        threadDriver.set(pickBrowser("cloud")); //System.getProperty("browser")
+        threadDriver.set(pickBrowser("browser")); //System.getProperty("browser")
         threadDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(TIME));
         threadDriver.get().manage().window().maximize();
         threadDriver.get().manage().deleteAllCookies();
@@ -105,45 +105,6 @@ public class BaseTest {
                 options.addArguments("--disable-notifications", "--remote-allow-origins=*");
                 return driver = new ChromeDriver(options);
         }
-    }
-
-    protected static void searchSong (String song){
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.main-scroll-wrap")));
-        WebElement songEl = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type = 'search']")));
-        songEl.clear();
-        String url = driver.getCurrentUrl();
-        System.out.println("searching for " + song + " in " + url);
-        songEl.sendKeys(song);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.results")));
-    }
-
-    protected static void viewAllSongs () {
-        //view all results for songs
-        WebElement searchResult = wait.until(ExpectedConditions.elementToBeClickable(
-                By.cssSelector("section.songs h1 button")
-        ));
-        searchResult.click();
-        String url = driver.getCurrentUrl();
-        System.out.println("searching for in " + url);
-    }
-
-    protected static void selectFirstSong () {
-        WebElement songEl = wait.until(ExpectedConditions.elementToBeClickable(
-                By.cssSelector("#songResultsWrapper  tr > td.title")
-        ));
-        songEl.click();
-    }
-
-    protected String clickAddToPls (String playlist) {
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#songResultsWrapper button.btn-add-to"))).click();
-        String xpathSelector = "//section[@id='songResultsWrapper']//li[contains(text(),'" + playlist + "')]";
-        WebElement ourPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathSelector)));
-        ourPlaylist.click();
-        String msg = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.cssSelector("div.success.show")
-        )).getText();
-        System.out.println(msg);
-        return msg;
     }
 
     @AfterMethod
