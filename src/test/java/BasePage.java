@@ -9,8 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class BasePage {
-    protected WebDriver driver;
-    protected WebDriverWait;
+    protected static WebDriver driver;
+    protected WebDriverWait wait;
     protected Actions actions;
 
     public BasePage(WebDriver givenDriver) {

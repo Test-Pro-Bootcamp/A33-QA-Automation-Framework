@@ -50,32 +50,32 @@ public class BaseTest {
         LoginTests.driver.quit();
     }
 
-    public static void login(String email, String password) {
+    public void login(String email, String password) {
 
-        provideEmail(email);
-        providePassword(password);
+        provideEmail();
+        providePassword();
         submitButton();
     }
 
-    public static void login (){
-        provideEmail("guadalupe.medina@testpro.io");
-        providePassword("DoingitBig23!");
+    public void login() throws InterruptedException {
+        provideEmail();
+        providePassword();
         submitButton();
     }
-    public static void submitButton() {
+    public void submitButton() {
         WebElement submitButtonElement = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type ='submit']")));
         submitButtonElement.click();
 
     }
 
-    public static void provideEmail(String email) {
+    public static void provideEmail() {
 
         WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type ='email']")));
         emailField.sendKeys("guadalupe.medina@testpro.io");
 
     }
 
-    public static void providePassword(String password) {
+    public static void providePassword() {
         WebElement provideField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type ='password']")));
         provideField.sendKeys("DoingitBig23!");
     }
