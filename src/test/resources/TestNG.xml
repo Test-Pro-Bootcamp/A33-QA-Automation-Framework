@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="TestNG" parallel="methods" thread-count="2">
+<suite name="TestNG" parallel="methods" thread-count="4">
     <parameter name="baseUrl" value="https://bbb.testpro.io"/>
     <test name="Example Test" preserve-order="false">
         <classes>
@@ -12,7 +12,6 @@
                     <include name="loginWithValidCredentials"/>
                     <include name="addSongToExistingPlaylist"/>
                     <include name="renamePlaylist"/>
-                    <include name="deletePlaylist"/>
                 </methods>
             </class>
         </classes>

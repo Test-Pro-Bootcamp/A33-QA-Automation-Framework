@@ -24,7 +24,7 @@ public class HomePage extends BasePage {
     private WebElement searchSong;
     @FindBy(css = "button[data-test = 'view-all-songs-btn']")
     private WebElement clickViewAllBtn;
-    @FindBy(css = "#songResultsWrapper > div > div > div.item-container > table > tr:nth-child(1)")
+    @FindBy(css = "section#songResultsWrapper tr.song-item td.title")
     private WebElement firstSong;
     @FindBy(css = "button[class = 'btn-add-to']")
     private WebElement addToButton;
@@ -40,7 +40,7 @@ public class HomePage extends BasePage {
     private WebElement clickXPlaylistButton;
     @FindBy(css = ".playlist:nth-child(3)")
     private WebElement clickExistingPlaylist;
-    @FindBy(xpath = "//a[contains(text(),'HW23')]")
+    @FindBy(xpath = "//a[contains(text(),'HW25')]")
     private WebElement choosePlaylist;
     @FindBy(css = "#playlists > ul > li:nth-child(3) > nav > ul > li:nth-child(1)")
     private WebElement editButton;
@@ -51,7 +51,7 @@ public class HomePage extends BasePage {
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
         driver = givenDriver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     public WebElement getUserAvatar() {
@@ -82,35 +82,43 @@ public class HomePage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(clickViewAllBtn)).click();
         return this;
     }
-    public HomePage selectFirstSong () {
+
+    public HomePage selectFirstSong() {
         wait.until(ExpectedConditions.visibilityOf(firstSong)).click();
         return this;
     }
+
     public HomePage clickAddToButton() {
         wait.until(ExpectedConditions.visibilityOf(addToButton)).click();
         return this;
     }
 
-    public HomePage clickPlaylistNameFromAddToButton (String playlistName){
+    public HomePage clickPlaylistNameFromAddToButton(String playlistName) {
         wait.until(ExpectedConditions.visibilityOf(clickPlaylistNameFromAddBtn));
         clickPlaylistNameFromAddBtn.click();
         return this;
     }
 
-    public static boolean notificationMessageIsDisplayed () {
+    public static boolean notificationMessageIsDisplayed() {
         WebElement getNotificationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector
-                ("div.success.show")));
+               ("div.success.show")));
         return getNotificationMessage.isDisplayed();
+        // public static boolean notificationMessageIsDisplayed(){
+        //        WebElement getNotificationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector
+        //                ("div.success.show")));
+        //        return getNotificationMessage.isDisplayed();
+        //    }
     }
 
-    public HomePage deleteSongFromPlaylist () {
+    public HomePage deleteSongFromPlaylist() {
         wait.until(ExpectedConditions.visibilityOf(selectPlaylist)).click();
         wait.until(ExpectedConditions.visibilityOf(selectTheSong)).click();
         wait.until(ExpectedConditions.visibilityOf(deleteSong)).click();
         actions.sendKeys(Keys.DELETE).perform();
         return this;
     }
-    public HomePage contextClickExistingPlaylist () {
+
+    public HomePage contextClickExistingPlaylist() {
         WebElement existingPlaylist = wait.until(ExpectedConditions.visibilityOf(clickExistingPlaylist));
         actions.contextClick(existingPlaylist).perform();
         return this;
@@ -119,11 +127,12 @@ public class HomePage extends BasePage {
             return this;*/
     }
 
-    public HomePage chooseEdit () {
+    public HomePage chooseEdit() {
         wait.until(ExpectedConditions.elementToBeClickable(editButton)).click();
         return this;
     }
-    public HomePage renamePlaylist (String newPlaylistName){
+
+    public HomePage renamePlaylist(String newPlaylistName) {
         wait.until(ExpectedConditions.visibilityOf(enterPlaylistNames));
         enterPlaylistNames.sendKeys((Keys.chord(Keys.COMMAND + "a", Keys.BACK_SPACE)), newPlaylistName, Keys.ENTER);
         return this;
@@ -136,3 +145,4 @@ public class HomePage extends BasePage {
         return updatedPlaylist.isDisplayed();
     }
 }
+

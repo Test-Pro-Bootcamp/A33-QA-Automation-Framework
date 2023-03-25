@@ -9,10 +9,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -21,37 +18,34 @@ import java.time.Duration;
 import java.util.HashMap;
 
 public class BaseTest {
-    public static WebDriver driver = null;
-    public static WebDriverWait wait;
-    public static String url = null;
-    public static Actions actions = null;
-    static ThreadLocal<WebDriver> threadDriver;
+
+    private static final ThreadLocal<WebDriver> ThreadDriver = new ThreadLocal<>();
+    private String url;
+    private static WebDriver driver;
+    private static WebDriverWait wait;
+
+    public static WebDriver getDriver() {
+        return ThreadDriver.get();
+    }
 
     @BeforeMethod
     @Parameters({"baseUrl"})
-    public static void launchBrowser(String baseUrl) throws MalformedURLException {
-        threadDriver = new ThreadLocal<>();
-        driver = pickBrowser(System.getProperty("browser"));
-        threadDriver.set(driver);
-        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
-        getDriver().manage().window().maximize();
-        actions = new Actions(getDriver());
-        url = baseUrl;
+    public void setUpBrowser(@Optional String baseURL) throws MalformedURLException {
+        ThreadDriver.set(pickBrowser("lambda"));
+        ThreadDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        ThreadDriver.get().manage().deleteAllCookies();
+        url = baseURL;
         getDriver().get(url);
-        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+        System.out.println(
+                "Browser setup by Thread " + Thread.currentThread().getId() + " and Driver reference is : " + getDriver());
 
     }
-
-    public static WebDriver getDriver() {
-        return threadDriver.get();
-    }
-
     public static WebDriver lambdaTest() throws MalformedURLException {
-        String hubURL="https://hub.lambdatest.com/wd/hub";
+        String hubURL = "https://hub.lambdatest.com/wd/hub";
 
-        FirefoxOptions browserOptions = new FirefoxOptions();
-        browserOptions.setPlatformName("macOS High Sierra");
-        browserOptions.setBrowserVersion("109.0");
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("MacOS Ventura");
+        browserOptions.setBrowserVersion("111.0");
         HashMap<String, Object> ltOptions = new HashMap<String, Object>();
         ltOptions.put("username", "mohamed.taqi");
         ltOptions.put("accessKey", "Huh7gAMTZMLs0uQGivbRtFZBFuN9nLbY84CFsHnSwlQeepW7gq");
@@ -60,8 +54,9 @@ public class BaseTest {
         ltOptions.put("plugin", "java-testNG");
         browserOptions.setCapability("LT:Options", ltOptions);
 
-        return new RemoteWebDriver(new URL(hubURL),browserOptions);
+        return new RemoteWebDriver(new URL(hubURL), browserOptions);
     }
+
     private static WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = "http://192.168.1.150:4444";
@@ -86,7 +81,7 @@ public class BaseTest {
                 caps.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             }
-            case "lambda" ->{
+            case "lambda" -> {
                 return lambdaTest();
             }
             default -> {
@@ -100,8 +95,8 @@ public class BaseTest {
 
     @AfterMethod
     public static void closeBrowser() {
-       getDriver().close();
-       threadDriver.remove();
+        ThreadDriver.get().close();
+        ThreadDriver.remove();
     }
 }
 

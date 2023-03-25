@@ -13,7 +13,7 @@ import java.time.Duration;
 public class BasePage {
     protected static WebDriverWait wait;
     protected Actions actions;
-    protected WebDriver driver;
+    protected static WebDriver driver;
 
     public BasePage(WebDriver givenDriver) {
         driver = givenDriver;
