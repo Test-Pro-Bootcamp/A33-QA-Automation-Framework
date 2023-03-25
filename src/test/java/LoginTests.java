@@ -15,8 +15,8 @@ public class LoginTests extends BaseTest {
     @Test
     public void loginValidEmailPasswordTest() {
 
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
 
         loginPage.provideEmail("regniermandy@gmail.com");
         loginPage.providePassword("te$t$tudent");
@@ -26,16 +26,16 @@ public class LoginTests extends BaseTest {
     }
     @Test
     public void loginCorrectPasswordFluent() {
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
 
         loginPage.provideEmail("regniermandy@gmail.com").providePassword("te$t$tudent").clickSubmitButton();
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
     @Test
     public void loginEmptyEmailPasswordTest() {
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
 
         loginPage.provideEmail("regniermandy@gmail.com");
         loginPage.providePassword("");
@@ -44,8 +44,8 @@ public class LoginTests extends BaseTest {
     }
     @Test
     public void loginIncorrectPasswordTest() {
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
 
         loginPage.provideEmail("regniermandy@gmail.com");
         loginPage.providePassword("notpassword");
@@ -54,8 +54,8 @@ public class LoginTests extends BaseTest {
     }
     @Test
     public void loginIncorrectPasswordFluent() {
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
 
         loginPage.provideEmail("regniermandy@gmail.com").providePassword("123password").clickSubmitButton();
         Assert.assertEquals(url, url);

@@ -13,9 +13,9 @@ public class HomePageTests extends BaseTest {
     String playlistName = "TestPro Playlist 123";
     @Test
     public void playSongTest()  {
-        HomePage homePage = new HomePage(getDriver());
-        LoginPage loginPage = new LoginPage(getDriver());
-        AllSongsPage allSongsPage = new AllSongsPage(getDriver());
+        HomePage homePage = new HomePage(getThreadLocal());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        AllSongsPage allSongsPage = new AllSongsPage(getThreadLocal());
 
         loginPage.logIn();
         homePage.playSong();
@@ -23,8 +23,8 @@ public class HomePageTests extends BaseTest {
     }
     @Test
     public void renamePlaylist() {
-        HomePage homePage = new HomePage(getDriver());
-        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getThreadLocal());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
 
         loginPage.logIn();
         homePage.doubleClickFirstPlaylist();
@@ -33,8 +33,8 @@ public class HomePageTests extends BaseTest {
     }
 
     public void deleteEmptyPlaylist()  {
-        HomePage homePage = new HomePage(getDriver());
-        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getThreadLocal());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
 
         loginPage.logIn();
         homePage.openPlaylist();
@@ -45,8 +45,8 @@ public class HomePageTests extends BaseTest {
     }
     @Test
     public void listOfSongsWebElements(){
-        HomePage homePage = new HomePage(getDriver());
-        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getThreadLocal());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
 
         loginPage.logIn();
         homePage.chooseSecondPlaylist();
