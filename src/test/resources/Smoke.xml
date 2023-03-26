@@ -6,7 +6,6 @@
     <test name="Example Test" preserve-order="false">
         <classes>
             <class name="Homework26"/>
-            <class name="BaseTest"/>
         </classes>
     </test>
 </suite>
