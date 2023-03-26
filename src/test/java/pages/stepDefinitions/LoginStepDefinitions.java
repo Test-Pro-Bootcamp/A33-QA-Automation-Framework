@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.LoginPage;
 
 import java.time.Duration;
 
@@ -46,13 +47,17 @@ public class LoginStepDefinitions {
     }
 
     @When("I enter email {string}")
-    public void iEnterEmail(String arg0) {
+    public void iEnterEmail(String email) {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.provideEmail(email);
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
 
     }
 
     @And("I enter password {string}")
-    public void iEnterPassword(String arg0) {
+    public void iEnterPassword(String password) {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.provideEmail(password);
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='password']]")));
 
     }
