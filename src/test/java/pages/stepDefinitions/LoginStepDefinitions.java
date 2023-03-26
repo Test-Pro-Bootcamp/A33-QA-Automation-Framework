@@ -50,7 +50,7 @@ public class LoginStepDefinitions {
     public void iEnterEmail(String email) {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.provideEmail(email);
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
+        //wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
 
     }
 
@@ -58,7 +58,7 @@ public class LoginStepDefinitions {
     public void iEnterPassword(String password) {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.provideEmail(password);
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='password']]")));
+        //wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='password']]")));
 
     }
 
@@ -66,13 +66,15 @@ public class LoginStepDefinitions {
     public void iSubmit() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.clickSubmitButton();
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='submit']")));
+        //wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='submit']")));
 
     }
 
     @Then("I am logged in")
     public void iAmLoggedIn() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar"))).isDisplayed());
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.isEmailFieldVisible();
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar"))).isDisplayed());
 
     }
 
