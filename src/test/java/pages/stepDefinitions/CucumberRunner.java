@@ -1,6 +1,8 @@
 package pages.stepDefinitions;
 
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
         features = {"src/test/resources/features/Login.feature"})
@@ -9,14 +11,14 @@ import org.junit.AfterClass;
 public class CucumberRunner extends AbstractTestNGCucumberTests {
     private TestNGCucumberRunner testNGCucumberRunner;
 
-    @BeforeClass(alwaysRun = true)
-    public void setUpCucumber() {
+    @BeforeClass (alwaysRun = true)
+    public void setupCucumber() {
         testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
 
     }
 
-    @DataProviderpublic
-    Object[][] features() {
+    @DataProvider
+    public Object[][] features() {
 
         return testNGCucumberRunner.provideScenarios();
     }
