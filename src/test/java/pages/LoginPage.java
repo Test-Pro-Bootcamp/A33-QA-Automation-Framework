@@ -1,11 +1,9 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.testng.annotations.Test;
+import org.testng.Assert;
 
 public class LoginPage extends BasePage {
 
@@ -45,6 +43,8 @@ public class LoginPage extends BasePage {
         return this;
 
     }
-
+    public void isEmailFieldVisible(){
+        Assert.assertTrue(emailField.isDisplayed());
+    }
 
 }
