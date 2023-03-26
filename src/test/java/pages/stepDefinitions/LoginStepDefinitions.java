@@ -64,6 +64,8 @@ public class LoginStepDefinitions {
 
     @And("I submit")
     public void iSubmit() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.clickSubmitButton();
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='submit']")));
 
     }
