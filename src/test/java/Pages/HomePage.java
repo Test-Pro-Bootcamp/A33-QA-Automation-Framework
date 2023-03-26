@@ -51,7 +51,6 @@ public class HomePage extends BasePage {
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
         driver = givenDriver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     public WebElement getUserAvatar() {
@@ -99,7 +98,7 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    public static boolean notificationMessageIsDisplayed() {
+    public static boolean notificationMessageIsDisplayed() throws InterruptedException {
         WebElement getNotificationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector
                ("div.success.show")));
         return getNotificationMessage.isDisplayed();
