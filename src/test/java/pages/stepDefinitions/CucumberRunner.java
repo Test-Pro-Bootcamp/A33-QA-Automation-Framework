@@ -1,6 +1,6 @@
 package pages.stepDefinitions;
 
-import org.testng.annotations.DataProvider;
+import org.junit.AfterClass;
 
 @CucumberOptions(
         features = {"src/test/resources/features/Login.feature"})
@@ -17,6 +17,7 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
 
     @DataProviderpublic
     Object[][] features() {
+
         return testNGCucumberRunner.provideScenarios();
     }
 
