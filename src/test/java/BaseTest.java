@@ -26,7 +26,9 @@ public class BaseTest {
     @BeforeMethod
     @Parameters ({"BaseUrl"})
     public void launchBrowser(String BaseUrl) {
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(BaseUrl);
     }
