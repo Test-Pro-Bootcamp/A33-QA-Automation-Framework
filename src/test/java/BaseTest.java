@@ -30,8 +30,10 @@ public class BaseTest {
     @BeforeMethod
     @Parameters ({"BaseUrl"})
     public void launchBrowser(String BaseUrl) {
-        driver = new ChromeDriver();
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url=BaseUrl;
         driver.get(BaseUrl);
         wait = new WebDriverWait(driver, Duration.ofSeconds(4));
