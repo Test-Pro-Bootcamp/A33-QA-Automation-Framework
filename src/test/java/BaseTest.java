@@ -153,8 +153,9 @@ public class BaseTest {
         playlistInputField.sendKeys(Keys.ENTER);
     }
 
-    public Boolean verifyNewPlaylist(){
-        WebElement playlistElement1 = driver.findElement(By.xpath("//*[@id='playlists']/ul/li[4]/a"));
+    public Boolean verifyNewPlaylist(String playlistName){
+        WebElement playlistElement1 = driver.findElement(By.xpath("//a[text()='" + playlistName +"']"));
         return playlistElement1.isDisplayed();
     }
+
 }

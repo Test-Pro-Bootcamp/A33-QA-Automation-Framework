@@ -12,7 +12,8 @@ By playlistInputField = By.cssSelector("input[name='name']");
         super(givenDriver);
     }
     public void doubleClickFirstPlaylist(){
-       doubleClick(firstPlaylist);
+        WebElement firstPlaylist1 = driver.findElement(firstPlaylist);
+       doubleClick(firstPlaylist1);
     }
     public void enterPlaylistName(String PlaylistName){
         WebElement playlistNameTextField = driver.findElement(playlistInputField);
