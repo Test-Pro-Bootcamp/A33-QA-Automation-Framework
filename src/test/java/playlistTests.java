@@ -1,9 +1,11 @@
+import Pages.BasePage;
 import Pages.HomePage;
 import Pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.openqa.selenium.*;
 
-public class playlistTests extends BaseTest{
+public class playlistTests extends BaseTest {
 
     @Test
     public void renamePlaylist(){

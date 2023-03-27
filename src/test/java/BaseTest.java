@@ -16,8 +16,6 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.openqa.selenium.interactions.Actions;
 import java.time.Duration;
-
-
 public class BaseTest {
 
     public static WebDriver driver = null;

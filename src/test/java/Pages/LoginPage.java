@@ -11,35 +11,28 @@ import org.openqa.selenium.interactions.Actions;
 import java.time.Duration;
 
 public class LoginPage extends BasePage{
-        WebDriver driver;
-       WebDriverWait wait;
-
+           By emailField = By.cssSelector("[type='email']");
+           By passwordField = By.cssSelector("[type='password']");
+           By submitButton = By.cssSelector("[type='submit']");
         public LoginPage(WebDriver givenDriver) {
                 super(givenDriver);
-
         }
 
-        public void enterEmail() {
-                WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
-                emailField.click();
-                emailField.sendKeys("rfkayoub12@gmail.com");
+        public void enterEmail(String email) {
+             driver.findElement(emailField).sendKeys(email);
         }
 
-        public void enterPassword() {
-                WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
-                passwordField.click();
-                passwordField.sendKeys("te$t$tudent");
+        public void enterPassword(String password) {
+            driver.findElement(passwordField).sendKeys(password);
         }
 
         public void submit() {
-                // WebElement submitButton = driver.findElement(By.cssSelector("[type='submit']"));
-                wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='submit']"))).click();
-                //submitButton.click();
+              driver.findElement(submitButton).click();
         }
 
         public void login(){
-                enterEmail();
-                enterPassword();
+                enterEmail("rfkayoub12@gmail.com");
+                enterPassword("te$t$tudent");
                 submit();
         }
 
