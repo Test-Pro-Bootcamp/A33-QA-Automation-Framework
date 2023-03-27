@@ -59,4 +59,9 @@ public class BaseTest {
         WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='submit']")));
         loginButton.click();
     }
+    
+    public boolean isDisplayedDeletedPlaylist() {
+        WebElement playlistIsDeleted = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class='success show']")));
+        return playlistIsDeleted.isDisplayed();
+    }
 }
