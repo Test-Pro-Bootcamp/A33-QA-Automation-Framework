@@ -60,4 +60,9 @@ public class BaseTest {
         loginButton.click();
         Thread.sleep(2000);
     }
+    
+    public boolean isDisplayedDeletedPlaylist() {
+        WebElement playlistIsDeleted = driver.findElement(By.cssSelector("[class='success show']"));
+        return playlistIsDeleted.isDisplayed();
+    }
 }
