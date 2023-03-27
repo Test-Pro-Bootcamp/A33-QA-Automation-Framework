@@ -6,15 +6,16 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 public class Homework20 extends BaseTest {
     @Test
-    public void deletePlaylist() throws InterruptedException {
-        /*openLoginUrl();*/
+    public void deletePlaylist() {
+        //GIVEN
         provideEmail("vera1077@gmail.com");
         enterPassword("te$t$tudent");
         clickSubmit();
+    }
+        //WHEN
+    public void selectPlaylist() {
         selectPlaylist();
         clickDeletePlaylist();
-    }
-    public void selectPlaylist() {
         WebElement selectPlaylistToDelete = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a")));
         selectPlaylistToDelete.click();
     }
@@ -26,10 +27,8 @@ public class Homework20 extends BaseTest {
         deleteConfirm.click();
     }
 
-    public boolean isDisplayedDeletedPlaylist() {
-        WebElement playlistIsDeleted = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class='success show']")));
-        return playlistIsDeleted.isDisplayed();
-    }
+         //THEN
+        Assert.assertTrue(isDisplayedDeletedPlaylist().isDisplayed());
 }
 
 
