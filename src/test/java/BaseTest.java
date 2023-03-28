@@ -28,7 +28,7 @@ public class BaseTest {
     protected String password = "";
     protected String email = "";
     protected String homeUrl = "";
-    private final static int TIME = 10; // time to set up implicitlyWait for the browser
+    private final static int TIME = 11; // time to set up implicitlyWait for the browser
 
 
 //    @BeforeSuite
@@ -102,7 +102,7 @@ public class BaseTest {
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options  = new ChromeOptions();
-                options.addArguments("--disable-notifications", "--remote-allow-origins=*");
+                options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito");
                 return driver = new ChromeDriver(options);
         }
     }
