@@ -10,13 +10,26 @@ repositories {
 }
 
 dependencies {
+<<<<<<< Updated upstream
     testImplementation 'org.testng:testng:7.6.1'
     implementation 'org.seleniumhq.selenium:selenium-java:4.5.0'
     testImplementation 'io.github.bonigarcia:webdrivermanager:5.3.1'
+=======
+    implementation 'tcp-driver:tcp-driver:0.1.0'
+    testImplementation 'org.testng:testng:7.7.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.8.1'
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.3.2'
+>>>>>>> Stashed changes
 }
 
 test {
     useTestNG() {
         suites "src/test/resources/TestNG.xml"
+    }
+}
+
+task Homework18(type: Test) {
+    useTestNG() {
+        suites "src/test/resources/Homework18.xml"
     }
 }

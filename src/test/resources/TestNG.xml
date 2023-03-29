@@ -9,4 +9,20 @@
             <class name="BaseTest"/>
         </classes>
     </test>
+<<<<<<< Updated upstream
+=======
+
+    <test name="homework17 Test" preserve-order="false">
+        <classes>
+            <class name="Homework17"/>
+        </classes>
+    </test>
+
+<!--    <test name="homework18 Test" preserve-order="false">-->
+<!--        <classes>-->
+<!--            <class name="Homework18"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+>>>>>>> Stashed changes
 </suite>
