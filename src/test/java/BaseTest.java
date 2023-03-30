@@ -71,7 +71,7 @@ public class BaseTest {
         emptyPlaylist.click();
     }
 
-    public void clickDeletePlaylistBtn() throws InterruptedException{
+    public void clickDeletePlaylistBtn() {
         WebElement deletePlaylist= wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".btn-delete-playlist")));
         deletePlaylist.click();
     }
