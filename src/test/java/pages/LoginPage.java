@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 public class LoginPage extends BasePage {
@@ -23,12 +24,25 @@ public class LoginPage extends BasePage {
         clickSubmitBtn();
     }
 
-    public static void navigateToPage() {
+    public void loginWithInvalidEmail(){
+        provideEmail("test12@gmail.com");
+        providePassword("te$t$tudent");
+        clickSubmitBtn();
+    }
+    public void loginWithInvalidPassword(){
+        provideEmail("test@test.com");
+        providePassword("testStudent");
+        clickSubmitBtn();
+    }
+
+    public static void navigateToPage() throws InterruptedException {
         String url = "https://bbb.testpro.io/";
         driver.get(url);
+        Thread.sleep(2000);
     }
 
     public LoginPage provideEmail(String email) {
+        wait.until(ExpectedConditions.elementToBeClickable(emailField));
         emailField.sendKeys(email);
         return this;
     }

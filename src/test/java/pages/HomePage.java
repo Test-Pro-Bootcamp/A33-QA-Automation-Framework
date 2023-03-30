@@ -1,9 +1,6 @@
 package pages;
 
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-//import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -33,14 +30,26 @@ public class HomePage extends BasePage {
     @FindBy(css = ".playlist:nth-child(3)")
     private WebElement doubleClickPlaylistName;
     @FindBy(xpath = "//div[@class='alertify-logs top right']/div[@class='success show'][1]")
-    private WebElement msgDeletedPlaylistLocator;
+    private WebElement msgPlaylistLocator;
     @FindBy(css = "input[name='name']")
     private WebElement enterPlaylistNameLocator;
     @FindBy(xpath = "//a[text()='\" + renameTest + \"']")
     private WebElement confirmNewPlaylistLocator;
     @FindBy(xpath = "//*[@id='playlistWrapper']/div//div[1]/table//td[2]")
     private WebElement firstSongInThePlaylist;
-
+    //Or AllSongs page
+    @FindBy(css = "[type='search']")
+    private WebElement searchField;
+    @FindBy(xpath = "//*[@id='sidebar']/section[1]/ul/li[3]/a")
+    private WebElement allSongsElement;
+    @FindBy(xpath = "//a[@class='logout control']")
+    private WebElement logOutBtn;
+    @FindBy(xpath = "//span[@title = 'Play or resume']")
+    private WebElement playBtnInConsole;
+    @FindBy(xpath = "//span[@title ='Pause']")
+    private WebElement pauseBtnInConsole;
+    @FindBy(xpath = "//button[@test-id='toggle-visualizer-btn']")
+    private WebElement visualizerElement;
 
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
@@ -80,7 +89,7 @@ public class HomePage extends BasePage {
     }
 
     public boolean confirmNotification() {
-        return msgDeletedPlaylistLocator.isDisplayed();
+        return msgPlaylistLocator.isDisplayed();
 
     }
 
@@ -88,8 +97,7 @@ public class HomePage extends BasePage {
     public void changePlaylistName() {
         doubleClickChoosePlaylist();
         enterPlaylistName();
-        confirmNotification();
-        playlistCreatedMsg();
+
     }
 
     public HomePage doubleClickChoosePlaylist() {
@@ -120,6 +128,35 @@ public class HomePage extends BasePage {
     public boolean newSongExists() {
         return firstSongInThePlaylist.isDisplayed();
 
+    }
+
+    public void playSongByClickingBtn() throws InterruptedException {
+        firstSongInThePlaylist.click();
+        playBtnInConsole.click();
+        Thread.sleep(1000);
+    }
+    public HomePage pauseSongByClickingBtn(){
+    wait.until(ExpectedConditions.visibilityOfElementLocated((By) pauseBtnInConsole)).click();
+    return this;
+    }
+    public boolean visualizerIsDisplayed(){
+        return visualizerElement.isDisplayed();
+    }
+    public boolean visualizerIsNotDisplayed(){
+        try {
+            return !visualizerElement.isDisplayed();
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
+
+            return false;
+        }
+    }
+    public AllSongsPage clickAllSongsPage() {
+        allSongsElement.click();
+        return this.clickAllSongsPage();
+    }
+
+    public void clickLogOutBtn() {
+        logOutBtn.click();
 
     }
 }
