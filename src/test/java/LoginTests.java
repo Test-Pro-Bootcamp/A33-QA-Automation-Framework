@@ -4,7 +4,8 @@ import pages.HomePage;
 import pages.LoginPage;
 
 public class LoginTests extends BaseTest {
-
+//trying homework
+    
     @Test
     public void LoginEmptyEmailPasswordTest () throws InterruptedException {
         Assert.assertEquals(getDriver().getCurrentUrl(), url);
