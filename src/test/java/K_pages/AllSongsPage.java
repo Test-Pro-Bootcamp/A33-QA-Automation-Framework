@@ -22,7 +22,7 @@ protected @FindBy(css="input[name='name']")
         playlistInputField.sendKeys((Keys.chord(Keys.chord(Keys.COMMAND, "a",Keys.BACK_SPACE))));
         playlistInputField.sendKeys(playlistName);
         playlistInputField.sendKeys(Keys.ENTER);
-        return this;
+
     }
 
     public void openPlaylist() {

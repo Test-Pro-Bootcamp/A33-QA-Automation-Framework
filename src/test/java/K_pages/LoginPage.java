@@ -13,10 +13,10 @@ public class LoginPage extends BasePage {
     @FindBy(css = "[type='submit']")
     WebElement submitButtonLocator;
     @FindBy (css = "[type='email']")
-    WebElement emailFieldLocator;
+   private WebElement emailFieldLocator;
 
     @FindBy(css="[type='password']")
-    WebElement passwordFieldLocator;
+   private WebElement passwordFieldLocator;
 
     //    Constructor
     public LoginPage (WebDriver givenDriver) {
