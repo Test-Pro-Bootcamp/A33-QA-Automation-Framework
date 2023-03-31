@@ -17,7 +17,7 @@ public class LoginTests extends BaseTest {
 
 
     @Test
-    public static void LoginSuccessTest() throws InterruptedException {
+    public static void LoginSuccessTest()  {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
