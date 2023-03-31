@@ -19,9 +19,11 @@ public class  BasePage {
     }
 
 
-
+    public WebElement findElement(By locator) {
+    return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+}
     public static void doubleClick (By locator){
   wait.until(ExpectedConditions.elementToBeClickable(locator));
-  actions.doubleClick((WebElement) locator).perform();
+  actions.doubleClick(driver.findElement(locator)).perform();
     }
 }

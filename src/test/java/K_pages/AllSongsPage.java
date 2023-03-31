@@ -18,7 +18,7 @@ static By playlistInputFieldLocator= cssSelector("input[name='name']");
 
     public  void enterPlaylistNewName (String playlistName) {
         WebElement playlistInputField = driver.findElement(playlistInputFieldLocator);
-        playlistInputField.sendKeys((Keys.chord(Keys.chord(Keys.CONTROL, "a",Keys.BACK_SPACE))));
+        playlistInputField.sendKeys((Keys.chord(Keys.chord(Keys.COMMAND, "a",Keys.BACK_SPACE))));
         playlistInputField.sendKeys(playlistName);
         playlistInputField.sendKeys(Keys.ENTER);
     }

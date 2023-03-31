@@ -7,8 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class LoginPage extends BasePage {
-    WebDriver driver;
-    WebDriverWait wait;
+
     //    locators
     By submitButtonLocator = By.cssSelector("[type='submit']");
     By emailFieldLocator = By.cssSelector("[type='email']");
