@@ -6,7 +6,7 @@
 
         <classes>
             <class name="BaseTest"/>
-            <class name="PlaylistTestHW22"/>
+            <class name="PlaylistTests"/>
             <class name="LoginTests"/>
         </classes>
     </test>

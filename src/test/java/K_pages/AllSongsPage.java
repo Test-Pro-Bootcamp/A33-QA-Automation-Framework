@@ -4,11 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import static org.openqa.selenium.By.*;
-
+import org.openqa.selenium.support.FindBy;
 public class AllSongsPage extends BasePage{
-private By playlistLocator= cssSelector(".playlist:nth-child(3)");
-private By playlistInputFieldLocator= cssSelector("input[name='name']");
+ @FindBy(css=".playlist:nth-child(3)")
+WebElement playlistLocator;
+protected @FindBy(css="input[name='name']")
+   WebElement playlistInputFieldLocator;
     public AllSongsPage (WebDriver givenDriver) {
         super(givenDriver);
     }
@@ -17,20 +18,21 @@ private By playlistInputFieldLocator= cssSelector("input[name='name']");
     }
 
     public  void enterPlaylistNewName (String playlistName) {
-        WebElement playlistInputField = driver.findElement(playlistInputFieldLocator);
+        WebElement playlistInputField = driver.findElement((By) playlistInputFieldLocator);
         playlistInputField.sendKeys((Keys.chord(Keys.chord(Keys.COMMAND, "a",Keys.BACK_SPACE))));
         playlistInputField.sendKeys(playlistName);
         playlistInputField.sendKeys(Keys.ENTER);
+        return this;
     }
 
     public void openPlaylist() {
-        driver.findElement(playlistLocator).click();
+        driver.findElement((By) playlistLocator).click();
     }
 
 
 
     public static boolean doesPlaylistExist (String playlistName) {
-        WebElement playlistElement =findElement(xpath("//a[text()='" + playlistName + "']"));
+        WebElement playlistElement = driver.findElement(By.xpath("//a[text()='" + playlistName + "']"));
         return playlistElement.isDisplayed();
     }
 

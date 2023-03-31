@@ -1,3 +1,5 @@
+import K_pages.HomePage;
+import K_pages.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,9 +11,9 @@ import java.time.Duration;
 
 public class LoginTests extends BaseTest {
 
-
+//Page Object Model using
     @Test
-    public static void LoginSuccessTest() throws InterruptedException {
+    public static void LoginSuccessTest() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
@@ -19,17 +21,14 @@ public class LoginTests extends BaseTest {
         String url = "https://bbb.testpro.io/";
         driver.get(url);
 
-        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
-        emailField.click();
-        emailField.sendKeys("krista_ua86@gmail.com");
-        WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
-        passwordField.click();
-        passwordField.sendKeys("te$t$tudent");
-        passwordField.click();
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
 
-        WebElement usersAvatar = driver.findElement(By.xpath("[alt='Avatar of student']"));
-        Assert.assertTrue(usersAvatar.isDisplayed());
+        loginPage.provideEmail("krista_ua86@gmail.com")
+                .providePassword("te$t$tudent")
+                .clickSubmitBtn();
 
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
         driver.quit();
     }
 
@@ -43,14 +42,12 @@ public class LoginTests extends BaseTest {
         String url = "https://bbb.testpro.io/";
         driver.get(url);
 
-        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
-        emailField.click();
-        emailField.sendKeys("notExisting@gmail.com");
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
 
-        WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
-        passwordField.click();
-        passwordField.sendKeys("te$t$tudent");
-        passwordField.click();
+        loginPage.provideEmail("notExisting@gmail.com")
+                .providePassword("te$t$tudent")
+                .clickSubmitBtn();
 
         Assert.assertEquals(driver.getCurrentUrl(),url);
         driver.quit();
@@ -60,17 +57,17 @@ public class LoginTests extends BaseTest {
 
     @Test
     public static void LoginEmptyPasswordTest() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--remote-allow-origins=*");
+//        driver = new ChromeDriver(options);
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         String url = "https://bbb.testpro.io/";
         driver.get(url);
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
 
-        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
-        emailField.click();
-        emailField.sendKeys("krista_ua86@gmail.com");
-
+        loginPage.provideEmail("krista_ua86@gmail.com");
+        loginPage.clickSubmitBtn();
         Assert.assertEquals(driver.getCurrentUrl(),url);
         driver.quit();
     }

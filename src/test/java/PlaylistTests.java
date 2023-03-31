@@ -2,8 +2,7 @@ import K_pages.AllSongsPage;
 import K_pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-public class PlaylistTestHW22 extends BaseTest{
+public class PlaylistTests extends BaseTest{
 
 
     @Test
