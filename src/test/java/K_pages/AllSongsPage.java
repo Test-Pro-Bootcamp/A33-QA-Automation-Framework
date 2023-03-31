@@ -7,8 +7,8 @@ import org.openqa.selenium.WebElement;
 import static org.openqa.selenium.By.*;
 
 public class AllSongsPage extends BasePage{
-static By playlistLocator= cssSelector(".playlist:nth-child(3)");
-static By playlistInputFieldLocator= cssSelector("input[name='name']");
+private By playlistLocator= cssSelector(".playlist:nth-child(3)");
+private By playlistInputFieldLocator= cssSelector("input[name='name']");
     public AllSongsPage (WebDriver givenDriver) {
         super(givenDriver);
     }
@@ -30,7 +30,7 @@ static By playlistInputFieldLocator= cssSelector("input[name='name']");
 
 
     public static boolean doesPlaylistExist (String playlistName) {
-        WebElement playlistElement = driver.findElement(xpath("//a[text()='" + playlistName + "']"));
+        WebElement playlistElement =findElement(xpath("//a[text()='" + playlistName + "']"));
         return playlistElement.isDisplayed();
     }
 
