@@ -1,3 +1,4 @@
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,10 +23,10 @@ public class BaseTest {
         WebElement notificationMsg=driver.findElement(By.cssSelector("div.success.show"));
         return notificationMsg.getText();
     }
-    public void openPlaylist() throws InterruptedException{
+    public void openPlaylist() {
         WebElement emptyPlaylist =driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
         emptyPlaylist.click();
-        Thread.sleep(2000);
+
     }
 
     public void clickDeletePlaylistBtn() throws InterruptedException{
@@ -36,7 +37,6 @@ public class BaseTest {
     @BeforeMethod
     @Parameters("baseUrl")
     public void setUpBrowser(String baseUrl) {
-
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -74,8 +74,6 @@ public class BaseTest {
 
 
 }
-
-
 
 
 

@@ -12,7 +12,7 @@ public class HomeWork19  extends BaseTest {
         logIn();
         openPlaylist();
         clickDeletePlaylistBtn();
-        Assert.assertTrue(getDeletedPlaylistMsg().contains(deletePlaylistMsg));
+       Assert.assertTrue(getDeletedPlaylistMsg().contains(deletePlaylistMsg));
     }
 }
 
