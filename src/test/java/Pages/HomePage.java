@@ -98,7 +98,7 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    public static boolean notificationMessageIsDisplayed() throws InterruptedException {
+    public static boolean notificationMessageIsDisplayed(){
         WebElement getNotificationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector
                 ("div.success.show")));
         return getNotificationMessage.isDisplayed();

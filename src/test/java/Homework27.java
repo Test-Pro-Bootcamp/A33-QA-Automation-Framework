@@ -25,7 +25,7 @@ public class Homework27 extends BaseTest {
     }
 
     @Test(enabled = true, priority = 2, description = " add a song to playlist")
-    public void addSongToExistingPlaylist() throws InterruptedException {
+    public void addSongToExistingPlaylist() {
         LoginPage loginPage = new LoginPage(getThreadLocal());
         HomePage homePage = new HomePage(getThreadLocal());
 
