@@ -26,7 +26,7 @@ WebElement playlistInputField;
         playlistInputField.sendKeys(Keys.ENTER);
     }
     public Boolean verifyNewPlaylist(String PlaylistName){
-        WebElement playlistElement1 = driver.findElement(By.xpath("//*[@id='playlists']/ul/li[4]/a"));
+        WebElement playlistElement1 = driver.findElement(By.xpath("//a[text()='"+ PlaylistName +"']"));
         return playlistElement1.isDisplayed();
     }
 }
