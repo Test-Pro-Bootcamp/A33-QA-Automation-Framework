@@ -29,7 +29,6 @@ public class LoginPage extends BasePage{
         passwordLocator.clear();
         passwordLocator.sendKeys(password);
         submitLocator.click();
-        wait.until(ExpectedConditions.visibilityOf(songsOnHomePage));
         return this;
     }
 

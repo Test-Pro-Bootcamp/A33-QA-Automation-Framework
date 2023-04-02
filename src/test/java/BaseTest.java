@@ -41,7 +41,7 @@ public class BaseTest {
         email = LoginEmail;
         password = LoginPassword;
         homeUrl = BaseUrl;
-        THREAD_DRIVER.set(pickBrowser(System.getProperty("browser"))); //System.getProperty("browser")
+        THREAD_DRIVER.set(pickBrowser("chrome")); //System.getProperty("browser")
         THREAD_DRIVER.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(TIME));
         THREAD_DRIVER.get().manage().window().maximize();
         THREAD_DRIVER.get().manage().deleteAllCookies();

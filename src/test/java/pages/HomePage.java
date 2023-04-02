@@ -83,6 +83,7 @@ public class HomePage extends BasePage{
         /*clickElement(createPlstButton);
         wait.until(ExpectedConditions.visibilityOf(createNewPlst));
         clickElement(createNewPlst);*/
+        wait.until(ExpectedConditions.visibilityOf(songsOnHomePage));
         clickElement(chooseAllSongs);
         clickElement(firstSong);
         clickElement(addToPlstButton);
@@ -101,6 +102,7 @@ public class HomePage extends BasePage{
     }
 
     public void selectPlaylist (String playlist){
+        wait.until(ExpectedConditions.visibilityOf(songsOnHomePage));
         String xpathSelector = "//section[@id='playlists']//a[contains(text(),'" + playlist + "')]";
         WebElement plstElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathSelector)));
         clickElement(plstElement);

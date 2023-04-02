@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="smoke" parallel="methods" thread-count="2">
+    <parameter name="BaseUrl" value="https://bbb.testpro.io/"/>
+    <parameter name="LoginEmail" value="me@elevchenko.com"/>
+    <parameter name="LoginPassword" value="$student1111"/>
+
+    <test name="Example Smoke Test">
+        <classes>
+            <class name="BaseTest"></class>
+            <class name="LoginTests">
+                <methods>
+                    <include name="LoginEmptyEmailPasswordTest"/>
+                    <include name="LoginInvalidEmail"/>
+                    <include name="LoginValidEmailPasswordTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

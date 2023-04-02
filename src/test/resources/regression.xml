@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="regression" parallel="methods" thread-count="2">
+    <parameter name="BaseUrl" value="https://bbb.testpro.io/"/>
+    <parameter name="Playlist" value="qweqwe"/>
+    <parameter name="PlaylistToRename" value="Motivating songs"/>
+    <parameter name="NewPlaylistName" value="Motivating Cool songs"/>
+    <parameter name="PlaylistToAddSong" value="Great songs"/>
+    <parameter name="LoginEmail" value="me@elevchenko.com"/>
+    <parameter name="LoginPassword" value="$student1111"/>
+    <parameter name="SongToSearch" value="Pluto"/>
+
+    <test name="Example Regression Test">
+        <classes>
+            <class name="BaseTest"></class>
+            <class name="LoginTests"></class>
+            <class name="Playlists">
+                <methods>
+                    <include name="loginWithValidCredentials"/>
+                    <include name="createPlaylist"/>
+                    <include name="deletePlaylist"/>
+                    <!--include name="renamePlaylist"/-->
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
