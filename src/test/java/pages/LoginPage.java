@@ -23,7 +23,8 @@ public class LoginPage extends BasePage{
         super(submittedDriver);
     }
 
-    public LoginPage loginWithValidCredentials (String email, String password){
+    public LoginPage loginWithValidCredentials (String email, String password) {
+        wait.until(ExpectedConditions.visibilityOf(loginForm));
         emailLocator.clear();
         emailLocator.sendKeys(email);
         passwordLocator.clear();
