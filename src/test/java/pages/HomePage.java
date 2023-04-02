@@ -35,21 +35,31 @@ public class HomePage extends BasePage {
     private WebElement enterPlaylistNameLocator;
     @FindBy(xpath = "//a[text()='\" + renameTest + \"']")
     private WebElement confirmNewPlaylistLocator;
-    @FindBy(xpath = "//*[@id='playlistWrapper']/div//div[1]/table//td[2]")
+    @FindBy(xpath = "//table/tr[1]/td[2]")
     private WebElement firstSongInThePlaylist;
+    By firstSongInThePlaylistBy = By.xpath("//table/tr[1]/td[2]");
     //Or AllSongs page
     @FindBy(css = "[type='search']")
     private WebElement searchField;
-    @FindBy(xpath = "//*[@id='sidebar']/section[1]/ul/li[3]/a")
-    private WebElement allSongsElement;
+    //    @FindBy(xpath = "//*[@id='sidebar']/section[1]/ul/li[3]/a")
+//    private WebElement allSongsElement;
+    By allSongsElement = By.xpath("//*[@id='sidebar']/section[1]/ul/li[3]/a");
     @FindBy(xpath = "//a[@class='logout control']")
     private WebElement logOutBtn;
     @FindBy(xpath = "//span[@title = 'Play or resume']")
     private WebElement playBtnInConsole;
+
+    By playBtnInConsoleBy = By.xpath("//span[@title = 'Play or resume']");
     @FindBy(xpath = "//span[@title ='Pause']")
     private WebElement pauseBtnInConsole;
-    @FindBy(xpath = "//button[@test-id='toggle-visualizer-btn']")
+
+    By pauseBtnInConsoleBy = By.xpath("//span[@title ='Pause']");
+    @FindBy(xpath = "//img[@alt='Sound bars']")
     private WebElement visualizerElement;
+    @FindBy(xpath ="//li[@class='playback']")
+    private WebElement pauseSongContext;
+
+    By pauseSongContextBy = By.xpath("//li[@class='playback']");
 
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
@@ -131,18 +141,27 @@ public class HomePage extends BasePage {
     }
 
     public void playSongByClickingBtn() throws InterruptedException {
-        firstSongInThePlaylist.click();
-        playBtnInConsole.click();
-        Thread.sleep(1000);
+        click(firstSongInThePlaylistBy);
+        actions.doubleClick(firstSongInThePlaylist).perform();
+
+//        findElement(playBtnInConsoleBy);
+//        playBtnInConsole.click();
+//        Thread.sleep(1000);
     }
-    public HomePage pauseSongByClickingBtn(){
-    wait.until(ExpectedConditions.visibilityOfElementLocated((By) pauseBtnInConsole)).click();
-    return this;
+
+    public void pauseSongByClickingBtn() {
+    findElement(firstSongInThePlaylistBy).click();
+    actions.contextClick(firstSongInThePlaylist).perform();
+        findElement(pauseSongContextBy).click();
     }
-    public boolean visualizerIsDisplayed(){
+
+    public boolean visualizerIsDisplayed() {
+       wait.until(ExpectedConditions.visibilityOf(visualizerElement));
         return visualizerElement.isDisplayed();
+
     }
-    public boolean visualizerIsNotDisplayed(){
+
+    public boolean visualizerIsNotDisplayed() {
         try {
             return !visualizerElement.isDisplayed();
         } catch (NoSuchElementException | StaleElementReferenceException e) {
@@ -150,8 +169,9 @@ public class HomePage extends BasePage {
             return false;
         }
     }
+
     public AllSongsPage clickAllSongsPage() {
-        allSongsElement.click();
+        findElement(allSongsElement).click();
         return this.clickAllSongsPage();
     }
 

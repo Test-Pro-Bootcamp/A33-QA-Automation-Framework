@@ -13,9 +13,8 @@ public class HomeTests extends BaseTest {
         AllSongsPage allSongPage = new AllSongsPage(getDriver());
         //WHEN
         loginPage.loginPageTest();
-        Thread.sleep(1000);
+        allSongPage.clickAllSongsPage();
         homePage.playSongByClickingBtn();
-        Thread.sleep(1000);
         Assert.assertTrue(homePage.visualizerIsDisplayed());
     }
     @Test
@@ -26,9 +25,8 @@ public class HomeTests extends BaseTest {
         AllSongsPage allSongPage = new AllSongsPage(getDriver());
         //WHEN
         loginPage.loginPageTest();
-        Thread.sleep(1000);
+        allSongPage.clickAllSongsPage();
         homePage.playSongByClickingBtn();
-        Thread.sleep(1000);
         homePage.pauseSongByClickingBtn();
         //THEN
         Assert.assertTrue(homePage.visualizerIsNotDisplayed());
