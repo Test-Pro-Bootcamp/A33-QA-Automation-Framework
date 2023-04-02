@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,7 +15,10 @@ public class BasePage {
     protected static WebDriver driver;
     protected static WebDriverWait wait;
     protected  static Actions action;
-    private static final int TIME = 13; //time in seconds for timeout wait
+    private static final int TIME = 8; //time in seconds for timeout wait
+
+    @FindBy(css = "img.avatar")
+    protected WebElement avatarIcon;
 
     public BasePage (WebDriver submittedDriver) {
         driver = submittedDriver;
@@ -31,16 +35,14 @@ public class BasePage {
 //        return wait.until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
 //    }
 
-    protected void clickElement (By elementLocator) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(elementLocator));
-        action.click(element).perform();
+    public Boolean isAvatarIconDisplayed () {
+        return wait.until(ExpectedConditions.visibilityOf(avatarIcon)).isDisplayed();
     }
-    protected void doubleClickElement (By elementLocator) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(elementLocator));
-        action.doubleClick(element).perform();
+    protected void clickElement (WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element)).click();
     }
-    protected static void contextClickElement (By elementLocator) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(elementLocator));
+    protected void contextClickElement (WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
         action.contextClick(element).perform();
     }
 }

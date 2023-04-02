@@ -1,7 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -10,7 +8,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
@@ -22,13 +19,12 @@ import java.util.HashMap;
 
 public class BaseTest {
 
-    private static ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
-    private static WebDriver driver;
+    private static final ThreadLocal<WebDriver> THREAD_DRIVER = new ThreadLocal<>();
     protected static WebDriverWait wait;
     protected String password = "";
     protected String email = "";
     protected String homeUrl = "";
-    private final static int TIME = 11; // time to set up implicitlyWait for the browser
+    private final static int TIME = 8; // time to set up implicitlyWait for the browser
 
 
 //    @BeforeSuite
@@ -37,7 +33,7 @@ public class BaseTest {
 //    }
 
     public static WebDriver getDriver () {
-        return threadDriver.get();
+        return THREAD_DRIVER.get();
     }
     @BeforeMethod
     @Parameters ({"BaseUrl", "LoginEmail", "LoginPassword"})
@@ -45,10 +41,10 @@ public class BaseTest {
         email = LoginEmail;
         password = LoginPassword;
         homeUrl = BaseUrl;
-        threadDriver.set(pickBrowser("browser")); //System.getProperty("browser")
-        threadDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(TIME));
-        threadDriver.get().manage().window().maximize();
-        threadDriver.get().manage().deleteAllCookies();
+        THREAD_DRIVER.set(pickBrowser(System.getProperty("browser"))); //System.getProperty("browser")
+        THREAD_DRIVER.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(TIME));
+        THREAD_DRIVER.get().manage().window().maximize();
+        THREAD_DRIVER.get().manage().deleteAllCookies();
         System.out.println("Thread working is " + Thread.currentThread().getId() + "driver: " + getDriver());
     }
 
@@ -81,35 +77,35 @@ public class BaseTest {
                WebDriverManager.firefoxdriver().setup();
                FirefoxOptions firefoxOptions = new FirefoxOptions();
                firefoxOptions.setBinary("/usr/bin/firefox/firefox");
-               return driver = new FirefoxDriver(firefoxOptions);
+               return new FirefoxDriver(firefoxOptions);
             case "MicrosoftEdge":
                 WebDriverManager.edgedriver().setup();
-                return driver = new EdgeDriver();
+                return new EdgeDriver();
             case "safari":
                 WebDriverManager.safaridriver();
-                return driver  = new SafariDriver();
+                return new SafariDriver();
             case "grid-firefox":
                 caps.setCapability("browserName", "firefox");
-                return driver = new RemoteWebDriver(URI.create(gridUrl).toURL(),caps);
+                return new RemoteWebDriver(URI.create(gridUrl).toURL(),caps);
             case "grid-edge":
                 caps.setCapability("browserName", "MicrosoftEdge");
-                return driver = new RemoteWebDriver(URI.create(gridUrl).toURL(),caps);
+                return new RemoteWebDriver(URI.create(gridUrl).toURL(),caps);
             case "grid-chrome":
                 caps.setCapability("browserName", "chrome");
-                return driver = new RemoteWebDriver(URI.create(gridUrl).toURL(),caps);
+                return new RemoteWebDriver(URI.create(gridUrl).toURL(),caps);
             case "cloud":
                 return lambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options  = new ChromeOptions();
                 options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito");
-                return driver = new ChromeDriver(options);
+                return new ChromeDriver(options);
         }
     }
 
     @AfterMethod
     public void closeBrowser () {
-        threadDriver.get().close();
-        threadDriver.remove();
+        THREAD_DRIVER.get().close();
+        THREAD_DRIVER.remove();
     }
 }

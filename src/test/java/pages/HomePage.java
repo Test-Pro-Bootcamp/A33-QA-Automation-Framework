@@ -14,7 +14,7 @@ public class HomePage extends BasePage{
     //WebElements
     @FindBy (css = "#playlists")
     protected WebElement playlists;
-    @FindBy (css = "nav.menu.playlist-item-menu")
+    @FindBy (css = "nav.menu.playlist-item-menu ul")
     protected WebElement plsContextMenu;
     @FindBy (css = "li.playlist.playlist.editing input")
     protected WebElement newPlaylist;
@@ -30,6 +30,28 @@ public class HomePage extends BasePage{
     protected WebElement playlistSongs;
     @FindBy (css = "img[alt = 'Sound bars']")
     protected WebElement soundBar;
+    @FindBy (css = "li[data-testid *= 'playlist-context-menu-edit']")
+    protected WebElement editPlaylist;
+    @FindBy (css = "#sidebar a.songs")
+    protected WebElement chooseAllSongs;
+    @FindBy (css = "i[title='Create a new playlist']")
+    protected WebElement createPlstButton;
+    @FindBy (css = "li[data-testid='playlist-context-menu-create-simple']")
+    protected WebElement createNewPlst;
+    @FindBy (css = "#playlistWrapper button.del.btn-delete-playlist")
+    protected WebElement deletePlstButton;
+    @FindBy (css = "span.play>i")
+    protected WebElement playSongButton;
+    @FindBy (css = "#songResultsWrapper  tr > td.title")
+    protected WebElement firstSongInSearch;
+    @FindBy (css = "#songsWrapper tr > td.title")
+    protected WebElement firstSong;
+    @FindBy (css = "button.btn-add-to")
+    protected WebElement addToPlstButton;
+    @FindBy (css = "div.alertify button.ok")
+    protected WebElement alertButtonOK;
+//    @FindBy (css = "")
+//    protected WebElement qweqweqweqewq;
 
     public HomePage(WebDriver submittedDriver) {
         super(submittedDriver);
@@ -39,12 +61,13 @@ public class HomePage extends BasePage{
         //choosing and clicking the playlist that we want to change the name of
         wait.until(ExpectedConditions.visibilityOf(playlists));
         String xpathSelector = "//section[@id='playlists']//a[contains(text(),'" + playlistToChange + "')]";
-        clickElement(By.xpath(xpathSelector));
+        WebElement plstElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathSelector)));
+        clickElement(plstElement);
 
         //editing the name of the playlist through context menu
-        contextClickElement(By.xpath(xpathSelector));
+        contextClickElement(plstElement);
         wait.until(ExpectedConditions.visibilityOf(plsContextMenu));
-        clickElement(By.cssSelector("li[data-testid *= 'playlist-context-menu-edit']"));
+        clickElement(editPlaylist);
 
         newPlaylist.sendKeys(Keys.CONTROL + "a"); newPlaylist.sendKeys(Keys.DELETE);
         newPlaylist.sendKeys(newPlaylistName); newPlaylist.sendKeys(Keys.ENTER);
@@ -55,52 +78,55 @@ public class HomePage extends BasePage{
         return msg;
     }
 
-    private void createPlaylist (String playlist) {
-        wait.until(ExpectedConditions.visibilityOf(songsOnHomePage));
-        clickElement(By.cssSelector("#sidebar a.songs"));
-        wait.until(ExpectedConditions.visibilityOf(allSongs));
-        clickElement(By.cssSelector("#songsWrapper  tr > td.title"));
-        clickElement(By.cssSelector("div.song-list-controls button.btn-add-to"));
+    public String createThePlaylist (String playlist) {
+//        wait.until(ExpectedConditions.visibilityOf(songsOnHomePage));
+        /*clickElement(createPlstButton);
+        wait.until(ExpectedConditions.visibilityOf(createNewPlst));
+        clickElement(createNewPlst);*/
+        clickElement(chooseAllSongs);
+        clickElement(firstSong);
+        clickElement(addToPlstButton);
 
         //type in the name of a new playlist and create it
-        WebElement newPlaylist = driver.findElement(By.cssSelector("section.new-playlist input"));
+        WebElement newPlaylist = wait.until(ExpectedConditions.presenceOfElementLocated(
+                                            By.cssSelector("#songsWrapper input[data-test='new-playlist-name']")));
         newPlaylist.sendKeys(playlist);
         newPlaylist.sendKeys(Keys.ENTER);
+
+        //Checking the notification message
+        String msg;
+        msg = wait.until(ExpectedConditions.visibilityOf(notificationMessage)).getText();
+        System.out.println("Message is: " + msg);
+        return msg;
     }
 
     public void selectPlaylist (String playlist){
-        try {
-            String xpathSelector = "//section[@id='playlists']//a[contains(text(),'" + playlist + "')]";
-            clickElement(By.xpath(xpathSelector));
-            playlistExists = Boolean.TRUE;
-            wait.until(ExpectedConditions.visibilityOf(playlistSongs));
-            System.out.println("Playlist " + playlist + " has been selected");
-        } catch (Exception e) {
-            //if there is no playlist with the given name then we create a new playlist with that name
-            createPlaylist(playlist);
-            System.out.println("Playlist " + playlist + " has been created and selected");
-        }
+        String xpathSelector = "//section[@id='playlists']//a[contains(text(),'" + playlist + "')]";
+        WebElement plstElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathSelector)));
+        clickElement(plstElement);
+        playlistExists = Boolean.TRUE;
+        wait.until(ExpectedConditions.visibilityOf(playlistSongs));
+        System.out.println("Playlist " + playlist + " has been selected");
     }
 
     public String deleteSelectedPlaylist(){
-        clickElement(By.cssSelector("#playlistWrapper button.del.btn-delete-playlist"));
+        clickElement(deletePlstButton);
 
-        String msg;
+        String msg = "";
         if (playlistExists) {
+            clickElement(alertButtonOK);
             msg = wait.until(ExpectedConditions.visibilityOf(notificationMessage)).getText();
-        } else {
-            clickElement(By.cssSelector("div.alertify button.ok"));
-            msg = wait.until(ExpectedConditions.visibilityOf(notificationMessageChild2)).getText();
+            playlistExists = Boolean.FALSE;
         }
         System.out.println("Message is: " + msg);
         return msg;
     }
 
     public HomePage playNextSong () {
-        wait.until(ExpectedConditions.presenceOfElementLocated(
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.cssSelector("i[title = 'Play next song']")
         )).click();
-        clickElement(By.cssSelector("span.play>i"));
+        clickElement(playSongButton);
         return this;
     }
 
@@ -126,15 +152,16 @@ public class HomePage extends BasePage{
         ));
         searchResult.click();
         String url = driver.getCurrentUrl();
-        System.out.println("searching for in " + url);
-        clickElement(By.cssSelector("#songResultsWrapper  tr > td.title"));
+        System.out.println("searching in " + url);
+        clickElement(firstSongInSearch);
         return this;
     }
 
     public String clickAddToPls (String playlist) {
-        clickElement(By.cssSelector("#songResultsWrapper button.btn-add-to"));
+        clickElement(addToPlstButton);
         String xpathSelector = "//section[@id='songResultsWrapper']//li[contains(text(),'" + playlist + "')]";
-        clickElement(By.xpath(xpathSelector));
+        WebElement plstElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathSelector)));
+        clickElement(plstElement);
         String msg = wait.until(ExpectedConditions.visibilityOf(notificationMessage)).getText();
         System.out.println(msg);
         return msg;
