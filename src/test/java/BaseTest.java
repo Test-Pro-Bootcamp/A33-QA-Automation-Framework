@@ -28,25 +28,30 @@ public class BaseTest {
      WebDriverWait wait;
     @BeforeSuite
     static void setupClass() {
-        WebDriverManager.chromedriver().setup();
+    //    WebDriverManager.chromedriver().setup();
     }
     public static Actions actions = null;
+//    @BeforeMethod
+//    @Parameters("BaseUrl")
+//    public void setUpBrowser(String BaseUrl) {
+//
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
+//        driver = new ChromeDriver(options);
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+//        driver.get(BaseUrl);
+//        wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+//         actions = new Actions(driver);
+//    }
     @BeforeMethod
     @Parameters("BaseUrl")
-    public void setUpBrowser(String BaseUrl) {
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+    public  void launchBrowser(String BaseUrl) throws MalformedURLException {
+        driver = pickBrowser(System.getProperty("browser")) ;
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        String url = BaseUrl;
         driver.get(BaseUrl);
         wait = new WebDriverWait(driver,Duration.ofSeconds(5));
-         actions = new Actions(driver);
-    }
-    @BeforeMethod
-    @Parameters("BaseUrl")
-    public static void launchBrowser() throws MalformedURLException {
-        driver = pickBrowser(System.getProperty("browser")) ;
+        actions = new Actions(driver);
    }
     private static WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
@@ -62,13 +67,17 @@ public class BaseTest {
                 caps.setCapability("browserName", "firefox");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             default:
-                return driver = new ChromeDriver();
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
+                return driver = new ChromeDriver(options);
 
         }
     }
         protected void openBrowser() {String url = "https://bbb.testpro.io/";
        driver.get(url);
    }
+   @AfterMethod
     public void closeBrowser() {
         driver.quit();
     }
