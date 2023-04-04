@@ -80,9 +80,7 @@ public void setUpBrowser() {
         Actions actions = new Actions(driver);
         actions.doubleClick(playlistInputField).perform();
 // Send keys to the playlist name element to enter a new name
-
         actions.sendKeys(Keys.chord(Keys.CONTROL), playlistName).perform();
-
 // Press the Enter key to save the changes
         actions.sendKeys(Keys.ENTER).perform();
 

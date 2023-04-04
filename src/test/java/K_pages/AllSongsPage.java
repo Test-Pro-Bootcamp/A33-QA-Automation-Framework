@@ -20,10 +20,11 @@ public class AllSongsPage extends BasePage {
         doubleClick(playlistLocator);
     }
 
-    public void enterPlaylistNewName (String playlistName) {
+    public void enterPlaylistNewName (String playlistName) throws InterruptedException {
         playlistInputFieldLocator.sendKeys((Keys.chord(Keys.chord(Keys.COMMAND, "a", Keys.BACK_SPACE))));
         playlistInputFieldLocator.sendKeys(playlistName);
         playlistInputFieldLocator.sendKeys(Keys.ENTER);
+        Thread.sleep(4000);
     }
 
     public void openPlaylist () {

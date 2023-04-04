@@ -7,9 +7,8 @@ public class PlaylistTests extends BaseTest {
 
 
     @Test
-    public void renamePlaylist () {
+    public void renamePlaylist () throws InterruptedException {
         String playlistName = "Emiliia Music";
-
         LoginPage loginPage = new LoginPage(driver);
         AllSongsPage allSongsPage = new AllSongsPage(driver);
 
