@@ -5,18 +5,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-
 public class LoginPage extends BasePage {
 
     //    locators ;
 
-    @FindBy(css = "[type='submit']")
+    @FindBy (css = "[type='submit']")
     WebElement submitButtonLocator;
     @FindBy (css = "[type='email']")
-   private WebElement emailFieldLocator;
+    private WebElement emailFieldLocator;
 
-    @FindBy(css="[type='password']")
-   private WebElement passwordFieldLocator;
+    @FindBy (css = "[type='password']")
+    private WebElement passwordFieldLocator;
 
     //    Constructor
     public LoginPage (WebDriver givenDriver) {
@@ -27,8 +26,8 @@ public class LoginPage extends BasePage {
     //    Page Methods Refactoring+Fluent Interface
 
     public LoginPage provideEmail (String email) {
-     emailFieldLocator.sendKeys(email);
-     return this;
+        emailFieldLocator.sendKeys(email);
+        return this;
     }
 
     public LoginPage providePassword (String password) {
@@ -36,10 +35,10 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public LoginPage clickSubmitBtn () {
+    public void clickSubmitBtn () {
         submitButtonLocator.click();
-        return this;
     }
+
     public void login () {
         provideEmail("krista_ua86@gmail.com");
         providePassword("te$t$tudent");

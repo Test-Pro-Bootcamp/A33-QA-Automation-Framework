@@ -11,9 +11,9 @@ import java.time.Duration;
 
 public class LoginTests extends BaseTest {
 
-//Page Object Model using
+    //Page Object Model using
     @Test
-    public static void LoginSuccessTest() {
+    public static void LoginSuccessTest () {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
@@ -34,7 +34,7 @@ public class LoginTests extends BaseTest {
 
 
     @Test
-    public static void LoginNotExistingEmailTest() {
+    public static void LoginNotExistingEmailTest () {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
@@ -49,14 +49,13 @@ public class LoginTests extends BaseTest {
                 .providePassword("te$t$tudent")
                 .clickSubmitBtn();
 
-        Assert.assertEquals(driver.getCurrentUrl(),url);
+        Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
     }
 
 
-
     @Test
-    public static void LoginEmptyPasswordTest() {
+    public static void LoginEmptyPasswordTest () {
 //        ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--remote-allow-origins=*");
 //        driver = new ChromeDriver(options);
@@ -68,7 +67,7 @@ public class LoginTests extends BaseTest {
 
         loginPage.provideEmail("krista_ua86@gmail.com");
         loginPage.clickSubmitBtn();
-        Assert.assertEquals(driver.getCurrentUrl(),url);
+        Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
     }
 }

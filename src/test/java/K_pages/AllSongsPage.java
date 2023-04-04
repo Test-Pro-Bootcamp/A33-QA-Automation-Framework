@@ -5,15 +5,18 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-public class AllSongsPage extends BasePage{
- @FindBy(css=".playlist:nth-child(3)")
-WebElement playlistLocator;
-protected @FindBy(css="input[name='name']")
-   WebElement playlistInputFieldLocator;
+
+public class AllSongsPage extends BasePage {
+    @FindBy (css = ".playlist:nth-child(3)")
+    WebElement playlistLocator;
+    protected @FindBy (css = "input[name='name']")
+    WebElement playlistInputFieldLocator;
+
     public AllSongsPage (WebDriver givenDriver) {
         super(givenDriver);
     }
-    public void doubleClickOnPlaylist(){
+
+    public void doubleClickOnPlaylist () {
         doubleClick(playlistLocator);
     }
 
@@ -22,13 +25,11 @@ protected @FindBy(css="input[name='name']")
         playlistInputField.sendKeys((Keys.chord(Keys.chord(Keys.COMMAND, "a",Keys.BACK_SPACE))));
         playlistInputField.sendKeys(playlistName);
         playlistInputField.sendKeys(Keys.ENTER);
-
     }
 
-    public void openPlaylist() {
+    public void openPlaylist () {
         driver.findElement((By) playlistLocator).click();
     }
-
 
 
     public static boolean doesPlaylistExist (String playlistName) {
