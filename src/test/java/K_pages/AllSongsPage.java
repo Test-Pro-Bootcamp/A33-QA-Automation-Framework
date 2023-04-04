@@ -8,9 +8,9 @@ import org.openqa.selenium.support.FindBy;
 
 public class AllSongsPage extends BasePage {
     @FindBy (css = ".playlist:nth-child(3)")
-    WebElement playlistLocator;
-    protected @FindBy (css = "input[name='name']")
-    WebElement playlistInputFieldLocator;
+    private WebElement playlistLocator;
+    @FindBy (css = "input[name='name']")
+    private WebElement playlistInputFieldLocator;
 
     public AllSongsPage (WebDriver givenDriver) {
         super(givenDriver);
@@ -20,11 +20,10 @@ public class AllSongsPage extends BasePage {
         doubleClick(playlistLocator);
     }
 
-    public  void enterPlaylistNewName (String playlistName) {
-        WebElement playlistInputField = driver.findElement((By) playlistInputFieldLocator);
-        playlistInputField.sendKeys((Keys.chord(Keys.chord(Keys.COMMAND, "a",Keys.BACK_SPACE))));
-        playlistInputField.sendKeys(playlistName);
-        playlistInputField.sendKeys(Keys.ENTER);
+    public void enterPlaylistNewName (String playlistName) {
+        playlistInputFieldLocator.sendKeys((Keys.chord(Keys.chord(Keys.COMMAND, "a", Keys.BACK_SPACE))));
+        playlistInputFieldLocator.sendKeys(playlistName);
+        playlistInputFieldLocator.sendKeys(Keys.ENTER);
     }
 
     public void openPlaylist () {
