@@ -14,12 +14,12 @@ public class LoginTests extends BaseTest {
     //Page Object Model using
     @Test
     public static void LoginSuccessTest () {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        String url = "https://bbb.testpro.io/";
-        driver.get(url);
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--remote-allow-origins=*");
+//        driver = new ChromeDriver(options);
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        String url = "https://bbb.testpro.io/";
+//        driver.get(url);
 
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
@@ -35,10 +35,10 @@ public class LoginTests extends BaseTest {
 
     @Test
     public static void LoginNotExistingEmailTest () {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--remote-allow-origins=*");
+//        driver = new ChromeDriver(options);
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         String url = "https://bbb.testpro.io/";
         driver.get(url);
 
@@ -60,8 +60,8 @@ public class LoginTests extends BaseTest {
 //        options.addArguments("--remote-allow-origins=*");
 //        driver = new ChromeDriver(options);
 //        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        String url = "https://bbb.testpro.io/";
-        driver.get(url);
+       String url = "https://bbb.testpro.io/";
+      driver.get(url);
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
 

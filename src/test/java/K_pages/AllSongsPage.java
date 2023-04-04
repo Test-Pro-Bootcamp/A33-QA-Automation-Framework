@@ -5,12 +5,13 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class AllSongsPage extends BasePage {
     @FindBy (css = ".playlist:nth-child(3)")
-    private WebElement playlistLocator;
+    protected WebElement playlistLocator;
     @FindBy (css = "input[name='name']")
-    private WebElement playlistInputFieldLocator;
+    public WebElement playlistInputFieldLocator;
 
     public AllSongsPage (WebDriver givenDriver) {
         super(givenDriver);
@@ -20,11 +21,11 @@ public class AllSongsPage extends BasePage {
         doubleClick(playlistLocator);
     }
 
-    public void enterPlaylistNewName (String playlistName) throws InterruptedException {
+    public void enterPlaylistNewName (String playlistName) {
         playlistInputFieldLocator.sendKeys((Keys.chord(Keys.chord(Keys.COMMAND, "a", Keys.BACK_SPACE))));
         playlistInputFieldLocator.sendKeys(playlistName);
         playlistInputFieldLocator.sendKeys(Keys.ENTER);
-        Thread.sleep(4000);
+
     }
 
     public void openPlaylist () {
@@ -33,7 +34,8 @@ public class AllSongsPage extends BasePage {
 
 
     public static boolean doesPlaylistExist (String playlistName) {
-        WebElement playlistElement = driver.findElement(By.xpath("//a[text()='" + playlistName + "']"));
+        WebElement playlistElement= wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='" + playlistName + "']")));
+//        WebElement playlistElement = driver.findElement(By.xpath("//a[text()='" + playlistName + "']"));
         return playlistElement.isDisplayed();
     }
 
