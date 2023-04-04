@@ -67,7 +67,6 @@ public class LoginTests extends BaseTest {
         loginPage.loginWithValidCredentials("demo@class.com", "te$t$tudent");
         System.out.println("Tried to login with correct email and password. I'm on " +
                 getDriver().getCurrentUrl() + " page");
-        WebElement avatar = getDriver().findElement(By.className("avatar"));
-        Assert.assertTrue(avatar.isDisplayed());
+        Assert.assertTrue(basePage.isAvatarIconDisplayed());
     }
 }

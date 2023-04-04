@@ -8,7 +8,6 @@
 
     <test name="Example Smoke Test">
         <classes>
-            <class name="BaseTest"></class>
             <class name="LoginTests">
                 <methods>
                     <include name="LoginEmptyEmailPasswordTest"/>

@@ -15,7 +15,7 @@ public class BasePage {
     protected static WebDriver driver;
     protected static WebDriverWait wait;
     protected  static Actions action;
-    private static final int TIME = 8; //time in seconds for timeout wait
+    private static final int TIME = 9; //time in seconds for timeout wait
 
     @FindBy(css = "img.avatar")
     protected WebElement avatarIcon;
@@ -43,6 +43,7 @@ public class BasePage {
     }
     protected void contextClickElement (WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
+        action.contextClick(element).perform();
         action.contextClick(element).perform();
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="TestNG" parallel="methods" thread-count="2">
+<suite name="TestNG">
     <parameter name="BaseUrl" value="https://bbb.testpro.io/"/>
     <parameter name="Playlist" value="qweqwe"/>
     <parameter name="PlaylistToRename" value="Motivating songs"/>
@@ -13,13 +13,20 @@
 
     <test name="Example Test">
         <classes>
-            <class name="BaseTest"></class>
+            <class name="LoginTests">
+                <methods>
+                    <include name="LoginEmptyEmailPasswordTest"/>
+                    <include name="LoginInvalidEmail"/>
+                    <include name="LoginValidEmailPasswordTest"/>
+                </methods>
+            </class>
             <class name="Playlists">
                 <methods>
                     <include name="loginWithValidCredentials"/>
                     <include name="createPlaylist"/>
                     <include name="deletePlaylist"/>
-                    <!--include name="renamePlaylist"/-->
+                    <include name="renamePlaylist"/>
+                    <include name="addSongToPlaylist"/>
                 </methods>
             </class>
         </classes>

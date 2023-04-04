@@ -13,14 +13,20 @@
 
     <test name="Example Regression Test">
         <classes>
-            <class name="BaseTest"></class>
-            <class name="LoginTests"></class>
+            <class name="LoginTests">
+                <methods>
+                    <include name="LoginEmptyEmailPasswordTest"/>
+                    <include name="LoginInvalidEmail"/>
+                    <include name="LoginValidEmailPasswordTest"/>
+                </methods>
+            </class>
             <class name="Playlists">
                 <methods>
                     <include name="loginWithValidCredentials"/>
                     <include name="createPlaylist"/>
                     <include name="deletePlaylist"/>
-                    <!--include name="renamePlaylist"/-->
+                    <include name="renamePlaylist"/>
+                    <include name="addSongToPlaylist"/>
                 </methods>
             </class>
         </classes>

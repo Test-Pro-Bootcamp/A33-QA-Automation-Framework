@@ -143,6 +143,7 @@ public class HomePage extends BasePage{
         String url = driver.getCurrentUrl();
         System.out.println("searching for " + song + " in " + url);
         songEl.sendKeys(song);
+        songEl.sendKeys(Keys.ENTER);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.results")));
         return this;
     }

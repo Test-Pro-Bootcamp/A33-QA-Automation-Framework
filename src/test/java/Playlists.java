@@ -1,4 +1,5 @@
 import org.testng.Assert;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.BasePage;
@@ -18,7 +19,7 @@ public class Playlists extends BaseTest{
 
     @Test
     @Parameters ({"Playlist"})
-    public void createPlaylist (String Playlist){
+    public void createPlaylist (@Optional String Playlist){
 
         //variables
         String msg = "Created playlist \"" + Playlist + ".\"";
@@ -70,5 +71,31 @@ public class Playlists extends BaseTest{
         String msgReturned = homePage.updatePlaylist(PlaylistToRename,NewPlaylistName);
         Assert.assertEquals(msgReturned,msg);
     }
+
+    @Test
+    @Parameters ({"SongToSearch", "PlaylistToAddSong"})
+    public void addSongToPlaylist (String song, String playlist) {
+
+        //variables
+        String msg = "Added 1 song into";
+
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        BasePage basePage = new BasePage(getDriver());
+        basePage.navigateToPage(homeUrl);
+        loginPage.loginWithValidCredentials(email, password);
+        String msgReturn = homePage.searchSong(song).viewSearchedSong().clickAddToPls(playlist);
+        Assert.assertTrue(msgReturn.contains(msg));
+    }
+
+//    @Test
+//    public void playSong () {
+//        LoginPage loginPage = new LoginPage(getDriver());
+//        HomePage homePage = new HomePage(getDriver());
+//        BasePage basePage = new BasePage(getDriver());
+//        basePage.navigateToPage(homeUrl);
+//        loginPage.loginWithValidCredentials(email, password);
+//        Assert.assertTrue(homePage.playNextSong().isPlaying());
+//    }
 
 }
