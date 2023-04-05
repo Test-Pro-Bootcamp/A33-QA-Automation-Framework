@@ -3,7 +3,6 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -13,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class AllSongsPage extends BasePage {
 
-    Actions actions = new Actions(driver);
+
     @FindBy(xpath = "//*[@id='songsWrapper']/div/div/div[1]/table/tr[1]/td[2]")
     private WebElement firstSong;
     By firstSongBy = By.xpath("//*[@id='songsWrapper']/div/div/div[1]/table/tr[1]/td[2]");
@@ -32,6 +31,7 @@ public class AllSongsPage extends BasePage {
     }
 
     public AllSongsPage clickAllSongsPage() {
+        wait.until(ExpectedConditions.elementToBeClickable(allSongsElement));
         allSongsElement.click();
         return this;
     }

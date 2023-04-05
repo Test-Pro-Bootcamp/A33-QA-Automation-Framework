@@ -8,9 +8,9 @@ public class HomeTests extends BaseTest {
     @Test
     public void playSongTest() throws InterruptedException {
         //GIVEN
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
-        AllSongsPage allSongPage = new AllSongsPage(getDriver());
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AllSongsPage allSongPage = new AllSongsPage(driver);
         //WHEN
         loginPage.loginPageTest();
         allSongPage.clickAllSongsPage();
@@ -20,9 +20,9 @@ public class HomeTests extends BaseTest {
     @Test
     public void pauseSongTest() throws InterruptedException {
         //GIVEN
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
-        AllSongsPage allSongPage = new AllSongsPage(getDriver());
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AllSongsPage allSongPage = new AllSongsPage(driver);
         //WHEN
         loginPage.loginPageTest();
         allSongPage.clickAllSongsPage();

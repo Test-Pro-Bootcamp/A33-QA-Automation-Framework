@@ -9,9 +9,9 @@ public class SearchTest extends BaseTest {
     @Test(enabled = true, description = "validate user can search a song")
     public void findSongUsingSearchBar() throws InterruptedException {
         //GIVEN
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
-        SearchPage searchPage = new SearchPage(getDriver());
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        SearchPage searchPage = new SearchPage(driver);
         //WHEN
         loginPage.loginPageTest();
         Thread.sleep(1000);
@@ -23,9 +23,9 @@ public class SearchTest extends BaseTest {
     @Test(enabled = true, description = "validate user can search a song")
     public void findArtistUsingSearchBar() throws InterruptedException {
         //GIVEN
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
-        SearchPage searchPage = new SearchPage(getDriver());
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        SearchPage searchPage = new SearchPage(driver);
         //WHEN
         loginPage.loginPageTest();
         Thread.sleep(1000);
@@ -37,9 +37,9 @@ public class SearchTest extends BaseTest {
     @Test(enabled = true, description = "validate user can search a song")
     public void findAlbumUsingSearchBar() throws InterruptedException {
         //GIVEN
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
-        SearchPage searchPage = new SearchPage(getDriver());
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        SearchPage searchPage = new SearchPage(driver);
         //WHEN
         loginPage.loginPageTest();
         Thread.sleep(1000);

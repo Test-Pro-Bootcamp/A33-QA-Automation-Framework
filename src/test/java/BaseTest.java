@@ -25,25 +25,25 @@ public class BaseTest {
     public static WebDriverWait wait = null;
     public static Actions actions = null;
     public static String url = null;
-    private static ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
+//    private static ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
 
     @Parameters({"BaseURL"})
     @BeforeMethod
     public void launchBrowser(@Optional String BaseURL) throws MalformedURLException {
 //        threadDriver = new ThreadLocal<>();
         driver = pickBrowser("browser");
-        threadDriver.set(driver);
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        getDriver().manage().window().maximize();
+//        threadDriver.set(driver);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
         url = BaseURL;
-        getDriver().get(BaseURL);
+        driver.get(BaseURL);
 
 
     }
 
-    public WebDriver getDriver() {
-        return threadDriver.get();
-    }
+//    public WebDriver getDriver() {
+//        return threadDriver.get();
+//    }
 
     public static WebDriver newLambdaTest() throws MalformedURLException {
         String hubURL = "https://hub.lambdatest.com/wd/hub";
@@ -94,8 +94,8 @@ public class BaseTest {
 
     @AfterMethod
     public void closeBrowser() {
-        getDriver().quit();
-        threadDriver.remove();
+        driver.quit();
+
     }
 
 

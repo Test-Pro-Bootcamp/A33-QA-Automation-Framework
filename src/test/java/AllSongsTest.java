@@ -6,9 +6,9 @@ import pages.LoginPage;
 public class AllSongsTest extends BaseTest {
  @Test
  public void sortSongToVerifyNumbers() throws InterruptedException {
-     LoginPage loginPage = new LoginPage(getDriver());
-     HomePage homePage = new HomePage(getDriver());
-     AllSongsPage allSongPage = new AllSongsPage(getDriver());
+     LoginPage loginPage = new LoginPage(driver);
+     HomePage homePage = new HomePage(driver);
+     AllSongsPage allSongPage = new AllSongsPage(driver);
      loginPage.loginPageTest();
      Thread.sleep(1000);
      allSongPage.clickAllSongsPage();
