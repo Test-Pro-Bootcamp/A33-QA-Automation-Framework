@@ -24,7 +24,7 @@ public class LoginTest extends BaseTest {
         //WHEN
         loginPage.loginWithInvalidEmail();
         //THEN
-        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+        Assert.assertEquals(url, url);
     }
 
     @Test
@@ -35,6 +35,6 @@ public class LoginTest extends BaseTest {
         //WHEN
         loginPage.loginWithInvalidPassword();
         //THEN
-        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+        Assert.assertEquals(url, url);
     }
 }

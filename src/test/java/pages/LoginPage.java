@@ -25,7 +25,7 @@ public class LoginPage extends BasePage {
     }
 
     public void loginWithInvalidEmail(){
-        provideEmail("test12@gmail.com");
+        provideEmail("testNG@gmail.com");
         providePassword("te$t$tudent");
         clickSubmitBtn();
     }

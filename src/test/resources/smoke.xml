@@ -6,6 +6,7 @@
     <test name="Example Test" preserve-order="false">
         <classes>
             <class name="BaseTest"/>
+            <class name="LoginTest"/>
             <class name="HomeTests">
                 <methods>
                     <include name="playSongTest"/>

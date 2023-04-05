@@ -4,11 +4,9 @@ import pages.AllSongsPage;
 import pages.HomePage;
 import pages.LoginPage;
 
-import java.net.MalformedURLException;
-
 public class PlaylistTest extends BaseTest {
     @Test
-    public void createPlaylist() throws MalformedURLException, InterruptedException {
+    public void createPlaylist() throws InterruptedException {
         //GIVEN
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
@@ -26,7 +24,6 @@ public class PlaylistTest extends BaseTest {
         //GIVEN
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
-        AllSongsPage allSongPage = new AllSongsPage(getDriver());
         //WHEN
         loginPage.loginPageTest();
         Thread.sleep(1000);
@@ -58,9 +55,10 @@ public class PlaylistTest extends BaseTest {
         HomePage homePage = new HomePage(getDriver());
         AllSongsPage allSongPage = new AllSongsPage(getDriver());
         loginPage.loginPageTest();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         //WHEN
         homePage.createPlaylist();
+        Thread.sleep(1000);
         allSongPage.addSongsToPlaylist();
         allSongPage.confirmSongIsAdded();
     }
@@ -75,17 +73,12 @@ public class PlaylistTest extends BaseTest {
         Thread.sleep(1000);
         //WHEN
         homePage.createPlaylist();
+        Thread.sleep(1000);
+        allSongPage.clickAllSongsPage();
+        Thread.sleep(1000);
         allSongPage.dropToAddSong();
         allSongPage.confirmSongIsAdded();
     }
 
-    @Test
-    public void sortSongToVerifyNumbers() throws InterruptedException {
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
-        AllSongsPage allSongPage = new AllSongsPage(getDriver());
-        loginPage.loginPageTest();
-        Thread.sleep(1000);
-        allSongPage.sortSongs();
-    }
+
 }

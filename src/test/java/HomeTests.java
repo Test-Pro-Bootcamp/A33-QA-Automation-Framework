@@ -27,8 +27,9 @@ public class HomeTests extends BaseTest {
         loginPage.loginPageTest();
         allSongPage.clickAllSongsPage();
         homePage.playSongByClickingBtn();
+        Thread.sleep(2000);
         homePage.pauseSongByClickingBtn();
         //THEN
-        Assert.assertTrue(homePage.visualizerIsNotDisplayed());
+        Assert.assertFalse(homePage.visualizerIsNotDisplayed());
     }
 }

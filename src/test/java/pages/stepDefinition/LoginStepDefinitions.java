@@ -1,4 +1,4 @@
-package pages.stepDifinition;
+package pages.stepDefinition;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -22,6 +22,7 @@ public class LoginStepDefinitions {
     public void openBrowser() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
@@ -29,7 +30,15 @@ public class LoginStepDefinitions {
     public void iCloseTheBrowser() {
         driver.quit();
     }
-
+    @Given("I am logged in the Koel")
+    public void iAmLoggedInKoel() throws InterruptedException {
+        LoginPage loginPage = new LoginPage(driver);
+        driver.get("https://bbb.testpro.io");
+        loginPage.provideEmail("test@test.com");
+        loginPage.providePassword("te$t$tudent");
+        loginPage.clickSubmitBtn();
+        Thread.sleep(2500);
+    }
     @Given("I open Login Page")
     public void openLoginPage() {
         driver.get("https://bbb.testpro.io");

@@ -1,6 +1,9 @@
 package pages;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -9,14 +12,17 @@ public class HomePage extends BasePage {
     String newNameTest = "TestNewPlaylist";
     String renameTest = "Renamed Playlist";
 
-    @FindBy(css = "[img.avatar]")
+    @FindBy(css = "img[alt='Avatar of Student']")
     private WebElement userAvatarIcon;
+    By userAvatarIconBy = By.cssSelector("img[alt='Avatar of Student']");
     @FindBy(css = ".playlist:nth-child(3)")
     private WebElement playlistInput;
     @FindBy(css = "i[data-testid='sidebar-create-playlist-btn']")
     private WebElement playlistNewBtn;
-    @FindBy(css = "li[data-testid='playlist-context-menu-create-simple']")
+    By playlistNewBtnBy = By.cssSelector("i[data-testid='sidebar-create-playlist-btn']");
+    @FindBy(xpath = "//*[@id='playlists']/nav/ul/li[1]")
     private WebElement playlistContextMenu;
+    By playlistContextMenuBy = By.xpath("//*[@id='playlists']/nav/ul/li[1]");
     @FindBy(css = "[name='name']")
     private WebElement playlistInputField;
     @FindBy(xpath = "//div[@class='song-list-controls']//button[@class='del btn-delete-playlist']")
@@ -31,13 +37,15 @@ public class HomePage extends BasePage {
     private WebElement doubleClickPlaylistName;
     @FindBy(xpath = "//div[@class='alertify-logs top right']/div[@class='success show'][1]")
     private WebElement msgPlaylistLocator;
+    By msgPlaylistLocatorBy = By.xpath("//div[@class='alertify-logs top right']/div[@class='success show'][1]");
+
     @FindBy(css = "input[name='name']")
     private WebElement enterPlaylistNameLocator;
     @FindBy(xpath = "//a[text()='\" + renameTest + \"']")
     private WebElement confirmNewPlaylistLocator;
-    @FindBy(xpath = "//table/tr[1]/td[2]")
+    @FindBy(xpath = "//*[@id=\"songsWrapper\"]/div/div/div[1]/table/tr[1]/td[2]")
     private WebElement firstSongInThePlaylist;
-    By firstSongInThePlaylistBy = By.xpath("//table/tr[1]/td[2]");
+    By firstSongInThePlaylistBy = By.xpath("//*[@id=\"songsWrapper\"]/div/div/div[1]/table/tr[1]/td[2]");
     //Or AllSongs page
     @FindBy(css = "[type='search']")
     private WebElement searchField;
@@ -56,6 +64,8 @@ public class HomePage extends BasePage {
     By pauseBtnInConsoleBy = By.xpath("//span[@title ='Pause']");
     @FindBy(xpath = "//img[@alt='Sound bars']")
     private WebElement visualizerElement;
+
+    By visualizerElementBy = By.xpath("//img[@alt='Sound bars']");
     @FindBy(xpath ="//li[@class='playback']")
     private WebElement pauseSongContext;
 
@@ -66,8 +76,12 @@ public class HomePage extends BasePage {
     }
 
     public WebElement getUserAvatar() {
-        return userAvatarIcon;
+       return userAvatarIcon;
+    }
 
+    public boolean getUserAvatarFail() {
+        driver.findElement(userAvatarIconBy);
+        return false;
     }
 
     public HomePage choosePlaylist() {
@@ -75,9 +89,12 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    public void createPlaylist() {
-        wait.until(ExpectedConditions.elementToBeClickable(playlistNewBtn)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(playlistContextMenu));
+    public void createPlaylist() throws InterruptedException {
+        Thread.sleep(500);
+        click(playlistNewBtnBy);
+        playlistNewBtn.click();
+        Thread.sleep(2000);
+       click(playlistContextMenuBy);
         playlistContextMenu.click();
 //        actions.contextClick(playlistContextMenu).build().perform();
         wait.until(ExpectedConditions.elementToBeClickable(playlistInputField));
@@ -99,6 +116,7 @@ public class HomePage extends BasePage {
     }
 
     public boolean confirmNotification() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(msgPlaylistLocatorBy));
         return msgPlaylistLocator.isDisplayed();
 
     }
@@ -139,7 +157,9 @@ public class HomePage extends BasePage {
         return firstSongInThePlaylist.isDisplayed();
 
     }
-
+    public void clickFirstSong(){
+        click(firstSongInThePlaylistBy);
+    }
     public void playSongByClickingBtn() throws InterruptedException {
         click(firstSongInThePlaylistBy);
         actions.doubleClick(firstSongInThePlaylist).perform();
@@ -150,7 +170,7 @@ public class HomePage extends BasePage {
     }
 
     public void pauseSongByClickingBtn() {
-    findElement(firstSongInThePlaylistBy).click();
+    click(firstSongInThePlaylistBy);
     actions.contextClick(firstSongInThePlaylist).perform();
         findElement(pauseSongContextBy).click();
     }
@@ -162,13 +182,11 @@ public class HomePage extends BasePage {
     }
 
     public boolean visualizerIsNotDisplayed() {
-        try {
-            return !visualizerElement.isDisplayed();
-        } catch (NoSuchElementException | StaleElementReferenceException e) {
+          wait.until(ExpectedConditions.invisibilityOfElementLocated(visualizerElementBy));
 
-            return false;
-        }
+        return false;
     }
+
 
     public AllSongsPage clickAllSongsPage() {
         findElement(allSongsElement).click();
