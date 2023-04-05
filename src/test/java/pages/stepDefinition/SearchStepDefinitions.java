@@ -11,8 +11,8 @@ public class SearchStepDefinitions {
     WebDriver driver;
     WebDriverWait wait;
     String query = "dark";
-    @When("I type a search keyword")
-    public void iTypeASearchKeyword() throws InterruptedException {
+    @When("I type a search keyword {string}")
+    public void iTypeASearchKeyword(String query) throws InterruptedException {
         SearchPage searchPage = new SearchPage(driver);
         searchPage.typeSearchQuery(query);
     }
