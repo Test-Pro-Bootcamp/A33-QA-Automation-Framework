@@ -42,8 +42,7 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage provideEmail(String email) {
-        wait.until(ExpectedConditions.elementToBeClickable(emailField));
-        emailField.sendKeys(email);
+        wait.until(ExpectedConditions.elementToBeClickable(emailField)).sendKeys(email);
         return this;
     }
 
@@ -61,4 +60,9 @@ public class LoginPage extends BasePage {
         Assert.assertTrue(emailField.isDisplayed());
     }
 
+    public void loginApplication(String email, String password){
+        emailField.sendKeys(email);
+        passwordField.sendKeys(password);
+        submitBtnLocator.click();
+    }
 }

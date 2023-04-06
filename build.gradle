@@ -12,13 +12,15 @@ repositories {
 
 dependencies {
     testImplementation 'org.testng:testng:7.6.1'
-//    implementation 'org.seleniumhq.selenium:selenium-java:4.5.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.5.0'
     testImplementation 'io.github.bonigarcia:webdrivermanager:5.3.1'
     implementation 'io.cucumber:cucumber-testng:7.9.0'
     implementation 'io.cucumber:cucumber-core:7.9.0'
     implementation 'io.cucumber:cucumber-java:7.9.0'
     implementation 'io.cucumber:gherkin:25.0.2'
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.8.3'
+    testImplementation 'org.jetbrains:annotations:23.0.0'
+    testImplementation 'org.jetbrains:annotations:23.0.0'
 }
 
 test {

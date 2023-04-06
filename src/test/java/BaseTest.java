@@ -28,7 +28,7 @@ public class BaseTest {
 //    private static ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
 
     @Parameters({"BaseURL"})
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void launchBrowser(@Optional String BaseURL) throws MalformedURLException {
 //        threadDriver = new ThreadLocal<>();
         driver = pickBrowser("browser");
@@ -92,7 +92,7 @@ public class BaseTest {
         }
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void closeBrowser() {
         driver.quit();
 

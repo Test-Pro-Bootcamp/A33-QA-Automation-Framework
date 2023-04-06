@@ -24,7 +24,7 @@ public class HomeTests extends BaseTest {
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongPage = new AllSongsPage(driver);
         //WHEN
-        loginPage.loginPageTest();
+
         allSongPage.clickAllSongsPage();
         homePage.playSongByClickingBtn();
         Thread.sleep(2000);

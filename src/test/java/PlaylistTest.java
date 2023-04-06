@@ -19,7 +19,7 @@ public class PlaylistTest extends BaseTest {
         Assert.assertTrue(homePage.playlistCreatedMsg());
     }
 
-    @Test
+    @Test(dependsOnMethods = {"createPlaylist"})
     public void deletePlaylistTest() throws InterruptedException {
         //GIVEN
         LoginPage loginPage = new LoginPage(driver);
@@ -27,7 +27,7 @@ public class PlaylistTest extends BaseTest {
         //WHEN
         loginPage.loginPageTest();
         Thread.sleep(1000);
-        homePage.createPlaylist();
+
         homePage.deletePlaylist();
         //THEN
         Assert.assertTrue(homePage.confirmNotification());
@@ -54,8 +54,8 @@ public class PlaylistTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongPage = new AllSongsPage(driver);
-        loginPage.loginPageTest();
-        Thread.sleep(2000);
+//        loginPage.loginPageTest();
+//        Thread.sleep(2000);
         //WHEN
         homePage.createPlaylist();
         Thread.sleep(1000);
