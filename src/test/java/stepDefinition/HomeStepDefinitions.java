@@ -18,39 +18,39 @@ public class HomeStepDefinitions {
 
     @And("I choose the song")
     public void iChooseTheSong(){
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(BaseDefinition.getThreadLocal());
         homePage.clickFirstSong();
     }
 
     @And("I play the song")
     public void iPlayTheSong() throws InterruptedException {
-        AllSongsPage allSongsPage = new AllSongsPage(driver);
-        HomePage homePage = new HomePage(driver);
+        AllSongsPage allSongsPage = new AllSongsPage(BaseDefinition.getThreadLocal());
+        HomePage homePage = new HomePage(BaseDefinition.getThreadLocal());
         allSongsPage.clickAllSongsPage();
         homePage.playSongByClickingBtn();
     }
 
     @Then("The song play")
     public void verifyTheSongPlay() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(BaseDefinition.getThreadLocal());
         Assert.assertTrue(homePage.visualizerIsDisplayed());
     }
 
     @And("I stop the song")
     public void iStopTheSong() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(BaseDefinition.getThreadLocal());
         homePage.pauseSongByClickingBtn();
     }
 
     @Then("The song stops")
     public void verifySongStops() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(BaseDefinition.getThreadLocal());
         Assert.assertFalse(homePage.visualizerIsNotDisplayed());
     }
 
     @And("I open the AllSongs page")
     public void iOpenTheAllSongsPage() {
-        AllSongsPage allSongsPage = new AllSongsPage(driver);
+        AllSongsPage allSongsPage = new AllSongsPage(BaseDefinition.getThreadLocal());
         allSongsPage.clickAllSongsPage();
     }
 }

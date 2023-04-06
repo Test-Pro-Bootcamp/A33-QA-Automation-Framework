@@ -54,8 +54,8 @@ public class PlaylistTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongPage = new AllSongsPage(driver);
-//        loginPage.loginPageTest();
-//        Thread.sleep(2000);
+        loginPage.loginPageTest();
+        Thread.sleep(2000);
         //WHEN
         homePage.createPlaylist();
         Thread.sleep(1000);

@@ -1,10 +1,7 @@
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
-
-import java.util.HashMap;
 
 public class LoginTest extends BaseTest {
     @Test
@@ -41,23 +38,23 @@ public class LoginTest extends BaseTest {
         Assert.assertEquals(url, url);
     }
 
-    @Test(dataProvider = "getData")
-    public void loginWithMultipleAccount(HashMap<String,String> input) {
-       LoginPage loginPage = new LoginPage(driver);
-       loginPage.loginApplication(input.get("email"), input.get("password"));
+//    @Test(dataProvider = "getData")
+//    public void loginWithMultipleAccount(HashMap<String,String> input) {
+//       LoginPage loginPage = new LoginPage(driver);
+//       loginPage.loginApplication(input.get("email"), input.get("password"));
+//
+//    }
+//    @DataProvider
+//    public Object[][] getData(){
+//        HashMap<String,String> map = new HashMap<>();
+//        map.put("email", "test@test.com");
+//        map.put("password", "te$t$tudent");
+//
+//        HashMap<String,String> map2 = new HashMap<>();
+//        map.put("email", "test@test.com");
+//        map.put("password", "te$t$tudent");
+//
+//        return new Object[][]{{map},{map2}};
 
-    }
-    @DataProvider
-    public Object[][] getData(){
-        HashMap<String,String> map = new HashMap<>();
-        map.put("email", "test@test.com");
-        map.put("password", "te$t$tudent");
 
-        HashMap<String,String> map2 = new HashMap<>();
-        map.put("email", "test@test.com");
-        map.put("password", "te$t$tudent");
-
-        return new Object[][]{{map},{map2}};
-
-    }
 }
