@@ -21,7 +21,10 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
+
 public class BaseTest {
 
     public static WebDriver driver = null;
@@ -31,29 +34,37 @@ public class BaseTest {
     //    WebDriverManager.chromedriver().setup();
     }
     public static Actions actions = null;
-//    @BeforeMethod
-//    @Parameters("BaseUrl")
-//    public void setUpBrowser(String BaseUrl) {
-//
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
-//        driver = new ChromeDriver(options);
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-//        driver.get(BaseUrl);
-//        wait = new WebDriverWait(driver,Duration.ofSeconds(5));
-//         actions = new Actions(driver);
-//    }
+    public ThreadLocal<WebDriver> threadDriver;
+
     @BeforeMethod
     @Parameters("BaseUrl")
     public  void launchBrowser(String BaseUrl) throws MalformedURLException {
+        threadDriver = new ThreadLocal<>();
         driver = pickBrowser(System.getProperty("browser")) ;
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        threadDriver.set(driver);
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         String url = BaseUrl;
-        driver.get(BaseUrl);
+        getDriver().get(BaseUrl);
         wait = new WebDriverWait(driver,Duration.ofSeconds(5));
         actions = new Actions(driver);
    }
-    private static WebDriver pickBrowser(String browser) throws MalformedURLException {
+
+   public WebDriver lambdaTest() throws MalformedURLException {
+       String hubURL = "https://hub.lambdatest.com/wd/hub";
+
+       ChromeOptions browserOptions = new ChromeOptions();
+       browserOptions.setPlatformName("Windows 10");
+       browserOptions.setBrowserVersion("111.0");
+       HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+       ltOptions.put("username", "ayoub.rafiqui");
+       ltOptions.put("accessKey", "6LidJdX30K6sCilU2bVnJGObjIMdEBOY1SdXEARYgNDejUr7KF");
+       ltOptions.put("project", "Untitled");
+       ltOptions.put("w3c", true);
+       ltOptions.put("plugin", "java-testNG");
+       browserOptions.setCapability("LT:Options", ltOptions);
+       return new RemoteWebDriver(new URL(hubURL),browserOptions);
+   }
+    private WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = " http://192.168.1.248:4444";
         switch (browser){
@@ -66,6 +77,8 @@ public class BaseTest {
             case "grid-firefox":
                 caps.setCapability("browserName", "firefox");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "lambda":
+                return lambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
@@ -75,20 +88,24 @@ public class BaseTest {
         }
     }
         protected void openBrowser() {String url = "https://bbb.testpro.io/";
-       driver.get(url);
+            getDriver().get(url);
    }
    @AfterMethod
     public void closeBrowser() {
-        driver.quit();
+       getDriver().quit();
+        threadDriver.remove();
+    }
+    public WebDriver getDriver(){
+        return threadDriver.get();
     }
     public void enterEmail() {
-        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
+        WebElement emailField = getDriver().findElement(By.cssSelector("[type='email']"));
         emailField.click();
         emailField.sendKeys("rfkayoub12@gmail.com");
     }
 
     public void enterPassword() {
-        WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
+        WebElement passwordField = getDriver().findElement(By.cssSelector("[type='password']"));
         passwordField.click();
         passwordField.sendKeys("te$t$tudent");
     }
@@ -103,40 +120,40 @@ public class BaseTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-test='view-all-songs-btn']"))).click();
     }
     public void clickFirstSong()  {
-        WebElement firstSong = driver.findElement(By.cssSelector("#songResultsWrapper > div > div > div.item-container > table > tr > td.title"));
+        WebElement firstSong = getDriver().findElement(By.cssSelector("#songResultsWrapper > div > div > div.item-container > table > tr > td.title"));
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#songResultsWrapper > div > div > div.item-container > table > tr > td.title"))).click();
 
 
     }
     public void clickAddTo()  {
-        WebElement addToBtn = driver.findElement(By.cssSelector("[class='btn-add-to']"));
+        WebElement addToBtn = getDriver().findElement(By.cssSelector("[class='btn-add-to']"));
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[class='btn-add-to']"))).click();
     }
     public void choosePlaylist()  {
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#songResultsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul > li:nth-child(6)"))).click();
     }
     public String getNotification() {
-        WebElement notificationElement = driver.findElement(By.cssSelector("div.success.show"));
+        WebElement notificationElement = getDriver().findElement(By.cssSelector("div.success.show"));
         return notificationElement.getText();
     }
     public void clickNext()  {
-        WebElement nextBtn = driver.findElement(By.cssSelector("[data-testid ='play-next-btn']"));
+        WebElement nextBtn = getDriver().findElement(By.cssSelector("[data-testid ='play-next-btn']"));
         nextBtn.click();
     }
     public void clickPlay()  {
-        WebElement playBtn = driver.findElement(By.cssSelector("[data-testid='play-btn']"));
+        WebElement playBtn = getDriver().findElement(By.cssSelector("[data-testid='play-btn']"));
         playBtn.click();
     }
     public Boolean isSongPlaying() {
-        WebElement songIsPLaying = driver.findElement(By.cssSelector("[class='plyr__progress--seek']"));
+        WebElement songIsPLaying = getDriver().findElement(By.cssSelector("[class='plyr__progress--seek']"));
         return songIsPLaying.isDisplayed();
     }
     public void clickPlaylist()  {
-        WebElement chosenPlaylist = driver.findElement(By.cssSelector("#playlists > ul > li:nth-child(3) > a"));
+        WebElement chosenPlaylist = getDriver().findElement(By.cssSelector("#playlists > ul > li:nth-child(3) > a"));
         chosenPlaylist.click();
     }
     public void clickDelete()  {
-        WebElement xPlaylist = driver.findElement(By.cssSelector("[title = 'Delete this playlist']"));
+        WebElement xPlaylist = getDriver().findElement(By.cssSelector("[title = 'Delete this playlist']"));
         xPlaylist.click();
     }
 

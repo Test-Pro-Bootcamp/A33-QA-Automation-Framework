@@ -11,8 +11,8 @@ public class playlistTests extends BaseTest {
     public void renamePlaylist(){
         String PlaylistName = "newPlaylistName";
 
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
 
         loginPage.login();
         homePage.doubleClickFirstPlaylist();
