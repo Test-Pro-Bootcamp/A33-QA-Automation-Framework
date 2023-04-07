@@ -18,6 +18,7 @@ public class PlaylistStepDefinitions {
     public void iCreateAPlaylist() throws InterruptedException {
         HomePage homePage = new HomePage(BaseDefinition.getThreadLocal());
         homePage.createPlaylist();
+        Thread.sleep(500);
     }
 
     @Then("New playlist name is on the left menu")

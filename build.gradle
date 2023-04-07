@@ -41,3 +41,11 @@ task testregression(type: Test){
         systemProperty "browser", System.getProperty("browser")
     }
 }
+task(({
+    useTestNG() {
+        suites "src/test/resources/${suite}.xml"
+        systemProperty "browser", System.getProperty("browser")
+    }
+            as String
+}
+        as String

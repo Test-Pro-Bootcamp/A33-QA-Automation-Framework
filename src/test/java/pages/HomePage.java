@@ -157,11 +157,13 @@ public class HomePage extends BasePage {
         return firstSongInThePlaylist.isDisplayed();
 
     }
-    public void clickFirstSong(){
+    public void clickFirstSong() throws InterruptedException {
         click(firstSongInThePlaylistBy);
+        Thread.sleep(1000);
+        firstSongInThePlaylist.click();
     }
     public void playSongByClickingBtn() throws InterruptedException {
-        click(firstSongInThePlaylistBy);
+//        click(firstSongInThePlaylistBy);
         actions.doubleClick(firstSongInThePlaylist).perform();
 
 //        findElement(playBtnInConsoleBy);
@@ -188,9 +190,9 @@ public class HomePage extends BasePage {
     }
 
 
-    public AllSongsPage clickAllSongsPage() {
+    public HomePage clickAllSongsPage() {
         findElement(allSongsElement).click();
-        return this.clickAllSongsPage();
+        return this;
     }
 
     public void clickLogOutBtn() {

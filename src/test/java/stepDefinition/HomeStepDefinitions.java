@@ -17,7 +17,7 @@ public class HomeStepDefinitions {
 
 
     @And("I choose the song")
-    public void iChooseTheSong(){
+    public void iChooseTheSong() throws InterruptedException {
         HomePage homePage = new HomePage(BaseDefinition.getThreadLocal());
         homePage.clickFirstSong();
     }
@@ -26,7 +26,6 @@ public class HomeStepDefinitions {
     public void iPlayTheSong() throws InterruptedException {
         AllSongsPage allSongsPage = new AllSongsPage(BaseDefinition.getThreadLocal());
         HomePage homePage = new HomePage(BaseDefinition.getThreadLocal());
-        allSongsPage.clickAllSongsPage();
         homePage.playSongByClickingBtn();
     }
 
@@ -52,5 +51,11 @@ public class HomeStepDefinitions {
     public void iOpenTheAllSongsPage() {
         AllSongsPage allSongsPage = new AllSongsPage(BaseDefinition.getThreadLocal());
         allSongsPage.clickAllSongsPage();
+    }
+
+    @And("I click AllSongs page")
+    public void iClickAllSongsPage() {
+        HomePage homePage = new HomePage(BaseDefinition.getThreadLocal());
+        homePage.clickAllSongsPage();
     }
 }

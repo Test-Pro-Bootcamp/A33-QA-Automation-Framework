@@ -27,6 +27,7 @@ public class BaseDefinition {
         THREAD_LOCAL.set(pickBrowser("browser"));
         THREAD_LOCAL.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         THREAD_LOCAL.get().manage().deleteAllCookies();
+        THREAD_LOCAL.get().manage().window().maximize();
     }
 
     public WebDriver pickBrowser(String browser) throws MalformedURLException {
