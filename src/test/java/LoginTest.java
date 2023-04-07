@@ -7,8 +7,8 @@ public class LoginTest extends BaseTest {
     @Test
     public void loginWithValidEmail() {
         //GIVEN
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         //WHEN
         loginPage.loginPageTest();
         //THEN
@@ -19,8 +19,8 @@ public class LoginTest extends BaseTest {
     @Test
     public void loginWithInvalidEmail() {
         //GIVEN
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         //WHEN
         loginPage.loginWithInvalidEmail();
         //THEN
@@ -30,8 +30,8 @@ public class LoginTest extends BaseTest {
     @Test
     public void loginWithInvalidPasswordTest() {
         //GIVEN
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         //WHEN
         loginPage.loginWithInvalidPassword();
         //THEN

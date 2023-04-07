@@ -8,9 +8,9 @@ public class PlaylistTest extends BaseTest {
     @Test
     public void createPlaylist() throws InterruptedException {
         //GIVEN
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        AllSongsPage allSongPage = new AllSongsPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        AllSongsPage allSongPage = new AllSongsPage(getDriver());
         //WHEN
         loginPage.loginPageTest();
         Thread.sleep(1000);
@@ -22,8 +22,8 @@ public class PlaylistTest extends BaseTest {
     @Test(dependsOnMethods = {"createPlaylist"})
     public void deletePlaylistTest() throws InterruptedException {
         //GIVEN
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         //WHEN
         loginPage.loginPageTest();
         Thread.sleep(1000);
@@ -36,9 +36,9 @@ public class PlaylistTest extends BaseTest {
     @Test
     public void renamePlaylistTest() throws InterruptedException {
         //GIVEN
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        AllSongsPage allSongPage = new AllSongsPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        AllSongsPage allSongPage = new AllSongsPage(getDriver());
         loginPage.loginPageTest();
         Thread.sleep(1000);
         //WHEN
@@ -51,9 +51,9 @@ public class PlaylistTest extends BaseTest {
     @Test
     public void addSongPlaylist() throws InterruptedException {
         //GIVEN
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        AllSongsPage allSongPage = new AllSongsPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        AllSongsPage allSongPage = new AllSongsPage(getDriver());
         loginPage.loginPageTest();
         Thread.sleep(2000);
         //WHEN
@@ -66,9 +66,9 @@ public class PlaylistTest extends BaseTest {
     @Test
     public void addSongPlaylistDragAndDrop() throws InterruptedException {
         //GIVEN
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        AllSongsPage allSongPage = new AllSongsPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        AllSongsPage allSongPage = new AllSongsPage(getDriver());
         loginPage.loginPageTest();
         Thread.sleep(1000);
         //WHEN
