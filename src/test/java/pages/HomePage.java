@@ -93,7 +93,7 @@ public class HomePage extends BasePage {
         Thread.sleep(500);
         click(playlistNewBtnBy);
         playlistNewBtn.click();
-        Thread.sleep(2000);
+        Thread.sleep(500);
        click(playlistContextMenuBy);
         playlistContextMenu.click();
 //        actions.contextClick(playlistContextMenu).build().perform();

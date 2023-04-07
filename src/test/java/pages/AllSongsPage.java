@@ -18,6 +18,7 @@ public class AllSongsPage extends BasePage {
     By firstSongBy = By.xpath("//*[@id='songsWrapper']/div/div/div[1]/table/tr[1]/td[2]");
     @FindBy(xpath = "//*[@id='songsWrapper']//span/button[2]")
     private WebElement greenBtnAddTo;
+    By greenBtnAddToBy = By.xpath("//*[@id='songsWrapper']//span/button[2]");
     @FindBy(xpath = "//*[@id=\"songsWrapper\"]/header/div[3]/div/section[1]/ul/li[5]")
     private WebElement contextMenuAddToPlaylist;
     @FindBy(xpath = "//*[@id='sidebar']/section[1]/ul/li[3]/a")
@@ -37,8 +38,9 @@ public class AllSongsPage extends BasePage {
     }
     public AllSongsPage addSongsToPlaylist() throws InterruptedException {
         clickAllSongsPage();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(firstSongBy)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(greenBtnAddTo)).click();
+        findElement(firstSongBy).click();
+        click(greenBtnAddToBy);
+        greenBtnAddTo.click();
         contextMenuAddToPlaylist.click();
         return this;
 

@@ -25,7 +25,7 @@ dependencies {
 
 test {
     useTestNG() {
-        suites "src/test/resources/${suite}.xml"
+        suites "src/test/resources/TestNG.xml"
         systemProperty "browser", System.getProperty("browser")
     }
 }
@@ -41,3 +41,9 @@ task testregression(type: Test){
         systemProperty "browser", System.getProperty("browser")
     }
 }
+//task testregression(type: Test){
+//    useTestNG() {
+//        suites "src/test/resources/TestNG.xml"
+//        systemProperty "browser", System.getProperty("browser")
+//    }
+//}
