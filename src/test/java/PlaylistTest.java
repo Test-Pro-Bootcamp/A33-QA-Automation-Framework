@@ -72,13 +72,12 @@ public class PlaylistTest extends BaseTest {
         loginPage.loginPageTest();
         Thread.sleep(1000);
         //WHEN
-        homePage.createPlaylist();
-        Thread.sleep(1000);
         allSongPage.clickAllSongsPage();
 //        Thread.sleep(1000);
         allSongPage.dropToAddSong();
+        //THEN
         allSongPage.confirmSongIsAdded();
-        driver.close();
+
     }
 
 
