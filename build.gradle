@@ -29,18 +29,18 @@ test {
         systemProperty "browser", System.getProperty("browser")
     }
 }
-//task testsmoke(type: Test){
-//    useTestNG() {
-//        suites "src/test/resources/smoke.xml"
-//        systemProperty "browser", System.getProperty("browser")
-//    }
-//}
-//task testregression(type: Test){
-//    useTestNG() {
-//        suites "src/test/resources/regression.xml"
-//        systemProperty "browser", System.getProperty("browser")
-//    }
-//}
+task testsmoke(type: Test){
+    useTestNG() {
+        suites "src/test/resources/smoke.xml"
+        systemProperty "browser", System.getProperty("browser")
+    }
+}
+task testregression(type: Test){
+    useTestNG() {
+        suites "src/test/resources/regression.xml"
+        systemProperty "browser", System.getProperty("browser")
+    }
+}
 ////task testregression(type: Test){
 ////    useTestNG() {
 ////        suites "src/test/resources/TestNG.xml"
