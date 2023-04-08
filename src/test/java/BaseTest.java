@@ -27,14 +27,14 @@ import java.util.HashMap;
 
 public class BaseTest {
 
-    public static WebDriver driver = null;
+    private WebDriver driver;
      WebDriverWait wait;
     @BeforeSuite
     static void setupClass() {
     //    WebDriverManager.chromedriver().setup();
     }
     public static Actions actions = null;
-    public ThreadLocal<WebDriver> threadDriver;
+    public  static ThreadLocal<WebDriver> threadDriver;
 
     @BeforeMethod
     @Parameters("BaseUrl")
@@ -45,8 +45,8 @@ public class BaseTest {
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         String url = BaseUrl;
         getDriver().get(BaseUrl);
-        wait = new WebDriverWait(driver,Duration.ofSeconds(5));
-        actions = new Actions(driver);
+        wait = new WebDriverWait(getDriver(),Duration.ofSeconds(5));
+        actions = new Actions(getDriver());
    }
 
    public WebDriver lambdaTest() throws MalformedURLException {
@@ -64,7 +64,7 @@ public class BaseTest {
        browserOptions.setCapability("LT:Options", ltOptions);
        return new RemoteWebDriver(new URL(hubURL),browserOptions);
    }
-    private WebDriver pickBrowser(String browser) throws MalformedURLException {
+    public WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = " http://192.168.1.248:4444";
         switch (browser){
