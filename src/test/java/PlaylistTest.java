@@ -63,7 +63,7 @@ public class PlaylistTest extends BaseTest {
         allSongPage.confirmSongIsAdded();
     }
 
-    @Test
+    @Test(enabled = true)
     public void addSongPlaylistDragAndDrop() throws InterruptedException {
         //GIVEN
         LoginPage loginPage = new LoginPage(getDriver());

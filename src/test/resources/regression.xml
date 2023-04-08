@@ -9,6 +9,7 @@
             <class name="LoginTest"/>
             <class name="HomeTests"/>
             <class name="PlaylistTest"/>
+
             <class name="SearchTest"/>
             <class name="AllSongsTest"/>
         </classes>
