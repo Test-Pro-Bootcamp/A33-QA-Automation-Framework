@@ -4,8 +4,10 @@
 <suite name="TestNG">
 
     <test name="Example Test" preserve-order="false">
+        <parameter name="BaseUrl" value="https://bbb.testpro.io/"/>
         <classes>
             <class name="LoginTests"/>
+            <class name="Homework22"/>
             <class name="BaseTest"/>
         </classes>
     </test>
