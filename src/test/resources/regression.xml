@@ -12,6 +12,7 @@
 
             <class name="SearchTest"/>
             <class name="AllSongsTest"/>
+            <class name="ExtentReport"/>
         </classes>
     </test>
 </suite>

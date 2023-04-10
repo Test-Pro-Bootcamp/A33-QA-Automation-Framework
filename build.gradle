@@ -21,11 +21,12 @@ dependencies {
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.8.3'
     testImplementation 'org.jetbrains:annotations:23.0.0'
     testImplementation 'org.jetbrains:annotations:23.0.0'
+    implementation group: 'com.aventstack', name: 'extentreports', version: '5.0.9'
 }
 
 test {
     useTestNG() {
-        suites "src/test/resources/{suite}.xml"
+        suites "src/test/resources/TestNG.xml"
         systemProperty "browser", System.getProperty("browser")
     }
 }
