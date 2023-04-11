@@ -68,7 +68,7 @@ public class PlaylistStepDefinitions {
     }
 
     @And("I add a song to the playlist by using drag and drop")
-    public void iAddASongToThePlaylistByUsingDragAndDrop() {
+    public void iAddASongToThePlaylistByUsingDragAndDrop() throws InterruptedException {
         HomePage homePage = new HomePage(BaseDefinition.getThreadLocal());
         AllSongsPage allSongPage = new AllSongsPage(BaseDefinition.getThreadLocal());
         allSongPage.dropToAddSong();

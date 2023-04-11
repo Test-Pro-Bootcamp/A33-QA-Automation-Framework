@@ -37,7 +37,9 @@ public class AllSongsPage extends BasePage {
         return this;
     }
     public AllSongsPage addSongsToPlaylist() throws InterruptedException {
+        Thread.sleep(1000);
         clickAllSongsPage();
+        Thread.sleep(2000);
         findElement(firstSongBy).click();
         click(greenBtnAddToBy);
         greenBtnAddTo.click();
@@ -48,7 +50,8 @@ public class AllSongsPage extends BasePage {
     public boolean confirmSongIsAdded(){
         return firstSong.isDisplayed();
     }
-    public void dropToAddSong(){
+    public void dropToAddSong() throws InterruptedException {
+        Thread.sleep(500);
         WebElement source = wait.until(ExpectedConditions.visibilityOfElementLocated(firstSongBy));
         WebElement target = driver.findElement(By.xpath("//*[@id='playlists']/ul/li[3]/a"));
         actions.dragAndDrop(source, target).build().perform();

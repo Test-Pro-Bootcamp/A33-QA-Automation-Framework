@@ -20,8 +20,8 @@ public class SearchPage extends BasePage {
     public SearchPage(WebDriver givenDriver){
         super(givenDriver);
     }
-    public SearchPage typeSearchQuery(String query) throws InterruptedException {
-        Thread.sleep(1000);
+    public SearchPage typeSearchQuery(String query)  {
+//        Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(searchField)).sendKeys(query);
         return this;
     }

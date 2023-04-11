@@ -20,14 +20,12 @@ public class PlaylistTest extends BaseTest {
     }
 
     @Test(dependsOnMethods = {"createPlaylist"})
-    public void deletePlaylistTest() throws InterruptedException {
+    public void deletePlaylistTest() {
         //GIVEN
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
         //WHEN
         loginPage.loginPageTest();
-        Thread.sleep(1000);
-
         homePage.deletePlaylist();
         //THEN
         Assert.assertTrue(homePage.confirmNotification());
@@ -40,7 +38,7 @@ public class PlaylistTest extends BaseTest {
         HomePage homePage = new HomePage(getDriver());
         AllSongsPage allSongPage = new AllSongsPage(getDriver());
         loginPage.loginPageTest();
-        Thread.sleep(1000);
+
         //WHEN
         homePage.createPlaylist();
         homePage.changePlaylistName();
@@ -55,11 +53,11 @@ public class PlaylistTest extends BaseTest {
         HomePage homePage = new HomePage(getDriver());
         AllSongsPage allSongPage = new AllSongsPage(getDriver());
         loginPage.loginPageTest();
-        Thread.sleep(2000);
+        Thread.sleep(500);
         //WHEN
         homePage.createPlaylist();
-        Thread.sleep(1000);
         allSongPage.addSongsToPlaylist();
+        homePage.choosePlaylist();
         allSongPage.confirmSongIsAdded();
     }
 
@@ -70,15 +68,15 @@ public class PlaylistTest extends BaseTest {
         HomePage homePage = new HomePage(getDriver());
         AllSongsPage allSongPage = new AllSongsPage(getDriver());
         loginPage.loginPageTest();
-        Thread.sleep(1000);
-        //WHEN
+       //WHEN
+        homePage.createPlaylist();
+        Thread.sleep(500);
         allSongPage.clickAllSongsPage();
-//        Thread.sleep(1000);
         allSongPage.dropToAddSong();
+        Thread.sleep(500);
+        homePage.choosePlaylist();
         //THEN
         allSongPage.confirmSongIsAdded();
 
     }
-
-
 }

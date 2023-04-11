@@ -6,7 +6,7 @@ import pages.LoginPage;
 
 public class HomeTests extends BaseTest {
     @Test
-    public void playSongTest() throws InterruptedException {
+    public void playSongTest()  {
         //GIVEN
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
@@ -18,7 +18,7 @@ public class HomeTests extends BaseTest {
         Assert.assertTrue(homePage.visualizerIsDisplayed());
     }
     @Test
-    public void pauseSongTest() throws InterruptedException {
+    public void pauseSongTest()  {
         //GIVEN
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
@@ -27,7 +27,7 @@ public class HomeTests extends BaseTest {
         loginPage.loginPageTest();
         allSongPage.clickAllSongsPage();
         homePage.playSongByClickingBtn();
-        Thread.sleep(2000);
+//        Thread.sleep(2000);
         homePage.pauseSongByClickingBtn();
         //THEN
         Assert.assertFalse(homePage.visualizerIsNotDisplayed());
