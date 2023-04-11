@@ -16,33 +16,41 @@ public class LoginPage extends BasePage {
 
     @FindBy (css = "[type='password']")
     private WebElement passwordFieldLocator;
+    @FindBy (css = "a.view-profile")
+    WebElement profileIcon;
 
     //    Constructor
     public LoginPage (WebDriver givenDriver) {
+
         super(givenDriver);
     }
 
 
     //    Page Methods Refactoring+Fluent Interface
 
-    public LoginPage provideEmail (String email) {
-        emailFieldLocator.sendKeys(email);
+    public LoginPage provideEmail () {
+        emailFieldLocator.sendKeys("krista_ua86@gmail.com");
         return this;
     }
 
-    public LoginPage providePassword (String password) {
-        passwordFieldLocator.sendKeys(password);
+    public LoginPage providePassword () {
+        passwordFieldLocator.sendKeys("te$t$tudent");
         return this;
     }
 
-    public void clickSubmitBtn () {
+    public LoginPage clickSubmitBtn () {
         submitButtonLocator.click();
+        return this;
     }
 
-    public void login () {
-        provideEmail("krista_ua86@gmail.com");
-        providePassword("te$t$tudent");
-        clickSubmitBtn();
+//    public void login () {
+//        provideEmail("krista_ua86@gmail.com");
+//        providePassword("te$t$tudent");
+//        clickSubmitBtn();
+//    }
+    public ProfilePage clickProfileIcon() {
+        profileIcon.click();
+        return new ProfilePage(driver);
     }
 
 

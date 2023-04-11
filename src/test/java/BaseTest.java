@@ -9,6 +9,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,13 +18,18 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
-
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
 
 public class BaseTest {
     static WebDriver driver;
     WebDriverWait wait;
     String url = "https://bbb.testpro.io/";
+
+    ThreadLocal<WebDriver> threadDriver;
     //    @BeforeSuite
 //    static void setupClass() {
 //        WebDriverManager.chromedriver().setup();
@@ -30,19 +37,39 @@ public class BaseTest {
     String playlistName = "Emiliia's Fun";
 
     @BeforeMethod
-    public void setUpBrowser () {
-//    ChromeOptions options = new ChromeOptions();
-//    options.addArguments("--remote-allow-origins=*");
-//    driver = new ChromeDriver(options);
+    public void setUpBrowser () throws MalformedURLException {
 
         driver = pickBrowser(System.getProperty("browser"));
+        threadDriver = new ThreadLocal<>();
+        threadDriver.set(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 //        driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(4));
         driver.get(url);
     }
 
-    public static WebDriver pickBrowser (String browser) {
+    public WebDriver lambdaTest () throws MalformedURLException {
+        String hubURL = "https://hub.lambdatest.com/wd/hub";
+
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("MacOS Ventura");
+        browserOptions.setBrowserVersion("111.0");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("username", "kristinaostropolets");
+        ltOptions.put("accessKey", "6cIGa2HGbr4u0tjvBFCgijWWQXvB40FGyYHIrEJDFfhKsfWfLK");
+        ltOptions.put("timezone", "New_York");
+        ltOptions.put("project", "Test Project");
+        ltOptions.put("selenium_version", "4.0.0");
+        ltOptions.put("w3c", true);
+        browserOptions.setCapability("LT:Options", ltOptions);
+
+        return new RemoteWebDriver(new URL(hubURL), browserOptions);
+    }
+
+    public WebDriver pickBrowser (String browser) throws MalformedURLException {
+        DesiredCapabilities caps = new DesiredCapabilities();
+        String gridURL = "http://192.168.1.160:4444";
+
         switch (browser) {
             case "Safari":
                 WebDriverManager.safaridriver().setup();
@@ -53,8 +80,22 @@ public class BaseTest {
             case "MicrosoftEdge":
                 WebDriverManager.edgedriver().setup();
                 return driver = new EdgeDriver();
+            case "grid-edge":
+                caps.setCapability("browserName", "MicrosoftEdge");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "grid-firefox":
+                caps.setCapability("browserName", "firefox");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "grid-chrome":
+                caps.setCapability("browserName", "chrome");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "cloud":
+                return lambdaTest();
             default:
-                return driver = new ChromeDriver();
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--remote-allow-origins=*");
+                return driver = new ChromeDriver(options);
         }
     }
 
@@ -118,8 +159,6 @@ public class BaseTest {
         action.doubleClick(playlist).perform();
 
     }
-
-
 }
 
 

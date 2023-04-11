@@ -12,7 +12,9 @@ public class PlaylistTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         AllSongsPage allSongsPage = new AllSongsPage(driver);
 
-        loginPage.login();
+        loginPage.provideEmail()
+                .providePassword()
+                .clickSubmitBtn();
         allSongsPage.doubleClickOnPlaylist();
         allSongsPage.enterPlaylistNewName(playlistName);
         Assert.assertTrue(AllSongsPage.doesPlaylistExist(playlistName));
