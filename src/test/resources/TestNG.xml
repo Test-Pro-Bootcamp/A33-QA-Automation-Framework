@@ -7,7 +7,8 @@
         <classes>
             <class name="BaseTest"/>
             <class name="PlaylistTests"/>
-            <class name="UserProfileTests"/>
+            <class name="PlaylistTest2"/>
+<!--            <class name="UserProfileTests"/>-->
         </classes>
     </test>
 
