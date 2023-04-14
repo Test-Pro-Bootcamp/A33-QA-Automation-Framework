@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 public class LoginPage extends BasePage {
 
     //    locators ;
-
+//    String registrationLink = "https://bbb.testpro.io/registration.php";
     @FindBy (css = "[type='submit']")
     WebElement submitButtonLocator;
     @FindBy (css = "[type='email']")
@@ -52,6 +52,4 @@ public class LoginPage extends BasePage {
         profileIcon.click();
         return new ProfilePage(driver);
     }
-
-
 }

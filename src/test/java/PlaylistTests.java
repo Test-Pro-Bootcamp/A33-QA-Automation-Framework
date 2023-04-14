@@ -9,12 +9,12 @@ public class PlaylistTests extends BaseTest {
     @Test
     public void renamePlaylist (){
         String playlistName = "Emiliia Music";
-        LoginPage loginPage = new LoginPage(driver);
-        AllSongsPage allSongsPage = new AllSongsPage(driver);
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        AllSongsPage allSongsPage = new AllSongsPage(getThreadLocal());
 
-        loginPage.provideEmail()
-                .providePassword()
-                .clickSubmitBtn();
+        loginPage.provideEmail();
+        loginPage.providePassword();
+        loginPage.clickSubmitBtn();
         allSongsPage.doubleClickOnPlaylist();
         allSongsPage.enterPlaylistNewName(playlistName);
         Assert.assertTrue(AllSongsPage.doesPlaylistExist(playlistName));

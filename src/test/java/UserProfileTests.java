@@ -9,7 +9,7 @@ public class UserProfileTests extends BaseTest {
 
     @Test
     public void changeCurrentTheme () {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getThreadLocal());
         ProfilePage profilePage = loginPage.provideEmail()
                 .providePassword()
                 .clickSubmitBtn()

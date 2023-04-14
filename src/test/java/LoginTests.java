@@ -13,55 +13,43 @@ public class LoginTests extends BaseTest {
 
     //Page Object Model using
     @Test
-    public static void LoginSuccessTest () {
+    public  void LoginSuccessTest () {
 
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
 
         loginPage.provideEmail()
                 .providePassword()
                 .clickSubmitBtn();
 
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
-        driver.quit();
-    }
 }
 
 //    @Test
 //    public static void LoginNotExistingEmailTest () {
-////        ChromeOptions options = new ChromeOptions();
-////        options.addArguments("--remote-allow-origins=*");
-////        driver = new ChromeDriver(options);
-////        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-//        String url = "https://bbb.testpro.io/";
-//        driver.get(url);
 //
-//        LoginPage loginPage = new LoginPage(driver);
-//        HomePage homePage = new HomePage(driver);
+//        LoginPage loginPage = new LoginPage(getThreadLocal());
+//        HomePage homePage = new HomePage(getThreadLocal());
 //
-//        loginPage.provideEmail("notExisting@gmail.com")
+//        loginPage.provideEmail("")
 //                .providePassword("te$t$tudent")
 //                .clickSubmitBtn();
 //
-//        Assert.assertEquals(driver.getCurrentUrl(), url);
+//        Assert.assertEquals(getThreadLocal().getCurrentUrl(), url);
 //        driver.quit();
 //    }
 
-//
+
 //    @Test
 //    public static void LoginEmptyPasswordTest () {
-////        ChromeOptions options = new ChromeOptions();
-////        options.addArguments("--remote-allow-origins=*");
-////        driver = new ChromeDriver(options);
-////        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-//       String url = "https://bbb.testpro.io/";
-//      driver.get(url);
-//        LoginPage loginPage = new LoginPage(driver);
-//        HomePage homePage = new HomePage(driver);
+//
+//        LoginPage loginPage = new LoginPage(getThreadLocal());
+//        HomePage homePage = new HomePage(getThreadLocal());
 //
 //        loginPage.provideEmail("krista_ua86@gmail.com");
+//        loginPage.providePassword("");
 //        loginPage.clickSubmitBtn();
-//        Assert.assertEquals(driver.getCurrentUrl(), url);
-//        driver.quit();
+//        Assert.assertTrue(loginPage.isPageOpened());
+//
 //    }
-//}
+}
