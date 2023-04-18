@@ -16,6 +16,7 @@ public class Homework22 extends BaseTest {
         HomePage homePage = new HomePage(driver);
         loginPage.login();
         homePage.rightClickThirdPlaylist();
+        homePage.clickEditBtn();
         homePage.renamePlaylist("Renamed playlist");
         Assert.assertTrue(homePage.isPlaylistRenamed(playlistName));
     }

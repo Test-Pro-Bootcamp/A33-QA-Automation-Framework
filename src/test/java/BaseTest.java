@@ -18,36 +18,36 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import java.time.Duration;
 public class BaseTest {
-        public static WebDriver driver = null;
-        public static WebDriverWait wait = null;
-        public static String url = null;
-        public static Actions actions = null;
+        public WebDriver driver = null;
+        public WebDriverWait wait = null;
+        public String url = null;
+        public Actions actions = null;
     @BeforeSuite
     static void setupClass() {WebDriverManager.chromedriver().setup();}
     @BeforeMethod
     @Parameters({"BaseUrl"})
-    public static void launchBrowser(String BaseUrl) {
+    public void launchBrowser(String BaseUrl) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito", "--start-maximized");
-        LoginTests.driver = new ChromeDriver(options);
-        LoginTests.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        actions = new Actions(LoginTests.driver);
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        actions = new Actions(driver);
         url = BaseUrl;
         driver.get(BaseUrl);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(4));
     }
     @AfterMethod
-    public static void closeDownBrowser() {LoginTests.driver.quit();
+    public void closeDownBrowser() {driver.quit();
     }
-    public static void provideEmail(String email) {
+    public void provideEmail(String email) {
         WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
         emailField.sendKeys(email);
     }
-    public static void providePassword(String password) {
+    public void providePassword(String password) {
         WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='password']")));
         passwordField.sendKeys(password);
     }
-    public static void clickSubmit() {
+    public void clickSubmit() {
         WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='submit']")));
         submitButton.click();
     }

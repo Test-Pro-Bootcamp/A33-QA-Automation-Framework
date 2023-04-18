@@ -13,20 +13,28 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import java.time.Duration;
 public class BasePage {
-    WebDriver driver;
-    WebDriverWait wait;
-    Actions actions;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+    protected Actions actions;
     String url;
     public BasePage(WebDriver givenDriver) {
         driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
     }
-
-    public void contextClick(WebElement locator) {
+    public void click(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
-        actions.contextClick(locator).perform();
     }
+    public WebElement findElement (By locator) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+    public void contextClick(By locator) {
+        actions.contextClick(findElement(locator)).perform();
+    }
+    public void doubleClick (By locator) {
+        actions.doubleClick(findElement(locator)).perform();
+    }
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();

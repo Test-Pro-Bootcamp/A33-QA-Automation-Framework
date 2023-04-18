@@ -8,18 +8,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 public class HomePage extends BasePage {
-    WebDriver driver;
-    WebDriverWait wait;
-    By userAvatarIcon = By.cssSelector("[img.avatar]");
-    By thirdPlaylist = By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a");
-    By playlistInputField = By.xpath("//input[@name='name']");
+    private By userAvatarIcon = By.cssSelector("[img.avatar]");
+    private By thirdPlaylist = By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a");
+    private By playlistInputField = By.xpath("//input[@name='name']");
+    private By editBtn = By.xpath("//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]");
 
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
 
     public void rightClickThirdPlaylist() {
-        contextClick ((WebElement) thirdPlaylist);
+        contextClick (thirdPlaylist);
+    }
+    public void clickEditBtn() {
+        actions.click(findElement(editBtn)).perform();
     }
 
     public void renamePlaylist(String playlistName) {
