@@ -39,16 +39,16 @@ public class BaseTest {
     @AfterMethod
     public void closeDownBrowser() {driver.quit();
     }
-    public void provideEmail(String email) {
-        WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
-        emailField.sendKeys(email);
-    }
-    public void providePassword(String password) {
-        WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='password']")));
-        passwordField.sendKeys(password);
-    }
-    public void clickSubmit() {
-        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='submit']")));
-        submitButton.click();
-    }
+//    public void provideEmail(String email) {
+//        WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
+//        emailField.sendKeys(email);
+//    }
+//    public void providePassword(String password) {
+//        WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='password']")));
+//        passwordField.sendKeys(password);
+//    }
+//    public void clickSubmit() {
+//        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='submit']")));
+//        submitButton.click();
+//    }
 }

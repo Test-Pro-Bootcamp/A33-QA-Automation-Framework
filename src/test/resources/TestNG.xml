@@ -6,7 +6,7 @@
     <test name="Example Test" preserve-order="false">
         <parameter name="BaseUrl" value="https://bbb.testpro.io/"/>
         <classes>
-            <class name="Homework22"/>
+            <class name="Homework23"/>
         </classes>
     </test>
 </suite>

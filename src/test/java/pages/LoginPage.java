@@ -3,34 +3,32 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.FindBy;
 import java.time.Duration;
-
 public class LoginPage extends BasePage {
-//attributes
-//locators
-    By emailField = By.cssSelector("[type='email']");
-    By passwordField = By.cssSelector("[type='password']");
-    By submitButton = By.cssSelector("[type='submit']");
+    @FindBy (css = "[type='email']")
+        WebElement emailField;
+    @FindBy (css = "[type='password']")
+        WebElement passwordField;
+    @FindBy (css = "[type='submit']")
+        WebElement submitButton;
+
 
     public LoginPage(WebDriver givenDriver) {
         super(givenDriver);
     }
-//Constructor that takes a WebDriver object and passes it to its superclass constructor
-//It's not initialized - we'll do that in the test classes
-//    public LoginPage (WebDriver givenDriver) {
-//        driver = givenDriver;
-//        wait = new WebDriverWait(driver, Duration.ofSeconds(4));
-//    }
-
 //page methods
-    public void provideEmail(String email) {
-        driver.findElement(emailField).sendKeys(email);
+    public LoginPage provideEmail(String email) {
+        emailField.sendKeys(email);
+        return this;
     }
-    public void providePassword(String password) {
-        driver.findElement(passwordField).sendKeys(password);
+    public LoginPage providePassword(String password) {
+        passwordField.sendKeys(password);
+        return this;
     }
-    public void clickSubmitBtn() {
-        driver.findElement(submitButton).click();
+    public LoginPage clickSubmitBtn() {
+        submitButton.click();
+        return this;
     }
     public void login() {
         provideEmail("vera1077@gmail.com");

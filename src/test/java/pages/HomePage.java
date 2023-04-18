@@ -6,22 +6,27 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.FindBy;
 import java.time.Duration;
 public class HomePage extends BasePage {
-    private By userAvatarIcon = By.cssSelector("[img.avatar]");
-    private By thirdPlaylist = By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a");
-    private By playlistInputField = By.xpath("//input[@name='name']");
-    private By editBtn = By.xpath("//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]");
+    @FindBy (css = "[img.avatar]")
+    WebElement userAvatarIcon;
+    @FindBy (xpath = "//*[@id=\"playlists\"]/ul/li[3]/a")
+    WebElement thirdPlaylist;
+    @FindBy  (xpath = "//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]")
+    WebElement editBtn;
 
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
 
-    public void rightClickThirdPlaylist() {
-        contextClick (thirdPlaylist);
+    public HomePage rightClickThirdPlaylist() {
+        actions.contextClick(thirdPlaylist).perform();
+        return this;
     }
-    public void clickEditBtn() {
-        actions.click(findElement(editBtn)).perform();
+    public HomePage clickEditBtn() {
+        actions.click(editBtn).perform();
+        return this;
     }
 
     public void renamePlaylist(String playlistName) {
@@ -36,7 +41,7 @@ public class HomePage extends BasePage {
         WebElement playlistRename = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class='success show']")));
         return playlistRename.isDisplayed();
     }
-    public WebElement getUserAvatar() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(userAvatarIcon));
-    }
+//    public WebElement getUserAvatar() {
+//        return wait.until(ExpectedConditions.visibilityOfElementLocated(userAvatarIcon));
+//    }
 }
