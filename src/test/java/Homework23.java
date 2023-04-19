@@ -12,7 +12,6 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.FindAll;
 public class Homework23 extends BaseTest {
     @Test
-    //GIVEN
     public void renamePlaylist() {
         String playlistName = "Renamed playlist";
         LoginPage loginPage = new LoginPage(driver);

@@ -12,9 +12,9 @@ public class HomePage extends BasePage {
     @FindBy (css = "[img.avatar]")
     WebElement userAvatarIcon;
     @FindBy (xpath = "//*[@id=\"playlists\"]/ul/li[3]/a")
-    WebElement thirdPlaylist;
+    private WebElement thirdPlaylist;
     @FindBy  (xpath = "//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]")
-    WebElement editBtn;
+    private WebElement editBtn;
 
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);

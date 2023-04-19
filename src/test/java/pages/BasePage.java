@@ -36,20 +36,4 @@ public class BasePage {
     public void doubleClick (By locator) {
         actions.doubleClick(findElement(locator)).perform();
     }
-
-    @BeforeSuite
-    static void setupClass() {
-        WebDriverManager.chromedriver().setup();
-    }
-    @BeforeMethod
-    @Parameters({"BaseUrl"})
-    public void launchBrowser(String BaseUrl) {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito", "--start-maximized");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        url = BaseUrl;
-        driver.get(BaseUrl);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(4));
-    }
 }

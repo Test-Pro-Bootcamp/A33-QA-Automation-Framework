@@ -34,7 +34,7 @@ public class BaseTest {
         wait = new WebDriverWait(driver, Duration.ofSeconds(4));
         actions = new Actions(driver);
         url = BaseUrl;
-        driver.get(BaseUrl);
+        driver.get(BaseUrl); 
     }
     @AfterMethod
     public void closeDownBrowser() {driver.quit();
