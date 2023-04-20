@@ -27,7 +27,7 @@ public class BaseTest {
     public String url;
 
     public WebDriverWait wait;
-
+//test commit
     @BeforeSuite
     public void setupClass() {
 //        WebDriverManager.chromedriver().setup();
