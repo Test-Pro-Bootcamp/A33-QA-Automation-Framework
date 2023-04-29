@@ -1,33 +1,55 @@
+import K_pages.HomePage;
+import K_pages.LoginPage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.HomePage;
-import pages.LoginPage;
+
+import java.time.Duration;
 
 public class LoginTests extends BaseTest {
 
+    //Page Object Model using
     @Test
-    public void LoginEmptyEmailPasswordTest () throws InterruptedException {
-        Assert.assertEquals(getDriver().getCurrentUrl(), url);
-    }
+    public  void LoginSuccessTest () {
 
-    @Test
-    public void LoginInvalidEmail() {
-        LoginPage loginPage = new LoginPage(getDriver());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
 
-        loginPage.provideEmail("cucaracha@class.com");
-        loginPage.providePassword("ayCaramba");
-        loginPage.clickSubmitButton();
-        loginPage.isEmailFieldVisible();
-    }
+        loginPage.provideEmail()
+                .providePassword()
+                .clickSubmitBtn();
 
-    @Test
-    public void LoginValidEmailPasswordTest() {
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+}
 
-        loginPage.provideEmail("demo@class.com");
-        loginPage.providePassword("te$t$tudent");
-        loginPage.clickSubmitButton();
-        homePage.isUserAvatarDisplayed();
-    }
+//    @Test
+//    public static void LoginNotExistingEmailTest () {
+//
+//        LoginPage loginPage = new LoginPage(getThreadLocal());
+//        HomePage homePage = new HomePage(getThreadLocal());
+//
+//        loginPage.provideEmail("")
+//                .providePassword("te$t$tudent")
+//                .clickSubmitBtn();
+//
+//        Assert.assertEquals(getThreadLocal().getCurrentUrl(), url);
+//        driver.quit();
+//    }
+
+
+//    @Test
+//    public static void LoginEmptyPasswordTest () {
+//
+//        LoginPage loginPage = new LoginPage(getThreadLocal());
+//        HomePage homePage = new HomePage(getThreadLocal());
+//
+//        loginPage.provideEmail("krista_ua86@gmail.com");
+//        loginPage.providePassword("");
+//        loginPage.clickSubmitBtn();
+//        Assert.assertTrue(loginPage.isPageOpened());
+//
+//    }
 }
