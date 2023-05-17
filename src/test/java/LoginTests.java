@@ -8,11 +8,11 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import pages.*;
 public class LoginTests extends BaseTest {
-//    @Test
-//    public void LoginValidEmailPasswordTest() {
-//    LoginPage loginPage = new LoginPage(driver);
-//    HomePage homePage = new HomePage(driver);
-//    loginPage.login();
-//    Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
-//    }
+    @Test
+    public void LoginValidEmailPasswordTest() {
+    LoginPage loginPage = new LoginPage(getDriver());
+    HomePage homePage = new HomePage(getDriver());
+    loginPage.login();
+    Assert.assertTrue(homePage.isUserAvatarDisplayed());
+    }
 }

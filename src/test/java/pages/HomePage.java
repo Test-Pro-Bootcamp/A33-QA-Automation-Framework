@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import java.time.Duration;
 public class HomePage extends BasePage {
     @FindBy (css = "[img.avatar]")
-    WebElement userAvatarIcon;
+    private WebElement userAvatarIcon;
     @FindBy (xpath = "//*[@id=\"playlists\"]/ul/li[3]/a")
     private WebElement thirdPlaylist;
     @FindBy  (xpath = "//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]")
@@ -41,7 +41,8 @@ public class HomePage extends BasePage {
         WebElement playlistRename = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class='success show']")));
         return playlistRename.isDisplayed();
     }
-//    public WebElement getUserAvatar() {
-//        return wait.until(ExpectedConditions.visibilityOfElementLocated(userAvatarIcon));
-//    }
+    public boolean isUserAvatarDisplayed() {
+        WebElement getUserAvatar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"userBadge\"]/a[1]/img")));
+        return getUserAvatar.isDisplayed();
+    }
 }

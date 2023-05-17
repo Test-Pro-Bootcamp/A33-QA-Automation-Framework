@@ -24,6 +24,10 @@ public class BasePage {
         actions = new Actions(driver);
         PageFactory.initElements(driver,this);
     }
+
+    public BasePage() {
+    }
+
     public void click(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }

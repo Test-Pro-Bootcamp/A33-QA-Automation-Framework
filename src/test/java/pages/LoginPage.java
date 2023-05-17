@@ -2,6 +2,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.FindBy;
 import java.time.Duration;
@@ -14,21 +15,20 @@ public class LoginPage extends BasePage {
         WebElement submitButton;
 
 
-    public LoginPage(WebDriver givenDriver) {
-        super(givenDriver);
+    public LoginPage (WebDriver driver) {
+        PageFactory.initElements(driver, this);
     }
 //page methods
-    public LoginPage provideEmail(String email) {
+    public void provideEmail(String email) {
+        emailField.click();
         emailField.sendKeys(email);
-        return this;
     }
-    public LoginPage providePassword(String password) {
+    public void providePassword(String password) {
+        passwordField.click();
         passwordField.sendKeys(password);
-        return this;
     }
-    public LoginPage clickSubmitBtn() {
+    public void clickSubmitBtn() {
         submitButton.click();
-        return this;
     }
     public void login() {
         provideEmail("vera1077@gmail.com");
