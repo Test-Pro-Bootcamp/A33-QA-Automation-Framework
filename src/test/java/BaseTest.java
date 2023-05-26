@@ -6,6 +6,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -60,12 +61,14 @@ public class BaseTest {
         String hubURL = "https://hub.lambdatest.com/wd/hub";
 
         ChromeOptions browserOptions = new ChromeOptions();
-        browserOptions.setPlatformName("Windows 10");
-        browserOptions.setBrowserVersion("110.0");
+        browserOptions.setPlatformName("MacOS Ventura");
+        browserOptions.setBrowserVersion("111.0");
         HashMap<String, Object> ltOptions = new HashMap<String, Object>();
-        ltOptions.put("username", "khaledoni01");
-        ltOptions.put("accessKey", "Zx0HIXlEJ9ERHjcH9UDCvNXRoiSm2si9VM3L6Dii3SX6W1GPF4");
+        ltOptions.put("username", "kristinaostropolets");
+        ltOptions.put("accessKey", "6cIGa2HGbr4u0tjvBFCgijWWQXvB40FGyYHIrEJDFfhKsfWfLK");
+        ltOptions.put("timezone", "New_York");
         ltOptions.put("project", "Test Project");
+        ltOptions.put("selenium_version", "4.0.0");
         ltOptions.put("w3c", true);
         browserOptions.setCapability("LT:Options", ltOptions);
 
@@ -80,18 +83,21 @@ public class BaseTest {
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
                 return driver = new FirefoxDriver();
+            case "Safari":
+                WebDriverManager.safaridriver().setup();
+                return driver = new SafariDriver();
             case "MicrosoftEdge":
                 WebDriverManager.edgedriver().setup();
                 return driver = new EdgeDriver();
-            case "grid-edge":
-                caps.setCapability("browserName", "MicrosoftEdge");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
-            case "grid-firefox":
-                caps.setCapability("browserName", "firefox");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
-            case "grid-chrome":
-                caps.setCapability("browserName", "chrome");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+//            case "grid-edge":
+//                caps.setCapability("browserName", "MicrosoftEdge");
+//                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+//            case "grid-firefox":
+//                caps.setCapability("browserName", "firefox");
+//                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+//            case "grid-chrome":
+//                caps.setCapability("browserName", "chrome");
+//                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             case "cloud":
                 return lambdaTest();
             default:
