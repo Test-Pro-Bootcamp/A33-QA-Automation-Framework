@@ -32,5 +32,17 @@ public class HomePage extends BasePage{
     public boolean newPlaylistIsDisplayed(){
         WebElement newPlaylist = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector
                 ("a[class='active']")));
-        return newPlaylist.isDisplayed();    }
+        return newPlaylist.isDisplayed();
+    }
+   // public HomePage hoverOverToPlaylists(){
+        //WebElement clickPlaylist =wait.until(ExpectedConditions.visibilityOfElementLocated
+             //   (By.xpath("//*[@id='playlists']//a[contains(text(),'Med23')]")));
+        //actions.moveToElement(clickPlaylist).perform();
+
+        //return this;
+    //}
+    public HomePage choosePlaylist(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='playlists']//a[contains(text(),'Med23')]"))).click();
+        return this;
+    }
 }

@@ -9,19 +9,17 @@ public class LoginPage extends BasePage {
     WebElement emailField;
     @FindBy(css="[type='password']")
     WebElement passwordField;
-    @FindBy(css = "[type=''submit]")
+    @FindBy(css = "[type='submit']")
     WebElement submitButton;
     public LoginPage(WebDriver givenDriver) {
         super(givenDriver);
     }
     public LoginPage provideEmail(String email){
-        emailField.click();
-        emailField.sendKeys();
+        emailField.sendKeys(email);
         return this;
     }
     public LoginPage providePassword(String password){
-        passwordField.click();
-        passwordField.sendKeys();
+        passwordField.sendKeys(password);
         return this;
     }
     public LoginPage clickSubmitBtn(){

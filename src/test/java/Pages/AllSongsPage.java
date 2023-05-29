@@ -1,6 +1,7 @@
 package Pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,10 +12,10 @@ public class AllSongsPage extends BasePage{
     private WebElement AllSongsPage;
     @FindBy(xpath = "//*[@id='songsWrapper'] //td[contains(text(),'Ketsa - That_s a Beat')]")
     private WebElement chooseSong;
-    @FindBy(xpath = "//*[@id='app']//li[contains(text(),'Add To')]")
-    private WebElement chooseAddTo;
-    @FindBy(xpath = "//*[@id='songsWrapper']//li[contains(text(),'Med')]")
-    private WebElement choosePlaylist1;
+    //@FindBy(xpath = "//*[@id='playlistWrapper']//tr[@class='song-item']//td[contains(text(),'Ketsa - That_s a Beat')]")
+    //private WebElement deleteSong1;
+    //@FindBy(xpath = "//*[@id='songsWrapper']//li[contains(text(),'Med23')]")
+    //private WebElement choosePlaylist1;
 
     public AllSongsPage(WebDriver givenDriver) {
         super(givenDriver);
@@ -28,18 +29,41 @@ public class AllSongsPage extends BasePage{
         actions.contextClick(chooseExistSong).perform();
         return this;
     }
-    public AllSongsPage hoverOverTOPlaylist(){
-        WebElement AddToButton =wait.until(ExpectedConditions.visibilityOf(chooseAddTo));
+    public AllSongsPage hoverOverToAddTo() {
+        WebElement AddToButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='app']//li[contains(text(),'Add To')]")));
         actions.moveToElement(AddToButton).perform();
-        return  this;
-    }
-    public AllSongsPage choosePlaylist(){
-        wait.until(ExpectedConditions.elementToBeClickable(choosePlaylist1)).click();
         return this;
     }
+        public AllSongsPage hoverOverTOPlaylist(){
+            WebElement AddToButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath
+                    ("//ul[@class='menu submenu menu-add-to']//li[contains(text(),'Med23')]"))) ;
+            actions.moveToElement(AddToButton).perform();
+            return  this;
+    }
+    public AllSongsPage clickPlaylist() {
+        WebElement AddToButton = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("//ul[@class='menu submenu menu-add-to']//li[contains(text(),'Med23')]")));
+        actions.doubleClick(AddToButton).perform();
+        return this;
+    }
+    //public AllSongsPage choosePlaylist(){
+      // wait.until(ExpectedConditions.visibilityOf(choosePlaylist1)).click();
+        //return this;
+    //}
     public boolean songAddedMsgDisplayed(){
         WebElement getNotificationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector
                 ("div.success.show")));
         return getNotificationMessage.isDisplayed();
+    }
+    public AllSongsPage deleteSongFromPlaylist(){
+    WebElement clickSong= wait.until(ExpectedConditions.visibilityOfElementLocated
+            (By.xpath("//*[@id='playlistWrapper']//tr[@class='song-item']//td[contains(text(),'Ketsa - That_s a Beat')]")));
+      clickSong.sendKeys(Keys.DELETE);
+        return this;
+    }
+    public boolean notificationSongDeleted(){
+        WebElement getNotificationMessage1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector
+                ("div.success.show")));
+        return getNotificationMessage1.isDisplayed();
     }
 }
