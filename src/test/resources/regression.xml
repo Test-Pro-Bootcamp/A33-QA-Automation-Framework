@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="TestNG" parallel="methods" thread-count="2">
+
+    <test name="Example Test" preserve-order="false">
+        <parameter name="BaseUrl" value="https://bbb.testpro.io/"/>
+        <classes>
+            <class name="BaseTest"/>
+            <class name="LoginTests"/>
+        </classes>
+    </test>
+</suite>
