@@ -57,8 +57,10 @@ public class AllSongsPage extends BasePage{
     }
     public AllSongsPage deleteSongFromPlaylist(){
     WebElement clickSong= wait.until(ExpectedConditions.visibilityOfElementLocated
-            (By.xpath("//*[@id='playlistWrapper']//tr[@class='song-item']//td[contains(text(),'Ketsa - That_s a Beat')]")));
-      clickSong.sendKeys(Keys.DELETE);
+            (By.xpath("//section[@id='playlistWrapper']//td[contains(text(),'Ketsa - That_s a Beat')]")));
+    clickSong.click();
+    actions.sendKeys(Keys.DELETE).perform();
+
         return this;
     }
     public boolean notificationSongDeleted(){

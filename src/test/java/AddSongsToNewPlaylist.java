@@ -1,6 +1,7 @@
 import Pages.AllSongsPage;
 import Pages.HomePage;
 import Pages.LoginPage;
+import Pages.PlaylistPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -41,10 +42,21 @@ public class AddSongsToNewPlaylist extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongsPage = new AllSongsPage(driver);
-
         loginPage.login();
         homePage.choosePlaylist();
         allSongsPage.deleteSongFromPlaylist();
         Assert.assertTrue(allSongsPage.notificationSongDeleted());
+    }
+    @Test(priority = 5)
+    public void DeletePlaylist(){
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AllSongsPage allSongsPage = new AllSongsPage(driver);
+        PlaylistPage playlistPage = new PlaylistPage(driver);
+
+     loginPage.login();
+     playlistPage.chooseThePlaylist();
+     playlistPage.DeletePlaylist();
+     Assert.assertTrue(playlistPage.notificationDeletedPlaylist());
     }
 }
