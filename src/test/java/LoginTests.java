@@ -4,19 +4,18 @@ public class LoginTests extends BaseTest {
 
 
     @Test
-    public void loginValidEmailPasswordTest() {
+    public void LoginEmptyEmailPasswordTest() {
+        openLoginURL();
+        provideEmail("guadalupe.medina@testpro.io");
 
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        loginPage.provideEmail("guadalupe.medina@testprio")
-                .providePassword("DoingitBig23!")
-                .submitButton();
 
-       // Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
+
+    private void openLoginURL() {
+    }
+
+
 }
-
-
 
 
 

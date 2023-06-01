@@ -50,34 +50,23 @@ public class BaseTest {
         LoginTests.driver.quit();
     }
 
-    public void login(String email, String password) {
 
-        provideEmail();
-        providePassword();
-        submitButton();
-    }
-
-    public void login() throws InterruptedException {
-        provideEmail();
-        providePassword();
-        submitButton();
-    }
     public void submitButton() {
         WebElement submitButtonElement = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type ='submit']")));
         submitButtonElement.click();
 
     }
 
-    public static void provideEmail() {
+    public static void provideEmail(String email) {
 
         WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type ='email']")));
-        emailField.sendKeys("guadalupe.medina@testpro.io");
+        emailField.sendKeys(email);
 
     }
 
-    public static void providePassword() {
+    public static void providePassword(String password) {
         WebElement provideField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type ='password']")));
-        provideField.sendKeys("DoingitBig23!");
+        provideField.sendKeys(password);
     }
 
     public void findSong() {

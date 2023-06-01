@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 
 
-public class HomeWork19 extends BaseTest{
+public class HomeWork19 extends BaseTest {
 
     @Test
     public void DeletePlaylist() throws InterruptedException {
@@ -17,7 +17,7 @@ public class HomeWork19 extends BaseTest{
         Assert.assertTrue(deletePlaylistMsg.isDisplayed());
     }
 
-    private void login() throws InterruptedException {
+    public void login() throws InterruptedException {
     provideEmail("guadalupe.medina@testpro.io");
     providePassword("DoingitBig23!");
     submitButton();
@@ -35,7 +35,7 @@ public class HomeWork19 extends BaseTest{
 
 
     }
-    private void deletePlaylist() throws InterruptedException{
+    public void clickDeletePlaylist() throws InterruptedException {
         WebElement deletePlaylistButton = driver.findElement(By.cssSelector(".btn-delete-playlist"));
         deletePlaylistButton.click();
         Thread.sleep(2000);

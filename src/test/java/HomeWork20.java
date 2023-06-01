@@ -4,7 +4,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-public class HomeWork20 extends BaseTest{
+public class HomeWork20 extends BaseTest {
 
     @Test
 
@@ -12,14 +12,9 @@ public class HomeWork20 extends BaseTest{
 
     }
 
-        public void provideEmail() {
 
-            WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type ='email']")));
-            emailField.sendKeys("guadalupe.medina@testpro.io");
 
-        }
-
-        public void providePassword() {
+        public static void providePassword() {
             WebElement providePassword = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type ='password']")));
             providePassword.sendKeys("DoingitBig23!");
         }
@@ -49,7 +44,7 @@ public class HomeWork20 extends BaseTest{
             emptyPlaylist.click();
         }
 
-        public void deletePlaylist() throws InterruptedException {
+        public void deletePlaylist() {
             WebElement deletePlaylistButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".btn-delete-playlist")));
             deletePlaylistButton.click();
         }

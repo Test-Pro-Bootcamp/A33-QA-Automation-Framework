@@ -3,20 +3,14 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import javax.swing.*;
-import java.util.List;
-
 
 
 
 public class HomeWork21 extends BaseTest {
 
 
-
-
+    private CharSequence playlistName;
 
     @Test
     public void renamePlaylist()  {
@@ -25,8 +19,8 @@ public class HomeWork21 extends BaseTest {
         String launchBrowser = "BaseURL";
         String provideEmail = "guadalupe.medina@testpro.io";
         String providePassword= "DoingitBig23!";
-        provideEmail();
-        providePassword();
+        provideEmail(provideEmail);
+        providePassword(providePassword);
         submitButton();
        //WHEN
 
@@ -54,13 +48,14 @@ public class HomeWork21 extends BaseTest {
     private void enterPlaylistName() {
         WebElement playlistInputField = (WebElement) driver.findElements(By.cssSelector("input[name='name']"));
         playlistInputField.sendKeys((Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE)));
+
         playlistInputField.sendKeys(playlistName);
         playlistInputField.sendKeys(Keys.ENTER);
 
 
     }
 
-    public boolean doesPlayListExit(){
+    public boolean doesPlayListExit() {
         WebElement playlistElement = driver.findElement(By.xpath("//e[text()= ' " + playlistName + "']"));
         return playlistElement.isDisplayed();
 

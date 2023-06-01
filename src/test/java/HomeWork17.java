@@ -11,7 +11,9 @@ import org.testng.annotations.Test;
         @Test
         public void addSongToPlaylist() throws InterruptedException {
 
-            navigateToPage();
+            String newSongAddedNotificationText = "Add 1 song into";
+
+
             provideEmail("guadalupe.medina@testpro.io");
             providePassword("DoingitBig23!");
             submitButton();
@@ -19,7 +21,7 @@ import org.testng.annotations.Test;
             clickViewAllBtn();
             selectFirstSongResults();
             clickAddToBtn();
-            choosePlaylist("JAMS");
+            createNewPlaylist();
 
             Assert.assertTrue(isNotificationPopUpPresent());
         }
@@ -48,9 +50,8 @@ import org.testng.annotations.Test;
         Thread.sleep(2000);
     }
 
-//    public void createNewPlaylist() throws InterruptedException {
-        public void choosePlaylist(String playlistName) throws InterruptedException {
-            WebElement playlistNameElement = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//section/ul/li[contains(text(),'"+playlistName+"')]"));
+    public void createNewPlaylist() throws InterruptedException {
+        WebElement playlistNameElement = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//section/ul/li[contains(text(),'" + ("") + "']"));
         playlistNameElement.click();
         Thread.sleep(2000);
     }

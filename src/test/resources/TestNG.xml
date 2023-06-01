@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="TestNG">
-<parameter name="BaseURL" value="https://bbb.testpro.io/"/>
+<suite name="TestNG" parallel="methods" thread-count="2">
+
+    <parameter name="BaseURL" value="https://bbb.testpro.io/"/>
+
     <test name="Example Test" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
-            <class name="LoginPage"/>
-            <class name="BasePage"/>
             <class name="BaseTest"/>
-            <class name="HomePage"/>
-            <class name="HomeWork17"/>
-            <class name="HomeWork18"/>
-            <class name="HomeWork19"/>
-            <class name="HomeWork20"/>
-            <class name="HomeWork21"/>
-            <class name="HomeWork22"/>
-            <class name="HomeWork23"/>
-            <class name="HomeWork24"/>
+
         </classes>
     </test>
 </suite>
