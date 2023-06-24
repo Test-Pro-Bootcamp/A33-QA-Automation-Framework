@@ -13,4 +13,12 @@ public class HomePage extends BasePage{
         WebElement successLogin = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar")));
         return successLogin.isDisplayed();
     }
+    public boolean navigateLoginPage(){
+        WebElement unableToLogin = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class='logo']")));
+        return unableToLogin.isDisplayed();
+    }
+    public boolean navigateLoginPageError(){
+        WebElement unableToLogin = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='mac nprogress-busy']")));
+        return unableToLogin.isDisplayed();
+    }
 }

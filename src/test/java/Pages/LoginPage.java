@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 public class LoginPage extends BasePage{
     @FindBy(css = "[type='email']")
     WebElement emailField;
-    @FindBy(css = "type='password']")
+    @FindBy(css = "[type='password']")
     WebElement passwordField;
     @FindBy(css = "[type='submit']")
     WebElement submit;
