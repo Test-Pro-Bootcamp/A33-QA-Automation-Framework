@@ -1,9 +1,8 @@
 package Pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasePage{
     public HomePage(WebDriver givenDriver) {
@@ -21,4 +20,22 @@ public class HomePage extends BasePage{
         WebElement unableToLogin = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='mac nprogress-busy']")));
         return unableToLogin.isDisplayed();
     }
+        public boolean verifyAlertMessage( String expectedMessage) {
+            try {
+                Alert alert = driver.switchTo().alert();
+                String actualMessage = alert.getText();
+                System.out.println("Actual Alert Message: " + actualMessage);
+                System.out.println("Expected Alert Message: " + expectedMessage);
+                return actualMessage.equals(expectedMessage);
+            } catch (NoAlertPresentException e) {
+                // Handle the case when no alert is present
+                return false;
+            }
+        }
 }
+
+
+
+
+
+

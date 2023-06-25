@@ -1,5 +1,6 @@
 import Pages.HomePage;
 import Pages.LoginPage;
+import org.asynchttpclient.util.Assertions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -71,7 +72,7 @@ public class KoelLogin extends BaseTest{
         Assert.assertTrue(homePage.navigateLoginPage());
     }
     @Test
-    public void loginWithEmailWithoutSymbol(){
+    public void loginWithEmailWithoutSymbol() {
         HomePage homePage = new HomePage(driver);
         LoginPage loginPage = new LoginPage(driver);
 
@@ -79,7 +80,7 @@ public class KoelLogin extends BaseTest{
         loginPage.providePassword("Med-20115-010499@");
         loginPage.clickSubmit();
 
-        Assert.assertTrue(homePage.navigateToHomePage());
+        Assert.assertTrue(homePage.verifyAlertMessage("Please include an '@' in the email address. 'taqimed99gmail.com' is missing an '@'."));
     }
     @Test
     public void loginWithEmailWithoutDot(){

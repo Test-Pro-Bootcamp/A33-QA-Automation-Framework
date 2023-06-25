@@ -24,7 +24,7 @@ String url=null;
         ChromeOptions ops = new ChromeOptions();
         ops.addArguments("--remote-allow-origins=*");
         driver=new ChromeDriver(ops);
-        wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver,Duration.ofSeconds(4));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         url=baseURL;

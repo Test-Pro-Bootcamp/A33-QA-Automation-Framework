@@ -5,8 +5,11 @@
 <parameter name="baseURL" value="https://qa.koel.app"/>
     <test name="Example Test" preserve-order="false">
         <classes>
-            <class name="KoelLogin"/>
-            <class name="BaseTest"/>
+            <class name="KoelLogin">
+                <methods>
+                    <include name="loginWithEmailWithoutSymbol"/>
+                </methods>
+        </class>
         </classes>
     </test>
 </suite>
