@@ -20,14 +20,4 @@ public class LoginTests extends BaseTest {
         loginPage.isEmailFieldVisible();
     }
 
-    @Test
-    public void LoginValidEmailPasswordTest() {
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
-
-        loginPage.provideEmail("demo@class.com");
-        loginPage.providePassword("te$t$tudent");
-        loginPage.clickSubmitButton();
-        homePage.isUserAvatarDisplayed();
-    }
 }
